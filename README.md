@@ -57,8 +57,9 @@ protocols themselves; the current versions are in `docs/protokolle/`.
 - Some LLM endpoints and provider states used in the measurements cannot be reproduced
   identically today.
 - The package is meant for checking the frozen inputs, the raw artifacts and the
-  deterministic evaluation. The evaluation tools can be rerun over the archived raw
-  artifacts.
+  deterministic evaluation. The archived artifacts permit independent inspection of the
+  reported results. The Z3 evaluation can be rerun from the included campaign artifacts,
+  while parts of Z1 depend on the separately versioned `llm_arch` extractor.
 - A byte-identical regeneration of all model responses is **not** claimed.
 - K3 depended on a hosted provider (DigitalOcean endpoint, not pinned). Its valid runs came
   from several points in time under server-side conditions that were neither controlled nor
