@@ -1,0 +1,644 @@
+{
+  "_comment_header": [
+    "Injection manifest of the conformance campaign, derived from the specification",
+    "ALONE, before the injection commits exist. Sources: docs/planung/c1_modulliste.md Rev. 5,",
+    "docs/planung/c1_komponentenschnitt.md Rev. 3, docs/protokolle/eval_protokoll_phase04.md",
+    "Rev. 28, data/soll/architecture-rules.yaml, docs/ddr/checker_entscheidungen_l_m.md,",
+    "the four baseline build reports (4b-1..4b-4). No checker, rule-engine, import-linter or",
+    "PyTestArch call was made to produce this file (see report c4a).",
+    "match_key format: category|component|module|subjectKey (matchKey.ts:26)."
+  ],
+  "resolution_addendum_2026_08_25": {
+    "task": "Auftrag C4B-0, before the 32 injection commits exist -- no model call, no tool run, no look at a built commit; derived exclusively from docs/protokolle/eval_protokoll_phase04.md §3 Nachtrag Rev. 28.",
+    "i16_cycle_parent_child": "Resolved in favor of the recipe: the previously cited K5 output for I16 came from the C2c probe against ten rebuilt-injection baseline copies, not from this testrepo's I16 injection. I16 adds the import of the PACKAGE MODULE depot.orders.services, not a submodule. See injections[].k5_match_rule for id I16.",
+    "i21_i24_forbidden_signature_type": "Injected type resolved: sqlalchemy.orm.Session. The carrying method/signature and its literal spelling in the signature remain OPEN, to be named by C4b. See injections[].offending_type_resolution_note for ids I21-I24."
+  },
+  "generated_before_injection_commits": true,
+  "c4c_addendum_2026_08_25": {
+    "task": "Auftrag C4C. Traegt NUR die 32 injection_sha256 und die von C4b benannten Methoden/Signaturen nach. KEIN expected_match_key ist geaendert -- weder bei den 28 abgeleiteten noch bei den vier OFFENEN (I21-I24).",
+    "expected_keys_derived_before_the_commits": "Die ERWARTETEN SCHLUESSEL wurden vor dem Bau der Injektions-Commits abgeleitet: C4a, Commit 56055de im Repo masterarbeit. Die Unabhaengigkeit der Ableitung ist damit durch die Commit-Historie belegt (Anti-Tautologie-Regel, Decision Record M).",
+    "sha_source": "data/testrepo/MANIFEST.md, Nachtrag 25.08.2026, Tabelle 'Die 32 Injektions-Commits' -- lokal aus git bundle verify gelesen und gegen git ls-remote --tags origin abgeglichen. In C4c zusaetzlich Eintrag fuer Eintrag gegen git rev-parse inj/NN gestellt: 32/32 zeichengleich, 0 Abweichungen.",
+    "no_key_changed": "Maschinell geprueft: die Menge aller expected_match_key-Werte ist vor und nach diesem Auftrag zeichengleich."
+  },
+  "injection_sha256": "je Injektion gefuellt in injections[].injection_sha256 (C4c, 25.08.2026); bis dahin absichtlich leer, siehe injection_sha256_rationale",
+  "injection_sha256_rationale": "Left empty on purpose. Decision Record M's Anti-Tautologie-Regel requires expected_match_key to be hand-derived from the documented rule, not computed by the rule engine — otherwise expected and measured value would come from the same function and the strict metric for K1/CYCLE would test nothing (b1_bericht_matchkey.md A2). The same principle is extended here to the whole manifest: it is produced and hashed BEFORE the injection commits exist, so the file's git history itself, not an assertion, is the evidence that its derivation is independent of the built injections. The injection SHA (of the 32 commits over baseline B) is filled in during C4c, after the manifest is frozen.",
+  "distribution_l2": {
+    "LAYER_BACK_CALL": 3, "LAYER_SKIP_CALL": 3, "PROTECTED_MODULE": 3, "INDEPENDENCE": 3,
+    "CYCLE_SIBLING": 3, "CYCLE_PARENT_CHILD": 1,
+    "MISSING_PORT_REFERENCE": 4, "FRAMEWORK_TYPE_IN_SIGNATURE": 4,
+    "INCORRECT_LOCATION": 4, "SIGNATURE_DEVIATION": 4
+  },
+  "injections": [
+    {
+      "id": "I01", "scenario_l2": "LAYER_BACK_CALL", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/01", "injection_sha256": "439125ece20060321bff983d7b8295f1b33dda50",
+      "carrier_module": "depot.identity.repository.customer_repo", "carrier_component": "identity_repository",
+      "affected_method_or_signature": null,
+      "rule_id": "R-LAYER-1", "expected_edge_boundary": "identity_repository -> identity_services",
+      "expected_match_key": {
+        "K1": "layer-violation|identity_repository|depot.identity.repository.customer_repo|identity_repository->identity_services",
+        "K2_K3": "FORBIDDEN_RELATION|identity_repository|depot.identity.repository.customer_repo|identity_repository->identity_services"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound: --rule-graph diff + changed_files_count==1 makes childState===VISITING unreachable (Protokoll §4 Amendment 13.08.(b))",
+      "k4_match_rule": "layers-Spine-Contract meldet BROKEN fuer die Rueckkante repository->services; ZUSAETZLICH meldet der acyclic_siblings-Contract (ancestors=depot) einen Geschwisterzyklus identity_services/identity_repository -- vorregistrierte K4-Doppelmeldung (Komponentenschnitt §6.2).",
+      "k5_match_rule": "Erlaubnislistenregel der Komponente identity_repository meldet \"depot.identity.repository.customer_repo\" imports \"<Modul in identity_services>\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile LAYER_BACK_CALL: K1 ja, K4 ja, K5 ja, K2/K3 ja (gemessen B9+ F3)"
+    },
+    {
+      "id": "I02", "scenario_l2": "LAYER_BACK_CALL", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/02", "injection_sha256": "4165fab5c82b1194572461fdb232c1af264e66f5",
+      "carrier_module": "depot.orders.repository.order_repo", "carrier_component": "orders_repository",
+      "affected_method_or_signature": null,
+      "rule_id": "R-LAYER-1", "expected_edge_boundary": "orders_repository -> orders_services",
+      "expected_match_key": {
+        "K1": "layer-violation|orders_repository|depot.orders.repository.order_repo|orders_repository->orders_services",
+        "K2_K3": "FORBIDDEN_RELATION|orders_repository|depot.orders.repository.order_repo|orders_repository->orders_services"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound (see I01)",
+      "k4_match_rule": "layers-Spine-Contract BROKEN (repository->services); K4-Doppelmeldung ueber acyclic_siblings (orders_services/orders_repository).",
+      "k5_match_rule": "Erlaubnislistenregel orders_repository meldet \"depot.orders.repository.order_repo\" imports \"<Modul in orders_services>\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile LAYER_BACK_CALL: K1 ja, K4 ja, K5 ja, K2/K3 ja (gemessen B9+ F3)"
+    },
+    {
+      "id": "I03", "scenario_l2": "LAYER_BACK_CALL", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/03", "injection_sha256": "b3fb12905f7f3becc803d1915af5654da35643bb",
+      "carrier_module": "depot.billing.repository.invoice_repo", "carrier_component": "billing_repository",
+      "affected_method_or_signature": null,
+      "rule_id": "R-LAYER-1", "expected_edge_boundary": "billing_repository -> billing_services",
+      "expected_match_key": {
+        "K1": "layer-violation|billing_repository|depot.billing.repository.invoice_repo|billing_repository->billing_services",
+        "K2_K3": "FORBIDDEN_RELATION|billing_repository|depot.billing.repository.invoice_repo|billing_repository->billing_services"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound (see I01)",
+      "k4_match_rule": "layers-Spine-Contract BROKEN (repository->services); K4-Doppelmeldung ueber acyclic_siblings (billing_services/billing_repository).",
+      "k5_match_rule": "Erlaubnislistenregel billing_repository meldet \"depot.billing.repository.invoice_repo\" imports \"<Modul in billing_services>\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile LAYER_BACK_CALL: K1 ja, K4 ja, K5 ja, K2/K3 ja (gemessen B9+ F3)"
+    },
+    {
+      "id": "I04", "scenario_l2": "LAYER_SKIP_CALL", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/04", "injection_sha256": "3de8357bc191821fe60922022be257c47959d35d",
+      "carrier_module": "depot.identity.api.routes", "carrier_component": "identity_api",
+      "affected_method_or_signature": null,
+      "rule_id": "R-LAYER-1", "expected_edge_boundary": "identity_api -> identity_repository",
+      "expected_match_key": {
+        "K1": "layer-violation|identity_api|depot.identity.api.routes|identity_api->identity_repository",
+        "K2_K3": "FORBIDDEN_RELATION|identity_api|depot.identity.api.routes|identity_api->identity_repository"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound (see I01); no acyclic_siblings co-report for this scenario (no sibling gegenkante)",
+      "k4_match_rule": "einer der sechs mechanisch abgeleiteten forbidden-Contracts (source_modules=depot.identity.api, forbidden_modules ⊇ depot.identity.repository, allow_indirect_imports=True) meldet BROKEN.",
+      "k5_match_rule": "Erlaubnislistenregel identity_api meldet \"depot.identity.api.routes\" imports \"<Modul in identity_repository>\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile LAYER_SKIP_CALL: K1 ja, K4 ja¹, K5 ja, K2/K3 ja (gemessen B9+ F3; ¹ misst Konfigurationsaufwand UF4)"
+    },
+    {
+      "id": "I05", "scenario_l2": "LAYER_SKIP_CALL", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/05", "injection_sha256": "dbcd05b8935ac3d007464f2e0d72c08ef0a9931e",
+      "carrier_module": "depot.orders.api.routes", "carrier_component": "orders_api",
+      "affected_method_or_signature": null,
+      "rule_id": "R-LAYER-1", "expected_edge_boundary": "orders_api -> orders_repository",
+      "expected_match_key": {
+        "K1": "layer-violation|orders_api|depot.orders.api.routes|orders_api->orders_repository",
+        "K2_K3": "FORBIDDEN_RELATION|orders_api|depot.orders.api.routes|orders_api->orders_repository"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound (see I01)",
+      "k4_match_rule": "einer der sechs forbidden-Contracts (source_modules=depot.orders.api, forbidden_modules ⊇ depot.orders.repository) meldet BROKEN.",
+      "k5_match_rule": "Erlaubnislistenregel orders_api meldet \"depot.orders.api.routes\" imports \"<Modul in orders_repository>\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile LAYER_SKIP_CALL: K1 ja, K4 ja¹, K5 ja, K2/K3 ja (gemessen B9+ F3)"
+    },
+    {
+      "id": "I06", "scenario_l2": "LAYER_SKIP_CALL", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/06", "injection_sha256": "531a1ff2616aaa13f8c317fe7d40f56135caacaf",
+      "carrier_module": "depot.billing.api.routes", "carrier_component": "billing_api",
+      "affected_method_or_signature": null,
+      "rule_id": "R-LAYER-1", "expected_edge_boundary": "billing_api -> billing_repository",
+      "expected_match_key": {
+        "K1": "layer-violation|billing_api|depot.billing.api.routes|billing_api->billing_repository",
+        "K2_K3": "FORBIDDEN_RELATION|billing_api|depot.billing.api.routes|billing_api->billing_repository"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound (see I01)",
+      "k4_match_rule": "einer der sechs forbidden-Contracts (source_modules=depot.billing.api, forbidden_modules ⊇ depot.billing.repository) meldet BROKEN.",
+      "k5_match_rule": "Erlaubnislistenregel billing_api meldet \"depot.billing.api.routes\" imports \"<Modul in billing_repository>\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile LAYER_SKIP_CALL: K1 ja, K4 ja¹, K5 ja, K2/K3 ja (gemessen B9+ F3)"
+    },
+    {
+      "id": "I07", "scenario_l2": "PROTECTED_MODULE", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/07", "injection_sha256": "0993e01b26b7cc91bb70840207860fcc15dba286",
+      "carrier_module": "depot.identity.services.customer_service", "carrier_component": "identity_services",
+      "affected_method_or_signature": null,
+      "rule_id": "R-PROTECT-1", "expected_edge_boundary": "identity_services -> core_adapters_internal",
+      "expected_match_key": {
+        "K1": "layer-violation|identity_services|depot.identity.services.customer_service|identity_services->core_adapters_internal",
+        "K2_K3": "FORBIDDEN_RELATION|identity_services|depot.identity.services.customer_service|identity_services->core_adapters_internal"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound (see I01)",
+      "k4_match_rule": "protected-Contract (protected_modules=depot.core.adapters.internal, allowed_importers=depot.core.adapters) meldet BROKEN. Annotation ᴾ: Zelle ist an den Contract-Typ protected gebunden, am Testrepo aber nicht tragend (Rev. 21 Nachtrag 1) -- die Kette services->storage->internal ist hier nicht gebaut.",
+      "k5_match_rule": "Erlaubnislistenregel identity_services meldet \"depot.identity.services.customer_service\" imports \"depot.core.adapters.internal...\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile PROTECTED_MODULE: K1 ja, K4 ja ᴾ, K5 ja, K2/K3 ja (gemessen B9+ F2)"
+    },
+    {
+      "id": "I08", "scenario_l2": "PROTECTED_MODULE", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/08", "injection_sha256": "792cb6867f55634bc3f8bfac321b392ea5507a48",
+      "carrier_module": "depot.orders.services.order_service", "carrier_component": "orders_services",
+      "affected_method_or_signature": null,
+      "rule_id": "R-PROTECT-1", "expected_edge_boundary": "orders_services -> core_adapters_internal",
+      "expected_match_key": {
+        "K1": "layer-violation|orders_services|depot.orders.services.order_service|orders_services->core_adapters_internal",
+        "K2_K3": "FORBIDDEN_RELATION|orders_services|depot.orders.services.order_service|orders_services->core_adapters_internal"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound (see I01)",
+      "k4_match_rule": "protected-Contract meldet BROKEN. Annotation ᴾ wie I07.",
+      "k5_match_rule": "Erlaubnislistenregel orders_services meldet \"depot.orders.services.order_service\" imports \"depot.core.adapters.internal...\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile PROTECTED_MODULE: K1 ja, K4 ja ᴾ, K5 ja, K2/K3 ja (gemessen B9+ F2)"
+    },
+    {
+      "id": "I09", "scenario_l2": "PROTECTED_MODULE", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/09", "injection_sha256": "06e052e19c153503f751611d7f813f18f204d8f0",
+      "carrier_module": "depot.billing.services.invoice_service", "carrier_component": "billing_services",
+      "affected_method_or_signature": null,
+      "rule_id": "R-PROTECT-1", "expected_edge_boundary": "billing_services -> core_adapters_internal",
+      "expected_match_key": {
+        "K1": "layer-violation|billing_services|depot.billing.services.invoice_service|billing_services->core_adapters_internal",
+        "K2_K3": "FORBIDDEN_RELATION|billing_services|depot.billing.services.invoice_service|billing_services->core_adapters_internal"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound (see I01)",
+      "k4_match_rule": "protected-Contract meldet BROKEN. Annotation ᴾ wie I07.",
+      "k5_match_rule": "Erlaubnislistenregel billing_services meldet \"depot.billing.services.invoice_service\" imports \"depot.core.adapters.internal...\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile PROTECTED_MODULE: K1 ja, K4 ja ᴾ, K5 ja, K2/K3 ja (gemessen B9+ F2)"
+    },
+    {
+      "id": "I10", "scenario_l2": "INDEPENDENCE", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/10", "injection_sha256": "e1829642b304a016d0b2f11087c2b215f8368942",
+      "carrier_module": "depot.orders.services.checkout_service", "carrier_component": "orders_services",
+      "affected_method_or_signature": null,
+      "rule_id": "R-INDEP-1", "expected_edge_boundary": "orders_services -> billing_services",
+      "expected_match_key": {
+        "K1": "layer-violation|orders_services|depot.orders.services.checkout_service|orders_services->billing_services",
+        "K2_K3": "FORBIDDEN_RELATION|orders_services|depot.orders.services.checkout_service|orders_services->billing_services"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound (see I01); no acyclic_siblings co-report (Einzelkante zwischen Wurzelgeschwistern, Protokoll §4 Amendment 13.08.(b))",
+      "k4_match_rule": "independence-Contract (modules=depot.orders, depot.billing) meldet BROKEN.",
+      "k5_match_rule": "Erlaubnislistenregel orders_services meldet \"depot.orders.services.checkout_service\" imports \"<Modul in billing_services>\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile INDEPENDENCE: K1 ja, K4 ja, K5 ja, K2/K3 ja (gemessen B9+ F1-Kontext)"
+    },
+    {
+      "id": "I11", "scenario_l2": "INDEPENDENCE", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/11", "injection_sha256": "5601a944ea1da65b1e2b03c5e74a8237336a2e85",
+      "carrier_module": "depot.billing.services.dunning_service", "carrier_component": "billing_services",
+      "affected_method_or_signature": null,
+      "rule_id": "R-INDEP-1", "expected_edge_boundary": "billing_services -> orders_models",
+      "expected_match_key": {
+        "K1": "layer-violation|billing_services|depot.billing.services.dunning_service|billing_services->orders_models",
+        "K2_K3": "FORBIDDEN_RELATION|billing_services|depot.billing.services.dunning_service|billing_services->orders_models"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound (see I01)",
+      "k4_match_rule": "independence-Contract meldet BROKEN.",
+      "k5_match_rule": "Erlaubnislistenregel billing_services meldet \"depot.billing.services.dunning_service\" imports \"<Modul in orders_models>\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile INDEPENDENCE: K1 ja, K4 ja, K5 ja, K2/K3 ja (gemessen B9+ F1-Kontext)"
+    },
+    {
+      "id": "I12", "scenario_l2": "INDEPENDENCE", "category_l1": "FORBIDDEN_RELATION",
+      "injection_ref": "inj/12", "injection_sha256": "cb1fb228ff6021071a8c6b2a88506a80f138eafb",
+      "carrier_module": "depot.orders.repository.order_line_repo", "carrier_component": "orders_repository",
+      "affected_method_or_signature": null,
+      "rule_id": "R-INDEP-1", "expected_edge_boundary": "orders_repository -> billing_repository",
+      "expected_match_key": {
+        "K1": "layer-violation|orders_repository|depot.orders.repository.order_line_repo|orders_repository->billing_repository",
+        "K2_K3": "FORBIDDEN_RELATION|orders_repository|depot.orders.repository.order_line_repo|orders_repository->billing_repository"
+      },
+      "expected_co_findings": [], "co_findings_note": "empty, construction-bound (see I01)",
+      "k4_match_rule": "independence-Contract meldet BROKEN.",
+      "k5_match_rule": "Erlaubnislistenregel orders_repository meldet \"depot.orders.repository.order_line_repo\" imports \"<Modul in billing_repository>\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile INDEPENDENCE: K1 ja, K4 ja, K5 ja, K2/K3 ja (gemessen B9+ F1-Kontext)"
+    },
+    {
+      "id": "I13", "scenario_l2": "CYCLE_SIBLING", "category_l1": "CYCLE",
+      "injection_ref": "inj/13", "injection_sha256": "3be646fed3bdb2449b153f912d42fbb63b719776",
+      "carrier_module": "depot.identity.mappers.customer_mapper", "carrier_component": "identity_mappers",
+      "affected_method_or_signature": null,
+      "rule_id": "R-CYCLE-1", "expected_edge_boundary": "identity_mappers -> identity_api (injiziert; Clean-Kante identity_api -> identity_mappers)",
+      "z2prime": {"S": "identity_api", "T": "identity_mappers", "S_lt_T": true, "S_sole_importer_of_T": true, "candidate_set_size": 1},
+      "expected_match_key": {
+        "K1": "cycle|identity_mappers|depot.identity.mappers.customer_mapper|identity_mappers->identity_api",
+        "K2_K3": null
+      },
+      "expected_co_findings": [
+        {"category": "layer-violation", "rule_id": "DERIVED:forbidden-edge",
+         "match_key": "layer-violation|identity_mappers|depot.identity.mappers.customer_mapper|identity_mappers->identity_api"}
+      ],
+      "co_findings_note": "gebildet als Praefixersatz cycle|->layer-violation| auf dem handabgeleiteten expected_match_key (DDR M.2 Festlegung 1(e)); gueltig unter Z2 (Ziel identity_api sortiert vor Quelle identity_mappers)",
+      "k4_match_rule": "acyclic_siblings-Contract (ancestors=depot) meldet einen No-cycles-Block, dessen minimale Entfernungsmenge die Kante .mappers -> .api unter depot.identity enthaelt.",
+      "k5_match_rule": "Erlaubnislistenregel identity_mappers meldet die Rueckkante als nicht gelistete Kante (NICHT als Zyklus, B9+ F5). Gemessenes Analogon (orders, Protokoll §3 Fussnote 7): \"depot.orders.mappers.order_mapper\" imports \"depot.orders.api.routes\". Buchung: strict kein Treffer, localized Treffer als richtige Stelle/falsche Kategorie.",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile CYCLE_SIBLING: K1 ja, K4 ja, K5 teilweise⁷ (B39/Rev.22), K2/K3 nein² (konstruktionsbedingt)"
+    },
+    {
+      "id": "I14", "scenario_l2": "CYCLE_SIBLING", "category_l1": "CYCLE",
+      "injection_ref": "inj/14", "injection_sha256": "a9d644515812b98877af4e63e0f9a3f119ee7e88",
+      "carrier_module": "depot.orders.mappers.order_mapper", "carrier_component": "orders_mappers",
+      "affected_method_or_signature": null,
+      "rule_id": "R-CYCLE-1", "expected_edge_boundary": "orders_mappers -> orders_api (injiziert; Clean-Kante orders_api -> orders_mappers)",
+      "z2prime": {"S": "orders_api", "T": "orders_mappers", "S_lt_T": true, "S_sole_importer_of_T": true, "candidate_set_size": 1},
+      "expected_match_key": {
+        "K1": "cycle|orders_mappers|depot.orders.mappers.order_mapper|orders_mappers->orders_api",
+        "K2_K3": null
+      },
+      "expected_co_findings": [
+        {"category": "layer-violation", "rule_id": "DERIVED:forbidden-edge",
+         "match_key": "layer-violation|orders_mappers|depot.orders.mappers.order_mapper|orders_mappers->orders_api"}
+      ],
+      "co_findings_note": "Praefixersatz wie I13; gueltig unter Z2 (orders_api < orders_mappers)",
+      "k4_match_rule": "acyclic_siblings meldet .mappers -> .api unter depot.orders in der minimalen Entfernungsmenge.",
+      "k5_match_rule": "Erlaubnislistenregel orders_mappers meldet die Rueckkante als nicht gelistete Kante. GEMESSEN (Protokoll §3 Fussnote 7, c2c §B5, woertliche Ausgabe): \"depot.orders.mappers.order_mapper\" imports \"depot.orders.api.routes\".",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile CYCLE_SIBLING: K1 ja, K4 ja, K5 teilweise⁷, K2/K3 nein²"
+    },
+    {
+      "id": "I15", "scenario_l2": "CYCLE_SIBLING", "category_l1": "CYCLE",
+      "injection_ref": "inj/15", "injection_sha256": "616cb02982e634670c4dbaa84d5efbf4df63c61a",
+      "carrier_module": "depot.billing.mappers.invoice_mapper", "carrier_component": "billing_mappers",
+      "affected_method_or_signature": null,
+      "rule_id": "R-CYCLE-1", "expected_edge_boundary": "billing_mappers -> billing_api (injiziert; Clean-Kante billing_api -> billing_mappers)",
+      "z2prime": {"S": "billing_api", "T": "billing_mappers", "S_lt_T": true, "S_sole_importer_of_T": true, "candidate_set_size": 1},
+      "expected_match_key": {
+        "K1": "cycle|billing_mappers|depot.billing.mappers.invoice_mapper|billing_mappers->billing_api",
+        "K2_K3": null
+      },
+      "expected_co_findings": [
+        {"category": "layer-violation", "rule_id": "DERIVED:forbidden-edge",
+         "match_key": "layer-violation|billing_mappers|depot.billing.mappers.invoice_mapper|billing_mappers->billing_api"}
+      ],
+      "co_findings_note": "Praefixersatz wie I13; gueltig unter Z2 (billing_api < billing_mappers)",
+      "k4_match_rule": "acyclic_siblings meldet .mappers -> .api unter depot.billing in der minimalen Entfernungsmenge.",
+      "k5_match_rule": "Erlaubnislistenregel billing_mappers meldet die Rueckkante als nicht gelistete Kante (analog I14).",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile CYCLE_SIBLING: K1 ja, K4 ja, K5 teilweise⁷, K2/K3 nein²"
+    },
+    {
+      "id": "I16", "scenario_l2": "CYCLE_PARENT_CHILD", "category_l1": "CYCLE",
+      "injection_ref": "inj/16", "injection_sha256": "43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf",
+      "carrier_module": "depot.orders.services.pricing.engine", "carrier_component": "orders_services_pricing",
+      "affected_method_or_signature": null,
+      "rule_id": "R-CYCLE-2", "expected_edge_boundary": "orders_services_pricing -> orders_services (injiziert; Clean-Kante orders_services -> orders_services_pricing, liegt in services/__init__.py)",
+      "z2prime": {"S": "orders_services", "T": "orders_services_pricing", "S_lt_T": true, "S_lt_T_basis": "Praefix, S um 8 Zeichen kuerzer", "S_sole_importer_of_T": true, "candidate_set_size": 1},
+      "expected_match_key": {
+        "K1": "cycle|orders_services_pricing|depot.orders.services.pricing.engine|orders_services_pricing->orders_services",
+        "K2_K3": null
+      },
+      "expected_co_findings": [
+        {"category": "layer-violation", "rule_id": "DERIVED:forbidden-edge",
+         "match_key": "layer-violation|orders_services_pricing|depot.orders.services.pricing.engine|orders_services_pricing->orders_services"}
+      ],
+      "co_findings_note": "Praefixersatz wie I13; Z2 gilt ausdruecklich auch fuer CYCLE_PARENT_CHILD (DDR M.2, Ergaenzung 13.08.); Ziel orders_services sortiert vor Quelle orders_services_pricing (Praefixordnung)",
+      "k4_match_rule": null,
+      "k4_note": "acyclic_siblings vergleicht ausschliesslich Geschwister und findet Eltern/Kind-Zyklen NICHT (B9+ F5, gemessen auch am Fall C mit ancestors=shop.audit) -- K4 = nein fuer dieses Szenario.",
+      "k5_match_rule": "Erlaubnislistenregel orders_services_pricing meldet die Rueckkante als nicht gelistete Kante: \"depot.orders.services.pricing.engine\" imports \"depot.orders.services\". Rueckkante auf das PAKETMODUL depot.orders.services, nicht auf ein Submodul (aufgeloest 25.08.2026, Protokoll §3 Nachtrag Rev. 28).",
+      "k5_match_rule_superseded_2026_08_23": "Erlaubnislistenregel orders_services_pricing meldet die Rueckkante als nicht gelistete Kante. GEMESSEN (Protokoll §3 Fussnote 7, c2c §B5, woertliche Ausgabe): \"depot.orders.services.pricing.engine\" imports \"depot.orders.services.order_service\". Widerspruch vermerkt: das Rezept (§3 Rezepttabelle) beschreibt eine Rueckkante auf das PAKET depot.orders.services, das zitierte Beispiel nennt jedoch depot.orders.services.order_service als Ziel -- im Bericht als offener Widerspruch zwischen Quellen gefuehrt, nicht durch einen eigenen Werkzeuglauf aufgeloest.",
+      "k5_match_rule_resolution_note": "Aufgeloest 25.08.2026 (Auftrag C4B-0, Protokoll §3 Nachtrag Rev. 28), nicht durch einen eigenen Werkzeuglauf: die zitierte Zeile stammte aus der C2c-Pruefsonde gegen zehn Baseline-Kopien mit je einer nachgebauten Injektion, nicht aus der I16-Injektion dieses Testrepositoriums. Begruendung: CYCLE_PARENT_CHILD prueft den Blindfleck von acyclic_siblings bei Paket UND eigenem Untermodul (Decision Record P); ein Import auf order_service waere auf Modulebene eine Kante zwischen Cousins und zerstoerte den Gegenstand der Kategorie. match_key (K1) unberuehrt, stand bereits auf Komponentenebene.",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile CYCLE_PARENT_CHILD: K1 ja, K4 nein, K5 teilweise⁷, K2/K3 nein²"
+    },
+    {
+      "id": "I17", "scenario_l2": "MISSING_PORT_REFERENCE", "category_l1": "ABSENCE_REQUIRED",
+      "carrying_method_c4b": "TokenService.issue",
+      "removed_port_annotation_c4b": {"before": "signer: depot.core.ports.TokenSigner", "after": "signer: object"},
+      "carrying_method_source_c4b": "c4b_bericht_injektionen.md §5 -- Annotation UND Import entfernt (Protokoll §3 Amendment (f)); object statt ersatzlos, weil Pruefpunkt 3e die vollstaendige Typannotation verlangt.",
+      "injection_ref": "inj/17", "injection_sha256": "c5faa0a65f0a85e9bb1a1ecac950806650449ec1",
+      "carrier_module": "depot.identity.services.token_service", "carrier_component": "identity_services",
+      "affected_method_or_signature": "TokenService.issue",
+      "rule_id": "R-PORT-1", "expected_edge_boundary": "keine Kante -- semantisch",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "ABSENCE_REQUIRED|identity_services|depot.identity.services.token_service|depot.core.ports.TokenSigner"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": null,
+      "k5_match_rule": "dedizierte Portregel auf depot.identity.services.token_service (Untermodulebene) meldet, dass der erforderliche Import depot.core.ports fehlt.",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile MISSING_PORT_REFERENCE: K1 nein³, K4 nein, K5 ja, K2/K3 ja (gemessen B9+ F4)"
+    },
+    {
+      "id": "I18", "scenario_l2": "MISSING_PORT_REFERENCE", "category_l1": "ABSENCE_REQUIRED",
+      "carrying_method_c4b": "CatalogService.quote_cents",
+      "removed_port_annotation_c4b": {"before": "rates: depot.core.ports.RateProvider", "after": "rates: object"},
+      "carrying_method_source_c4b": "c4b_bericht_injektionen.md §5 -- Annotation UND Import entfernt (Protokoll §3 Amendment (f)); object statt ersatzlos, weil Pruefpunkt 3e die vollstaendige Typannotation verlangt.",
+      "injection_ref": "inj/18", "injection_sha256": "ad210637f542736323c4d2f5da4254c4c4e60bad",
+      "carrier_module": "depot.orders.services.catalog_service", "carrier_component": "orders_services",
+      "affected_method_or_signature": "CatalogService.quote_cents",
+      "rule_id": "R-PORT-2", "expected_edge_boundary": "keine Kante -- semantisch",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "ABSENCE_REQUIRED|orders_services|depot.orders.services.catalog_service|depot.core.ports.RateProvider"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": null,
+      "k5_match_rule": "dedizierte Portregel auf depot.orders.services.catalog_service meldet den fehlenden Import depot.core.ports.",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile MISSING_PORT_REFERENCE: K1 nein³, K4 nein, K5 ja, K2/K3 ja (gemessen B9+ F4)"
+    },
+    {
+      "id": "I19", "scenario_l2": "MISSING_PORT_REFERENCE", "category_l1": "ABSENCE_REQUIRED",
+      "carrying_method_c4b": "RefundService.refund",
+      "removed_port_annotation_c4b": {"before": "gateway: depot.core.ports.PaymentGateway", "after": "gateway: object"},
+      "carrying_method_source_c4b": "c4b_bericht_injektionen.md §5 -- Annotation UND Import entfernt (Protokoll §3 Amendment (f)); object statt ersatzlos, weil Pruefpunkt 3e die vollstaendige Typannotation verlangt.",
+      "injection_ref": "inj/19", "injection_sha256": "864da9678e6a10137a2fd2d4b1a7d73082db403f",
+      "carrier_module": "depot.orders.services.refund_service", "carrier_component": "orders_services",
+      "affected_method_or_signature": "RefundService.refund",
+      "rule_id": "R-PORT-3", "expected_edge_boundary": "keine Kante -- semantisch",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "ABSENCE_REQUIRED|orders_services|depot.orders.services.refund_service|depot.core.ports.PaymentGateway"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": null,
+      "k5_match_rule": "dedizierte Portregel auf depot.orders.services.refund_service meldet den fehlenden Import depot.core.ports.",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile MISSING_PORT_REFERENCE: K1 nein³, K4 nein, K5 ja, K2/K3 ja (gemessen B9+ F4)"
+    },
+    {
+      "id": "I20", "scenario_l2": "MISSING_PORT_REFERENCE", "category_l1": "ABSENCE_REQUIRED",
+      "carrying_method_c4b": "LedgerService.post_invoice",
+      "removed_port_annotation_c4b": {"before": "clock: depot.core.ports.Clock", "after": "clock: object"},
+      "carrying_method_source_c4b": "c4b_bericht_injektionen.md §5 -- Annotation UND Import entfernt (Protokoll §3 Amendment (f)); object statt ersatzlos, weil Pruefpunkt 3e die vollstaendige Typannotation verlangt.",
+      "injection_ref": "inj/20", "injection_sha256": "35061d852631049ff74f65451368d7e85fd733bd",
+      "carrier_module": "depot.billing.services.ledger_service", "carrier_component": "billing_services",
+      "affected_method_or_signature": "LedgerService.post_invoice",
+      "rule_id": "R-PORT-4", "expected_edge_boundary": "keine Kante -- semantisch",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "ABSENCE_REQUIRED|billing_services|depot.billing.services.ledger_service|depot.core.ports.Clock"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": null,
+      "k5_match_rule": "dedizierte Portregel auf depot.billing.services.ledger_service meldet den fehlenden Import depot.core.ports. LedgerService.post_settlement ist ausdruecklich NICHT von R-PORT-4 gedeckt (nimmt day: str) und darf nicht mitgetroffen werden (Singular-Regel, Protokoll §3 Nachtrag Rev. 17).",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile MISSING_PORT_REFERENCE: K1 nein³, K4 nein, K5 ja, K2/K3 ja (gemessen B9+ F4)"
+    },
+    {
+      "id": "I21", "scenario_l2": "FRAMEWORK_TYPE_IN_SIGNATURE", "category_l1": "FORBIDDEN_SIGNATURE_TYPE",
+      "carrying_class_c4b": "Customer", "carrying_method_c4b": "Customer.reload",
+      "injected_signature_verbatim_c4b": "def reload(self, session: sqlalchemy.orm.Session) -> None:",
+      "offending_type_verbatim_c4b": "sqlalchemy.orm.Session",
+      "offending_type_spelling_enforced_note": "Die qualifizierte Schreibweise sqlalchemy.orm.Session ist durch die Top-Level-Import-Regel ERZWUNGEN und nicht gewaehlt: die Bauvorschrift laesst nur 'import pkg.modul' zu, nie 'from pkg import modul' (B9+, Protokoll §3 Amendment (c)); die unqualifizierte Form Session waere ohne 'from sqlalchemy.orm import Session' ein NameError, und dieser Import ist verboten. Quelle: c4b_bericht_injektionen.md §3.",
+      "expected_match_key_still_open_note_c4c": "Typ, Schreibweise und tragende Methode liegen jetzt vor; die Bildung des K2/K3-match_key aus §1c bleibt AUSSERHALB des Auftrags C4C (dieser traegt nur SHAs und Methodennamen nach). Als Beobachtung im Bericht c4c_bericht_vorabpruefung.md ausgewiesen, NICHT hier eingetragen.",
+      "injection_ref": "inj/21", "injection_sha256": "dd414657d12197a1ca79152d401f75eb4b5f5f57",
+      "carrier_module": "depot.identity.models.customer_models", "carrier_component": "identity_models",
+      "affected_method_or_signature": "Customer.reload",
+      "affected_method_or_signature_open_superseded_2026_08_23": "OFFEN -- welche oeffentliche Methode/Signatur den sqlalchemy.orm-Typ traegt und welcher Typ aus dem sqlalchemy.orm-Namensraum injiziert wird, ist in den Quellen nicht festgelegt; wird laut Protokoll §3 (Zwingende Praezisierung / Rezepttabelle) und Regelkommentar ('Welcher Typ injiziert wird, entscheidet C4') erst im Bauauftrag C4b entschieden. Baseline-Kontrolle (git show baseline, siehe Bericht) bestaetigt: noch keine Signatur mit sqlalchemy.orm-Typ vorhanden.",
+      "offending_type_resolved_2026_08_25": "sqlalchemy.orm.Session",
+      "offending_type_resolution_note": "Aufgeloest 25.08.2026 (Auftrag C4B-0, Protokoll §3 Nachtrag Rev. 28): injiziert wird sqlalchemy.orm.Session als Parameter- oder Rueckgabetypannotation einer oeffentlichen Methode der Traegerklasse -- kanonischer Typ des R-FRAMEWORK-1-Beispiels, Mapped ungeeignet (in Klassenattributen erlaubt). Drei Auflagen fuer C4b: (a) oeffentliche, vom Extractor erfasste Methode, (b) kein neuer Import (sqlalchemy.orm bereits importiert, Importmenge identisch zum Zwilling), (c) kein gebrochener Aufrufer. Genau ein Vorkommen (Singular-Regel, Protokoll §3 Nachtrag Rev. 17). WEITERHIN OFFEN: tragende Methode/Signatur und die woertliche Schreibweise (unqualifiziert Session oder qualifiziert sqlalchemy.orm.Session) -- beide entscheidet C4b.",
+      "rule_id": "R-FRAMEWORK-1", "expected_edge_boundary": "keine Kante -- externer Import bleibt unmapped/erlaubt",
+      "expected_match_key_k2_k3_open_superseded_2026_08_26": "OFFEN -- Typ festgelegt (sqlalchemy.orm.Session, 25.08.2026), woertliche Schreibweise und tragende Methode bleiben offen, siehe offending_type_resolution_note",
+      "expected_match_key_k2_k3_entered_2026_08_26": "Eingetragen 26.08.2026 (Auftrag D1). Mechanisch gebildet aus matchKey.ts:26 [category|component|module|subjectKey]: category_l1, Komponente des carrier_module aufgeloest ueber data/soll/depot_soll.ilograph.yaml (dieselbe Abbildung wie load_soll in tools/evaluate_control_run.py), carrier_module, offending_type_verbatim_c4b. Ableitungskette: R-FRAMEWORK-1 im Wortlaut, gehashter Messeingang 23.08.2026 (architecture-rules.yaml, SHA256SUMS, C2a) -- Schreibweise des vierten Segments 'die im Prompt woertlich vorkommende Form' 23.08.2026 (Protokoll §3 Nachtrag Rev. 18) -- Typwahl sqlalchemy.orm.Session 25.08.2026 (Protokoll §3 Nachtrag Rev. 28) -- qualifizierte Schreibweise erzwungen, nicht gewaehlt 25.08.2026 (c4c_bericht_vorabpruefung.md §A2) -- Traegermethode <Klasse>.reload 25.08.2026 (c4b_bericht_injektionen.md §3-§6) -- Eintrag dieses Schluessels 26.08.2026, dieser Commit. Zeichengleich mit c4c_bericht_vorabpruefung.md §A2, 4 von 4. Die frueheren OFFEN-Vermerke dieses Eintrags (expected_match_key_k2_k3_open_superseded_2026_08_26, expected_match_key_still_open_note_c4c, co_findings_note) bleiben woertlich stehen und sind damit ueberholt -- ergaenzt statt ersetzt. Volle Kette mit Fundstellen: injection_manifest.md §3, Ableitungsvermerk zu I21-I24.",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "FORBIDDEN_SIGNATURE_TYPE|identity_models|depot.identity.models.customer_models|sqlalchemy.orm.Session"
+      },
+      "expected_co_findings": [
+        {"note": "vorregistrierte Begleitmeldung auf dem Zwilling depot.identity.models.customer_view_models (identische Importmenge) -- historisch als FP4 gefuehrt, seit Protokoll §3 Rev.20/Rev.21 KEINE Messung fuer K4/K5 (beide werten nur Importkanten aus, Importmenge aendert sich durch die Injektion nicht); fuer K2/K3 bleibt der Zwilling ein separat zu fuehrender Praezisions-Testfall (UF1/UF2), kein vorregistrierter Treffer"}
+      ],
+      "co_findings_note": "kein match_key-Eintrag ableitbar wegen der weiterhin offenen Methode/Schreibweise",
+      "k4_match_rule": null,
+      "k5_match_rule": null,
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile FRAMEWORK_TYPE_IN_SIGNATURE: K1 nein, K4 nein⁴ (gemessen c2b §B6), K5 nein⁴ (gemessen c2c §B6), K2/K3 ja"
+    },
+    {
+      "id": "I22", "scenario_l2": "FRAMEWORK_TYPE_IN_SIGNATURE", "category_l1": "FORBIDDEN_SIGNATURE_TYPE",
+      "carrying_class_c4b": "Order", "carrying_method_c4b": "Order.reload",
+      "injected_signature_verbatim_c4b": "def reload(self, session: sqlalchemy.orm.Session) -> None:",
+      "offending_type_verbatim_c4b": "sqlalchemy.orm.Session",
+      "offending_type_spelling_enforced_note": "Die qualifizierte Schreibweise sqlalchemy.orm.Session ist durch die Top-Level-Import-Regel ERZWUNGEN und nicht gewaehlt: die Bauvorschrift laesst nur 'import pkg.modul' zu, nie 'from pkg import modul' (B9+, Protokoll §3 Amendment (c)); die unqualifizierte Form Session waere ohne 'from sqlalchemy.orm import Session' ein NameError, und dieser Import ist verboten. Quelle: c4b_bericht_injektionen.md §3.",
+      "expected_match_key_still_open_note_c4c": "Typ, Schreibweise und tragende Methode liegen jetzt vor; die Bildung des K2/K3-match_key aus §1c bleibt AUSSERHALB des Auftrags C4C (dieser traegt nur SHAs und Methodennamen nach). Als Beobachtung im Bericht c4c_bericht_vorabpruefung.md ausgewiesen, NICHT hier eingetragen.",
+      "injection_ref": "inj/22", "injection_sha256": "08a622b024e9174d7ce62863f385b369c8c27b12",
+      "carrier_module": "depot.orders.models.order_models", "carrier_component": "orders_models",
+      "affected_method_or_signature": "Order.reload",
+      "affected_method_or_signature_open_superseded_2026_08_23": "OFFEN, wie I21",
+      "offending_type_resolved_2026_08_25": "sqlalchemy.orm.Session",
+      "offending_type_resolution_note": "wie I21 -- Typ aufgeloest, Methode/Schreibweise weiterhin offen",
+      "rule_id": "R-FRAMEWORK-1", "expected_edge_boundary": "keine Kante -- externer Import bleibt unmapped/erlaubt",
+      "expected_match_key_k2_k3_open_superseded_2026_08_26": "OFFEN, wie I21",
+      "expected_match_key_k2_k3_entered_2026_08_26": "wie I21 -- eingetragen 26.08.2026 (Auftrag D1), mechanisch aus matchKey.ts:26 gebildet, zeichengleich mit c4c_bericht_vorabpruefung.md §A2; Kette siehe injection_manifest.md §3, Ableitungsvermerk zu I21-I24.",
+      "expected_match_key": { "K1": null, "K2_K3": "FORBIDDEN_SIGNATURE_TYPE|orders_models|depot.orders.models.order_models|sqlalchemy.orm.Session" },
+      "expected_co_findings": [
+        {"note": "Zwilling depot.orders.models.order_view_models, wie I21"}
+      ],
+      "co_findings_note": "wie I21",
+      "k4_match_rule": null, "k5_match_rule": null,
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile FRAMEWORK_TYPE_IN_SIGNATURE: K1 nein, K4 nein⁴, K5 nein⁴, K2/K3 ja"
+    },
+    {
+      "id": "I23", "scenario_l2": "FRAMEWORK_TYPE_IN_SIGNATURE", "category_l1": "FORBIDDEN_SIGNATURE_TYPE",
+      "carrying_class_c4b": "OrderLine", "carrying_method_c4b": "OrderLine.reload",
+      "injected_signature_verbatim_c4b": "def reload(self, session: sqlalchemy.orm.Session) -> None:",
+      "offending_type_verbatim_c4b": "sqlalchemy.orm.Session",
+      "offending_type_spelling_enforced_note": "Die qualifizierte Schreibweise sqlalchemy.orm.Session ist durch die Top-Level-Import-Regel ERZWUNGEN und nicht gewaehlt: die Bauvorschrift laesst nur 'import pkg.modul' zu, nie 'from pkg import modul' (B9+, Protokoll §3 Amendment (c)); die unqualifizierte Form Session waere ohne 'from sqlalchemy.orm import Session' ein NameError, und dieser Import ist verboten. Quelle: c4b_bericht_injektionen.md §3.",
+      "expected_match_key_still_open_note_c4c": "Typ, Schreibweise und tragende Methode liegen jetzt vor; die Bildung des K2/K3-match_key aus §1c bleibt AUSSERHALB des Auftrags C4C (dieser traegt nur SHAs und Methodennamen nach). Als Beobachtung im Bericht c4c_bericht_vorabpruefung.md ausgewiesen, NICHT hier eingetragen.",
+      "injection_ref": "inj/23", "injection_sha256": "28a75749496229bb1db37d85f68347572bd84c49",
+      "carrier_module": "depot.orders.models.order_line_models", "carrier_component": "orders_models",
+      "affected_method_or_signature": "OrderLine.reload",
+      "affected_method_or_signature_open_superseded_2026_08_23": "OFFEN, wie I21",
+      "offending_type_resolved_2026_08_25": "sqlalchemy.orm.Session",
+      "offending_type_resolution_note": "wie I21 -- Typ aufgeloest, Methode/Schreibweise weiterhin offen",
+      "rule_id": "R-FRAMEWORK-1", "expected_edge_boundary": "keine Kante -- externer Import bleibt unmapped/erlaubt",
+      "expected_match_key_k2_k3_open_superseded_2026_08_26": "OFFEN, wie I21",
+      "expected_match_key_k2_k3_entered_2026_08_26": "wie I21 -- eingetragen 26.08.2026 (Auftrag D1), mechanisch aus matchKey.ts:26 gebildet, zeichengleich mit c4c_bericht_vorabpruefung.md §A2; Kette siehe injection_manifest.md §3, Ableitungsvermerk zu I21-I24.",
+      "expected_match_key": { "K1": null, "K2_K3": "FORBIDDEN_SIGNATURE_TYPE|orders_models|depot.orders.models.order_line_models|sqlalchemy.orm.Session" },
+      "expected_co_findings": [
+        {"note": "Zwilling depot.orders.models.order_line_view_models, wie I21"}
+      ],
+      "co_findings_note": "wie I21",
+      "k4_match_rule": null, "k5_match_rule": null,
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile FRAMEWORK_TYPE_IN_SIGNATURE: K1 nein, K4 nein⁴, K5 nein⁴, K2/K3 ja"
+    },
+    {
+      "id": "I24", "scenario_l2": "FRAMEWORK_TYPE_IN_SIGNATURE", "category_l1": "FORBIDDEN_SIGNATURE_TYPE",
+      "carrying_class_c4b": "Invoice", "carrying_method_c4b": "Invoice.reload",
+      "injected_signature_verbatim_c4b": "def reload(self, session: sqlalchemy.orm.Session) -> None:",
+      "offending_type_verbatim_c4b": "sqlalchemy.orm.Session",
+      "offending_type_spelling_enforced_note": "Die qualifizierte Schreibweise sqlalchemy.orm.Session ist durch die Top-Level-Import-Regel ERZWUNGEN und nicht gewaehlt: die Bauvorschrift laesst nur 'import pkg.modul' zu, nie 'from pkg import modul' (B9+, Protokoll §3 Amendment (c)); die unqualifizierte Form Session waere ohne 'from sqlalchemy.orm import Session' ein NameError, und dieser Import ist verboten. Quelle: c4b_bericht_injektionen.md §3.",
+      "expected_match_key_still_open_note_c4c": "Typ, Schreibweise und tragende Methode liegen jetzt vor; die Bildung des K2/K3-match_key aus §1c bleibt AUSSERHALB des Auftrags C4C (dieser traegt nur SHAs und Methodennamen nach). Als Beobachtung im Bericht c4c_bericht_vorabpruefung.md ausgewiesen, NICHT hier eingetragen.",
+      "injection_ref": "inj/24", "injection_sha256": "91ed6a80d415c68eed7661a21ea554ba32da9c83",
+      "carrier_module": "depot.billing.models.invoice_models", "carrier_component": "billing_models",
+      "affected_method_or_signature": "Invoice.reload",
+      "affected_method_or_signature_open_superseded_2026_08_23": "OFFEN, wie I21",
+      "offending_type_resolved_2026_08_25": "sqlalchemy.orm.Session",
+      "offending_type_resolution_note": "wie I21 -- Typ aufgeloest, Methode/Schreibweise weiterhin offen",
+      "rule_id": "R-FRAMEWORK-1", "expected_edge_boundary": "keine Kante -- externer Import bleibt unmapped/erlaubt",
+      "expected_match_key_k2_k3_open_superseded_2026_08_26": "OFFEN, wie I21",
+      "expected_match_key_k2_k3_entered_2026_08_26": "wie I21 -- eingetragen 26.08.2026 (Auftrag D1), mechanisch aus matchKey.ts:26 gebildet, zeichengleich mit c4c_bericht_vorabpruefung.md §A2; Kette siehe injection_manifest.md §3, Ableitungsvermerk zu I21-I24.",
+      "expected_match_key": { "K1": null, "K2_K3": "FORBIDDEN_SIGNATURE_TYPE|billing_models|depot.billing.models.invoice_models|sqlalchemy.orm.Session" },
+      "expected_co_findings": [
+        {"note": "Zwilling depot.billing.models.invoice_view_models, wie I21"}
+      ],
+      "co_findings_note": "wie I21",
+      "k4_match_rule": null, "k5_match_rule": null,
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile FRAMEWORK_TYPE_IN_SIGNATURE: K1 nein, K4 nein⁴, K5 nein⁴, K2/K3 ja"
+    },
+    {
+      "id": "I25", "scenario_l2": "INCORRECT_LOCATION", "category_l1": "STRUCTURAL_PLACEMENT",
+      "file_move_c4b": {"from": "src/depot/orders/repository/legacy_order_index.py", "to": "src/depot/orders/legacy_order_index.py"},
+      "file_move_note_c4b": "Reiner git mv, Inhalt unveraendert (Blob-Hashes identisch, R100). Nach dem Umzug 0 ausgehende Importe und 0 eingehende Referenzen -- Abnahmebedingung 8. Quelle: c4b_bericht_injektionen.md §6.",
+      "injection_ref": "inj/25", "injection_sha256": "ef114806ec2360f19eb9dc9425d79ed153b9a769",
+      "carrier_module_origin": "depot.orders.repository.legacy_order_index",
+      "carrier_module": "depot.orders.legacy_order_index", "carrier_component": "orders_repository",
+      "affected_method_or_signature": null,
+      "rule_id": "R-PLACE-1 (Klausel 1: *_repo/*_query/*_index -> repository)",
+      "expected_edge_boundary": "keine Kante -- Platzierung",
+      "phantom_target_is_direct_child_of": "depot.orders",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "STRUCTURAL_PLACEMENT|orders_repository|depot.orders.legacy_order_index|depot.orders.legacy_order_index"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": "layers-Contract mit exhaustive=True auf dem Zielpaket depot.orders (Layerliste aus dem Dateibaum der Clean-Baseline) meldet das verschobene Modul als nicht deklariertes Kind -- richtige Stelle, falsche Art (Fussnote 5); zaehlt in localized, nie in strict.",
+      "k5_match_rule": null,
+      "k5_note": "K5=nein: das verschobene Modul ist bauvorschriftsgemaess import- und referenzfrei (Abnahmebedingung 8), PyTestArch erreicht ein falsch platziertes Modul nur als Import-Proxy (Fussnote 6).",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile INCORRECT_LOCATION: K1 nein, K4 teilweise⁵ᴳ, K5 nein⁶ᴱ, K2/K3 ja"
+    },
+    {
+      "id": "I26", "scenario_l2": "INCORRECT_LOCATION", "category_l1": "STRUCTURAL_PLACEMENT",
+      "file_move_c4b": {"from": "src/depot/billing/repository/legacy_invoice_index.py", "to": "src/depot/billing/legacy_invoice_index.py"},
+      "file_move_note_c4b": "Reiner git mv, Inhalt unveraendert (Blob-Hashes identisch, R100). Nach dem Umzug 0 ausgehende Importe und 0 eingehende Referenzen -- Abnahmebedingung 8. Quelle: c4b_bericht_injektionen.md §6.",
+      "injection_ref": "inj/26", "injection_sha256": "efe5c81f526d183fcb6634e65df00e7f90b0dbc3",
+      "carrier_module_origin": "depot.billing.repository.legacy_invoice_index",
+      "carrier_module": "depot.billing.legacy_invoice_index", "carrier_component": "billing_repository",
+      "affected_method_or_signature": null,
+      "rule_id": "R-PLACE-1 (Klausel 1)",
+      "expected_edge_boundary": "keine Kante -- Platzierung",
+      "phantom_target_is_direct_child_of": "depot.billing",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "STRUCTURAL_PLACEMENT|billing_repository|depot.billing.legacy_invoice_index|depot.billing.legacy_invoice_index"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": "layers-Contract mit exhaustive=True auf depot.billing meldet das Modul als nicht deklariertes Kind (wie I25).",
+      "k5_match_rule": null, "k5_note": "wie I25",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile INCORRECT_LOCATION: K1 nein, K4 teilweise⁵ᴳ, K5 nein⁶ᴱ, K2/K3 ja"
+    },
+    {
+      "id": "I27", "scenario_l2": "INCORRECT_LOCATION", "category_l1": "STRUCTURAL_PLACEMENT",
+      "file_move_c4b": {"from": "src/depot/identity/repository/legacy_token_index.py", "to": "src/depot/identity/legacy_token_index.py"},
+      "file_move_note_c4b": "Reiner git mv, Inhalt unveraendert (Blob-Hashes identisch, R100). Nach dem Umzug 0 ausgehende Importe und 0 eingehende Referenzen -- Abnahmebedingung 8. Quelle: c4b_bericht_injektionen.md §6.",
+      "injection_ref": "inj/27", "injection_sha256": "33ad86a07dd626c59541c91334d33f3e1e76bc04",
+      "carrier_module_origin": "depot.identity.repository.legacy_token_index",
+      "carrier_module": "depot.identity.legacy_token_index", "carrier_component": "identity_repository",
+      "affected_method_or_signature": null,
+      "rule_id": "R-PLACE-1 (Klausel 1)",
+      "expected_edge_boundary": "keine Kante -- Platzierung",
+      "phantom_target_is_direct_child_of": "depot.identity",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "STRUCTURAL_PLACEMENT|identity_repository|depot.identity.legacy_token_index|depot.identity.legacy_token_index"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": "layers-Contract mit exhaustive=True auf depot.identity meldet das Modul als nicht deklariertes Kind (wie I25).",
+      "k5_match_rule": null, "k5_note": "wie I25",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile INCORRECT_LOCATION: K1 nein, K4 teilweise⁵ᴳ, K5 nein⁶ᴱ, K2/K3 ja"
+    },
+    {
+      "id": "I28", "scenario_l2": "INCORRECT_LOCATION", "category_l1": "STRUCTURAL_PLACEMENT",
+      "file_move_c4b": {"from": "src/depot/billing/models/legacy_tax_models.py", "to": "src/depot/billing/legacy_tax_models.py"},
+      "file_move_note_c4b": "Reiner git mv, Inhalt unveraendert (Blob-Hashes identisch, R100). Nach dem Umzug 0 ausgehende Importe und 0 eingehende Referenzen -- Abnahmebedingung 8. Quelle: c4b_bericht_injektionen.md §6.",
+      "injection_ref": "inj/28", "injection_sha256": "72dc7461f9ecb5cdd53293f1f94d7418e98a3401",
+      "carrier_module_origin": "depot.billing.models.legacy_tax_models",
+      "carrier_module": "depot.billing.legacy_tax_models", "carrier_component": "billing_models",
+      "affected_method_or_signature": null,
+      "rule_id": "R-PLACE-1 (Klausel 2: *_models -> models)",
+      "expected_edge_boundary": "keine Kante -- Platzierung",
+      "phantom_target_is_direct_child_of": "depot.billing",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "STRUCTURAL_PLACEMENT|billing_models|depot.billing.legacy_tax_models|depot.billing.legacy_tax_models"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": "layers-Contract mit exhaustive=True auf depot.billing meldet das Modul als nicht deklariertes Kind (wie I25); einzige Injektion unter Klausel 2.",
+      "k5_match_rule": null, "k5_note": "wie I25",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile INCORRECT_LOCATION: K1 nein, K4 teilweise⁵ᴳ, K5 nein⁶ᴱ, K2/K3 ja"
+    },
+    {
+      "id": "I29", "scenario_l2": "SIGNATURE_DEVIATION", "category_l1": "API_CONTRACT",
+      "carrying_method_c4b": "SessionRepository.touch",
+      "signature_before_c4b": "def touch(self, session_id: str, ttl_seconds: int) -> bool:",
+      "signature_after_c4b": "def touch(self, session_id: str, ttl_seconds: float) -> bool:",
+      "deviation_c4b": "Parametertyp int -> float",
+      "offending_type_form_note": "offending_type ist der Symbolname als Class.method (Protokoll §3 Nachtrag Rev. 18); bei der Top-Level-Funktion to_payload der blosse Name. Quelle: c4b_bericht_injektionen.md §4.",
+      "injection_ref": "inj/29", "injection_sha256": "5e685cff9559cfbff8935162405cd98c5c10932e",
+      "carrier_module": "depot.identity.repository.session_repo", "carrier_component": "identity_repository",
+      "affected_method_or_signature": "SessionRepository.touch",
+      "rule_id": "R-SIG-1", "expected_edge_boundary": "keine Kante",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "API_CONTRACT|identity_repository|depot.identity.repository.session_repo|SessionRepository.touch"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": null, "k5_match_rule": null,
+      "k4_k5_note": "K4=K5=nein bauvorschriftsgebunden (h): die Importmenge bleibt unveraendert, beide Werkzeuge werten nur ast.Import/ast.ImportFrom aus.",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile SIGNATURE_DEVIATION: K1 nein, K4 neinᴴ, K5 neinᴴ, K2/K3 ja (abgeleitet, nicht gemessen -- einzige nicht gemessene Zeile)"
+    },
+    {
+      "id": "I30", "scenario_l2": "SIGNATURE_DEVIATION", "category_l1": "API_CONTRACT",
+      "carrying_method_c4b": "OrderQuery.percent_for",
+      "signature_before_c4b": "def percent_for(self, code: str, subtotal_cents: int) -> int:",
+      "signature_after_c4b": "def percent_for(self, code: str, subtotal_cents: int) -> float:",
+      "deviation_c4b": "Rueckgabetyp int -> float",
+      "offending_type_form_note": "offending_type ist der Symbolname als Class.method (Protokoll §3 Nachtrag Rev. 18); bei der Top-Level-Funktion to_payload der blosse Name. Quelle: c4b_bericht_injektionen.md §4.",
+      "injection_ref": "inj/30", "injection_sha256": "604d30460ce9a602b7b635f8f6de08c113acf9bf",
+      "carrier_module": "depot.orders.repository.order_query", "carrier_component": "orders_repository",
+      "affected_method_or_signature": "OrderQuery.percent_for",
+      "rule_id": "R-SIG-2", "expected_edge_boundary": "keine Kante",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "API_CONTRACT|orders_repository|depot.orders.repository.order_query|OrderQuery.percent_for"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": null, "k5_match_rule": null,
+      "k4_k5_note": "wie I29",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile SIGNATURE_DEVIATION: K1 nein, K4 neinᴴ, K5 neinᴴ, K2/K3 ja"
+    },
+    {
+      "id": "I31", "scenario_l2": "SIGNATURE_DEVIATION", "category_l1": "API_CONTRACT",
+      "carrying_method_c4b": "InvoiceQuery.settled_cents",
+      "signature_before_c4b": "def settled_cents(self, invoice_number: str) -> int:",
+      "signature_after_c4b": "def settled_cents(self, invoice_number: str) -> float:",
+      "deviation_c4b": "Rueckgabetyp int -> float",
+      "offending_type_form_note": "offending_type ist der Symbolname als Class.method (Protokoll §3 Nachtrag Rev. 18); bei der Top-Level-Funktion to_payload der blosse Name. Quelle: c4b_bericht_injektionen.md §4.",
+      "injection_ref": "inj/31", "injection_sha256": "3d3374571153656f012a15d01df7f5e8dcb88c8e",
+      "carrier_module": "depot.billing.repository.invoice_query", "carrier_component": "billing_repository",
+      "affected_method_or_signature": "InvoiceQuery.settled_cents",
+      "rule_id": "R-SIG-3", "expected_edge_boundary": "keine Kante",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "API_CONTRACT|billing_repository|depot.billing.repository.invoice_query|InvoiceQuery.settled_cents"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": null, "k5_match_rule": null,
+      "k4_k5_note": "wie I29",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile SIGNATURE_DEVIATION: K1 nein, K4 neinᴴ, K5 neinᴴ, K2/K3 ja"
+    },
+    {
+      "id": "I32", "scenario_l2": "SIGNATURE_DEVIATION", "category_l1": "API_CONTRACT",
+      "carrying_method_c4b": "to_payload",
+      "signature_before_c4b": "def to_payload(line: depot.orders.models.order_line_models.OrderLine) -> dict[str, object]:",
+      "signature_after_c4b": "def to_payload(line: depot.orders.models.order_line_models.OrderLine) -> dict[str, str]:",
+      "deviation_c4b": "Rueckgabetyp dict[str, object] -> dict[str, str]",
+      "offending_type_form_note": "offending_type ist der Symbolname als Class.method (Protokoll §3 Nachtrag Rev. 18); bei der Top-Level-Funktion to_payload der blosse Name. Quelle: c4b_bericht_injektionen.md §4.",
+      "signature_layout_note_c4b": "Die Signatur ist in der Datei ueber drei Zeilen umbrochen (black) und traegt dort ein Magic Trailing Comma; oben auf einer logischen Zeile ohne dieses Komma wiedergegeben, Tokenfolge identisch. Geaendert wurde ausschliesslich die Zeile ) -> dict[str, object]: -> ) -> dict[str, str]:.",
+      "injection_ref": "inj/32", "injection_sha256": "307e57327a81d94dea84614d9fc9d8d82b839f97",
+      "carrier_module": "depot.orders.mappers.order_line_mapper", "carrier_component": "orders_mappers",
+      "affected_method_or_signature": "to_payload",
+      "rule_id": "R-SIG-4", "expected_edge_boundary": "keine Kante",
+      "expected_match_key": {
+        "K1": null,
+        "K2_K3": "API_CONTRACT|orders_mappers|depot.orders.mappers.order_line_mapper|to_payload"
+      },
+      "expected_co_findings": [], "co_findings_note": "keine Vorschrift fuer diese Kategorie",
+      "k4_match_rule": null, "k5_match_rule": null,
+      "k4_k5_note": "wie I29",
+      "matrix_cell_ref": "§3 Erwartungsmatrix Zeile SIGNATURE_DEVIATION: K1 nein, K4 neinᴴ, K5 neinᴴ, K2/K3 ja"
+    }
+  ],
+  "completeness_check": {
+    "line_count": 32,
+    "ids_gapless": "I01..I32",
+    "distribution_by_scenario": "3/3/3/3/3/1/4/4/4/4",
+    "each_carrier_module_appears_exactly_once": true,
+    "all_rule_ids_exist_in_architecture_rules_yaml_and_scope_covers_carrier_component": true,
+    "all_six_level1_categories_populated": true,
+    "level1_category_strings_char_identical_to_rules_yaml": true,
+    "cycle_rows_satisfy_z1_z4_and_z2prime_i_ii": true,
+    "z4_order_comparison_source": "reused from docs/planung/c1_modulliste.md §3 (already machine-checked and frozen there): identity_api<identity_mappers (pos 9, a<m), orders_api<orders_mappers (pos 7, a<m), billing_api<billing_mappers (pos 8, a<m), orders_services<orders_services_pricing (prefix)",
+    "incorrect_location_rows_name_origin_and_phantom_and_target_is_direct_child_of_context_package": true,
+    "layer_back_call_rows_carry_preregistered_k4_double_report": true,
+    "no_forbidden_relation_row_carries_k1_co_finding": true
+  }
+}

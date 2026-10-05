@@ -1,0 +1,47 @@
+
+╔══╗─────────▶╔╗ ╔╗      ╔╗◀───┐
+╚╣╠╝◀─────┐  ╔╝╚╗║║────▶╔╝╚╗   │
+ ║║   ╔══╦══╦╩╗╔╝║║  ╔╦═╩╗╔╝╔═╦══╗
+ ║║╔══╣╔╗║╔╗║╔╣║ ║║ ╔╬╣╔╗║║ ║│║╔═╝
+╔╣╠╣║║║╚╝║╚╝║║║╚╗║╚═╝║║║║║╚╗║═╣║
+╚══╩╩╩╣╔═╩══╩╝╚═╝╚═══╩╩╝╚╩═╩╩═╩╝
+  └──▶║║                    ▲ 
+      ╚╝────────────────────┘
+
+
+---------
+Contracts
+---------
+
+Analyzed 75 files, 91 dependencies.
+-----------------------------------
+
+Layered spine of every bounded context KEPT
+identity.api skips no layer KEPT
+identity.services skips no layer KEPT
+orders.api skips no layer BROKEN
+orders.services skips no layer KEPT
+billing.api skips no layer KEPT
+billing.services skips no layer KEPT
+Only the adapter facade may reach into the adapter internals KEPT
+orders and billing are mutually independent KEPT
+No cycles between sibling packages KEPT
+identity declares all of its direct children KEPT
+orders declares all of its direct children KEPT
+billing declares all of its direct children KEPT
+
+Contracts: 12 kept, 1 broken.
+
+
+----------------
+Broken contracts
+----------------
+
+orders.api skips no layer
+-------------------------
+
+depot.orders.api is not allowed to import depot.orders.repository:
+
+-   depot.orders.api.routes -> depot.orders.repository.order_repo (l.11)
+
+

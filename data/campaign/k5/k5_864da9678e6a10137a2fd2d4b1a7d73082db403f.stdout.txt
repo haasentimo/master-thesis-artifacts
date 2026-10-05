@@ -1,0 +1,40 @@
+.....................F..                                                 [100%]
+=================================== FAILURES ===================================
+_______________ test_carrier_references_the_core_ports[R-PORT-3] _______________
+
+rule_id = 'R-PORT-3'
+
+    @pytest.mark.parametrize("rule_id", sorted(PORT_RULES))
+    def test_carrier_references_the_core_ports(rule_id: str) -> None:
+>       PORT_RULES[rule_id].assert_applies(ARCH)
+
+../masterarbeit/data/soll/test_architecture.py:311: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../venv/lib/python3.12/site-packages/pytestarch/query_language/rule.py:212: in assert_applies
+    matcher.match(evaluable)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pytestarch.rule_assessment.rule_check.rule_matcher.DefaultRuleMatcher object at 0x7f52de2d2150>
+evaluable = <pytestarch.eval_structure.evaluable_graph.EvaluableArchitectureGraph object at 0x7f52de3da300>
+
+    def match(self, evaluable: EvaluableArchitecture) -> None:
+        """
+        Checks whether an expected behavior is exhibited by the EvaluableArchitecture.
+        If there are any rule violations, will raise an error detailing the violations.
+    
+        Args:
+            evaluable: object to check
+        Raises:
+            AssertionError
+        """
+        self._updated_module_requirements(evaluable)
+        rule_violations = self._find_rule_violations(evaluable)
+    
+        if rule_violations:
+>           raise AssertionError(self._create_rule_violation_message(rule_violations))
+E           AssertionError: "depot.orders.services.refund_service" does not import "depot.core.ports".
+
+../venv/lib/python3.12/site-packages/pytestarch/rule_assessment/rule_check/rule_matcher.py:59: AssertionError
+=========================== short test summary info ============================
+FAILED ../masterarbeit/data/soll/test_architecture.py::test_carrier_references_the_core_ports[R-PORT-3]
+1 failed, 23 passed in 0.16s

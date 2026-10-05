@@ -1,0 +1,160 @@
+{
+  "schema": "z2-run-manifest/1",
+  "bedingung": "K3",
+  "zelle": "k3_b1",
+  "slot": "run0",
+  "protokoll": {
+    "pfad": "docs/protokolle/z2_protokoll_regelableitung.md",
+    "sha256": "862fdc3b7cfb264482db155575437edb25b1b436f92b5444b2137f1e332d9dde",
+    "commit": "35aff9bd777a204977a77ab7fc25df09e9983da6",
+    "stand": "eingefroren; Kopf-Freeze-Vermerk im Dokument"
+  },
+  "nachrichten": {
+    "system_sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0",
+    "system_bytes": 2283,
+    "user_sha256": "21741e034a9c129638d9c3228111e0a11ae82a4e275b6a291edcf5866b8d4eb1",
+    "user_bytes": 107307,
+    "struktur": "zwei Nachrichten nach A2/R3"
+  },
+  "eingaben": {
+    "ist_modell": {
+      "pfad": "data/z2/eingaben/ist_modell.yaml",
+      "bytes": 42959,
+      "sha256": "146dbb055e059b9dd948b27e185f33a2cb56557a534c55e0daf983c892336673"
+    },
+    "input_facts": {
+      "pfad": "data/z2/eingaben/input_facts.json",
+      "bytes": 64245,
+      "sha256": "f670593a7add275c364ebff5a5529cb95a787a10de5e0c80f97cd46574eb282a"
+    }
+  },
+  "modell": "nvidia-nemotron-3-super-120b",
+  "modell_echo": "nvidia-nemotron-3-super-120b",
+  "provider": "digitalocean",
+  "base_url": "https://inference.do-ai.run/v1",
+  "endpunkt": "https://inference.do-ai.run/v1/chat/completions",
+  "schemaname": "architecture_rules",
+  "fenster": {
+    "gesetzt": {
+      "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+      "wert": 32768
+    },
+    "wirksam": "nicht kontrollierbar und nicht ablesbar (fremder Anbieter)"
+  },
+  "ollama": null,
+  "delivery_assurance": "record_only",
+  "delivery_assurance_begruendung": "Fremder Tokenisierer: es gibt keinen berechenbaren Sollwert, und das Kontextfenster des Anbieters ist weder gesetzt noch ablesbar. (b) und (b3) sind Ollama-Eigenschaften und binden hier NICHT; geprueft wird ausschliesslich (b2) gegen fruehere Messungen DERSELBEN Bedingung. §3b (e): die Schwelle bindet auf K2, K3s Tokenzahl wird berichtet und ist nicht schwellenbildend.",
+  "lieferzusicherung": {
+    "delivery_assurance": "record_only",
+    "gemeldete_prompt_tokens": 25030,
+    "gesetztes_fenster": null,
+    "sollwert": null,
+    "monotonie_bezug": null,
+    "kriterien": [
+      {
+        "kriterium": "soll_toleranz",
+        "regel": "Sollwert und Toleranzband",
+        "rechnung": "kein berechenbarer Sollwert",
+        "gilt": false,
+        "urteil": "gilt nicht",
+        "grund_wenn_aus": "record_only: fremder Tokenisierer, kein berechenbarer Sollwert (§3b (e))"
+      },
+      {
+        "kriterium": "b_fenstergleichstand",
+        "regel": "Gleichstand mit dem gesetzten Fenster",
+        "rechnung": "Fenster nicht kontrollierbar",
+        "gilt": false,
+        "urteil": "gilt nicht",
+        "grund_wenn_aus": "record_only: das Fenster des Anbieters ist weder gesetzt noch ablesbar; das Kriterium ist eine Ollama-Eigenschaft"
+      },
+      {
+        "kriterium": "b2_monotonie",
+        "regel": "Monotonie gegen die groesste Komponente",
+        "rechnung": "kein Bezugswert",
+        "gilt": false,
+        "urteil": "gilt nicht",
+        "grund_wenn_aus": "record_only ohne frueheren Lauf DERSELBEN Bedingung: es gibt noch keine Vergleichsmessung; das Kriterium ist gegenstandslos, nicht bestanden"
+      },
+      {
+        "kriterium": "b3_halbfenster",
+        "regel": "Halbfenster-Signatur Fenster/2 + 2",
+        "rechnung": "Signatur ist eine Ollama-Eigenschaft",
+        "gilt": false,
+        "urteil": "gilt nicht",
+        "grund_wenn_aus": "record_only: die Halbfenster-Signatur ist an zwei Ollama-Messpunkten abgeleitet (§3b (b3), Evidenzeinordnung) und auf einen fremden Server nicht uebertragbar"
+      }
+    ],
+    "verletzt": [],
+    "urteil": "LIEFERUNG AUFGEZEICHNET",
+    "delivery_assurance_begruendung": "Fremder Tokenisierer: es gibt keinen berechenbaren Sollwert, und das Kontextfenster des Anbieters ist weder gesetzt noch ablesbar. (b) und (b3) sind Ollama-Eigenschaften und binden hier NICHT; geprueft wird ausschliesslich (b2) gegen fruehere Messungen DERSELBEN Bedingung. §3b (e): die Schwelle bindet auf K2, K3s Tokenzahl wird berichtet und ist nicht schwellenbildend.",
+    "monotonie_bezug_herkunft": "kein frueherer Lauf derselben Bedingung",
+    "sollwert_herkunft": null
+  },
+  "bytegatter": {
+    "gatter": [
+      {
+        "gatter": "G1",
+        "gegenstand": "system-Nachricht (Anhang A, A3)",
+        "soll_sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0",
+        "ist_sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0",
+        "soll_bytes": 2283,
+        "ist_bytes": 2283,
+        "herkunft_soll": "M11, Nachricht der Rolle `system`",
+        "urteil": "GEHALTEN"
+      },
+      {
+        "gatter": "G2",
+        "gegenstand": "user-Nachricht (Anhang A, A2, Zusammensetzungsformel)",
+        "soll_sha256": "21741e034a9c129638d9c3228111e0a11ae82a4e275b6a291edcf5866b8d4eb1",
+        "ist_sha256": "21741e034a9c129638d9c3228111e0a11ae82a4e275b6a291edcf5866b8d4eb1",
+        "soll_bytes": 107307,
+        "ist_bytes": 107307,
+        "herkunft_soll": "M11, Nachricht der Rolle `user`",
+        "urteil": "GEHALTEN"
+      }
+    ],
+    "urteil": "GEHALTEN",
+    "registrierte_sollwerte": {
+      "quelle": "data/z2/messungen/tokenmessung_2026-09-02.json",
+      "quelle_sha256": "a9625d88ec0746b90b9e21955c69fad9bc078431e24a3b58a8b10ebc0461b280",
+      "G1_system": {
+        "sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0",
+        "bytes": 2283,
+        "herkunft": "M11, Nachricht der Rolle `system`"
+      },
+      "G2_user": {
+        "sha256": "21741e034a9c129638d9c3228111e0a11ae82a4e275b6a291edcf5866b8d4eb1",
+        "bytes": 107307,
+        "herkunft": "M11, Nachricht der Rolle `user`"
+      },
+      "soll_prompt_tokens": {
+        "wert": 23405,
+        "herkunft": "M11"
+      },
+      "monotonie_bezug": {
+        "wert": 14451,
+        "herkunft": "M11a, Faktenbasis in der gezogenen Fassung"
+      },
+      "basiszahl_B": {
+        "wert": 30,
+        "herkunft": "M1"
+      }
+    }
+  },
+  "zeitstempel": {
+    "start": "2026-09-02T20:55:45+0200",
+    "ende": "2026-09-02T20:58:21+0200"
+  },
+  "werkzeug": {
+    "pfad": "tools/run_z2.py",
+    "sha256": "c886da13fac988fffe462b0bb3b0d9cecdfdd1cbe109f6751304e0949a107975"
+  },
+  "git_head": "7d2c4ae39965b1767aacde1055c1dc533d8b3049",
+  "aufruf": {
+    "temperature": 0,
+    "seed": 0,
+    "seed_hinweis": "gesendet, aber nicht als wirksam angenommen (Z1-Protokoll §3.3 (1), T-Z1-5)",
+    "max_tokens": "nicht gesetzt -- ein abgeschnittenes Generat saehe wie Modellversagen aus (§3b, Generat-Reserve)",
+    "options": "nicht gesendet -- das Fenster ist eine Eigenschaft des Servers (systemd-Drop-in), nicht des Calls"
+  }
+}

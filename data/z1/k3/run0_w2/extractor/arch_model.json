@@ -1,0 +1,37 @@
+{
+  "components": [
+    {
+      "id": "API",
+      "name": "API",
+      "kind": "component",
+      "description": "HTTP handlers for browsing/searching catalog and checkout flow.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "Application",
+      "name": "Application",
+      "kind": "component",
+      "description": "Use-case services orchestrating domain logic with infrastructure adapters.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "Domain",
+      "name": "Domain",
+      "kind": "component",
+      "description": "Pure domain model containing entities, aggregates, pricing rules, and catalog aggregate.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "Infrastructure",
+      "name": "Infrastructure",
+      "kind": "component",
+      "description": "In-memory persistence adapters and external service gateways.",
+      "role": null,
+      "contained_modules": []
+    }
+  ],
+  "relations": []
+}

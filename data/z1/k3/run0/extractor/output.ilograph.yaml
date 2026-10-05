@@ -1,0 +1,34 @@
+resources:
+- id: Application
+  name: Application
+  subtitle: Use-case services that orchestrate domain logic with infrastructure 
+    adapters.
+- id: Domain
+  name: Domain
+  subtitle: Core business model including books, orders, pricing rules, and 
+    catalog aggregate.
+- id: Infrastructure
+  name: Infrastructure
+  subtitle: In-memory persistence adapters for books and orders, and a fake 
+    payment gateway.
+- id: Presentation
+  name: Presentation
+  subtitle: HTTP handlers for browsing/searching the catalog and checkout flow.
+perspectives:
+- name: Dependencies
+  relations:
+  - from: Application
+    to: Domain
+    label: depends_on
+  - from: Application
+    to: Infrastructure
+    label: depends_on
+  - from: Infrastructure
+    to: Domain
+    label: depends_on
+  - from: Presentation
+    to: Application
+    label: depends_on
+  - from: Presentation
+    to: Domain
+    label: depends_on

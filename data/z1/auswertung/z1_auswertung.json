@@ -1,0 +1,1620 @@
+{
+  "erzeugt_utc": "2026-08-31T22:04:57+00:00",
+  "extractor_head": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+  "protokoll": {
+    "revision": "5",
+    "sha256": "a6a42f3a65b62a73a0c7c4e849174c274dc56202ac838edde2e215dcb999fe95"
+  },
+  "instrumente": {
+    "src/llm_arch/eval/metrics.py": "54a8021c51f1a05447b5ec64005853d5a8c9760b",
+    "src/llm_arch/eval/ilograph_reader.py": "99a9566e50211a2e86db25924f58ed9ab473743d",
+    "src/llm_arch/ilograph/validate.py": "1265156e1361370e7d4ecdea3a87527734a32378",
+    "src/llm_arch/facts/extractor.py": "2e7a40e41795f02cc1192ea7cb07386a834025cf",
+    "tests/test_reader.py": "7fc33d1b795debca65488afb863c35dc2517622d",
+    "scripts/compare_runs.py": "c6db316b3904338d034ac65297aa8557f1fee028"
+  },
+  "ansatz1": {
+    "quelle": "fixtures/rich_repo.full.ilograph.yaml",
+    "blob_sha1": "ef8e0d0181eccddf5b2e88f3315c418cc1270208",
+    "substanzielle_module": [
+      "bookshop.api.catalog_routes",
+      "bookshop.api.checkout_routes",
+      "bookshop.application.checkout",
+      "bookshop.application.inventory",
+      "bookshop.domain.book",
+      "bookshop.domain.catalog",
+      "bookshop.domain.order",
+      "bookshop.domain.pricing",
+      "bookshop.infrastructure.book_repository",
+      "bookshop.infrastructure.order_repository",
+      "bookshop.infrastructure.payment_gateway"
+    ],
+    "modul_zu_komponente": {
+      "bookshop.api.catalog_routes": "bookshop.api",
+      "bookshop.api.checkout_routes": "bookshop.api",
+      "bookshop.application.checkout": "bookshop.application",
+      "bookshop.application.inventory": "bookshop.application",
+      "bookshop.domain.book": "bookshop.domain",
+      "bookshop.domain.catalog": "bookshop.domain",
+      "bookshop.domain.order": "bookshop.domain",
+      "bookshop.domain.pricing": "bookshop.domain",
+      "bookshop.infrastructure.book_repository": "bookshop.infrastructure",
+      "bookshop.infrastructure.order_repository": "bookshop.infrastructure",
+      "bookshop.infrastructure.payment_gateway": "bookshop.infrastructure"
+    },
+    "komponentenrelationen": [
+      [
+        "bookshop.api",
+        "bookshop.application"
+      ],
+      [
+        "bookshop.api",
+        "bookshop.domain"
+      ],
+      [
+        "bookshop.application",
+        "bookshop.domain"
+      ],
+      [
+        "bookshop.application",
+        "bookshop.infrastructure"
+      ],
+      [
+        "bookshop.infrastructure",
+        "bookshop.domain"
+      ]
+    ],
+    "unmatched_modules": [],
+    "unresolved_relations": [],
+    "werte": {
+      "relation_precision": 1.0,
+      "relation_recall": 1.0,
+      "module_coverage": 1.0,
+      "phantom_modules": 0,
+      "module_count": 11,
+      "component_count": 4,
+      "module_compression": 2.75,
+      "import_edge_count": 16,
+      "component_relation_count": 5,
+      "relation_compression": 3.2,
+      "gold_similarity": 1.0,
+      "gold_similarity_method": "adjusted_rand_index"
+    },
+    "e1_e2_abweichungen": [],
+    "valid_felder": "entfällt — kein Lauf"
+  },
+  "ansatz2": {
+    "k2": {
+      "laeufe": 6,
+      "gueltig": 0,
+      "byte_identisch": true,
+      "arch_model_hashes": {
+        "96a6456773974f151dc453da4bbfd8074bbd40cfa7d3128796f03ccd253c42e0": [
+          "run0",
+          "run0_w1",
+          "run0_w2",
+          "run0_w3",
+          "run1",
+          "run2"
+        ]
+      },
+      "relation_fehler_in_laeufen": 6,
+      "relation_fehler_im_endversuch": 6,
+      "zeilen": [
+        {
+          "slot": "run0",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 26,
+          "fehlerklassen_endversuch": {
+            "relation": 26
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            }
+          ],
+          "komponenten_im_modell": 5,
+          "relationen_im_modell": 13,
+          "platzierte_moduleintraege": 15,
+          "arch_model_sha256": "96a6456773974f151dc453da4bbfd8074bbd40cfa7d3128796f03ccd253c42e0",
+          "prompt_tokens": 6685,
+          "completion_tokens": 776,
+          "latency_ms": 9166.239108999434,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 26,
+            "klassen": {
+              "relation": 26
+            },
+            "errors": [
+              "relation: from 'bookshop.api.catalog_routes' references unknown component",
+              "relation: to 'bookshop.application.inventory' references unknown component",
+              "relation: from 'bookshop.api.checkout_routes' references unknown component",
+              "relation: to 'bookshop.application.checkout' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.payment_gateway' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: from 'bookshop.domain.catalog' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.pricing' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.catalog' references unknown component",
+              "relation: from 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component"
+            ]
+          }
+        },
+        {
+          "slot": "run0_w1",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 26,
+          "fehlerklassen_endversuch": {
+            "relation": 26
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            }
+          ],
+          "komponenten_im_modell": 5,
+          "relationen_im_modell": 13,
+          "platzierte_moduleintraege": 15,
+          "arch_model_sha256": "96a6456773974f151dc453da4bbfd8074bbd40cfa7d3128796f03ccd253c42e0",
+          "prompt_tokens": 6685,
+          "completion_tokens": 776,
+          "latency_ms": 9448.535491999792,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 26,
+            "klassen": {
+              "relation": 26
+            },
+            "errors": [
+              "relation: from 'bookshop.api.catalog_routes' references unknown component",
+              "relation: to 'bookshop.application.inventory' references unknown component",
+              "relation: from 'bookshop.api.checkout_routes' references unknown component",
+              "relation: to 'bookshop.application.checkout' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.payment_gateway' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: from 'bookshop.domain.catalog' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.pricing' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.catalog' references unknown component",
+              "relation: from 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component"
+            ]
+          }
+        },
+        {
+          "slot": "run0_w2",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 26,
+          "fehlerklassen_endversuch": {
+            "relation": 26
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            }
+          ],
+          "komponenten_im_modell": 5,
+          "relationen_im_modell": 13,
+          "platzierte_moduleintraege": 15,
+          "arch_model_sha256": "96a6456773974f151dc453da4bbfd8074bbd40cfa7d3128796f03ccd253c42e0",
+          "prompt_tokens": 6685,
+          "completion_tokens": 776,
+          "latency_ms": 9426.73558399838,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 26,
+            "klassen": {
+              "relation": 26
+            },
+            "errors": [
+              "relation: from 'bookshop.api.catalog_routes' references unknown component",
+              "relation: to 'bookshop.application.inventory' references unknown component",
+              "relation: from 'bookshop.api.checkout_routes' references unknown component",
+              "relation: to 'bookshop.application.checkout' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.payment_gateway' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: from 'bookshop.domain.catalog' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.pricing' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.catalog' references unknown component",
+              "relation: from 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component"
+            ]
+          }
+        },
+        {
+          "slot": "run0_w3",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 26,
+          "fehlerklassen_endversuch": {
+            "relation": 26
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            }
+          ],
+          "komponenten_im_modell": 5,
+          "relationen_im_modell": 13,
+          "platzierte_moduleintraege": 15,
+          "arch_model_sha256": "96a6456773974f151dc453da4bbfd8074bbd40cfa7d3128796f03ccd253c42e0",
+          "prompt_tokens": 6685,
+          "completion_tokens": 776,
+          "latency_ms": 9372.074095001153,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 26,
+            "klassen": {
+              "relation": 26
+            },
+            "errors": [
+              "relation: from 'bookshop.api.catalog_routes' references unknown component",
+              "relation: to 'bookshop.application.inventory' references unknown component",
+              "relation: from 'bookshop.api.checkout_routes' references unknown component",
+              "relation: to 'bookshop.application.checkout' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.payment_gateway' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: from 'bookshop.domain.catalog' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.pricing' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.catalog' references unknown component",
+              "relation: from 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component"
+            ]
+          }
+        },
+        {
+          "slot": "run1",
+          "run_index": 1,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 26,
+          "fehlerklassen_endversuch": {
+            "relation": 26
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            }
+          ],
+          "komponenten_im_modell": 5,
+          "relationen_im_modell": 13,
+          "platzierte_moduleintraege": 15,
+          "arch_model_sha256": "96a6456773974f151dc453da4bbfd8074bbd40cfa7d3128796f03ccd253c42e0",
+          "prompt_tokens": 6685,
+          "completion_tokens": 776,
+          "latency_ms": 9351.358031002746,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 26,
+            "klassen": {
+              "relation": 26
+            },
+            "errors": [
+              "relation: from 'bookshop.api.catalog_routes' references unknown component",
+              "relation: to 'bookshop.application.inventory' references unknown component",
+              "relation: from 'bookshop.api.checkout_routes' references unknown component",
+              "relation: to 'bookshop.application.checkout' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.payment_gateway' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: from 'bookshop.domain.catalog' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.pricing' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.catalog' references unknown component",
+              "relation: from 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component"
+            ]
+          }
+        },
+        {
+          "slot": "run2",
+          "run_index": 2,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 26,
+          "fehlerklassen_endversuch": {
+            "relation": 26
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 26,
+              "klassen": {
+                "relation": 26
+              }
+            }
+          ],
+          "komponenten_im_modell": 5,
+          "relationen_im_modell": 13,
+          "platzierte_moduleintraege": 15,
+          "arch_model_sha256": "96a6456773974f151dc453da4bbfd8074bbd40cfa7d3128796f03ccd253c42e0",
+          "prompt_tokens": 6685,
+          "completion_tokens": 776,
+          "latency_ms": 9331.504164001672,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 26,
+            "klassen": {
+              "relation": 26
+            },
+            "errors": [
+              "relation: from 'bookshop.api.catalog_routes' references unknown component",
+              "relation: to 'bookshop.application.inventory' references unknown component",
+              "relation: from 'bookshop.api.checkout_routes' references unknown component",
+              "relation: to 'bookshop.application.checkout' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: from 'bookshop.application.checkout' references unknown component",
+              "relation: to 'bookshop.infrastructure.payment_gateway' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.application.inventory' references unknown component",
+              "relation: to 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: from 'bookshop.domain.catalog' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.domain.order' references unknown component",
+              "relation: to 'bookshop.domain.pricing' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.book' references unknown component",
+              "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+              "relation: to 'bookshop.domain.catalog' references unknown component",
+              "relation: from 'bookshop.infrastructure.order_repository' references unknown component",
+              "relation: to 'bookshop.domain.order' references unknown component"
+            ]
+          }
+        }
+      ],
+      "gegenprobe_abweichungen": []
+    },
+    "k3": {
+      "laeufe": 6,
+      "gueltig": 0,
+      "byte_identisch": false,
+      "arch_model_hashes": {
+        "7849acc362cb90e6ada763f45164c3bfc7d6843c42402638d14bb72d493e1ab9": [
+          "run0"
+        ],
+        "1ec41e36b5ed403ff31547ebba5e217d920073cde9a0d4996b208a75c8fab39b": [
+          "run0_w1"
+        ],
+        "e8c4085eb104f25a9b256e9aeb4154df499731931d3dd75c4e50e207a0d69a96": [
+          "run0_w2"
+        ],
+        "fcdaf709b728f076abc2f6dc60597c5585b32f69bb5d3a797eadfea43b00dd60": [
+          "run0_w3"
+        ],
+        "c716ac82fe327cfa1b4b67cff4b251f92274e464830008bf7c3a298f1712bf59": [
+          "run1"
+        ],
+        "a869604da7bce09ea1af6dae9567a6246526269838b70b062f1ec8b4594c862b": [
+          "run2"
+        ]
+      },
+      "relation_fehler_in_laeufen": 2,
+      "relation_fehler_im_endversuch": 1,
+      "zeilen": [
+        {
+          "slot": "run0",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 11,
+          "fehlerklassen_endversuch": {
+            "completeness": 11
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            }
+          ],
+          "komponenten_im_modell": 4,
+          "relationen_im_modell": 5,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "7849acc362cb90e6ada763f45164c3bfc7d6843c42402638d14bb72d493e1ab9",
+          "prompt_tokens": 5811,
+          "completion_tokens": 1042,
+          "latency_ms": 69852.27212800055,
+          "model_version": "nvidia-nemotron-3-super-120b",
+          "base_url": "https://inference.do-ai.run/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 11,
+            "klassen": {
+              "completeness": 11
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+            ]
+          }
+        },
+        {
+          "slot": "run0_w1",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 11,
+          "fehlerklassen_endversuch": {
+            "completeness": 11
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            }
+          ],
+          "komponenten_im_modell": 5,
+          "relationen_im_modell": 5,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "1ec41e36b5ed403ff31547ebba5e217d920073cde9a0d4996b208a75c8fab39b",
+          "prompt_tokens": 5823,
+          "completion_tokens": 680,
+          "latency_ms": 30746.851412999604,
+          "model_version": "nvidia-nemotron-3-super-120b",
+          "base_url": "https://inference.do-ai.run/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 11,
+            "klassen": {
+              "completeness": 11
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+            ]
+          }
+        },
+        {
+          "slot": "run0_w2",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 11,
+          "fehlerklassen_endversuch": {
+            "completeness": 11
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            }
+          ],
+          "komponenten_im_modell": 4,
+          "relationen_im_modell": 0,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "e8c4085eb104f25a9b256e9aeb4154df499731931d3dd75c4e50e207a0d69a96",
+          "prompt_tokens": 5763,
+          "completion_tokens": 923,
+          "latency_ms": 65187.55126199903,
+          "model_version": "nvidia-nemotron-3-super-120b",
+          "base_url": "https://inference.do-ai.run/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 11,
+            "klassen": {
+              "completeness": 11
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+            ]
+          }
+        },
+        {
+          "slot": "run0_w3",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 19,
+          "fehlerklassen_endversuch": {
+            "completeness": 11,
+            "relation": 8
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 19,
+              "klassen": {
+                "completeness": 11,
+                "relation": 8
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 19,
+              "klassen": {
+                "completeness": 11,
+                "relation": 8
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 19,
+              "klassen": {
+                "completeness": 11,
+                "relation": 8
+              }
+            }
+          ],
+          "komponenten_im_modell": 1,
+          "relationen_im_modell": 5,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "fcdaf709b728f076abc2f6dc60597c5585b32f69bb5d3a797eadfea43b00dd60",
+          "prompt_tokens": 5517,
+          "completion_tokens": 2157,
+          "latency_ms": 160210.06209400002,
+          "model_version": "nvidia-nemotron-3-super-120b",
+          "base_url": "https://inference.do-ai.run/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 19,
+            "klassen": {
+              "completeness": 11,
+              "relation": 8
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component",
+              "relation: to 'application' references unknown component",
+              "relation: to 'domain' references unknown component",
+              "relation: from 'application' references unknown component",
+              "relation: to 'domain' references unknown component",
+              "relation: from 'application' references unknown component",
+              "relation: to 'infrastructure' references unknown component",
+              "relation: from 'infrastructure' references unknown component",
+              "relation: to 'domain' references unknown component"
+            ]
+          }
+        },
+        {
+          "slot": "run1",
+          "run_index": 1,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 11,
+          "fehlerklassen_endversuch": {
+            "completeness": 11
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 21,
+              "klassen": {
+                "completeness": 11,
+                "relation": 10
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            }
+          ],
+          "komponenten_im_modell": 4,
+          "relationen_im_modell": 5,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "c716ac82fe327cfa1b4b67cff4b251f92274e464830008bf7c3a298f1712bf59",
+          "prompt_tokens": 5883,
+          "completion_tokens": 1281,
+          "latency_ms": 84277.8733539999,
+          "model_version": "nvidia-nemotron-3-super-120b",
+          "base_url": "https://inference.do-ai.run/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 11,
+            "klassen": {
+              "completeness": 11
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+            ]
+          }
+        },
+        {
+          "slot": "run2",
+          "run_index": 2,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 11,
+          "fehlerklassen_endversuch": {
+            "completeness": 11
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            }
+          ],
+          "komponenten_im_modell": 4,
+          "relationen_im_modell": 5,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "a869604da7bce09ea1af6dae9567a6246526269838b70b062f1ec8b4594c862b",
+          "prompt_tokens": 5793,
+          "completion_tokens": 870,
+          "latency_ms": 55330.45276000121,
+          "model_version": "nvidia-nemotron-3-super-120b",
+          "base_url": "https://inference.do-ai.run/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 11,
+            "klassen": {
+              "completeness": 11
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+            ]
+          }
+        }
+      ],
+      "gegenprobe_abweichungen": []
+    },
+    "k2_trunkiert": {
+      "laeufe": 6,
+      "gueltig": 0,
+      "byte_identisch": true,
+      "arch_model_hashes": {
+        "12ad74ecbe7c5bb5706e73c3e9c9984805053fa693d40bd7a6390ea340be9e14": [
+          "run0",
+          "run0_w1",
+          "run0_w2",
+          "run0_w3",
+          "run1",
+          "run2"
+        ]
+      },
+      "relation_fehler_in_laeufen": 0,
+      "relation_fehler_im_endversuch": 0,
+      "zeilen": [
+        {
+          "slot": "run0",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 11,
+          "fehlerklassen_endversuch": {
+            "completeness": 11
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            }
+          ],
+          "komponenten_im_modell": 11,
+          "relationen_im_modell": 11,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "12ad74ecbe7c5bb5706e73c3e9c9984805053fa693d40bd7a6390ea340be9e14",
+          "prompt_tokens": 2086,
+          "completion_tokens": 781,
+          "latency_ms": 14621.407810000164,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 11,
+            "klassen": {
+              "completeness": 11
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+            ]
+          }
+        },
+        {
+          "slot": "run0_w1",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 11,
+          "fehlerklassen_endversuch": {
+            "completeness": 11
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            }
+          ],
+          "komponenten_im_modell": 11,
+          "relationen_im_modell": 11,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "12ad74ecbe7c5bb5706e73c3e9c9984805053fa693d40bd7a6390ea340be9e14",
+          "prompt_tokens": 2086,
+          "completion_tokens": 781,
+          "latency_ms": 14830.372836000606,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 11,
+            "klassen": {
+              "completeness": 11
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+            ]
+          }
+        },
+        {
+          "slot": "run0_w2",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 11,
+          "fehlerklassen_endversuch": {
+            "completeness": 11
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            }
+          ],
+          "komponenten_im_modell": 11,
+          "relationen_im_modell": 11,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "12ad74ecbe7c5bb5706e73c3e9c9984805053fa693d40bd7a6390ea340be9e14",
+          "prompt_tokens": 2086,
+          "completion_tokens": 781,
+          "latency_ms": 14705.536628000118,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 11,
+            "klassen": {
+              "completeness": 11
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+            ]
+          }
+        },
+        {
+          "slot": "run0_w3",
+          "run_index": 0,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 11,
+          "fehlerklassen_endversuch": {
+            "completeness": 11
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            }
+          ],
+          "komponenten_im_modell": 11,
+          "relationen_im_modell": 11,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "12ad74ecbe7c5bb5706e73c3e9c9984805053fa693d40bd7a6390ea340be9e14",
+          "prompt_tokens": 2086,
+          "completion_tokens": 781,
+          "latency_ms": 14651.585771998725,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 11,
+            "klassen": {
+              "completeness": 11
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+            ]
+          }
+        },
+        {
+          "slot": "run1",
+          "run_index": 1,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 11,
+          "fehlerklassen_endversuch": {
+            "completeness": 11
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            }
+          ],
+          "komponenten_im_modell": 11,
+          "relationen_im_modell": 11,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "12ad74ecbe7c5bb5706e73c3e9c9984805053fa693d40bd7a6390ea340be9e14",
+          "prompt_tokens": 2086,
+          "completion_tokens": 781,
+          "latency_ms": 13908.72978399966,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 11,
+            "klassen": {
+              "completeness": 11
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+            ]
+          }
+        },
+        {
+          "slot": "run2",
+          "run_index": 2,
+          "valid_raw": false,
+          "valid_final": false,
+          "attempts_used": 3,
+          "fehler_endversuch": 11,
+          "fehlerklassen_endversuch": {
+            "completeness": 11
+          },
+          "fehlerklassen_je_versuch": [
+            {
+              "versuch": "attempt_0",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_1",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            },
+            {
+              "versuch": "attempt_2",
+              "fehler": 11,
+              "klassen": {
+                "completeness": 11
+              }
+            }
+          ],
+          "komponenten_im_modell": 11,
+          "relationen_im_modell": 11,
+          "platzierte_moduleintraege": 0,
+          "arch_model_sha256": "12ad74ecbe7c5bb5706e73c3e9c9984805053fa693d40bd7a6390ea340be9e14",
+          "prompt_tokens": 2086,
+          "completion_tokens": 781,
+          "latency_ms": 14622.012190000532,
+          "model_version": "qwen2.5-coder:7b",
+          "base_url": "http://localhost:11434/v1/",
+          "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+          "validate_arch_gegenprobe": {
+            "valid": false,
+            "fehler": 11,
+            "klassen": {
+              "completeness": 11
+            },
+            "errors": [
+              "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+              "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+              "completeness: module 'bookshop.application.checkout' is not placed in any component",
+              "completeness: module 'bookshop.application.inventory' is not placed in any component",
+              "completeness: module 'bookshop.domain.book' is not placed in any component",
+              "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+              "completeness: module 'bookshop.domain.order' is not placed in any component",
+              "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+              "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+            ]
+          }
+        }
+      ],
+      "gegenprobe_abweichungen": []
+    }
+  },
+  "compare_runs": {
+    "k2": {
+      "blob_sha1": "c6db316b3904338d034ac65297aa8557f1fee028",
+      "returncode": 0,
+      "gelesen": {
+        "byte_identical": true,
+        "validity_rate": 0.0
+      },
+      "rohzeile": "_qwen2.5-coder:7b_: 6 runs · output byte-identical: True · validity_rate(valid_final): 0.00"
+    },
+    "k3": {
+      "blob_sha1": "c6db316b3904338d034ac65297aa8557f1fee028",
+      "returncode": 0,
+      "gelesen": {
+        "byte_identical": false,
+        "validity_rate": 0.0
+      },
+      "rohzeile": "_nvidia-nemotron-3-super-120b_: 6 runs · output byte-identical: False · validity_rate(valid_final): 0.00"
+    },
+    "k2_trunkiert": {
+      "blob_sha1": "c6db316b3904338d034ac65297aa8557f1fee028",
+      "returncode": 0,
+      "gelesen": {
+        "byte_identical": true,
+        "validity_rate": 0.0
+      },
+      "rohzeile": "_qwen2.5-coder:7b_: 6 runs · output byte-identical: True · validity_rate(valid_final): 0.00"
+    }
+  },
+  "extrapolation": {
+    "verfuegbar": true,
+    "charakter": "EXTRAPOLATION, keine Messung",
+    "tokenizer": {
+      "quelle": "/usr/share/ollama/.ollama/models/blobs/sha256-60e05f2100071479f596b964f89f510f057ce397ea22f2833a0cfe029bfc2463",
+      "manifest_digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+      "pre": "qwen2",
+      "modell": "gpt2 (byte-level BPE)"
+    },
+    "gatter": [
+      {
+        "gate": "G1",
+        "was": "attempt_0/prompt.txt mit Chat-Template",
+        "soll": 4281,
+        "ist": 4281,
+        "quelle": "Z1-Protokoll §3.3 (6)",
+        "ok": true
+      },
+      {
+        "gate": "G2",
+        "was": "dieselbe Datei ohne Template",
+        "soll": 4274,
+        "ist": 4274,
+        "quelle": "z1_t_bericht_kontextfenster.md §1.1",
+        "ok": true
+      },
+      {
+        "gate": "G3",
+        "was": "k2_trunkiert attempt_2 ohne Template",
+        "soll": 6010,
+        "ist": 6010,
+        "quelle": "Z1-Protokoll §3.3 (6), Tabelle",
+        "ok": true
+      },
+      {
+        "gate": "G4",
+        "was": "die drei Versuchsprompts des Blocks k2/, mit Template",
+        "soll": [
+          4281,
+          5483,
+          6685
+        ],
+        "ist": [
+          4281,
+          5483,
+          6685
+        ],
+        "quelle": "data/z1/MANIFEST.md (= usage.prompt_tokens der Artefakte)",
+        "ok": true
+      }
+    ],
+    "zeichen": {
+      "systemteil": 1690,
+      "faktenteil": 17048,
+      "nutzertext_rahmen": 82,
+      "datei_gesamt": 18842
+    },
+    "token": {
+      "gesamt_gerendert": 4281,
+      "konstanter_rahmen": 365,
+      "faktenteil": 3916,
+      "versuchsprompts": [
+        4281,
+        5483,
+        6685
+      ]
+    },
+    "je_modul": {
+      "substanzielle_module": 11,
+      "token_je_modul": 356.0,
+      "je_eintrag": [
+        {
+          "modul": "bookshop",
+          "substanziell": false,
+          "token": 48
+        },
+        {
+          "modul": "bookshop.api",
+          "substanziell": false,
+          "token": 37
+        },
+        {
+          "modul": "bookshop.api.catalog_routes",
+          "substanziell": true,
+          "token": 250
+        },
+        {
+          "modul": "bookshop.api.checkout_routes",
+          "substanziell": true,
+          "token": 226
+        },
+        {
+          "modul": "bookshop.application",
+          "substanziell": false,
+          "token": 37
+        },
+        {
+          "modul": "bookshop.application.checkout",
+          "substanziell": true,
+          "token": 471
+        },
+        {
+          "modul": "bookshop.application.inventory",
+          "substanziell": true,
+          "token": 354
+        },
+        {
+          "modul": "bookshop.domain",
+          "substanziell": false,
+          "token": 37
+        },
+        {
+          "modul": "bookshop.domain.book",
+          "substanziell": true,
+          "token": 383
+        },
+        {
+          "modul": "bookshop.domain.catalog",
+          "substanziell": true,
+          "token": 348
+        },
+        {
+          "modul": "bookshop.domain.order",
+          "substanziell": true,
+          "token": 563
+        },
+        {
+          "modul": "bookshop.domain.pricing",
+          "substanziell": true,
+          "token": 243
+        },
+        {
+          "modul": "bookshop.infrastructure",
+          "substanziell": false,
+          "token": 38
+        },
+        {
+          "modul": "bookshop.infrastructure.book_repository",
+          "substanziell": true,
+          "token": 368
+        },
+        {
+          "modul": "bookshop.infrastructure.order_repository",
+          "substanziell": true,
+          "token": 274
+        },
+        {
+          "modul": "bookshop.infrastructure.payment_gateway",
+          "substanziell": true,
+          "token": 239
+        }
+      ],
+      "davon_substanziell": 3719,
+      "davon_leere_pakete": 197
+    },
+    "schwellen": {
+      "4096": {
+        "erste_modulzahl_darueber": 11,
+        "token_dort": 4281.0
+      },
+      "16384": {
+        "erste_modulzahl_darueber": 45,
+        "token_dort": 16385.0
+      },
+      "32768": {
+        "erste_modulzahl_darueber": 92,
+        "token_dort": 33117.0
+      }
+    },
+    "annahmen": [
+      "Linearität: der Faktenteil wächst proportional zur Modulzahl.",
+      "Gleichverteilte Modulgrösse: jedes Modul kostet den Mittelwert dieser Fixture.",
+      "rich_repo als Maßstab: Docstring-Dichte, Signaturlänge und Importzahl dieser Fixture gelten als typisch; ein anderes Repo verschiebt den Wert je Modul.",
+      "Der konstante Rahmen enthält den Systemtext, den Nutzertextrahmen und die ChatML-Marken; er wächst nicht mit der Modulzahl.",
+      "Gerechnet ist der ERSTE Versuch. Die Retry-Konversation wächst darüber hinaus (hier 4 281 → 5 483 → 6 685 Token); die Schwellen sind insofern optimistisch."
+    ]
+  }
+}

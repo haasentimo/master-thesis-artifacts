@@ -1,0 +1,23 @@
+{
+  "modell": "qwen2.5-coder:7b",
+  "modell_echo": "qwen2.5-coder:7b",
+  "base_url": "http://localhost:11434/v1",
+  "endpunkt": "http://localhost:11434/v1/chat/completions",
+  "http_status": 200,
+  "latenz_ms": 26810.375,
+  "usage": {
+    "prompt_tokens": 23405,
+    "completion_tokens": 529,
+    "total_tokens": 23934
+  },
+  "system_fingerprint": "fp_ollama",
+  "finish_reason": "stop",
+  "temperature": 0,
+  "seed": 0,
+  "schemaname": "architecture_rules",
+  "delivery_assurance": "hard",
+  "zeitstempel": {
+    "start": "2026-09-02T20:26:58+0200",
+    "ende": "2026-09-02T20:27:25+0200"
+  }
+}

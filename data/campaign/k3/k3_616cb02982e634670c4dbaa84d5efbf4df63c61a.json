@@ -1,0 +1,238 @@
+{
+  "result_schema_version": "1",
+  "run_id": "20260827T080216Z-2280ee0b",
+  "timestamp": "2026-08-27T08:05:19.358Z",
+  "provenance": {
+    "topology_sha256": "e97013685ff217d85095b637459a2eb02d2f4effb9f9ad44d1f45798144ec25d",
+    "rules_sha256": "72fa851ffd9eae3865827f959e962f564216fe48948e792944537d64a8d87b95",
+    "prompt_template_sha256": "65e78f38e7b1fee20000ea70c654df042f5e0831fc6a68ccb340f833bd915035",
+    "user_prompt_render_sha256": "45780c70c486ea8f608d1b2ca11178049a02b7a6ece9ba33fcdc8d1b815b03ef",
+    "checker_git_head": "348ca9daa456af4954f11f7152fc45201035297e",
+    "target_repo_git_head": "616cb02982e634670c4dbaa84d5efbf4df63c61a",
+    "base_ref": "0d651041ed87dd03f2f78359713633fac01c0a66",
+    "rule_graph_mode": "diff",
+    "model_requested": "nvidia-nemotron-3-super-120b",
+    "endpoint": "https://inference.do-ai.run/v1",
+    "seed_requested": 42,
+    "temperature_requested": 0,
+    "runs_requested": 3,
+    "timeout_ms": 600000,
+    "changed_files_count": 1,
+    "control_files_count": 0
+  },
+  "runs": [
+    {
+      "run_index": 0,
+      "findings": [
+        {
+          "match_key": "layer-violation|billing_mappers|depot.billing.mappers.invoice_mapper|billing_mappers->billing_api",
+          "source": "rule-engine",
+          "rule_id": "DERIVED:forbidden-edge",
+          "category": "layer-violation",
+          "component": "billing_mappers",
+          "module": "depot.billing.mappers.invoice_mapper",
+          "file": "src/depot/billing/mappers/invoice_mapper.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "billing_mappers",
+            "to": "billing_api"
+          },
+          "reason": "Module depot.billing.mappers.invoice_mapper imports depot.billing.api.routes; component billing_mappers must not depend on billing_api (edge not in the allowed topology).",
+          "suggestion": "Remove the dependency or invert it (define a port in billing_api's consumer and depend on the abstraction).",
+          "confidence": null
+        },
+        {
+          "match_key": "CYCLE|billing_mappers|depot.billing.mappers.invoice_mapper|billing_mappers->billing_api",
+          "source": "llm",
+          "rule_id": "R-CYCLE-1",
+          "category": "CYCLE",
+          "component": "billing_mappers",
+          "module": "depot.billing.mappers.invoice_mapper",
+          "file": "src/depot/billing/mappers/invoice_mapper.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "billing_mappers",
+            "to": "billing_api"
+          },
+          "reason": "The module depot.billing.mappers.invoice_mapper imports depot.billing.api.routes, creating a back edge from billing_mappers to billing_api. This violates R-CYCLE-1 which permits only the direction billing_api -> billing_mappers within the billing bounded context.",
+          "suggestion": "Remove the import of depot.billing.api.routes from invoice_mapper.py. If API-related functionality is required, depend on core or move shared logic to a module accessible via core or identity_services, ensuring the dependency direction remains api -> mappers.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-INDEP-1",
+          "scope": {
+            "components": [
+              "orders_api",
+              "orders_mappers",
+              "orders_models",
+              "orders_repository",
+              "orders_services",
+              "orders_services_pricing",
+              "billing_api",
+              "billing_mappers",
+              "billing_models",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/billing/mappers/invoice_mapper.py"
+        },
+        {
+          "rule_id": "R-CYCLE-1",
+          "scope": {
+            "components": [
+              "identity_api",
+              "identity_mappers",
+              "orders_api",
+              "orders_mappers",
+              "billing_api",
+              "billing_mappers"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/billing/mappers/invoice_mapper.py"
+        }
+      ]
+    },
+    {
+      "run_index": 1,
+      "findings": [
+        {
+          "match_key": "CYCLE|billing_mappers|depot.billing.mappers.invoice_mapper|billing_mappers->billing_api",
+          "source": "llm",
+          "rule_id": "R-CYCLE-1",
+          "category": "CYCLE",
+          "component": "billing_mappers",
+          "module": "depot.billing.mappers.invoice_mapper",
+          "file": "src/depot/billing/mappers/invoice_mapper.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "billing_mappers",
+            "to": "billing_api"
+          },
+          "reason": "The module depot.billing.mappers.invoice_mapper imports depot.billing.api.routes, creating a back edge from billing_mappers to billing_api, which violates R-CYCLE-1 that forbids mappers importing api within the same bounded context.",
+          "suggestion": "Remove the import of depot.billing.api.routes. If API-specific data is required, move shared definitions to depot.billing.models or depot.core, or restructure so that the API layer depends on mappers, not the reverse.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-INDEP-1",
+          "scope": {
+            "components": [
+              "orders_api",
+              "orders_mappers",
+              "orders_models",
+              "orders_repository",
+              "orders_services",
+              "orders_services_pricing",
+              "billing_api",
+              "billing_mappers",
+              "billing_models",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/billing/mappers/invoice_mapper.py"
+        },
+        {
+          "rule_id": "R-CYCLE-1",
+          "scope": {
+            "components": [
+              "identity_api",
+              "identity_mappers",
+              "orders_api",
+              "orders_mappers",
+              "billing_api",
+              "billing_mappers"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/billing/mappers/invoice_mapper.py"
+        }
+      ]
+    },
+    {
+      "run_index": 2,
+      "findings": [
+        {
+          "match_key": "CYCLE|billing_mappers|depot.billing.mappers.invoice_mapper|billing_mappers->billing_api",
+          "source": "llm",
+          "rule_id": "R-CYCLE-1",
+          "category": "CYCLE",
+          "component": "billing_mappers",
+          "module": "depot.billing.mappers.invoice_mapper",
+          "file": "src/depot/billing/mappers/invoice_mapper.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "billing_mappers",
+            "to": "billing_api"
+          },
+          "reason": "billing_mappers module imports billing_api module, creating a back edge from mappers to api within the billing bounded context, violating the permitted direction api -> mappers and forming a potential import cycle.",
+          "suggestion": "Remove the import of depot.billing.api.routes from invoice_mapper.py. If API-related functionality is required, depend on core or billing_models instead, or relocate shared code to a common location accessible via core or identity_services.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-INDEP-1",
+          "scope": {
+            "components": [
+              "orders_api",
+              "orders_mappers",
+              "orders_models",
+              "orders_repository",
+              "orders_services",
+              "orders_services_pricing",
+              "billing_api",
+              "billing_mappers",
+              "billing_models",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/billing/mappers/invoice_mapper.py"
+        },
+        {
+          "rule_id": "R-CYCLE-1",
+          "scope": {
+            "components": [
+              "identity_api",
+              "identity_mappers",
+              "orders_api",
+              "orders_mappers",
+              "billing_api",
+              "billing_mappers"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/billing/mappers/invoice_mapper.py"
+        }
+      ]
+    }
+  ],
+  "validity": {
+    "status": "completed",
+    "runs_completed": 3,
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 0,
+    "skipped_count": 0,
+    "invalid_reasons": [],
+    "exit_code": 1
+  },
+  "skipped": []
+}

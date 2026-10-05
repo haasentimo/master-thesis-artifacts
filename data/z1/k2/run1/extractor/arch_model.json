@@ -1,0 +1,131 @@
+{
+  "components": [
+    {
+      "id": "bookshop",
+      "name": "Bookshop",
+      "kind": "component",
+      "description": "A small layered bookshop application (richer extraction fixture).",
+      "role": null,
+      "contained_modules": [
+        "bookshop.api",
+        "bookshop.application",
+        "bookshop.domain",
+        "bookshop.infrastructure"
+      ]
+    },
+    {
+      "id": "bookshop.api",
+      "name": "API",
+      "kind": "component",
+      "description": "HTTP handlers for browsing and searching the catalog, and the checkout flow.",
+      "role": null,
+      "contained_modules": [
+        "bookshop.api.catalog_routes",
+        "bookshop.api.checkout_routes"
+      ]
+    },
+    {
+      "id": "bookshop.application",
+      "name": "Application",
+      "kind": "component",
+      "description": "Use-case services that orchestrate domain logic with infrastructure adapters.",
+      "role": null,
+      "contained_modules": [
+        "bookshop.application.checkout",
+        "bookshop.application.inventory"
+      ]
+    },
+    {
+      "id": "bookshop.domain",
+      "name": "Domain",
+      "kind": "component",
+      "description": "Pure domain model with no infrastructure dependencies.",
+      "role": null,
+      "contained_modules": [
+        "bookshop.domain.book",
+        "bookshop.domain.catalog",
+        "bookshop.domain.order",
+        "bookshop.domain.pricing"
+      ]
+    },
+    {
+      "id": "bookshop.infrastructure",
+      "name": "Infrastructure",
+      "kind": "component",
+      "description": "Adapters to external systems and in-memory persistence.",
+      "role": null,
+      "contained_modules": [
+        "bookshop.infrastructure.book_repository",
+        "bookshop.infrastructure.order_repository",
+        "bookshop.infrastructure.payment_gateway"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "from": "bookshop.api.catalog_routes",
+      "to": "bookshop.application.inventory",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.api.checkout_routes",
+      "to": "bookshop.application.checkout",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.application.checkout",
+      "to": "bookshop.domain.order",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.application.checkout",
+      "to": "bookshop.infrastructure.order_repository",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.application.checkout",
+      "to": "bookshop.infrastructure.payment_gateway",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.application.inventory",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.application.inventory",
+      "to": "bookshop.infrastructure.book_repository",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.domain.catalog",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.domain.order",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.domain.order",
+      "to": "bookshop.domain.pricing",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.book_repository",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.book_repository",
+      "to": "bookshop.domain.catalog",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.order_repository",
+      "to": "bookshop.domain.order",
+      "kind": "uses"
+    }
+  ]
+}

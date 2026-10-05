@@ -1,0 +1,49 @@
+
+╔══╗─────────▶╔╗ ╔╗      ╔╗◀───┐
+╚╣╠╝◀─────┐  ╔╝╚╗║║────▶╔╝╚╗   │
+ ║║   ╔══╦══╦╩╗╔╝║║  ╔╦═╩╗╔╝╔═╦══╗
+ ║║╔══╣╔╗║╔╗║╔╣║ ║║ ╔╬╣╔╗║║ ║│║╔═╝
+╔╣╠╣║║║╚╝║╚╝║║║╚╗║╚═╝║║║║║╚╗║═╣║
+╚══╩╩╩╣╔═╩══╩╝╚═╝╚═══╩╩╝╚╩═╩╩═╩╝
+  └──▶║║                    ▲ 
+      ╚╝────────────────────┘
+
+
+---------
+Contracts
+---------
+
+Analyzed 75 files, 90 dependencies.
+-----------------------------------
+
+Layered spine of every bounded context KEPT
+identity.api skips no layer KEPT
+identity.services skips no layer KEPT
+orders.api skips no layer KEPT
+orders.services skips no layer KEPT
+billing.api skips no layer KEPT
+billing.services skips no layer KEPT
+Only the adapter facade may reach into the adapter internals KEPT
+orders and billing are mutually independent KEPT
+No cycles between sibling packages KEPT
+identity declares all of its direct children KEPT
+orders declares all of its direct children BROKEN
+billing declares all of its direct children KEPT
+
+Contracts: 12 kept, 1 broken.
+
+
+----------------
+Broken contracts
+----------------
+
+orders declares all of its direct children
+------------------------------------------
+
+The following modules are not listed as layers:
+
+- depot.orders.legacy_order_index
+
+(Since this contract is marked as 'exhaustive', every child of every container 
+must be declared as a layer.)
+

@@ -1,0 +1,34 @@
+{
+  "id": "chatcmpl-792",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"components\": [\n    {\n      \"id\": \"bookshop.domain.book\",\n      \"name\": \"Book\",\n      \"description\": \"Represents a book with a title, author, ISBN, and genre.\"\n    },\n    {\n      \"id\": \"bookshop.domain.catalog\",\n      \"name\": \"Catalog\",\n      \"description\": \"An in-memory collection of books with simple query operations.\"\n    },\n    {\n      \"id\": \"bookshop.domain.order\",\n      \"name\": \"Order\",\n      \"description\": \"A customer order aggregating line items and a status.\"\n    },\n    {\n      \"id\": \"bookshop.domain.pricing\",\n      \"name\": \"Pricing\",\n      \"description\": \"Pure pricing rules: discounts applied to an order's gross total.\"\n    },\n    {\n      \"id\": \"bookshop.infrastructure.book_repository\",\n      \"name\": \"Book Repository\",\n      \"description\": \"In-memory persistence adapter for the book catalog.\"\n    },\n    {\n      \"id\": \"bookshop.infrastructure.order_repository\",\n      \"name\": \"Order Repository\",\n      \"description\": \"In-memory persistence adapter for orders.\"\n    },\n    {\n      \"id\": \"bookshop.infrastructure.payment_gateway\",\n      \"name\": \"Payment Gateway\",\n      \"description\": \"Adapter to an external payment provider (faked for the fixture).\"\n    },\n    {\n      \"id\": \"bookshop.application.checkout\",\n      \"name\": \"Checkout\",\n      \"description\": \"Application service for processing customer orders.\"\n    },\n    {\n      \"id\": \"bookshop.application.inventory\",\n      \"name\": \"Inventory\",\n      \"description\": \"Application service for managing book inventory.\"\n    },\n    {\n      \"id\": \"bookshop.api.catalog_routes\",\n      \"name\": \"Catalog Routes\",\n      \"description\": \"API endpoints for catalog operations.\"\n    },\n    {\n      \"id\": \"bookshop.api.checkout_routes\",\n      \"name\": \"Checkout Routes\",\n      \"description\": \"API endpoints for checkout operations.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"from\": \"bookshop.domain.catalog\",\n      \"to\": \"bookshop.domain.book\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.domain.order\",\n      \"to\": \"bookshop.domain.book\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.domain.order\",\n      \"to\": \"bookshop.domain.pricing\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.infrastructure.book_repository\",\n      \"to\": \"bookshop.domain.book\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.infrastructure.order_repository\",\n      \"to\": \"bookshop.domain.order\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.infrastructure.payment_gateway\",\n      \"to\": \"bookshop.domain.order\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.application.checkout\",\n      \"to\": \"bookshop.domain.order\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.application.checkout\",\n      \"to\": \"bookshop.domain.pricing\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.application.inventory\",\n      \"to\": \"bookshop.domain.book\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.api.catalog_routes\",\n      \"to\": \"bookshop.domain.catalog\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.api.checkout_routes\",\n      \"to\": \"bookshop.application.checkout\",\n      \"kind\": \"uses\"\n    }\n  ]\n}",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null
+      }
+    }
+  ],
+  "created": 1788185120,
+  "model": "qwen2.5-coder:7b",
+  "object": "chat.completion",
+  "metadata": null,
+  "moderation": null,
+  "service_tier": null,
+  "system_fingerprint": "fp_ollama",
+  "usage": {
+    "completion_tokens": 781,
+    "prompt_tokens": 1065,
+    "total_tokens": 1846,
+    "completion_tokens_details": null,
+    "compute_units": null,
+    "prompt_tokens_details": null
+  }
+}

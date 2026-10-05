@@ -1,0 +1,22 @@
+{
+  "id": "chatcmpl-552",
+  "object": "chat.completion",
+  "created": 1788373608,
+  "model": "qwen2.5-coder:7b",
+  "system_fingerprint": "fp_ollama",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"rules\": [\n    {\n      \"id\": \"R1\",\n      \"category\": \"dependency-management\",\n      \"scope\": {\"components\": [\"depot.billing.api\", \"depot.billing.services\", \"depot.billing.repository\", \"depot.billing.models\"]},\n      \"statement\": \"Classes and functions within the billing components must not directly import the standard logging module. Instead, they should obtain a logger from a shared logging helper module.\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"id\": \"R2\",\n      \"category\": \"code-reusability\",\n      \"scope\": {\"components\": [\"depot.billing.api\", \"depot.billing.services\", \"depot.billing.repository\", \"depot.billing.models\"]},\n      \"statement\": \"Classes and functions within the billing components should not duplicate logic found in other modules. Instead, they should reuse existing functions or classes where possible.\",\n      \"severity\": \"warning\"\n    },\n    {\n      \"id\": \"R3\",\n      \"category\": \"error-handling\",\n      \"scope\": {\"components\": [\"depot.billing.api\", \"depot.billing.services\", \"depot.billing.repository\", \"depot.billing.models\"]},\n      \"statement\": \"All error handling within the billing components should be consistent and follow a common pattern. This includes using a shared error handling module and ensuring that all error messages are localized and user-friendly.\",\n      \"severity\": \"error\"\n    },\n    {\n      \"id\": \"R4\",\n      \"category\": \"code-organization\",\n      \"scope\": {\"components\": [\"depot.billing.api\", \"depot.billing.services\", \"depot.billing.repository\", \"depot.billing.models\"]},\n      \"statement\": \"All classes and functions within the billing components should be organized into logical modules and packages. This includes grouping related classes and functions together and ensuring that each module has a single responsibility.\",\n      \"severity\": \"error\"\n    },\n    {\n      \"id\": \"R5\",\n      \"category\": \"code-quality\",\n      \"scope\": {\"components\": [\"depot.billing.api\", \"depot.billing.services\", \"depot.billing.repository\", \"depot.billing.models\"]},\n      \"statement\": \"All classes and functions within the billing components should be well-documented and follow a consistent coding style. This includes using docstrings to describe the purpose and behavior of each function, and following a consistent naming convention for variables and functions.\",\n      \"severity\": \"error\"\n    }\n  ]\n}"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 23405,
+    "completion_tokens": 529,
+    "total_tokens": 23934
+  }
+}

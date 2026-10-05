@@ -1,0 +1,33 @@
+resources:
+- id: api
+  name: API
+  subtitle: HTTP handlers for browsing/searching the catalog and processing 
+    checkout requests.
+- id: application
+  name: Application
+  subtitle: Use‑case services that orchestrate domain logic with infrastructure 
+    adapters.
+- id: domain
+  name: Domain
+  subtitle: 'Pure domain model: entities, aggregates, and pricing rules.'
+- id: infrastructure
+  name: Infrastructure
+  subtitle: In‑memory persistence adapters and external service stubs.
+perspectives:
+- name: Dependencies
+  relations:
+  - from: api
+    to: application
+    label: depends_on
+  - from: api
+    to: domain
+    label: depends_on
+  - from: application
+    to: domain
+    label: depends_on
+  - from: application
+    to: infrastructure
+    label: depends_on
+  - from: infrastructure
+    to: domain
+    label: depends_on

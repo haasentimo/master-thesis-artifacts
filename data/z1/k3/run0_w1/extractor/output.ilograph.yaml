@@ -1,0 +1,36 @@
+resources:
+- id: API
+  name: API
+  subtitle: HTTP handlers for catalog browsing, searching, and checkout.
+- id: Application
+  name: Application
+  subtitle: Use-case services orchestrating domain operations and infrastructure
+    adapters.
+- id: Domain
+  name: Domain
+  subtitle: 'Core business model: books, orders, pricing rules, and catalog aggregates.'
+- id: Infrastructure
+  name: Infrastructure
+  subtitle: Persistence adapters and external service stubs (in-memory 
+    repositories, fake payment gateway).
+- id: Root
+  name: Root
+  subtitle: Project root package.
+perspectives:
+- name: Dependencies
+  relations:
+  - from: API
+    to: Application
+    label: depends_on
+  - from: API
+    to: Domain
+    label: depends_on
+  - from: Application
+    to: Domain
+    label: depends_on
+  - from: Application
+    to: Infrastructure
+    label: depends_on
+  - from: Infrastructure
+    to: Domain
+    label: depends_on

@@ -1,0 +1,139 @@
+{
+  "schema_konformitaet": {
+    "schemaname": "architecture_rules",
+    "strict": true,
+    "verstoesse": [],
+    "urteil": "konform",
+    "einordnung": "§5.3 Punkt 1: unter `strict: true` providerseitig erzwungen und AUSDRUECKLICH KEINE Messgroesse -- hier nur protokolliert."
+  },
+  "z2w": {
+    "regel": "§5.3 Punkt 2 -- binaere, maschinelle Liste; vier Bedingungen je Vorschlag",
+    "je_vorschlag": [
+      {
+        "position": 0,
+        "id": "R1",
+        "pruefungen": {
+          "components_aufloesbar": true,
+          "statement_nicht_leer": true,
+          "statement_keine_wiederholung": true,
+          "id_eindeutig": true,
+          "category_nicht_leer": true
+        },
+        "befunde": [],
+        "wohlgeformt": true,
+        "granularitaet": {
+          "package": 0,
+          "module": 3,
+          "artefact": 0,
+          "unresolved": 0
+        }
+      },
+      {
+        "position": 1,
+        "id": "R2",
+        "pruefungen": {
+          "components_aufloesbar": true,
+          "statement_nicht_leer": true,
+          "statement_keine_wiederholung": true,
+          "id_eindeutig": true,
+          "category_nicht_leer": true
+        },
+        "befunde": [],
+        "wohlgeformt": true,
+        "granularitaet": {
+          "package": 0,
+          "module": 3,
+          "artefact": 0,
+          "unresolved": 0
+        }
+      },
+      {
+        "position": 2,
+        "id": "R3",
+        "pruefungen": {
+          "components_aufloesbar": true,
+          "statement_nicht_leer": true,
+          "statement_keine_wiederholung": true,
+          "id_eindeutig": true,
+          "category_nicht_leer": true
+        },
+        "befunde": [],
+        "wohlgeformt": true,
+        "granularitaet": {
+          "package": 3,
+          "module": 0,
+          "artefact": 0,
+          "unresolved": 0
+        }
+      },
+      {
+        "position": 3,
+        "id": "R4",
+        "pruefungen": {
+          "components_aufloesbar": true,
+          "statement_nicht_leer": true,
+          "statement_keine_wiederholung": true,
+          "id_eindeutig": true,
+          "category_nicht_leer": true
+        },
+        "befunde": [],
+        "wohlgeformt": true,
+        "granularitaet": {
+          "package": 3,
+          "module": 0,
+          "artefact": 0,
+          "unresolved": 0
+        }
+      }
+    ],
+    "aggregat": {
+      "vorschlaege": 4,
+      "wohlgeformt": 4,
+      "nicht_wohlgeformt": 0
+    },
+    "granularitaet": {
+      "vorschlaege_mit_mindestens_einer_artefakt_id": 0,
+      "ebenen_je_vorschlag": [
+        {
+          "position": 0,
+          "id": "R1",
+          "package": 0,
+          "module": 3,
+          "artefact": 0,
+          "unresolved": 0
+        },
+        {
+          "position": 1,
+          "id": "R2",
+          "package": 0,
+          "module": 3,
+          "artefact": 0,
+          "unresolved": 0
+        },
+        {
+          "position": 2,
+          "id": "R3",
+          "package": 3,
+          "module": 0,
+          "artefact": 0,
+          "unresolved": 0
+        },
+        {
+          "position": 3,
+          "id": "R4",
+          "package": 3,
+          "module": 0,
+          "artefact": 0,
+          "unresolved": 0
+        }
+      ],
+      "einordnung": "BEOBACHTUNG, KEIN Z2-W-KRITERIUM UND KEIN BEWERTUNGSKRITERIUM. Z2-W bleibt die in §5.3 registrierte binaere Liste; ein Vorschlag auf Artefaktebene ist WOHLGEFORMT. Diese Zaehlung wird berichtet, nicht gewertet, und geht in keine Kennzahl ein. Anlass: Granularitaet war in Z1 der Ausfallgrund (Befund 07 -- beide Modelle schrieben die Relationsendpunkte auf der falschen Granularitaet)."
+    }
+  },
+  "nicht_implementiert": {
+    "Z2-P": "Pruefbarkeit -- menschliche Bewertung (§6); dieses Werkzeug bewertet nichts davon und schreibt dafuer kein Feld.",
+    "Z2-G": "Gehalt -- menschliche Bewertung (§6).",
+    "Z2-Z": "Zuordnung zum Abweichungstyp -- menschliche Bewertung (§6).",
+    "Z2-R": "Redundanz/Dedup -- NICHT automatisiert; N1 zaehlt der Bewerter."
+  }
+}

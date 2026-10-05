@@ -1,0 +1,988 @@
+description: Full code-model export for ma-conformance-testrepo.
+resources:
+  - id: depot
+    name: depot
+    subtitle: package · 4 folders
+    x-triton-node-type: package
+    x-triton-package-scope: true
+    children:
+      - id: depot.billing
+        name: billing
+        subtitle: package · 5 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: depot.billing.api
+            name: api
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.billing.api.routes
+                name: routes
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.api.routes::class:InvoiceRoutes
+                    name: InvoiceRoutes
+                    subtitle: class
+                  - id: depot.billing.api.routes::class:PaymentRoutes
+                    name: PaymentRoutes
+                    subtitle: class
+                  - id: depot.billing.api.routes::function:status_for
+                    name: status_for
+                    subtitle: function
+              - id: depot.billing.api.schemas
+                name: schemas
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.api.schemas::class:InvoiceDraft
+                    name: InvoiceDraft
+                    subtitle: class
+                  - id: depot.billing.api.schemas::class:SettlementNotice
+                    name: SettlementNotice
+                    subtitle: class
+                  - id: depot.billing.api.schemas::class:StatementBatch
+                    name: StatementBatch
+                    subtitle: class
+                  - id: depot.billing.api.schemas::function:error_body
+                    name: error_body
+                    subtitle: function
+          - id: depot.billing.mappers
+            name: mappers
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.billing.mappers.invoice_mapper
+                name: invoice_mapper
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.mappers.invoice_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.billing.mappers.invoice_mapper::function:to_document_header
+                    name: to_document_header
+                    subtitle: function
+                  - id: depot.billing.mappers.invoice_mapper::function:check_number
+                    name: check_number
+                    subtitle: function
+                  - id: depot.billing.mappers.invoice_mapper::function:is_settled
+                    name: is_settled
+                    subtitle: function
+              - id: depot.billing.mappers.payment_mapper
+                name: payment_mapper
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.mappers.payment_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.billing.mappers.payment_mapper::function:to_remittance_line
+                    name: to_remittance_line
+                    subtitle: function
+                  - id: depot.billing.mappers.payment_mapper::function:normalise_notice
+                    name: normalise_notice
+                    subtitle: function
+          - id: depot.billing.models
+            name: models
+            subtitle: package · 4 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.billing.models.invoice_models
+                name: invoice_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.models.invoice_models::class:Invoice
+                    name: Invoice
+                    subtitle: class
+              - id: depot.billing.models.invoice_view_models
+                name: invoice_view_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.models.invoice_view_models::class:DebtorStatementLine
+                    name: DebtorStatementLine
+                    subtitle: class
+              - id: depot.billing.models.legacy_tax_models
+                name: legacy_tax_models
+                subtitle: module · 2 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.models.legacy_tax_models::class:LegacyTaxRate
+                    name: LegacyTaxRate
+                    subtitle: class
+                  - id: depot.billing.models.legacy_tax_models::class:LegacyTaxTable
+                    name: LegacyTaxTable
+                    subtitle: class
+              - id: depot.billing.models.payment_models
+                name: payment_models
+                subtitle: module · 2 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.models.payment_models::class:Payment
+                    name: Payment
+                    subtitle: class
+                  - id: depot.billing.models.payment_models::function:cash_at_counter
+                    name: cash_at_counter
+                    subtitle: function
+          - id: depot.billing.repository
+            name: repository
+            subtitle: package · 3 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.billing.repository.invoice_query
+                name: invoice_query
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-cross-artefact-relations:
+                  - from: depot.billing.repository.invoice_query::class:InvoiceQuery
+                    to: depot.core.ports::class:PaymentLedger
+                    label: extends
+                x-triton-inner-artefacts:
+                  - id: depot.billing.repository.invoice_query::class:InvoiceQuery
+                    name: InvoiceQuery
+                    subtitle: class
+              - id: depot.billing.repository.invoice_repo
+                name: invoice_repo
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.repository.invoice_repo::class:InvoiceRepository
+                    name: InvoiceRepository
+                    subtitle: class
+              - id: depot.billing.repository.legacy_invoice_index
+                name: legacy_invoice_index
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.repository.legacy_invoice_index::class:LegacyInvoiceIndex
+                    name: LegacyInvoiceIndex
+                    subtitle: class
+          - id: depot.billing.services
+            name: services
+            subtitle: package · 3 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.billing.services.dunning_service
+                name: dunning_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.services.dunning_service::class:DunningService
+                    name: DunningService
+                    subtitle: class
+              - id: depot.billing.services.invoice_service
+                name: invoice_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.services.invoice_service::class:InvoiceService
+                    name: InvoiceService
+                    subtitle: class
+              - id: depot.billing.services.ledger_service
+                name: ledger_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.services.ledger_service::class:LedgerService
+                    name: LedgerService
+                    subtitle: class
+      - id: depot.core
+        name: core
+        subtitle: package · 4 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: depot.core.adapters
+            name: adapters
+            subtitle: package · 2 folders · 1 artefact
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            x-triton-inner-artefacts:
+              - id: depot.core.adapters::function:__getattr__
+                name: __getattr__
+                subtitle: function
+            children:
+              - id: depot.core.adapters.internal
+                name: internal
+                subtitle: package · 2 folders
+                x-triton-node-type: package
+                x-triton-package-scope: true
+                children:
+                  - id: depot.core.adapters.internal.cache
+                    name: cache
+                    subtitle: module · 1 artefact
+                    x-triton-project-kind: module
+                    x-triton-inner-artefacts:
+                      - id: depot.core.adapters.internal.cache::class:LruCache
+                        name: LruCache
+                        subtitle: class
+                  - id: depot.core.adapters.internal.session
+                    name: session
+                    subtitle: module · 2 artefacts
+                    x-triton-project-kind: module
+                    x-triton-inner-artefacts:
+                      - id: depot.core.adapters.internal.session::class:Session
+                        name: Session
+                        subtitle: class
+                      - id: depot.core.adapters.internal.session::class:SessionFactory
+                        name: SessionFactory
+                        subtitle: class
+              - id: depot.core.adapters.storage
+                name: storage
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-cross-artefact-relations:
+                  - from: depot.core.adapters.storage::class:ParcelDocumentStore
+                    to: depot.core.ports::class:DocumentStore
+                    label: extends
+                x-triton-inner-artefacts:
+                  - id: depot.core.adapters.storage::class:ParcelDocumentStore
+                    name: ParcelDocumentStore
+                    subtitle: class
+          - id: depot.core.config
+            name: config
+            subtitle: module · 1 artefact
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: depot.core.config::class:DepotSettings
+                name: DepotSettings
+                subtitle: class
+          - id: depot.core.errors
+            name: errors
+            subtitle: module · 5 artefacts
+            x-triton-project-kind: module
+            x-triton-inner-artefact-relations:
+              - from: depot.core.errors::class:NotFoundError
+                to: depot.core.errors::class:DepotError
+                label: extends
+              - from: depot.core.errors::class:ValidationError
+                to: depot.core.errors::class:DepotError
+                label: extends
+              - from: depot.core.errors::class:ConflictError
+                to: depot.core.errors::class:DepotError
+                label: extends
+              - from: depot.core.errors::class:PermissionDeniedError
+                to: depot.core.errors::class:DepotError
+                label: extends
+            x-triton-inner-artefacts:
+              - id: depot.core.errors::class:DepotError
+                name: DepotError
+                subtitle: class
+              - id: depot.core.errors::class:NotFoundError
+                name: NotFoundError
+                subtitle: class
+              - id: depot.core.errors::class:ValidationError
+                name: ValidationError
+                subtitle: class
+              - id: depot.core.errors::class:ConflictError
+                name: ConflictError
+                subtitle: class
+              - id: depot.core.errors::class:PermissionDeniedError
+                name: PermissionDeniedError
+                subtitle: class
+          - id: depot.core.ports
+            name: ports
+            subtitle: module · 11 artefacts
+            x-triton-project-kind: module
+            x-triton-cross-artefact-relations:
+              - from: depot.billing.repository.invoice_query::class:InvoiceQuery
+                to: depot.core.ports::class:PaymentLedger
+                label: extends
+              - from: depot.core.adapters.storage::class:ParcelDocumentStore
+                to: depot.core.ports::class:DocumentStore
+                label: extends
+              - from: depot.identity.repository.session_repo::class:SessionRepository
+                to: depot.core.ports::class:SessionStore
+                label: extends
+              - from: depot.orders.repository.order_query::class:OrderQuery
+                to: depot.core.ports::class:DiscountCatalog
+                label: extends
+            x-triton-inner-artefacts:
+              - id: depot.core.ports::class:Clock
+                name: Clock
+                subtitle: class
+              - id: depot.core.ports::class:TokenSigner
+                name: TokenSigner
+                subtitle: class
+              - id: depot.core.ports::class:SessionStore
+                name: SessionStore
+                subtitle: class
+              - id: depot.core.ports::class:DocumentStore
+                name: DocumentStore
+                subtitle: class
+              - id: depot.core.ports::class:IdGenerator
+                name: IdGenerator
+                subtitle: class
+              - id: depot.core.ports::class:NotificationSender
+                name: NotificationSender
+                subtitle: class
+              - id: depot.core.ports::class:ShelfAllocator
+                name: ShelfAllocator
+                subtitle: class
+              - id: depot.core.ports::class:RateProvider
+                name: RateProvider
+                subtitle: class
+              - id: depot.core.ports::class:DiscountCatalog
+                name: DiscountCatalog
+                subtitle: class
+              - id: depot.core.ports::class:PaymentGateway
+                name: PaymentGateway
+                subtitle: class
+              - id: depot.core.ports::class:PaymentLedger
+                name: PaymentLedger
+                subtitle: class
+      - id: depot.identity
+        name: identity
+        subtitle: package · 5 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: depot.identity.api
+            name: api
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.identity.api.routes
+                name: routes
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.api.routes::class:CustomerRoutes
+                    name: CustomerRoutes
+                    subtitle: class
+                  - id: depot.identity.api.routes::class:RoleRoutes
+                    name: RoleRoutes
+                    subtitle: class
+                  - id: depot.identity.api.routes::function:status_for
+                    name: status_for
+                    subtitle: function
+              - id: depot.identity.api.schemas
+                name: schemas
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.api.schemas::class:CustomerRegistration
+                    name: CustomerRegistration
+                    subtitle: class
+                  - id: depot.identity.api.schemas::class:ContactChange
+                    name: ContactChange
+                    subtitle: class
+                  - id: depot.identity.api.schemas::class:SignOn
+                    name: SignOn
+                    subtitle: class
+                  - id: depot.identity.api.schemas::function:error_body
+                    name: error_body
+                    subtitle: function
+          - id: depot.identity.mappers
+            name: mappers
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.identity.mappers.customer_mapper
+                name: customer_mapper
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.mappers.customer_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.identity.mappers.customer_mapper::function:to_slip_line
+                    name: to_slip_line
+                    subtitle: function
+                  - id: depot.identity.mappers.customer_mapper::function:apply_changes
+                    name: apply_changes
+                    subtitle: function
+              - id: depot.identity.mappers.role_mapper
+                name: role_mapper
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.mappers.role_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.identity.mappers.role_mapper::function:from_name
+                    name: from_name
+                    subtitle: function
+                  - id: depot.identity.mappers.role_mapper::function:catalogue
+                    name: catalogue
+                    subtitle: function
+          - id: depot.identity.models
+            name: models
+            subtitle: package · 3 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.identity.models.customer_models
+                name: customer_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.models.customer_models::class:Customer
+                    name: Customer
+                    subtitle: class
+              - id: depot.identity.models.customer_view_models
+                name: customer_view_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.models.customer_view_models::class:CustomerSummary
+                    name: CustomerSummary
+                    subtitle: class
+              - id: depot.identity.models.role_models
+                name: role_models
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.models.role_models::class:Role
+                    name: Role
+                    subtitle: class
+                  - id: depot.identity.models.role_models::function:counter_clerk
+                    name: counter_clerk
+                    subtitle: function
+                  - id: depot.identity.models.role_models::function:dispatcher
+                    name: dispatcher
+                    subtitle: function
+                  - id: depot.identity.models.role_models::function:depot_manager
+                    name: depot_manager
+                    subtitle: function
+          - id: depot.identity.repository
+            name: repository
+            subtitle: package · 3 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.identity.repository.customer_repo
+                name: customer_repo
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.repository.customer_repo::class:CustomerRepository
+                    name: CustomerRepository
+                    subtitle: class
+              - id: depot.identity.repository.legacy_token_index
+                name: legacy_token_index
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.repository.legacy_token_index::class:LegacyTokenIndex
+                    name: LegacyTokenIndex
+                    subtitle: class
+              - id: depot.identity.repository.session_repo
+                name: session_repo
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-cross-artefact-relations:
+                  - from: depot.identity.repository.session_repo::class:SessionRepository
+                    to: depot.core.ports::class:SessionStore
+                    label: extends
+                x-triton-inner-artefacts:
+                  - id: depot.identity.repository.session_repo::class:SessionRepository
+                    name: SessionRepository
+                    subtitle: class
+          - id: depot.identity.services
+            name: services
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.identity.services.customer_service
+                name: customer_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.services.customer_service::class:CustomerService
+                    name: CustomerService
+                    subtitle: class
+              - id: depot.identity.services.token_service
+                name: token_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.services.token_service::class:TokenService
+                    name: TokenService
+                    subtitle: class
+      - id: depot.orders
+        name: orders
+        subtitle: package · 5 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: depot.orders.api
+            name: api
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.orders.api.routes
+                name: routes
+                subtitle: module · 2 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.api.routes::class:OrderRoutes
+                    name: OrderRoutes
+                    subtitle: class
+                  - id: depot.orders.api.routes::function:status_for
+                    name: status_for
+                    subtitle: function
+              - id: depot.orders.api.schemas
+                name: schemas
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.api.schemas::class:OrderDraft
+                    name: OrderDraft
+                    subtitle: class
+                  - id: depot.orders.api.schemas::class:LineBatch
+                    name: LineBatch
+                    subtitle: class
+                  - id: depot.orders.api.schemas::class:QuoteRequest
+                    name: QuoteRequest
+                    subtitle: class
+                  - id: depot.orders.api.schemas::function:error_body
+                    name: error_body
+                    subtitle: function
+          - id: depot.orders.mappers
+            name: mappers
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.orders.mappers.order_line_mapper
+                name: order_line_mapper
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.mappers.order_line_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.orders.mappers.order_line_mapper::function:to_shelf_label
+                    name: to_shelf_label
+                    subtitle: function
+                  - id: depot.orders.mappers.order_line_mapper::function:normalise_request
+                    name: normalise_request
+                    subtitle: function
+              - id: depot.orders.mappers.order_mapper
+                name: order_mapper
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.mappers.order_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.orders.mappers.order_mapper::function:to_board_line
+                    name: to_board_line
+                    subtitle: function
+                  - id: depot.orders.mappers.order_mapper::function:check_zone
+                    name: check_zone
+                    subtitle: function
+                  - id: depot.orders.mappers.order_mapper::function:next_states
+                    name: next_states
+                    subtitle: function
+          - id: depot.orders.models
+            name: models
+            subtitle: package · 5 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.orders.models.discount_models
+                name: discount_models
+                subtitle: module · 2 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.models.discount_models::class:Discount
+                    name: Discount
+                    subtitle: class
+                  - id: depot.orders.models.discount_models::function:house_codes
+                    name: house_codes
+                    subtitle: function
+              - id: depot.orders.models.order_line_models
+                name: order_line_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.models.order_line_models::class:OrderLine
+                    name: OrderLine
+                    subtitle: class
+              - id: depot.orders.models.order_line_view_models
+                name: order_line_view_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.models.order_line_view_models::class:PackingListRow
+                    name: PackingListRow
+                    subtitle: class
+              - id: depot.orders.models.order_models
+                name: order_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.models.order_models::class:Order
+                    name: Order
+                    subtitle: class
+              - id: depot.orders.models.order_view_models
+                name: order_view_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.models.order_view_models::class:OrderBoardRow
+                    name: OrderBoardRow
+                    subtitle: class
+          - id: depot.orders.repository
+            name: repository
+            subtitle: package · 4 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.orders.repository.legacy_order_index
+                name: legacy_order_index
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.repository.legacy_order_index::class:LegacyOrderIndex
+                    name: LegacyOrderIndex
+                    subtitle: class
+              - id: depot.orders.repository.order_line_repo
+                name: order_line_repo
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.repository.order_line_repo::class:OrderLineRepository
+                    name: OrderLineRepository
+                    subtitle: class
+              - id: depot.orders.repository.order_query
+                name: order_query
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-cross-artefact-relations:
+                  - from: depot.orders.repository.order_query::class:OrderQuery
+                    to: depot.core.ports::class:DiscountCatalog
+                    label: extends
+                x-triton-inner-artefacts:
+                  - id: depot.orders.repository.order_query::class:OrderQuery
+                    name: OrderQuery
+                    subtitle: class
+              - id: depot.orders.repository.order_repo
+                name: order_repo
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.repository.order_repo::class:OrderRepository
+                    name: OrderRepository
+                    subtitle: class
+          - id: depot.orders.services
+            name: services
+            subtitle: package · 5 folders · 2 artefacts
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            x-triton-inner-artefacts:
+              - id: depot.orders.services::function:quote_parcel_cents
+                name: quote_parcel_cents
+                subtitle: function
+              - id: depot.orders.services::function:weight_band
+                name: weight_band
+                subtitle: function
+            children:
+              - id: depot.orders.services.catalog_service
+                name: catalog_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.services.catalog_service::class:CatalogService
+                    name: CatalogService
+                    subtitle: class
+              - id: depot.orders.services.checkout_service
+                name: checkout_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.services.checkout_service::class:CheckoutService
+                    name: CheckoutService
+                    subtitle: class
+              - id: depot.orders.services.order_service
+                name: order_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.services.order_service::class:OrderService
+                    name: OrderService
+                    subtitle: class
+              - id: depot.orders.services.pricing
+                name: pricing
+                subtitle: package · 1 folder
+                x-triton-node-type: package
+                x-triton-package-scope: true
+                children:
+                  - id: depot.orders.services.pricing.engine
+                    name: engine
+                    subtitle: module · 1 artefact
+                    x-triton-project-kind: module
+                    x-triton-inner-artefacts:
+                      - id: depot.orders.services.pricing.engine::class:PricingEngine
+                        name: PricingEngine
+                        subtitle: class
+              - id: depot.orders.services.refund_service
+                name: refund_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.services.refund_service::class:RefundService
+                    name: RefundService
+                    subtitle: class
+perspectives:
+  - name: dependencies
+    orientation: leftToRight
+    color: royalblue
+    relations:
+      - from: depot.billing.api.routes
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.api.routes
+        to: depot.billing.mappers.invoice_mapper
+        label: imports
+      - from: depot.billing.api.routes
+        to: depot.billing.mappers.payment_mapper
+        label: imports
+      - from: depot.billing.api.routes
+        to: depot.billing.services.invoice_service
+        label: imports
+      - from: depot.billing.api.schemas
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.mappers.invoice_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.mappers.invoice_mapper
+        to: depot.billing.models.invoice_models
+        label: imports
+      - from: depot.billing.mappers.payment_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.mappers.payment_mapper
+        to: depot.billing.models.payment_models
+        label: imports
+      - from: depot.billing.models.invoice_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.models.invoice_view_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.models.payment_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.repository.invoice_query
+        to: depot.core.ports
+        label: imports
+      - from: depot.billing.repository.invoice_query
+        to: depot.billing.models.payment_models
+        label: imports
+      - from: depot.billing.repository.invoice_repo
+        to: depot.core.ports
+        label: imports
+      - from: depot.billing.repository.invoice_repo
+        to: depot.billing.models.invoice_models
+        label: imports
+      - from: depot.billing.services.dunning_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.billing.services.dunning_service
+        to: depot.billing.repository.invoice_query
+        label: imports
+      - from: depot.billing.services.invoice_service
+        to: depot.core.adapters.storage
+        label: imports
+      - from: depot.billing.services.invoice_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.billing.services.invoice_service
+        to: depot.identity.services.customer_service
+        label: imports
+      - from: depot.billing.services.invoice_service
+        to: depot.billing.repository.invoice_repo
+        label: imports
+      - from: depot.billing.services.ledger_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.billing.services.ledger_service
+        to: depot.billing.repository.invoice_repo
+        label: imports
+      - from: depot.core.adapters
+        to: depot.core.adapters.internal.cache
+        label: imports
+      - from: depot.core.adapters
+        to: depot.core.adapters.internal.session
+        label: imports
+      - from: depot.core.adapters
+        to: depot.core.ports
+        label: imports
+      - from: depot.core.adapters.storage
+        to: depot.core.ports
+        label: imports
+      - from: depot.identity.api.routes
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.api.routes
+        to: depot.identity.mappers.customer_mapper
+        label: imports
+      - from: depot.identity.api.routes
+        to: depot.identity.mappers.role_mapper
+        label: imports
+      - from: depot.identity.api.routes
+        to: depot.identity.services.customer_service
+        label: imports
+      - from: depot.identity.api.schemas
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.mappers.customer_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.mappers.customer_mapper
+        to: depot.identity.models.customer_models
+        label: imports
+      - from: depot.identity.mappers.role_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.mappers.role_mapper
+        to: depot.identity.models.role_models
+        label: imports
+      - from: depot.identity.models.customer_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.models.customer_view_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.models.role_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.repository.customer_repo
+        to: depot.core.ports
+        label: imports
+      - from: depot.identity.repository.customer_repo
+        to: depot.identity.models.customer_models
+        label: imports
+      - from: depot.identity.repository.session_repo
+        to: depot.core.ports
+        label: imports
+      - from: depot.identity.repository.session_repo
+        to: depot.identity.models.role_models
+        label: imports
+      - from: depot.identity.services.customer_service
+        to: depot.core.adapters.storage
+        label: imports
+      - from: depot.identity.services.customer_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.identity.services.customer_service
+        to: depot.identity.repository.customer_repo
+        label: imports
+      - from: depot.identity.services.token_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.identity.services.token_service
+        to: depot.identity.repository.session_repo
+        label: imports
+      - from: depot.orders.api.routes
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.api.routes
+        to: depot.orders.mappers.order_line_mapper
+        label: imports
+      - from: depot.orders.api.routes
+        to: depot.orders.mappers.order_mapper
+        label: imports
+      - from: depot.orders.api.routes
+        to: depot.orders.services.order_service
+        label: imports
+      - from: depot.orders.api.schemas
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.mappers.order_line_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.mappers.order_line_mapper
+        to: depot.orders.models.order_line_models
+        label: imports
+      - from: depot.orders.mappers.order_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.mappers.order_mapper
+        to: depot.orders.models.order_models
+        label: imports
+      - from: depot.orders.models.discount_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.models.order_line_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.models.order_line_view_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.models.order_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.models.order_view_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.repository.order_line_repo
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.repository.order_line_repo
+        to: depot.orders.models.order_line_models
+        label: imports
+      - from: depot.orders.repository.order_query
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.repository.order_query
+        to: depot.orders.models.discount_models
+        label: imports
+      - from: depot.orders.repository.order_repo
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.repository.order_repo
+        to: depot.orders.models.order_models
+        label: imports
+      - from: depot.orders.services
+        to: depot.orders.services.pricing.engine
+        label: imports
+      - from: depot.orders.services.catalog_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.services.catalog_service
+        to: depot.orders.repository.order_query
+        label: imports
+      - from: depot.orders.services.checkout_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.services.checkout_service
+        to: depot.orders.repository.order_line_repo
+        label: imports
+      - from: depot.orders.services.order_service
+        to: depot.core.adapters.storage
+        label: imports
+      - from: depot.orders.services.order_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.services.order_service
+        to: depot.identity.services.customer_service
+        label: imports
+      - from: depot.orders.services.order_service
+        to: depot.orders.repository.order_repo
+        label: imports
+      - from: depot.orders.services.pricing.engine
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.services.refund_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.services.refund_service
+        to: depot.orders.repository.order_repo
+        label: imports

@@ -1,0 +1,496 @@
+{
+  "zweck": "Zuordnungsschlüssel zum verblindeten Bewertungsblatt `bewertungsblatt.md`. NACH §6 ERST NACH ABSCHLUSS DER BEWERTUNG ZU ÖFFNEN.",
+  "auftrag": "S10",
+  "werkzeug": "tools/prepare_z2_review.py",
+  "protokoll_sha256": "862fdc3b7cfb264482db155575437edb25b1b436f92b5444b2137f1e332d9dde",
+  "seed": 20260903,
+  "seed_verwendung": "random.Random(20260903).shuffle(...) auf die Einträge in Reihenfolge ihres ersten Auftretens (Zellen k2_b1, k3_b1; Slots run0, run1, run2; Position aufsteigend)",
+  "identitaetsdefinition": "Zwei Vorschläge sind MECHANISCH IDENTISCH, wenn das Tupel (category, statement, severity, sorted(scope.components)) nach Unicode-NFC und Abschneiden führender und schliessender Leerzeichen ZEICHENGLEICH ist. `id` geht NICHT ein -- sie ist je Lauf frei gewählt. Keine weitere Normalisierung: keine Kleinschreibung, keine Interpunktions-, Zahlen- oder Synonymbehandlung, kein Zusammenziehen innerer Leerzeichen. MECHANISCHE IDENTITÄT IST NUR EINE TEILMENGE DESSEN, WAS Z2-R VERLANGT (§6: Kategorie, Scope und Kernaussage; Umformulierungen zählen als ein Vorschlag) -- die inhaltliche Zusammenführung steht aus und ist Sache des Bewerters.",
+  "identitaetstupel": [
+    "category",
+    "statement",
+    "severity",
+    "sorted(scope.components)"
+  ],
+  "hinweis_vielfachheit": "Die Vielfachheit ist eine Kennzahl, aus der die Bedingung ableitbar ist -- in einer der beiden Zellen sind die drei Generate zeichengleich. Sie steht deshalb NUR hier und nicht im Blatt.",
+  "eintraege": [
+    {
+      "etikett": "P-01",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run1",
+          "position": 0,
+          "id": "R1"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run1"
+      ],
+      "positionen": [
+        0
+      ],
+      "ids": [
+        "R1"
+      ]
+    },
+    {
+      "etikett": "P-02",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 3,
+          "id": "R4"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run2"
+      ],
+      "positionen": [
+        3
+      ],
+      "ids": [
+        "R4"
+      ]
+    },
+    {
+      "etikett": "P-03",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 1,
+          "id": "R2"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run0"
+      ],
+      "positionen": [
+        1
+      ],
+      "ids": [
+        "R2"
+      ]
+    },
+    {
+      "etikett": "P-04",
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 0,
+          "id": "R1"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 0,
+          "id": "R1"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 0,
+          "id": "R1"
+        }
+      ],
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "slots": [
+        "run0",
+        "run1",
+        "run2"
+      ],
+      "positionen": [
+        0
+      ],
+      "ids": [
+        "R1"
+      ]
+    },
+    {
+      "etikett": "P-05",
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 4,
+          "id": "R5"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 4,
+          "id": "R5"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 4,
+          "id": "R5"
+        }
+      ],
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "slots": [
+        "run0",
+        "run1",
+        "run2"
+      ],
+      "positionen": [
+        4
+      ],
+      "ids": [
+        "R5"
+      ]
+    },
+    {
+      "etikett": "P-06",
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 1,
+          "id": "R2"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 1,
+          "id": "R2"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 1,
+          "id": "R2"
+        }
+      ],
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "slots": [
+        "run0",
+        "run1",
+        "run2"
+      ],
+      "positionen": [
+        1
+      ],
+      "ids": [
+        "R2"
+      ]
+    },
+    {
+      "etikett": "P-07",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 4,
+          "id": "R5"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run2"
+      ],
+      "positionen": [
+        4
+      ],
+      "ids": [
+        "R5"
+      ]
+    },
+    {
+      "etikett": "P-08",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 1,
+          "id": "R2"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run2"
+      ],
+      "positionen": [
+        1
+      ],
+      "ids": [
+        "R2"
+      ]
+    },
+    {
+      "etikett": "P-09",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run1",
+          "position": 2,
+          "id": "R3"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run1"
+      ],
+      "positionen": [
+        2
+      ],
+      "ids": [
+        "R3"
+      ]
+    },
+    {
+      "etikett": "P-10",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 0,
+          "id": "R1"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run0"
+      ],
+      "positionen": [
+        0
+      ],
+      "ids": [
+        "R1"
+      ]
+    },
+    {
+      "etikett": "P-11",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 2,
+          "id": "R3"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run0"
+      ],
+      "positionen": [
+        2
+      ],
+      "ids": [
+        "R3"
+      ]
+    },
+    {
+      "etikett": "P-12",
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 3,
+          "id": "R4"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 3,
+          "id": "R4"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 3,
+          "id": "R4"
+        }
+      ],
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "slots": [
+        "run0",
+        "run1",
+        "run2"
+      ],
+      "positionen": [
+        3
+      ],
+      "ids": [
+        "R4"
+      ]
+    },
+    {
+      "etikett": "P-13",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 0,
+          "id": "R1"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run2"
+      ],
+      "positionen": [
+        0
+      ],
+      "ids": [
+        "R1"
+      ]
+    },
+    {
+      "etikett": "P-14",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run1",
+          "position": 1,
+          "id": "R2"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run1"
+      ],
+      "positionen": [
+        1
+      ],
+      "ids": [
+        "R2"
+      ]
+    },
+    {
+      "etikett": "P-15",
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 2,
+          "id": "R3"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 2,
+          "id": "R3"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 2,
+          "id": "R3"
+        }
+      ],
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "slots": [
+        "run0",
+        "run1",
+        "run2"
+      ],
+      "positionen": [
+        2
+      ],
+      "ids": [
+        "R3"
+      ]
+    },
+    {
+      "etikett": "P-16",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 3,
+          "id": "R4"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run0"
+      ],
+      "positionen": [
+        3
+      ],
+      "ids": [
+        "R4"
+      ]
+    },
+    {
+      "etikett": "P-17",
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 2,
+          "id": "R3"
+        }
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run2"
+      ],
+      "positionen": [
+        2
+      ],
+      "ids": [
+        "R3"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3606 @@
+[
+  {
+    "module_name": "depot",
+    "module_docstring": "Depot \u2014 parcel acceptance, storage and shipping logistics.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing",
+    "module_docstring": "Billing context: invoices, payments and the dunning of a depot.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.api",
+    "module_docstring": "HTTP surface of the billing context.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.api.routes",
+    "module_docstring": "Endpoints of the billing context.\n\nThe handlers ask the service for the work, hand what comes back to a mapper and\nturn a depot error into a status code. Storage is none of their business \u2014 a\nhandler never reaches past the service.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.billing.mappers.invoice_mapper",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.billing.mappers.payment_mapper",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.billing.services.invoice_service",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "InvoiceRoutes",
+        "bases": [],
+        "decorators": [],
+        "docstring": "The invoice endpoints of the billing API.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, invoices: depot.billing.services.invoice_service.InvoiceService) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "post_invoice",
+            "signature": "(self, customer_reference: str, order_reference: str, net_cents: int) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Draft an invoice for a shipment and return what was created."
+          },
+          {
+            "name": "get_invoice",
+            "signature": "(self, number: str) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Return one invoice."
+          },
+          {
+            "name": "post_issue",
+            "signature": "(self, number: str, issued_at: float) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Raise an invoice and send it out."
+          },
+          {
+            "name": "get_document_header",
+            "signature": "(self, number: str) -> dict[str, str]",
+            "decorators": [],
+            "docstring": "Return the header line printed on the invoice document."
+          },
+          {
+            "name": "get_invoices_of_customer",
+            "signature": "(self, customer_reference: str) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "List the invoices of one customer."
+          }
+        ]
+      },
+      {
+        "name": "PaymentRoutes",
+        "bases": [],
+        "decorators": [],
+        "docstring": "The payment endpoints the bank interface posts to.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, invoices: depot.billing.services.invoice_service.InvoiceService) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "post_statement",
+            "signature": "(self, notices: list[dict[str, object]]) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Take in a bank statement and report what was booked."
+          },
+          {
+            "name": "post_settlement",
+            "signature": "(self, number: str, amount_cents: int) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Book one payment against an invoice by hand."
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "status_for",
+        "signature": "(error: depot.core.errors.DepotError) -> int",
+        "decorators": [],
+        "docstring": "Map a depot error onto the status code the API answers with."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.billing.api.schemas",
+    "module_docstring": "Request and response shapes of the billing endpoints.\n\nThe schemas check what a client sent before anything below the API sees it.\nThey know nothing about the records themselves \u2014 that translation is the\nmappers' job.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "InvoiceDraft",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Body of a request that drafts an invoice for a shipment.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, customer_reference: str, order_reference: str, net_cents: int) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Raise unless the body can draft an invoice."
+          }
+        ]
+      },
+      {
+        "name": "SettlementNotice",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Body of a request that books money against an invoice.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, number: str, amount_cents: int) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Raise unless the notice moves money against a named invoice."
+          }
+        ]
+      },
+      {
+        "name": "StatementBatch",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Body of a request that hands in a bank statement.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, notices: list[dict[str, object]]) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Raise unless the batch is one the billing run can take in one go."
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "error_body",
+        "signature": "(error: depot.core.errors.DepotError) -> dict[str, str]",
+        "decorators": [],
+        "docstring": "Build the body the API returns for an error the depot raised."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.billing.mappers",
+    "module_docstring": "Translation between billing records and the shapes the API exchanges.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.mappers.invoice_mapper",
+    "module_docstring": "Translation between invoices and the shapes the API exchanges.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.billing.models.invoice_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(invoice: depot.billing.models.invoice_models.Invoice) -> dict[str, object]",
+        "decorators": [],
+        "docstring": "Build the body an invoice endpoint returns for one invoice."
+      },
+      {
+        "name": "to_document_header",
+        "signature": "(invoice: depot.billing.models.invoice_models.Invoice) -> str",
+        "decorators": [],
+        "docstring": "Build the header line printed at the top of the invoice document."
+      },
+      {
+        "name": "check_number",
+        "signature": "(number: str) -> str",
+        "decorators": [],
+        "docstring": "Return an invoice number in the form the depot files it under."
+      },
+      {
+        "name": "is_settled",
+        "signature": "(invoice: depot.billing.models.invoice_models.Invoice) -> bool",
+        "decorators": [],
+        "docstring": "Report whether an invoice needs nothing further from the customer."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.billing.mappers.payment_mapper",
+    "module_docstring": "Translation between payments and the shapes the API exchanges.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.billing.models.payment_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(payment: depot.billing.models.payment_models.Payment) -> dict[str, object]",
+        "decorators": [],
+        "docstring": "Build the body a payment endpoint returns for one payment."
+      },
+      {
+        "name": "to_remittance_line",
+        "signature": "(payment: depot.billing.models.payment_models.Payment) -> str",
+        "decorators": [],
+        "docstring": "Build the line the remittance advice carries for one payment."
+      },
+      {
+        "name": "normalise_notice",
+        "signature": "(notice: dict[str, object]) -> dict[str, object]",
+        "decorators": [],
+        "docstring": "Check an incoming payment notice and return it in canonical form.\n\nA notice that names no method is refused rather than guessed: booking a\ncard payment as a transfer would make it look reversible, and the depot\nwould promise a customer money back it cannot send."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.billing.models",
+    "module_docstring": "Records the billing context keeps.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.models.invoice_models",
+    "module_docstring": "Invoices the depot issues for the shipments it has carried out.\n\nAn invoice is raised when an order leaves the depot and is settled when the\nmoney has arrived in full. Partial payments are normal with business customers,\nso the open amount is kept on the invoice rather than worked out from the\npayments every time the dunning run asks.",
+    "imports": [
+      {
+        "module": "sqlalchemy.orm",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "Invoice",
+        "bases": [],
+        "decorators": [],
+        "docstring": "One invoice and everything the billing run decided about it.",
+        "methods": [
+          {
+            "name": "vat_cents",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report the tax on top of the net amount, rounded down."
+          },
+          {
+            "name": "gross_cents",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report what the customer owes in total."
+          },
+          {
+            "name": "open_cents",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report what is still outstanding on this invoice."
+          },
+          {
+            "name": "issue",
+            "signature": "(self, issued_at: float) -> None",
+            "decorators": [],
+            "docstring": "Raise the invoice and start the payment term running."
+          },
+          {
+            "name": "settle",
+            "signature": "(self, amount_cents: int) -> int",
+            "decorators": [],
+            "docstring": "Book money against the invoice and report what stays open."
+          },
+          {
+            "name": "due_at",
+            "signature": "(self) -> float | None",
+            "decorators": [],
+            "docstring": "Report when the invoice falls due, or None while it is a draft."
+          },
+          {
+            "name": "is_overdue",
+            "signature": "(self, now_epoch: float) -> bool",
+            "decorators": [],
+            "docstring": "Report whether the payment term has run out with money still open."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.models.invoice_view_models",
+    "module_docstring": "Read models behind the monthly account statement.\n\nBusiness customers get one sheet a month listing every open item with its age,\nand the depot's own bookkeeping reads the same rows to age the receivables into\nbuckets. Both want the figures as they stood at the close of the month, so the\nrows are written once by the closing run and never corrected afterwards \u2014 a\nstatement that changes after it was sent is worse than one that is stale.",
+    "imports": [
+      {
+        "module": "sqlalchemy.orm",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "DebtorStatementLine",
+        "bases": [],
+        "decorators": [],
+        "docstring": "One open item on the monthly statement of a debtor.",
+        "methods": [
+          {
+            "name": "bucket",
+            "signature": "(self) -> str",
+            "decorators": [],
+            "docstring": "Report which ageing bucket this item falls into."
+          },
+          {
+            "name": "counts_towards_dunning",
+            "signature": "(self) -> bool",
+            "decorators": [],
+            "docstring": "Report whether the dunning run may take this item into account."
+          },
+          {
+            "name": "printed_amount",
+            "signature": "(self) -> str",
+            "decorators": [],
+            "docstring": "Format the open amount the way the statement prints it."
+          },
+          {
+            "name": "headline",
+            "signature": "(self) -> str",
+            "decorators": [],
+            "docstring": "Build the single line the statement shows for this item."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.models.legacy_tax_models",
+    "module_docstring": "Tax rates the depot's previous billing software worked with.\n\nKept for the length of the archiving obligation: an invoice raised before the\nswitch has to be reproducible with the rate that applied on its date, and the\nrates changed twice in that period. Nothing writes here any more \u2014 the table is\nread from the archive export and left alone.",
+    "imports": [],
+    "classes": [
+      {
+        "name": "LegacyTaxRate",
+        "bases": [],
+        "decorators": [],
+        "docstring": "One tax rate together with the period it applied in.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, code: str, percent_scaled: int, valid_from: str, valid_to: str) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "applies_on",
+            "signature": "(self, day: str) -> bool",
+            "decorators": [],
+            "docstring": "Report whether this rate was the one in force on a given day."
+          },
+          {
+            "name": "tax_cents",
+            "signature": "(self, net_cents: int) -> int",
+            "decorators": [],
+            "docstring": "Report the tax this rate puts on a net amount, rounded down."
+          }
+        ]
+      },
+      {
+        "name": "LegacyTaxTable",
+        "bases": [],
+        "decorators": [],
+        "docstring": "The whole rate table as the archive export delivered it.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "load_line",
+            "signature": "(self, line: str) -> bool",
+            "decorators": [],
+            "docstring": "Take one line of the archive export and report whether it was usable.\n\nA line is ``<code>;<percent times 100>;<from>;<to>``, dates in ISO form.\nThe export was written with fixed-width columns, so every field is\nstripped before it is filed."
+          },
+          {
+            "name": "rate_on",
+            "signature": "(self, day: str) -> LegacyTaxRate | None",
+            "decorators": [],
+            "docstring": "Return the rate that was in force on a day, or None."
+          },
+          {
+            "name": "codes",
+            "signature": "(self) -> list[str]",
+            "decorators": [],
+            "docstring": "List the rate codes the table holds, without repetition."
+          },
+          {
+            "name": "size",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report how many rate periods the table holds."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.models.payment_models",
+    "module_docstring": "Payments that arrive for the invoices of the depot.\n\nA payment carries the remittance reference the customer typed into their bank\nform, and that is where most of the work is: the reference is often wrong, so\nit is normalised here and matched by the query side.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "Payment",
+        "bases": [],
+        "decorators": [],
+        "docstring": "One incoming payment as the bank statement reported it.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, reference: str, amount_cents: int, method: str, received_at: float, remittance_note: str='') -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "normalise",
+            "signature": "(self, reference: str) -> str",
+            "decorators": [],
+            "docstring": "Strip the spacing a bank form leaves in a remittance reference."
+          },
+          {
+            "name": "looks_matchable",
+            "signature": "(self) -> bool",
+            "decorators": [],
+            "docstring": "Report whether the reference has the shape of an invoice number."
+          },
+          {
+            "name": "is_reversible",
+            "signature": "(self) -> bool",
+            "decorators": [],
+            "docstring": "Report whether the depot can still send this payment back."
+          },
+          {
+            "name": "printed_amount",
+            "signature": "(self) -> str",
+            "decorators": [],
+            "docstring": "Format the amount the way the remittance advice prints it."
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "cash_at_counter",
+        "signature": "(amount_cents: int, received_at: float, slip: str) -> Payment",
+        "decorators": [],
+        "docstring": "Build the payment a clerk books when a customer pays at the counter."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.billing.repository",
+    "module_docstring": "Storage of the billing records.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.repository.invoice_query",
+    "module_docstring": "Read side of the billing storage: what has been paid on an invoice.\n\nThe payments arrive as a bank statement and carry whatever remittance reference\nthe customer typed. Matching them onto invoice numbers is the work this module\ndoes, and it is the only place that knows how wrong a reference may be before\nthe depot gives up and books it to the clearing account.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.billing.models.payment_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "InvoiceQuery",
+        "bases": [
+          "depot.core.ports.PaymentLedger"
+        ],
+        "decorators": [],
+        "docstring": "Answers what has been paid, and against which invoice.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "settled_cents",
+            "signature": "(self, invoice_number: str) -> int",
+            "decorators": [],
+            "docstring": "Report how much of an invoice has already been settled."
+          },
+          {
+            "name": "book",
+            "signature": "(self, payment: PaymentRecord, known_numbers: list[str]) -> str",
+            "decorators": [],
+            "docstring": "File a payment against an invoice and report where it went.\n\nA reference that matches nothing is not dropped \u2014 it goes to the\nclearing account, where the bookkeeping picks it up by hand. Losing a\npayment because a customer mistyped a digit is not an option."
+          },
+          {
+            "name": "match",
+            "signature": "(self, payment: PaymentRecord, known_numbers: list[str]) -> str",
+            "decorators": [],
+            "docstring": "Report which invoice a payment belongs to, or the clearing account."
+          },
+          {
+            "name": "payments_of",
+            "signature": "(self, invoice_number: str) -> list[PaymentRecord]",
+            "decorators": [],
+            "docstring": "List the payments booked against an invoice, oldest first."
+          },
+          {
+            "name": "unmatched_cents",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report how much money is sitting on the clearing account."
+          },
+          {
+            "name": "last_payment_at",
+            "signature": "(self, invoice_number: str) -> float | None",
+            "decorators": [],
+            "docstring": "Report when money last arrived for an invoice, or None."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.repository.invoice_repo",
+    "module_docstring": "Storage of the invoices.\n\nThe repository mints the invoice number before the first write: the number goes\nonto the paper the same run that raises the invoice, and a gap in the sequence\nis something the auditor asks about.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.billing.models.invoice_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "InvoiceRepository",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Reads and writes the invoices.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, ids: depot.core.ports.IdGenerator) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "create",
+            "signature": "(self, customer_reference: str, order_reference: str, net_cents: int) -> str",
+            "decorators": [],
+            "docstring": "Draft an invoice for a shipment and return its number."
+          },
+          {
+            "name": "get",
+            "signature": "(self, number: str) -> InvoiceRecord | None",
+            "decorators": [],
+            "docstring": "Return the invoice filed under a number, or None."
+          },
+          {
+            "name": "issue",
+            "signature": "(self, number: str, issued_at: float) -> bool",
+            "decorators": [],
+            "docstring": "Raise an invoice; report whether the number was known.\n\nWhat follows from a raised invoice \u2014 sending it out, the reminders, the\nledger posting \u2014 happens above this layer."
+          },
+          {
+            "name": "settle",
+            "signature": "(self, number: str, amount_cents: int) -> int",
+            "decorators": [],
+            "docstring": "Book money against an invoice and report what stays open."
+          },
+          {
+            "name": "count_reminder",
+            "signature": "(self, number: str) -> int",
+            "decorators": [],
+            "docstring": "Note that a reminder went out and report how many that makes."
+          },
+          {
+            "name": "overdue",
+            "signature": "(self, now_epoch: float) -> list[str]",
+            "decorators": [],
+            "docstring": "List the invoice numbers whose payment term has run out."
+          },
+          {
+            "name": "of_customer",
+            "signature": "(self, customer_reference: str) -> list[str]",
+            "decorators": [],
+            "docstring": "List the invoice numbers of one customer."
+          },
+          {
+            "name": "open_total_cents",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report what the depot is still owed altogether."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.repository.legacy_invoice_index",
+    "module_docstring": "Index of the invoice numbers the depot's previous billing software issued.\n\nKept for the length of the archiving obligation: customers still query invoices\nraised before the switch, and the numbering scheme changed with it. The index\nis read from the archive export once and never written to again.",
+    "imports": [],
+    "classes": [
+      {
+        "name": "LegacyInvoiceIndex",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Resolves a pre-migration invoice number to the number it became.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "load_line",
+            "signature": "(self, line: str) -> bool",
+            "decorators": [],
+            "docstring": "Take one line of the archive export and report whether it was usable.\n\nA line is ``<old number>;<new number>``. The export padded its columns,\nso both halves are stripped before they are filed."
+          },
+          {
+            "name": "looks_legacy",
+            "signature": "(self, old_number: str) -> bool",
+            "decorators": [],
+            "docstring": "Report whether a string has the shape of an old invoice number."
+          },
+          {
+            "name": "resolve",
+            "signature": "(self, old_number: str) -> str | None",
+            "decorators": [],
+            "docstring": "Return the number an old one became, or None if unknown."
+          },
+          {
+            "name": "size",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report how many old numbers the index holds."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.services",
+    "module_docstring": "Use cases of the billing context.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.services.dunning_service",
+    "module_docstring": "Reminders for the invoices that have not been paid.\n\nThe dunning run walks the open items once a week. It reads what has actually\narrived rather than what the invoice says, because a payment that landed on the\nclearing account is money the depot has \u2014 sending a reminder for it is how a\ndepot loses a business customer.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.billing.repository.invoice_query",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "DunningService",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Decides which open items get a reminder, and which one.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, payments: depot.billing.repository.invoice_query.InvoiceQuery, notifier: depot.core.ports.NotificationSender) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "template_for",
+            "signature": "(self, reminders_sent: int) -> str",
+            "decorators": [],
+            "docstring": "Report which letter goes out after that many reminders."
+          },
+          {
+            "name": "is_quiet",
+            "signature": "(self, invoice_number: str, now_epoch: float) -> bool",
+            "decorators": [],
+            "docstring": "Report whether money arrived recently enough to hold the reminder."
+          },
+          {
+            "name": "should_remind",
+            "signature": "(self, invoice_number: str, gross_cents: int, now_epoch: float) -> bool",
+            "decorators": [],
+            "docstring": "Report whether an open item earns a reminder today."
+          },
+          {
+            "name": "remind",
+            "signature": "(self, invoice_number: str, recipient: str, gross_cents: int, reminders_sent: int, now_epoch: float) -> bool",
+            "decorators": [],
+            "docstring": "Send the reminder that is due and report whether one went out."
+          },
+          {
+            "name": "unmatched_cents",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report how much money the bookkeeping still has to assign by hand."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.services.invoice_service",
+    "module_docstring": "Invoice use cases of the depot.\n\nRaising an invoice crosses a context boundary: the depot only bills a customer\nit still serves, so the customer side is asked before anything is written. The\nissued document itself is filed through the adapter facade.",
+    "imports": [
+      {
+        "module": "depot.core.adapters.storage",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.identity.services.customer_service",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.billing.repository.invoice_repo",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "InvoiceService",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Drives the invoicing side of the depot.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, invoices: depot.billing.repository.invoice_repo.InvoiceRepository, customers: depot.identity.services.customer_service.CustomerService, notifier: depot.core.ports.NotificationSender, documents: depot.core.adapters.storage.ParcelDocumentStore) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "raise_invoice",
+            "signature": "(self, customer_reference: str, order_reference: str, net_cents: int) -> str",
+            "decorators": [],
+            "docstring": "Draft an invoice for a shipment the depot has carried out.\n\nA customer the depot no longer serves is answered with an empty number\nrather than an error: the API turns that into the status code, and this\nlayer has no business knowing which one."
+          },
+          {
+            "name": "fetch",
+            "signature": "(self, number: str) -> depot.billing.repository.invoice_repo.InvoiceRecord | None",
+            "decorators": [],
+            "docstring": "Return the invoice filed under a number, or None."
+          },
+          {
+            "name": "issue",
+            "signature": "(self, number: str, issued_at: float) -> bool",
+            "decorators": [],
+            "docstring": "Raise an invoice and send it to the customer."
+          },
+          {
+            "name": "settle",
+            "signature": "(self, number: str, amount_cents: int) -> int",
+            "decorators": [],
+            "docstring": "Book money against an invoice and tell the customer when it is done."
+          },
+          {
+            "name": "file_document",
+            "signature": "(self, number: str, day: str, document: bytes) -> str",
+            "decorators": [],
+            "docstring": "Store the issued invoice document and return its storage key."
+          },
+          {
+            "name": "document",
+            "signature": "(self, number: str, day: str) -> bytes | None",
+            "decorators": [],
+            "docstring": "Return a filed invoice document, or None if there is none."
+          },
+          {
+            "name": "invoices_of",
+            "signature": "(self, customer_reference: str) -> list[str]",
+            "decorators": [],
+            "docstring": "List the invoice numbers of one customer."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.services.ledger_service",
+    "module_docstring": "Postings from the invoices into the depot's ledger.\n\nEvery raised invoice becomes two entries \u2014 receivable against revenue \u2014 and\nevery settlement two more. The booking date is not the moment the software gets\nround to it: a posting belongs to the day the business event happened, which is\nwhy the clock is handed in rather than read here.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.billing.repository.invoice_repo",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "LedgerService",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Turns invoices and settlements into ledger entries.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, invoices: depot.billing.repository.invoice_repo.InvoiceRepository) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "post_invoice",
+            "signature": "(self, number: str, clock: depot.core.ports.Clock) -> str",
+            "decorators": [],
+            "docstring": "Post a raised invoice and return the booking day it went on."
+          },
+          {
+            "name": "post_settlement",
+            "signature": "(self, number: str, amount_cents: int, day: str) -> str",
+            "decorators": [],
+            "docstring": "Post an incoming payment and return the booking day it went on.\n\nA settlement is booked on the value date the bank statement carries,\nnot on the day the batch happens to be read: money that arrived on a\nFriday belongs in that week even if the run only sees it on Monday."
+          },
+          {
+            "name": "record",
+            "signature": "(self, day: str, debit: str, credit: str, amount_cents: int) -> None",
+            "decorators": [],
+            "docstring": "Write one entry into the journal, skipping empty amounts."
+          },
+          {
+            "name": "journal",
+            "signature": "(self) -> list[str]",
+            "decorators": [],
+            "docstring": "List the entries written so far, in the order they were posted."
+          },
+          {
+            "name": "balance_cents",
+            "signature": "(self, account: str) -> int",
+            "decorators": [],
+            "docstring": "Report the balance of one account across the journal."
+          },
+          {
+            "name": "receivable_cents",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report what the ledger says the depot is owed."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core",
+    "module_docstring": "Core package: ports, configuration and error types shared by all contexts.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.adapters",
+    "module_docstring": "Adapter facade.\n\nThe only module that reaches into ``depot.core.adapters.internal``. Context\nservices take the session, the cache and the port protocols from here; the\npublic storage adapter next door they import directly.\n\nThe re-exports resolve lazily. Depot code imports whole modules\n(``import depot.x.y``) and never single names, so a name of a sub-package\ncannot be read while this package is still executing \u2014 at that moment\n``depot.core`` does not carry the ``adapters`` attribute yet. Resolving on\nfirst attribute access sidesteps that without giving up the import style.",
+    "imports": [
+      {
+        "module": "depot.core.adapters.internal.cache",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.adapters.internal.session",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "__getattr__",
+        "signature": "(name: str) -> object",
+        "decorators": [],
+        "docstring": "Resolve a re-exported name against the module it really lives in."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.core.adapters.internal",
+    "module_docstring": "Internal adapter machinery.\n\nNothing outside ``depot.core.adapters`` may reach into this package; the facade\nre-exports whatever the contexts are allowed to touch.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.adapters.internal.cache",
+    "module_docstring": "Bounded in-memory cache behind the adapter facade.\n\nUsed for the small, hot lookups of the depot \u2014 tariff zones, depot codes,\nlabel templates \u2014 where a round trip to the database costs more than the\nmemory. Insertion order of a dict carries the recency, so no extra bookkeeping\nis needed.",
+    "imports": [],
+    "classes": [
+      {
+        "name": "LruCache",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Least-recently-used cache with a fixed number of slots.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, capacity: int=256) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "get",
+            "signature": "(self, key: str) -> str | None",
+            "decorators": [],
+            "docstring": "Return the cached value and mark it as the most recently used."
+          },
+          {
+            "name": "put",
+            "signature": "(self, key: str, value: str) -> None",
+            "decorators": [],
+            "docstring": "Store a value, evicting the least recently used entry when full."
+          },
+          {
+            "name": "invalidate",
+            "signature": "(self, key: str) -> None",
+            "decorators": [],
+            "docstring": "Drop a single entry; an unknown key is ignored."
+          },
+          {
+            "name": "clear",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Drop every entry and reset the counters."
+          },
+          {
+            "name": "size",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report how many slots are currently taken."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.adapters.internal.session",
+    "module_docstring": "Database sessions behind the adapter facade.\n\nA session collects the statements of one unit of work and writes them at the\ncommit. Nothing here is thread-safe; a session belongs to one request.",
+    "imports": [],
+    "classes": [
+      {
+        "name": "Session",
+        "bases": [],
+        "decorators": [],
+        "docstring": "A single unit of work against the depot database.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, connection_string: str) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "execute",
+            "signature": "(self, statement: str) -> None",
+            "decorators": [],
+            "docstring": "Queue a statement for the next commit."
+          },
+          {
+            "name": "commit",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Write the queued statements and report how many were written."
+          },
+          {
+            "name": "rollback",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Discard everything queued since the last commit."
+          },
+          {
+            "name": "close",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Release the session; anything still queued is lost."
+          },
+          {
+            "name": "pending",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report how many statements wait for the next commit."
+          }
+        ]
+      },
+      {
+        "name": "SessionFactory",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Hands out sessions for one configured database.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, connection_string: str) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "open",
+            "signature": "(self) -> Session",
+            "decorators": [],
+            "docstring": "Open a fresh session and count it."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.adapters.storage",
+    "module_docstring": "Public storage adapter.\n\nThis is the surface the context services depend on. It keeps the documents that\nbelong to a parcel \u2014 the shipping label, the customs form, the handover\nmanifest \u2014 and it is deliberately free of any database session: the facade owns\nthose.\n\nIt is also free of a clock. The day a document is filed under comes in with the\ndocument, because the shift that produced a manifest and the moment it reaches\nthe store are not the same thing.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "ParcelDocumentStore",
+        "bases": [
+          "depot.core.ports.DocumentStore"
+        ],
+        "decorators": [],
+        "docstring": "Stores the documents that belong to a parcel, keyed by tracking code.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, bucket: str) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "key_for",
+            "signature": "(self, tracking_code: str, day: str, kind: str) -> str",
+            "decorators": [],
+            "docstring": "Build the storage key of a document filed for a given day."
+          },
+          {
+            "name": "put_label",
+            "signature": "(self, tracking_code: str, day: str, label: bytes) -> str",
+            "decorators": [],
+            "docstring": "Store a shipping label and return the key it was written under."
+          },
+          {
+            "name": "put_manifest",
+            "signature": "(self, tracking_code: str, day: str, manifest: bytes) -> str",
+            "decorators": [],
+            "docstring": "Store a handover manifest and return the key it was written under."
+          },
+          {
+            "name": "read",
+            "signature": "(self, key: str) -> bytes | None",
+            "decorators": [],
+            "docstring": "Return a stored document, or None if the key is unknown."
+          },
+          {
+            "name": "drop",
+            "signature": "(self, key: str) -> bool",
+            "decorators": [],
+            "docstring": "Delete a document and report whether it had been there."
+          },
+          {
+            "name": "keys_of_day",
+            "signature": "(self, day: str) -> list[str]",
+            "decorators": [],
+            "docstring": "List the keys filed for one day, in storage order."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.config",
+    "module_docstring": "Runtime configuration of a single depot site.",
+    "imports": [],
+    "classes": [
+      {
+        "name": "DepotSettings",
+        "bases": [],
+        "decorators": [],
+        "docstring": "The settings every context reads once at start-up.\n\nThe weight and girth limits are the ones printed on the acceptance counter\nnotice; carriers reject anything above them, so the depot refuses it first.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, database_url: str, depot_code: str, currency: str=DEFAULT_CURRENCY, session_ttl_seconds: int=DEFAULT_SESSION_TTL_SECONDS, max_parcel_weight_grams: int=MAX_PARCEL_WEIGHT_GRAMS, max_parcel_girth_cm: int=MAX_PARCEL_GIRTH_CM) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "accepts_weight",
+            "signature": "(self, weight_grams: int) -> bool",
+            "decorators": [],
+            "docstring": "Report whether a parcel of that weight may be handed in."
+          },
+          {
+            "name": "accepts_girth",
+            "signature": "(self, length_cm: int, width_cm: int, height_cm: int) -> bool",
+            "decorators": [],
+            "docstring": "Report whether length plus twice width plus twice height still fits."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.errors",
+    "module_docstring": "Error types raised throughout the depot.\n\nEvery context maps these onto its own transport format; the core itself never\ncatches them.",
+    "imports": [],
+    "classes": [
+      {
+        "name": "DepotError",
+        "bases": [
+          "Exception"
+        ],
+        "decorators": [],
+        "docstring": "Base class of every error the depot raises on purpose.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, message: str) -> None",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "NotFoundError",
+        "bases": [
+          "DepotError"
+        ],
+        "decorators": [],
+        "docstring": "A record was addressed that the depot does not hold.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, entity: str, reference: str) -> None",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "ValidationError",
+        "bases": [
+          "DepotError"
+        ],
+        "decorators": [],
+        "docstring": "Incoming data does not satisfy the rules of the depot.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, field: str, reason: str) -> None",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "ConflictError",
+        "bases": [
+          "DepotError"
+        ],
+        "decorators": [],
+        "docstring": "The requested change collides with the state already stored.\n\nRaised when a parcel is handed in twice, an invoice is settled twice or a\nshipment is cancelled after it has left the depot.",
+        "methods": []
+      },
+      {
+        "name": "PermissionDeniedError",
+        "bases": [
+          "DepotError"
+        ],
+        "decorators": [],
+        "docstring": "The caller is known but may not perform this operation.",
+        "methods": []
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.ports",
+    "module_docstring": "Protocols the depot expects of its surroundings.\n\nThe core owns the interfaces, the adapters and the context services implement\nthem. Nothing here refers to a concrete technology, and nothing here imports\nanother depot module.",
+    "imports": [
+      {
+        "module": "typing",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "Clock",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "docstring": "Source of the current time.\n\nInjected rather than read from the wall clock so that bookings, expiry\ndates and dunning runs stay reproducible in a replay.",
+        "methods": [
+          {
+            "name": "now_epoch",
+            "signature": "(self) -> float",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "today_iso",
+            "signature": "(self) -> str",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "TokenSigner",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "docstring": "Signs and verifies the opaque tokens handed to depot clients.",
+        "methods": [
+          {
+            "name": "sign",
+            "signature": "(self, subject: str, ttl_seconds: int) -> str",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "verify",
+            "signature": "(self, token: str) -> str | None",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "SessionStore",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "docstring": "Keeps the counter sessions of the depot staff.",
+        "methods": [
+          {
+            "name": "touch",
+            "signature": "(self, session_id: str, ttl_seconds: int) -> bool",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "revoke",
+            "signature": "(self, session_id: str) -> None",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "DocumentStore",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "docstring": "Keeps the documents that belong to a parcel.\n\nThe storage key is built by the store and never by its callers, so that a\ndepot can change how it partitions its storage without any service above\nhaving to follow. The day a document belongs to is passed in rather than\nread from a clock: a manifest that is filed after midnight still belongs to\nthe shift that produced it.",
+        "methods": [
+          {
+            "name": "key_for",
+            "signature": "(self, tracking_code: str, day: str, kind: str) -> str",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "put_label",
+            "signature": "(self, tracking_code: str, day: str, label: bytes) -> str",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "put_manifest",
+            "signature": "(self, tracking_code: str, day: str, manifest: bytes) -> str",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "read",
+            "signature": "(self, key: str) -> bytes | None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "drop",
+            "signature": "(self, key: str) -> bool",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "IdGenerator",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "docstring": "Mints the references under which the depot files its records.\n\nA reference is handed to the customer on the collection slip, so it must be\nstable and free of a database round trip; the repositories ask for one\nbefore they write.",
+        "methods": [
+          {
+            "name": "new_id",
+            "signature": "(self, prefix: str) -> str",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "NotificationSender",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "docstring": "Delivers a short notice to a customer over their preferred channel.",
+        "methods": [
+          {
+            "name": "send",
+            "signature": "(self, recipient: str, template: str, fields: dict[str, str]) -> bool",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "ShelfAllocator",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "docstring": "Hands out the shelf slots an accepted parcel is put away in.\n\nWhich slot a parcel goes to is decided by the warehouse system, not by the\ndepot software: the shelves are shared with the returns handling, and only\nthe warehouse knows what is free at that moment.",
+        "methods": [
+          {
+            "name": "reserve",
+            "signature": "(self, depot_code: str, parcel_count: int) -> str",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "release",
+            "signature": "(self, slot: str) -> bool",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "RateProvider",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "docstring": "Supplies the carrier rate for a destination zone and weight.",
+        "methods": [
+          {
+            "name": "rate_cents",
+            "signature": "(self, zone: str, weight_grams: int) -> int",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "DiscountCatalog",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "docstring": "Answers which discount a code grants on a given subtotal.",
+        "methods": [
+          {
+            "name": "percent_for",
+            "signature": "(self, code: str, subtotal_cents: int) -> int",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "PaymentGateway",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "docstring": "Moves money on behalf of the depot; the only outbound money path.",
+        "methods": [
+          {
+            "name": "refund",
+            "signature": "(self, payment_reference: str, amount_cents: int) -> str",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      },
+      {
+        "name": "PaymentLedger",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "docstring": "Reports how much of an invoice has already been settled.",
+        "methods": [
+          {
+            "name": "settled_cents",
+            "signature": "(self, invoice_number: str) -> int",
+            "decorators": [],
+            "docstring": null
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity",
+    "module_docstring": "Identity context: depot customers, staff accounts and counter sessions.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.api",
+    "module_docstring": "HTTP surface of the identity context.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.api.routes",
+    "module_docstring": "Endpoints of the identity context.\n\nThe handlers do three things and nothing else: ask the service for the work,\nhand what comes back to a mapper, and turn a depot error into a status code.\nStorage is none of their business \u2014 a handler never reaches past the service.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.identity.mappers.customer_mapper",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.identity.mappers.role_mapper",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.identity.services.customer_service",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "CustomerRoutes",
+        "bases": [],
+        "decorators": [],
+        "docstring": "The customer endpoints of the counter API.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, customers: depot.identity.services.customer_service.CustomerService) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "post_customer",
+            "signature": "(self, email: str, display_name: str, phone: str) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Register a customer and return the record that was created."
+          },
+          {
+            "name": "get_customer",
+            "signature": "(self, reference: str) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Return one customer record."
+          },
+          {
+            "name": "patch_customer",
+            "signature": "(self, reference: str, changes: dict[str, str]) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Change the contact details of a customer and return the record."
+          },
+          {
+            "name": "post_block",
+            "signature": "(self, reference: str, reason: str) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Block a customer after a counter dispute."
+          },
+          {
+            "name": "post_address_confirmation",
+            "signature": "(self, reference: str, confirmed_at: float) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Confirm a delivery address."
+          },
+          {
+            "name": "get_blocked",
+            "signature": "(self) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "List the references the counter must refuse today."
+          }
+        ]
+      },
+      {
+        "name": "RoleRoutes",
+        "bases": [],
+        "decorators": [],
+        "docstring": "The role endpoints the terminal reads when a clerk signs on.",
+        "methods": [
+          {
+            "name": "get_roles",
+            "signature": "(self) -> list[dict[str, object]]",
+            "decorators": [],
+            "docstring": "List the roles a clerk can sign on with."
+          },
+          {
+            "name": "get_role",
+            "signature": "(self, name: str) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Return one role together with the permissions it grants."
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "status_for",
+        "signature": "(error: depot.core.errors.DepotError) -> int",
+        "decorators": [],
+        "docstring": "Map a depot error onto the status code the API answers with."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.identity.api.schemas",
+    "module_docstring": "Request and response shapes of the identity endpoints.\n\nThe schemas validate what a client sent before anything below the API sees it,\nso that a malformed body never reaches a service. They know nothing about the\nrecords themselves \u2014 that translation is the mappers' job.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "CustomerRegistration",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Body of a customer registration request.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, email: str, display_name: str, phone: str) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Raise unless the body can be turned into a customer."
+          }
+        ]
+      },
+      {
+        "name": "ContactChange",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Body of a request that changes the contact details of a customer.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, fields: dict[str, str]) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Raise unless at least one field was sent and none of them is blank."
+          }
+        ]
+      },
+      {
+        "name": "SignOn",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Body of a request that signs a clerk on at a counter terminal.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, terminal: str, role_name: str) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Raise unless the terminal and the role were both named."
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "error_body",
+        "signature": "(error: depot.core.errors.DepotError) -> dict[str, str]",
+        "decorators": [],
+        "docstring": "Build the body the API returns for an error the depot raised."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.identity.mappers",
+    "module_docstring": "Translation between identity records and the shapes the API exchanges.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.mappers.customer_mapper",
+    "module_docstring": "Translation between customer records and the shapes the API exchanges.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.identity.models.customer_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(customer: depot.identity.models.customer_models.Customer) -> dict[str, object]",
+        "decorators": [],
+        "docstring": "Build the body a customer endpoint returns for one record."
+      },
+      {
+        "name": "to_slip_line",
+        "signature": "(customer: depot.identity.models.customer_models.Customer) -> str",
+        "decorators": [],
+        "docstring": "Build the line the collection slip carries under the barcode."
+      },
+      {
+        "name": "apply_changes",
+        "signature": "(customer: depot.identity.models.customer_models.Customer, changes: dict[str, str]) -> int",
+        "decorators": [],
+        "docstring": "Write the writable fields of a change request and count what moved.\n\nAnything outside the writable set is refused rather than ignored: a client\nthat sends ``email`` expects the address to change, and silently dropping\nit would leave the counter and the customer with different records."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.identity.mappers.role_mapper",
+    "module_docstring": "Translation between roles and the shapes the API exchanges.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.identity.models.role_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(role: depot.identity.models.role_models.Role) -> dict[str, object]",
+        "decorators": [],
+        "docstring": "Build the body a role endpoint returns for one role."
+      },
+      {
+        "name": "from_name",
+        "signature": "(name: str) -> depot.identity.models.role_models.Role",
+        "decorators": [],
+        "docstring": "Build the role a request named, with the permissions it carries."
+      },
+      {
+        "name": "catalogue",
+        "signature": "() -> list[dict[str, object]]",
+        "decorators": [],
+        "docstring": "Build the list of roles the terminal offers when signing on."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.identity.models",
+    "module_docstring": "Records the identity context keeps.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.models.customer_models",
+    "module_docstring": "Customer records of the depot.\n\nA customer is whoever may hand in or collect a parcel at the counter. The\nrecord carries the contact details the notification templates fill in and the\ntwo flags the counter checks before it releases anything.",
+    "imports": [
+      {
+        "module": "sqlalchemy.orm",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "Customer",
+        "bases": [],
+        "decorators": [],
+        "docstring": "A customer account that may hand in and collect parcels.",
+        "methods": [
+          {
+            "name": "mark_verified",
+            "signature": "(self, verified_at: float) -> None",
+            "decorators": [],
+            "docstring": "Record when the customer confirmed their delivery address."
+          },
+          {
+            "name": "block",
+            "signature": "(self, reason: str) -> None",
+            "decorators": [],
+            "docstring": "Refuse further hand-ins and collections for this customer."
+          },
+          {
+            "name": "unblock",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Lift a block; an account that was never blocked stays as it is."
+          },
+          {
+            "name": "rename",
+            "signature": "(self, display_name: str) -> None",
+            "decorators": [],
+            "docstring": "Change the name printed on the collection slip."
+          },
+          {
+            "name": "may_collect",
+            "signature": "(self) -> bool",
+            "decorators": [],
+            "docstring": "Report whether the counter may release a parcel to this customer."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.models.customer_view_models",
+    "module_docstring": "Read models behind the counter overview screen.\n\nThe clerk at the counter needs one flat row per customer \u2014 name, how much is\nwaiting on the shelf, when they were last here. No single table holds that, and\njoining it per keystroke was too slow on the depot's hardware, so a nightly job\nwrites these rows and the screen reads them straight. They are never written\nthrough from the counter.",
+    "imports": [
+      {
+        "module": "sqlalchemy.orm",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "CustomerSummary",
+        "bases": [],
+        "decorators": [],
+        "docstring": "One row of the counter overview, refreshed by the nightly job.",
+        "methods": [
+          {
+            "name": "shelf_pressure",
+            "signature": "(self) -> float",
+            "decorators": [],
+            "docstring": "Report how full the customer's shelf slot is, from 0.0 to 1.0."
+          },
+          {
+            "name": "is_overflowing",
+            "signature": "(self) -> bool",
+            "decorators": [],
+            "docstring": "Report whether the parcels no longer fit the customer's slot."
+          },
+          {
+            "name": "needs_reminder",
+            "signature": "(self, now_epoch: float, grace_seconds: float) -> bool",
+            "decorators": [],
+            "docstring": "Report whether the customer should be reminded to collect."
+          },
+          {
+            "name": "headline",
+            "signature": "(self) -> str",
+            "decorators": [],
+            "docstring": "Build the single line the overview shows for this customer."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.models.role_models",
+    "module_docstring": "Roles a depot staff account can hold.\n\nThe three roles are ordered: a dispatcher may do everything a counter clerk\nmay, a depot manager everything a dispatcher may. Nothing outside this module\nrelies on that order except the comparison below.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "Role",
+        "bases": [],
+        "decorators": [],
+        "docstring": "A named role together with the permissions it grants.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, name: str, permissions: frozenset[str]) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "grants",
+            "signature": "(self, permission: str) -> bool",
+            "decorators": [],
+            "docstring": "Report whether this role carries the permission."
+          },
+          {
+            "name": "outranks",
+            "signature": "(self, other: 'Role') -> bool",
+            "decorators": [],
+            "docstring": "Report whether this role sits above another in the depot hierarchy."
+          },
+          {
+            "name": "require",
+            "signature": "(self, permission: str) -> None",
+            "decorators": [],
+            "docstring": "Raise unless this role carries the permission."
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "counter_clerk",
+        "signature": "() -> Role",
+        "decorators": [],
+        "docstring": "Build the role every new counter account starts with."
+      },
+      {
+        "name": "dispatcher",
+        "signature": "() -> Role",
+        "decorators": [],
+        "docstring": "Build the role that may also lift a hold on a parcel."
+      },
+      {
+        "name": "depot_manager",
+        "signature": "() -> Role",
+        "decorators": [],
+        "docstring": "Build the role that may close the depot day."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.identity.repository",
+    "module_docstring": "Storage of the identity records.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.repository.customer_repo",
+    "module_docstring": "Storage of the customer records.\n\nThe repository owns the reference a customer is filed under. It asks the\nid generator for one before the first write so that the collection slip can be\nprinted in the same counter interaction.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.identity.models.customer_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "CustomerRepository",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Reads and writes customer records.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, ids: depot.core.ports.IdGenerator) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "create",
+            "signature": "(self, email: str, display_name: str, phone: str) -> str",
+            "decorators": [],
+            "docstring": "File a new customer and return the reference it was filed under."
+          },
+          {
+            "name": "verify",
+            "signature": "(self, reference: str, confirmed_at: float) -> bool",
+            "decorators": [],
+            "docstring": "Record an address confirmation; report whether anything changed."
+          },
+          {
+            "name": "get",
+            "signature": "(self, reference: str) -> depot.identity.models.customer_models.Customer | None",
+            "decorators": [],
+            "docstring": "Return the customer filed under a reference, or None."
+          },
+          {
+            "name": "find_by_email",
+            "signature": "(self, email: str) -> depot.identity.models.customer_models.Customer | None",
+            "decorators": [],
+            "docstring": "Return the customer registered with an address, or None."
+          },
+          {
+            "name": "block",
+            "signature": "(self, reference: str, reason: str) -> bool",
+            "decorators": [],
+            "docstring": "Block a customer and report whether the reference was known.\n\nBlocking is the last step of a counter dispute. Everything that follows\nfrom it \u2014 withdrawing the open collection slips, telling the customer \u2014\nhappens above this layer."
+          },
+          {
+            "name": "blocked_references",
+            "signature": "(self) -> list[str]",
+            "decorators": [],
+            "docstring": "List the references the counter must refuse today."
+          },
+          {
+            "name": "count",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report how many customers are on file."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.repository.legacy_token_index",
+    "module_docstring": "Index of the tokens issued by the depot's previous counter software.\n\nKept for the length of the migration window: collection slips printed before\nthe switch carry these tokens instead of a customer reference, and the counter\nhas to resolve them until the last of those parcels has left the shelf. Nothing\nwrites here any more; the index is loaded once from the export file.",
+    "imports": [],
+    "classes": [
+      {
+        "name": "LegacyTokenIndex",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Resolves a pre-migration token to the account number it belonged to.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "load_line",
+            "signature": "(self, line: str) -> bool",
+            "decorators": [],
+            "docstring": "Take one line of the export file and report whether it was usable.\n\nA line is ``<token>;<account number>``. The export was written by a\nsystem that padded short tokens with spaces, so both halves are\nstripped before they are filed."
+          },
+          {
+            "name": "resolve",
+            "signature": "(self, token: str) -> str | None",
+            "decorators": [],
+            "docstring": "Return the account number behind a token, or None if unknown."
+          },
+          {
+            "name": "knows",
+            "signature": "(self, token: str) -> bool",
+            "decorators": [],
+            "docstring": "Report whether a token appears in the index at all."
+          },
+          {
+            "name": "size",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report how many tokens the index holds."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.repository.session_repo",
+    "module_docstring": "Counter sessions of the depot staff.\n\nA session is opened when a clerk signs on at a counter terminal and carries the\nrole the terminal was signed on with. Expiry is kept as an absolute epoch so\nthat the repository needs no time source of its own; whoever extends a session\npasses the seconds it should gain.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.identity.models.role_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "SessionRepository",
+        "bases": [
+          "depot.core.ports.SessionStore"
+        ],
+        "decorators": [],
+        "docstring": "Keeps the counter sessions and the role each was opened with.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "open",
+            "signature": "(self, session_id: str, role: depot.identity.models.role_models.Role, expires_at: float) -> None",
+            "decorators": [],
+            "docstring": "Sign a clerk on at a terminal until the given epoch."
+          },
+          {
+            "name": "touch",
+            "signature": "(self, session_id: str, ttl_seconds: int) -> bool",
+            "decorators": [],
+            "docstring": "Extend a session and report whether it was still open."
+          },
+          {
+            "name": "revoke",
+            "signature": "(self, session_id: str) -> None",
+            "decorators": [],
+            "docstring": "Sign the terminal off; an unknown session is ignored."
+          },
+          {
+            "name": "role_of",
+            "signature": "(self, session_id: str) -> depot.identity.models.role_models.Role | None",
+            "decorators": [],
+            "docstring": "Return the role a session was opened with, or None."
+          },
+          {
+            "name": "expires_at",
+            "signature": "(self, session_id: str) -> float | None",
+            "decorators": [],
+            "docstring": "Return the epoch a session runs out at, or None."
+          },
+          {
+            "name": "drop_expired",
+            "signature": "(self, now_epoch: float) -> int",
+            "decorators": [],
+            "docstring": "Revoke every session that has run out and report how many."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.services",
+    "module_docstring": "Use cases of the identity context.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.services.customer_service",
+    "module_docstring": "Customer use cases of the depot counter.\n\nEverything a clerk can do to a customer account goes through here: registering\nsomeone at the counter, confirming their delivery address, blocking an account\nafter a dispute. The service also files the signed hand-over forms, which is\nwhy it holds the document store.",
+    "imports": [
+      {
+        "module": "depot.core.adapters.storage",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.identity.repository.customer_repo",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "CustomerService",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Drives the customer side of the counter.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, customers: depot.identity.repository.customer_repo.CustomerRepository, notifier: depot.core.ports.NotificationSender, documents: depot.core.adapters.storage.ParcelDocumentStore) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "register",
+            "signature": "(self, email: str, display_name: str, phone: str) -> str",
+            "decorators": [],
+            "docstring": "Register a customer at the counter and return their reference.\n\nRegistering the same address twice is what happens when a customer\nforgets they already have an account, so it is not an error: the\nexisting reference is handed back and no welcome notice goes out."
+          },
+          {
+            "name": "fetch",
+            "signature": "(self, reference: str) -> depot.identity.repository.customer_repo.CustomerRecord | None",
+            "decorators": [],
+            "docstring": "Return the record filed under a reference, or None."
+          },
+          {
+            "name": "confirm_address",
+            "signature": "(self, reference: str, confirmed_at: float) -> bool",
+            "decorators": [],
+            "docstring": "Confirm a delivery address and report whether anything changed."
+          },
+          {
+            "name": "block",
+            "signature": "(self, reference: str, reason: str) -> bool",
+            "decorators": [],
+            "docstring": "Block an account after a counter dispute and tell the customer."
+          },
+          {
+            "name": "file_handover_form",
+            "signature": "(self, reference: str, day: str, form: bytes) -> str",
+            "decorators": [],
+            "docstring": "Store the signed hand-over form and return its storage key."
+          },
+          {
+            "name": "handover_form",
+            "signature": "(self, reference: str, day: str) -> bytes | None",
+            "decorators": [],
+            "docstring": "Return a filed hand-over form, or None if none was ever stored."
+          },
+          {
+            "name": "blocked_today",
+            "signature": "(self) -> list[str]",
+            "decorators": [],
+            "docstring": "List the references the counter must refuse."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.services.token_service",
+    "module_docstring": "Bearer tokens for the counter terminals.\n\nA terminal signs on once and then carries a token on every call. The token\nitself is signed outside the depot \u2014 the service only decides whether a session\nis still good for one and what subject the token should name.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.identity.repository.session_repo",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "TokenService",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Issues and checks the tokens the counter terminals carry.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, sessions: depot.identity.repository.session_repo.SessionRepository) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "issue",
+            "signature": "(self, session_id: str, signer: depot.core.ports.TokenSigner) -> str",
+            "decorators": [],
+            "docstring": "Issue a token for a session that is still open.\n\nThe session is extended by the same span the token is good for, so a\nterminal that keeps working never has to sign on twice."
+          },
+          {
+            "name": "subject_of",
+            "signature": "(self, session_id: str) -> str",
+            "decorators": [],
+            "docstring": "Build the subject a token for this session should name."
+          },
+          {
+            "name": "revoke",
+            "signature": "(self, session_id: str) -> None",
+            "decorators": [],
+            "docstring": "Sign a terminal off, so the next call with its token fails."
+          },
+          {
+            "name": "is_live",
+            "signature": "(self, session_id: str, now_epoch: float) -> bool",
+            "decorators": [],
+            "docstring": "Report whether a session is still good at that moment."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders",
+    "module_docstring": "Orders context: shipment orders placed at the depot counter.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.api",
+    "module_docstring": "HTTP surface of the orders context.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.api.routes",
+    "module_docstring": "Endpoints of the orders context.\n\nThe handlers ask the service for the work, hand what comes back to a mapper and\nturn a depot error into a status code. Storage is none of their business \u2014 a\nhandler never reaches past the service.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.mappers.order_line_mapper",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.mappers.order_mapper",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.services.order_service",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "OrderRoutes",
+        "bases": [],
+        "decorators": [],
+        "docstring": "The order endpoints of the counter API.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, orders: depot.orders.services.order_service.OrderService) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "post_order",
+            "signature": "(self, customer_reference: str, destination_zone: str) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Open a draft order and return the header that was created."
+          },
+          {
+            "name": "get_order",
+            "signature": "(self, reference: str) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Return one order header."
+          },
+          {
+            "name": "post_lines",
+            "signature": "(self, reference: str, lines: list[dict[str, object]]) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Take in the parcels of an order and return what was accepted."
+          },
+          {
+            "name": "post_placement",
+            "signature": "(self, reference: str, placed_at: float) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Hand an order over to dispatch."
+          },
+          {
+            "name": "delete_order",
+            "signature": "(self, reference: str) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "Withdraw an order before it has left the depot."
+          },
+          {
+            "name": "get_board",
+            "signature": "(self, reference: str) -> dict[str, str]",
+            "decorators": [],
+            "docstring": "Return the single line the dispatch board prints for an order."
+          },
+          {
+            "name": "get_open_of_customer",
+            "signature": "(self, customer_reference: str) -> dict[str, object]",
+            "decorators": [],
+            "docstring": "List the orders a customer still has running."
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "status_for",
+        "signature": "(error: depot.core.errors.DepotError) -> int",
+        "decorators": [],
+        "docstring": "Map a depot error onto the status code the API answers with."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.api.schemas",
+    "module_docstring": "Request and response shapes of the order endpoints.\n\nThe schemas check what a client sent before anything below the API sees it.\nThey know nothing about the records themselves \u2014 that translation is the\nmappers' job.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "OrderDraft",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Body of a request that opens a new order.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, customer_reference: str, destination_zone: str) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Raise unless the body can open an order."
+          }
+        ]
+      },
+      {
+        "name": "LineBatch",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Body of a request that adds parcels to an order.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, lines: list[dict[str, object]]) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Raise unless the batch is one the counter can take in one go."
+          }
+        ]
+      },
+      {
+        "name": "QuoteRequest",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Body of a request that asks what a shipment would cost.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, zone: str, weight_grams: int, code: str='') -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Raise unless the quote can be worked out."
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "error_body",
+        "signature": "(error: depot.core.errors.DepotError) -> dict[str, str]",
+        "decorators": [],
+        "docstring": "Build the body the API returns for an error the depot raised."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.mappers",
+    "module_docstring": "Translation between order records and the shapes the API exchanges.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.mappers.order_line_mapper",
+    "module_docstring": "Translation between order lines and the shapes the API exchanges.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.models.order_line_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(line: depot.orders.models.order_line_models.OrderLine) -> dict[str, object]",
+        "decorators": [],
+        "docstring": "Build the body a line endpoint returns for one parcel."
+      },
+      {
+        "name": "to_shelf_label",
+        "signature": "(line: depot.orders.models.order_line_models.OrderLine) -> str",
+        "decorators": [],
+        "docstring": "Build the text the shelf label carries for one parcel."
+      },
+      {
+        "name": "normalise_request",
+        "signature": "(lines: list[dict[str, object]]) -> list[dict[str, object]]",
+        "decorators": [],
+        "docstring": "Check the parcels of an incoming order and return them in canonical form.\n\nA client that leaves out a field expects the depot to know what it meant,\nand it does not \u2014 a missing weight is refused here rather than guessed, so\nthat no parcel reaches the shelf with a made-up price band."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.mappers.order_mapper",
+    "module_docstring": "Translation between order headers and the shapes the API exchanges.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.models.order_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(order: depot.orders.models.order_models.Order) -> dict[str, object]",
+        "decorators": [],
+        "docstring": "Build the body an order endpoint returns for one header."
+      },
+      {
+        "name": "to_board_line",
+        "signature": "(order: depot.orders.models.order_models.Order) -> str",
+        "decorators": [],
+        "docstring": "Build the single line the dispatch board prints for an order."
+      },
+      {
+        "name": "check_zone",
+        "signature": "(zone: str) -> str",
+        "decorators": [],
+        "docstring": "Return a destination zone in the form the depot files it under."
+      },
+      {
+        "name": "next_states",
+        "signature": "(order: depot.orders.models.order_models.Order) -> list[str]",
+        "decorators": [],
+        "docstring": "List the states the counter may still move an order to."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.models",
+    "module_docstring": "Records the orders context keeps.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.models.discount_models",
+    "module_docstring": "Discount codes the depot honours on shipment orders.\n\nA code is worth a percentage, never a fixed sum: the depot settles with the\ncarrier on the list price and keeps the difference, so a fixed discount on a\ncheap zone could turn a shipment into a loss.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "Discount",
+        "bases": [],
+        "decorators": [],
+        "docstring": "A discount code together with the conditions it holds under.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, code: str, percent: int, min_subtotal_cents: int=0, zones: frozenset[str]=frozenset()) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "applies_to",
+            "signature": "(self, subtotal_cents: int, zone: str) -> bool",
+            "decorators": [],
+            "docstring": "Report whether this code may be used on that order."
+          },
+          {
+            "name": "cut_cents",
+            "signature": "(self, subtotal_cents: int) -> int",
+            "decorators": [],
+            "docstring": "Report how much this code takes off a subtotal, rounded down."
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "house_codes",
+        "signature": "() -> list[Discount]",
+        "decorators": [],
+        "docstring": "Build the codes the depot itself hands out at the counter."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.models.order_line_models",
+    "module_docstring": "The single parcels an order consists of.\n\nOne line is one physical parcel: what is in it, what it weighs, what it costs.\nThe weight decides the price band, so it is checked here and not left to the\ncounter software.",
+    "imports": [
+      {
+        "module": "sqlalchemy.orm",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "OrderLine",
+        "bases": [],
+        "decorators": [],
+        "docstring": "One parcel of an order.",
+        "methods": [
+          {
+            "name": "check",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Raise unless the parcel is one the depot may accept."
+          },
+          {
+            "name": "total_cents",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report what the whole line costs."
+          },
+          {
+            "name": "total_weight_grams",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report what the whole line weighs."
+          },
+          {
+            "name": "needs_two_hands",
+            "signature": "(self) -> bool",
+            "decorators": [],
+            "docstring": "Report whether a single parcel of this line is a two-person lift."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.models.order_line_view_models",
+    "module_docstring": "Read models behind the packing list and the shelf labels.\n\nWhat the packer carries through the hall is a sheet per order: one row per\nparcel, with the shelf slot, the handling marks and a check digit that the\nscanner compares against the barcode. The rows are built once when an order is\nreleased to the hall and are not touched again \u2014 a packer walking the aisles\nmust see exactly what was printed, even if the order changes behind them.",
+    "imports": [
+      {
+        "module": "sqlalchemy.orm",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "PackingListRow",
+        "bases": [],
+        "decorators": [],
+        "docstring": "One printed row of a packing list.",
+        "methods": [
+          {
+            "name": "marks",
+            "signature": "(self) -> list[str]",
+            "decorators": [],
+            "docstring": "List the handling marks printed next to the description."
+          },
+          {
+            "name": "is_fragile",
+            "signature": "(self) -> bool",
+            "decorators": [],
+            "docstring": "Report whether the packer has to reach for the padded sleeve."
+          },
+          {
+            "name": "check_digit",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Compute the digit the scanner compares against the barcode."
+          },
+          {
+            "name": "barcode",
+            "signature": "(self) -> str",
+            "decorators": [],
+            "docstring": "Build the string the barcode on this row encodes."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.models.order_models",
+    "module_docstring": "Shipment orders placed at the depot counter.\n\nAn order is the header: who is sending, where it goes, what it costs and how\nfar it has got. The parcels themselves are the lines. The header carries the\ncounted totals of its lines because the dispatch board reads them on every\nrefresh and the join was too slow for that.",
+    "imports": [
+      {
+        "module": "sqlalchemy.orm",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "Order",
+        "bases": [],
+        "decorators": [],
+        "docstring": "A shipment order and everything the counter decided about it.",
+        "methods": [
+          {
+            "name": "move_to",
+            "signature": "(self, status: str) -> None",
+            "decorators": [],
+            "docstring": "Advance the order, refusing a step the flow does not allow."
+          },
+          {
+            "name": "place",
+            "signature": "(self, placed_at: float) -> None",
+            "decorators": [],
+            "docstring": "Hand the order over to dispatch."
+          },
+          {
+            "name": "cancel",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": "Withdraw the order before it has left the depot."
+          },
+          {
+            "name": "is_open",
+            "signature": "(self) -> bool",
+            "decorators": [],
+            "docstring": "Report whether the depot still owes the customer something."
+          },
+          {
+            "name": "add_line_total",
+            "signature": "(self, amount_cents: int) -> None",
+            "decorators": [],
+            "docstring": "Book one more parcel and its share of the price onto the header."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.models.order_view_models",
+    "module_docstring": "Read models behind the dispatch board.\n\nThe board on the wall of the sorting hall shows one row per order that has not\nleft yet: where it goes, how many parcels are on the shelf for it and how long\nit has been waiting. The rows are rebuilt whenever an order changes state, and\nthe board reads nothing else \u2014 the hall has no time to wait for a join across\nfour tables while a van is at the ramp.",
+    "imports": [
+      {
+        "module": "sqlalchemy.orm",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "OrderBoardRow",
+        "bases": [],
+        "decorators": [],
+        "docstring": "One line of the dispatch board in the sorting hall.",
+        "methods": [
+          {
+            "name": "waited_seconds",
+            "signature": "(self, now_epoch: float) -> float",
+            "decorators": [],
+            "docstring": "Report how long this order has been waiting for a van."
+          },
+          {
+            "name": "is_urgent",
+            "signature": "(self, now_epoch: float) -> bool",
+            "decorators": [],
+            "docstring": "Report whether the board should show this row in red."
+          },
+          {
+            "name": "sort_key",
+            "signature": "(self, now_epoch: float) -> tuple[int, float]",
+            "decorators": [],
+            "docstring": "Build the key the board sorts by: urgent first, longest waiting first."
+          },
+          {
+            "name": "label",
+            "signature": "(self) -> str",
+            "decorators": [],
+            "docstring": "Build the text the board prints in the destination column."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.repository",
+    "module_docstring": "Storage of the order records.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.repository.legacy_order_index",
+    "module_docstring": "Index of the order numbers the depot's previous counter software issued.\n\nKept for the length of the migration window: customers still call about\nshipments booked before the switch, and the counter has to find them by the old\nnumber. The index is loaded once from the export file and never written to\nagain.",
+    "imports": [],
+    "classes": [
+      {
+        "name": "LegacyOrderIndex",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Resolves a pre-migration order number to the reference it became.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "load_line",
+            "signature": "(self, line: str) -> bool",
+            "decorators": [],
+            "docstring": "Take one line of the export file and report whether it was usable.\n\nA line is ``<old number>;<new reference>``. The export was written by a\nsystem that padded its columns, so both halves are stripped first."
+          },
+          {
+            "name": "looks_legacy",
+            "signature": "(self, old_number: str) -> bool",
+            "decorators": [],
+            "docstring": "Report whether a string has the shape of an old order number."
+          },
+          {
+            "name": "resolve",
+            "signature": "(self, old_number: str) -> str | None",
+            "decorators": [],
+            "docstring": "Return the reference an old number became, or None if unknown."
+          },
+          {
+            "name": "size",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report how many old numbers the index holds."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.repository.order_line_repo",
+    "module_docstring": "Storage of the order lines \u2014 one row per physical parcel.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.models.order_line_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "OrderLineRepository",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Reads and writes the parcels of an order.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, ids: depot.core.ports.IdGenerator) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "add",
+            "signature": "(self, order_reference: str, description: str, weight_grams: int, quantity: int, unit_price_cents: int, fragile: bool=False) -> str",
+            "decorators": [],
+            "docstring": "File one parcel of an order and return its line reference."
+          },
+          {
+            "name": "get",
+            "signature": "(self, reference: str) -> OrderLineRecord | None",
+            "decorators": [],
+            "docstring": "Return one line, or None if the reference is unknown."
+          },
+          {
+            "name": "of_order",
+            "signature": "(self, order_reference: str) -> list[OrderLineRecord]",
+            "decorators": [],
+            "docstring": "List the parcels of an order, in the order they were handed in."
+          },
+          {
+            "name": "drop",
+            "signature": "(self, reference: str) -> bool",
+            "decorators": [],
+            "docstring": "Take a parcel back off an order before it was placed."
+          },
+          {
+            "name": "subtotal_cents",
+            "signature": "(self, order_reference: str) -> int",
+            "decorators": [],
+            "docstring": "Report what the parcels of an order come to before any discount."
+          },
+          {
+            "name": "weight_grams",
+            "signature": "(self, order_reference: str) -> int",
+            "decorators": [],
+            "docstring": "Report what the parcels of an order weigh together."
+          },
+          {
+            "name": "two_hand_lines",
+            "signature": "(self, order_reference: str) -> list[str]",
+            "decorators": [],
+            "docstring": "List the parcels of an order that are a two-person lift."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.repository.order_query",
+    "module_docstring": "Read side of the orders storage: what a discount code is worth.\n\nThe counter asks this before it prints a quote, so the answer has to come from\none lookup. The codes themselves are held in memory and reloaded when the\nmarketing list changes.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.models.discount_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "OrderQuery",
+        "bases": [
+          "depot.core.ports.DiscountCatalog"
+        ],
+        "decorators": [],
+        "docstring": "Answers the discount questions the counter and the services ask.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "percent_for",
+            "signature": "(self, code: str, subtotal_cents: int) -> int",
+            "decorators": [],
+            "docstring": "Report the percentage a code takes off a subtotal, 0 if it does not."
+          },
+          {
+            "name": "cut_cents",
+            "signature": "(self, code: str, subtotal_cents: int, zone: str) -> int",
+            "decorators": [],
+            "docstring": "Report what a code takes off a subtotal in a given zone."
+          },
+          {
+            "name": "find",
+            "signature": "(self, code: str) -> DiscountRecord | None",
+            "decorators": [],
+            "docstring": "Return one discount code, or None if the depot does not honour it."
+          },
+          {
+            "name": "codes_for_zone",
+            "signature": "(self, zone: str) -> list[str]",
+            "decorators": [],
+            "docstring": "List the codes that can be used on shipments into a zone."
+          },
+          {
+            "name": "reload",
+            "signature": "(self, discounts: list[DiscountRecord]) -> int",
+            "decorators": [],
+            "docstring": "Replace the code list and report how many codes are now honoured."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.repository.order_repo",
+    "module_docstring": "Storage of the order headers.\n\nThe repository mints the order reference before the first write, because the\ncounter prints it on the acceptance slip while the customer is still standing\nthere.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.models.order_models",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "OrderRepository",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Reads and writes the order headers.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, ids: depot.core.ports.IdGenerator) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "create",
+            "signature": "(self, customer_reference: str, destination_zone: str) -> str",
+            "decorators": [],
+            "docstring": "Open a draft order and return the reference it was filed under."
+          },
+          {
+            "name": "get",
+            "signature": "(self, reference: str) -> OrderRecord | None",
+            "decorators": [],
+            "docstring": "Return the order filed under a reference, or None."
+          },
+          {
+            "name": "place",
+            "signature": "(self, reference: str, placed_at: float) -> bool",
+            "decorators": [],
+            "docstring": "Hand an order over to dispatch; report whether it was there.\n\nWhat follows from a placed order \u2014 the dispatch manifest, telling the\ncustomer, the invoice \u2014 happens above this layer."
+          },
+          {
+            "name": "cancel",
+            "signature": "(self, reference: str) -> bool",
+            "decorators": [],
+            "docstring": "Withdraw an order; report whether the reference was known."
+          },
+          {
+            "name": "book_line",
+            "signature": "(self, reference: str, amount_cents: int) -> bool",
+            "decorators": [],
+            "docstring": "Book one parcel onto the header totals."
+          },
+          {
+            "name": "open_of_customer",
+            "signature": "(self, customer_reference: str) -> list[str]",
+            "decorators": [],
+            "docstring": "List the references a customer still has running."
+          },
+          {
+            "name": "count",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Report how many orders are on file."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.services",
+    "module_docstring": "Use cases of the orders context.\n\nThe pricing sub-package is wired here rather than in each service, so that the\nwhole context quotes with one and the same handling percentage. Everything the\nservices need from it goes through the two functions below.",
+    "imports": [
+      {
+        "module": "depot.orders.services.pricing.engine",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "quote_parcel_cents",
+        "signature": "(weight_grams: int, fragile: bool, two_hands: bool) -> int",
+        "decorators": [],
+        "docstring": "Quote one parcel with the settings this context prices on."
+      },
+      {
+        "name": "weight_band",
+        "signature": "(weight_grams: int) -> int",
+        "decorators": [],
+        "docstring": "Report the weight band a parcel falls into, counting from zero."
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.services.catalog_service",
+    "module_docstring": "What a shipment costs before it is booked.\n\nThe counter quotes from two sources: the carrier tariff, which the depot does\nnot own and asks for through a port, and the discount codes it honours itself.\nBoth are read-only \u2014 a quote writes nothing.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.repository.order_query",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "CatalogService",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Answers what a shipment into a zone would cost.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, discounts: depot.orders.repository.order_query.OrderQuery) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "quote_cents",
+            "signature": "(self, zone: str, weight_grams: int, rates: depot.core.ports.RateProvider) -> int",
+            "decorators": [],
+            "docstring": "Quote one parcel at the carrier tariff, before any discount."
+          },
+          {
+            "name": "net_cents",
+            "signature": "(self, zone: str, subtotal_cents: int, code: str) -> int",
+            "decorators": [],
+            "docstring": "Report what is left of a subtotal after a discount code."
+          },
+          {
+            "name": "offers_for",
+            "signature": "(self, zone: str) -> list[str]",
+            "decorators": [],
+            "docstring": "List the discount codes a shipment into a zone can use."
+          },
+          {
+            "name": "honours",
+            "signature": "(self, code: str) -> bool",
+            "decorators": [],
+            "docstring": "Report whether the depot honours a code at all."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.services.checkout_service",
+    "module_docstring": "Hand-over of the parcels at the counter.\n\nCheckout is the moment the customer lets go of the parcels: every line is\nweighed and checked, the depot reserves a shelf slot for the lot, and from then\non the parcels are the depot's problem. Nothing here talks to money \u2014 what the\nshipment costs was settled on the quote.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.repository.order_line_repo",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "CheckoutService",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Takes the parcels of an order over the counter.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, lines: depot.orders.repository.order_line_repo.OrderLineRepository, shelves: depot.core.ports.ShelfAllocator) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "hand_over",
+            "signature": "(self, order_reference: str, depot_code: str) -> str",
+            "decorators": [],
+            "docstring": "Take an order over the counter and return the shelf slot it went to.\n\nAn order without a parcel gets no slot: there is nothing to put away,\nand a reserved slot nobody fills blocks the aisle for the rest of the\nshift."
+          },
+          {
+            "name": "slot_of",
+            "signature": "(self, order_reference: str) -> str | None",
+            "decorators": [],
+            "docstring": "Return the shelf slot an order was put away in, or None."
+          },
+          {
+            "name": "take_back",
+            "signature": "(self, order_reference: str) -> bool",
+            "decorators": [],
+            "docstring": "Give the parcels back and free the slot; report whether it existed."
+          },
+          {
+            "name": "two_hand_warning",
+            "signature": "(self, order_reference: str) -> list[str]",
+            "decorators": [],
+            "docstring": "List the parcels the packer must not lift alone."
+          },
+          {
+            "name": "handed_weight_grams",
+            "signature": "(self, order_reference: str) -> int",
+            "decorators": [],
+            "docstring": "Report what the depot just took over, in grams."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.services.order_service",
+    "module_docstring": "Order use cases of the depot counter.\n\nPlacing an order is the one operation that crosses a context boundary: the\ndepot refuses a shipment from a customer who may not collect, so the customer\nside is asked before anything is written. The dispatch manifest is filed\nthrough the adapter facade.",
+    "imports": [
+      {
+        "module": "depot.core.adapters.storage",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.identity.services.customer_service",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.repository.order_repo",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "OrderService",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Drives the order side of the counter.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, orders: depot.orders.repository.order_repo.OrderRepository, customers: depot.identity.services.customer_service.CustomerService, notifier: depot.core.ports.NotificationSender, documents: depot.core.adapters.storage.ParcelDocumentStore) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "open_order",
+            "signature": "(self, customer_reference: str, destination_zone: str) -> str",
+            "decorators": [],
+            "docstring": "Open a draft order for a customer the depot still serves.\n\nAn unknown or blocked customer is answered with an empty reference\nrather than an error: the API turns that into the status code, and this\nlayer has no business knowing which one."
+          },
+          {
+            "name": "fetch",
+            "signature": "(self, reference: str) -> depot.orders.repository.order_repo.OrderRecord | None",
+            "decorators": [],
+            "docstring": "Return the order filed under a reference, or None."
+          },
+          {
+            "name": "place",
+            "signature": "(self, reference: str, placed_at: float) -> bool",
+            "decorators": [],
+            "docstring": "Hand an order over to dispatch and tell the customer."
+          },
+          {
+            "name": "cancel",
+            "signature": "(self, reference: str) -> bool",
+            "decorators": [],
+            "docstring": "Withdraw an order and tell the customer."
+          },
+          {
+            "name": "file_dispatch_manifest",
+            "signature": "(self, reference: str, day: str, manifest: bytes) -> str",
+            "decorators": [],
+            "docstring": "Store the manifest the van driver signs and return its key."
+          },
+          {
+            "name": "dispatch_manifest",
+            "signature": "(self, reference: str, day: str) -> bytes | None",
+            "decorators": [],
+            "docstring": "Return a filed dispatch manifest, or None if there is none."
+          },
+          {
+            "name": "open_orders_of",
+            "signature": "(self, customer_reference: str) -> list[str]",
+            "decorators": [],
+            "docstring": "List the orders a customer still has running."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.services.pricing",
+    "module_docstring": "Price calculation for shipment orders.",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.services.pricing.engine",
+    "module_docstring": "Price calculation for a shipment.\n\nWhat the carrier charges is one thing; what the depot charges is that plus the\nhandling it does itself. This module owns the second part: the weight bands,\nthe surcharges the counter can see on the quote, and the rounding rule. It\ndeliberately knows nothing about orders, storage or carriers.",
+    "imports": [
+      {
+        "module": "depot.core.errors",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "PricingEngine",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Turns weight and handling into the price the counter quotes.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, handling_percent: int=0) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "band_of",
+            "signature": "(self, weight_grams: int) -> int",
+            "decorators": [],
+            "docstring": "Report which weight band a parcel falls into, counting from zero."
+          },
+          {
+            "name": "base_cents",
+            "signature": "(self, weight_grams: int) -> int",
+            "decorators": [],
+            "docstring": "Report the price of the band a parcel falls into."
+          },
+          {
+            "name": "quote_cents",
+            "signature": "(self, weight_grams: int, fragile: bool, two_hands: bool) -> int",
+            "decorators": [],
+            "docstring": "Quote one parcel, surcharges and handling included."
+          },
+          {
+            "name": "round_up",
+            "signature": "(self, amount_cents: int) -> int",
+            "decorators": [],
+            "docstring": "Round a price up to the step the price list is printed in."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.services.refund_service",
+    "module_docstring": "Money back for a shipment the depot did not carry out.\n\nA refund is only ever due on a cancelled order, and only for what was actually\ntaken. The money itself moves outside the depot; this service decides the\namount and hands it to the gateway.",
+    "imports": [
+      {
+        "module": "depot.core.ports",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      },
+      {
+        "module": "depot.orders.repository.order_repo",
+        "relative_level": 0,
+        "names": [],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "RefundService",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Works out and triggers the refunds of cancelled orders.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, orders: depot.orders.repository.order_repo.OrderRepository) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "refund",
+            "signature": "(self, reference: str, payment_reference: str, gateway: depot.core.ports.PaymentGateway) -> str",
+            "decorators": [],
+            "docstring": "Refund a cancelled order and return the gateway's receipt.\n\nAn order that is not cancelled, or one that owes nothing, gets no\nreceipt \u2014 an empty string tells the caller nothing moved."
+          },
+          {
+            "name": "refundable_cents",
+            "signature": "(self, reference: str) -> int",
+            "decorators": [],
+            "docstring": "Report what the depot owes back on an order, fee deducted."
+          },
+          {
+            "name": "fee_cents",
+            "signature": "(self, reference: str) -> int",
+            "decorators": [],
+            "docstring": "Report the fee the depot keeps for a cancellation."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  }
+]

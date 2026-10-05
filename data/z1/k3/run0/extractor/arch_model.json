@@ -1,0 +1,63 @@
+{
+  "components": [
+    {
+      "id": "Presentation",
+      "name": "Presentation",
+      "kind": "component",
+      "description": "HTTP handlers for browsing/searching the catalog and checkout flow.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "Application",
+      "name": "Application",
+      "kind": "component",
+      "description": "Use-case services that orchestrate domain logic with infrastructure adapters.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "Domain",
+      "name": "Domain",
+      "kind": "component",
+      "description": "Core business model including books, orders, pricing rules, and catalog aggregate.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "Infrastructure",
+      "name": "Infrastructure",
+      "kind": "component",
+      "description": "In-memory persistence adapters for books and orders, and a fake payment gateway.",
+      "role": null,
+      "contained_modules": []
+    }
+  ],
+  "relations": [
+    {
+      "from": "Presentation",
+      "to": "Application",
+      "kind": "depends_on"
+    },
+    {
+      "from": "Presentation",
+      "to": "Domain",
+      "kind": "depends_on"
+    },
+    {
+      "from": "Application",
+      "to": "Domain",
+      "kind": "depends_on"
+    },
+    {
+      "from": "Application",
+      "to": "Infrastructure",
+      "kind": "depends_on"
+    },
+    {
+      "from": "Infrastructure",
+      "to": "Domain",
+      "kind": "depends_on"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "id": "chatcmpl-270be01d-0389-44a8-88ae-a4b1290feaca",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"components\": [\n    {\n      \"description\": \"HTTP handlers for browsing/searching the catalog and processing checkout requests.\",\n      \"id\": \"api\",\n      \"name\": \"API\",\n      \"contained_modules:\": [\n        \"bookshop\",\n        \"bookshop.api\",\n        \"bookshop.api.catalog_routes\",\n        \"bookshop.api.checkout_routes\"\n      ]\n    },\n    {\n      \"description\": \"Use\u2011case services that orchestrate domain logic with infrastructure adapters.\",\n      \"id\": \"application\",\n      \"name\": \"Application\",\n      \"contained_modules:\": [\n        \"bookshop.application\",\n        \"bookshop.application.checkout\",\n        \"bookshop.application.inventory\"\n      ]\n    },\n    {\n      \"description\": \"Pure domain model: entities, aggregates, and pricing rules.\",\n      \"id\": \"domain\",\n      \"name\": \"Domain\",\n      \"contained_modules:\": [\n        \"bookshop.domain\",\n        \"bookshop.domain.book\",\n        \"bookshop.domain.catalog\",\n        \"bookshop.domain.order\",\n        \"bookshop.domain.pricing\"\n      ]\n    },\n    {\n      \"description\": \"In\u2011memory persistence adapters and external service stubs.\",\n      \"id\": \"infrastructure\",\n      \"name\": \"Infrastructure\",\n      \"contained_modules:\": [\n        \"bookshop.infrastructure\",\n        \"bookshop.infrastructure.book_repository\",\n        \"bookshop.infrastructure.order_repository\",\n        \"bookshop.infrastructure.payment_gateway\"\n      ]\n    }\n  ],\n  \"relations\": [\n    { \"from\": \"API\", \"to\": \"Application\" },\n    { \"from\": \"API\", \"to\": \"Domain\" },\n    { \"from\": \"Application\", \"to\": \"Domain\" },\n    { \"from\": \"Application\", \"to\": \"Infrastructure\" },\n    { \"from\": \"Infrastructure\", \"to\": \"Domain\" }\n  ]\n}",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning_content": "We need to produce an abstracted architecture: group modules into components, each component has contained_modules (list of exact module names). Then relations: for each import from a module in component A to a module in component B, we add a relation from A to B (deduplicated). Must follow Ilograph format: JSON with components list, each component has name, description? The schema not given but we can infer typical: components: [{name, description?, contained_modules: [...]}]; relations: [{from: componentName, to: componentName}]. We need to infer component roles from names and docstrings.\n\nWe have modules: top-level bookshop, bookshop.api, bookshop.api.catalog_routes, bookshop.api.checkout_routes, bookshop.application, bookshop.application.checkout, bookshop.application.inventory, bookshop.domain, bookshop.domain.book, bookshop.domain.catalog, bookshop.domain.order, bookshop.domain.pricing, bookshop.infrastructure, bookshop.infrastructure.book_repository, bookshop.infrastructure.order_repository, bookshop.infrastructure.payment_gateway.\n\nWe need to group into a small number of meaningful components. Likely layers: API (presentation), Application (use cases), Domain (model), Infrastructure (persistence/adapters). Also maybe separate subcomponents like catalog vs order? But we need small number.\n\nWe could have components: \"API\", \"Application\", \"Domain\", \"Infrastructure\". Each contains modules accordingly.\n\nCheck imports: API modules import from application and domain. Application modules import from domain and infrastructure. Domain modules import from domain (internal) and maybe from stdlib (ignore). Infrastructure modules import from domain.\n\nThus relations: API -> Application, API -> Domain. Application -> Domain, Application -> Infrastructure. Domain -> (maybe none). Infrastructure -> Domain.\n\nWe must ensure each module belongs to exactly one component.\n\nList modules per component:\n\nAPI component: bookshop.api, bookshop.api.catalog_routes, bookshop.api.checkout_routes (maybe also bookshop? but bookshop is top-level package with docstring; could be part of API or maybe a root component? It has no imports, just docstring. Could be considered part of API as it's the package root. But we can include it in API component.\n\nApplication component: bookshop.application, bookshop.application.checkout, bookshop.application.inventory.\n\nDomain component: bookshop.domain, bookshop.domain.book, bookshop.domain.catalog, bookshop.domain.order, bookshop.domain.pricing.\n\nInfrastructure component: bookshop.infrastructure, bookshop.infrastructure.book_repository, bookshop.infrastructure.order_repository, bookshop.infrastructure.payment_gateway.\n\nCheck that all modules are covered: yes.\n\nNow compute relations based on imports:\n\nWe'll examine each module's imports and map to component relations.\n\nWe'll ignore stdlib imports (dataclasses, enum) as they are external.\n\nWe'll list imports per module:\n\n- bookshop: none.\n\n- bookshop.api: none.\n\n- bookshop.api.catalog_routes: imports bookshop.application.inventory (InventoryService) and bookshop.domain.book (Genre). So from API component to Application component (via inventory) and API to Domain (via book).\n\n- bookshop.api.checkout_routes: imports bookshop.application.checkout (CheckoutService) and bookshop.domain.order (EmptyOrderError, Order). So API -> Application, API -> Domain.\n\n- bookshop.application: none.\n\n- bookshop.application.checkout: imports bookshop.domain (pricing) (module), bookshop.domain.order (EmptyOrderError, Order, OrderStatus), bookshop.infrastructure.order_repository (InMemoryOrderRepository), bookshop.infrastructure.payment_gateway (FakePaymentGateway). So Application -> Domain (pricing, order), Application -> Infrastructure (order_repository, payment_gateway).\n\n- bookshop.application.inventory: imports bookshop.domain.book (Book, Genre) and bookshop.infrastructure.book_repository (InMemoryBookRepository). So Application -> Domain (book), Application -> Infrastructure (book_repository).\n\n- bookshop.domain: none.\n\n- bookshop.domain.book: imports dataclasses, enum (stdlib) ignore. No project imports.\n\n- bookshop.domain.catalog: imports bookshop.domain.book (Book, Genre). So Domain -> Domain (internal). Since same component, we don't need relation (component-level relation only for different components). So ignore.\n\n- bookshop.domain.order: imports dataclasses, enum (stdlib), bookshop.domain.book (Book). So Domain -> Domain (internal). ignore.\n\n- bookshop.domain.pricing: imports bookshop.domain.order (Order). Domain -> Domain internal.\n\n- bookshop.infrastructure: none.\n\n- bookshop.infrastructure.book_repository: imports bookshop.domain.book (Book) and bookshop.domain.catalog (Catalog). So Infrastructure -> Domain (both).\n\n- bookshop.infrastructure.order_repository: imports bookshop.domain.order (Order). Infrastructure -> Domain.\n\n- bookshop.infrastructure.payment_gateway: no imports.\n\nThus component-level relations:\n\nAPI -> Application\nAPI -> Domain\nApplication -> Domain\nApplication -> Infrastructure\nInfrastructure -> Domain\n\nAlso note: API -> Application via both catalog_routes and checkout_routes; deduplicate.\n\nApplication -> Infrastructure via checkout and inventory.\n\nNow we need to output JSON. Need to follow Ilograph format rules: each component has name, description?, contained_modules. Possibly also \"type\"? Not sure. We'll assume schema: { \"components\": [ { \"name\": string, \"description\": string?, \"contained_modules\": [string] } ], \"relations\": [ { \"from\": string, \"to\": string } ] }.\n\nWe'll provide description inferred from module docstrings: For API component: description: \"HTTP handlers for browsing/searching catalog and checkout flow.\" For Application: \"Use-case services orchestrating domain and infrastructure.\" For Domain: \"Pure domain model with entities, aggregates, and pricing rules.\" For Infrastructure: \"In-memory persistence adapters and external service stubs.\"\n\nNow produce JSON.\n\nCheck that we didn't miss any modules: bookshop (top-level) included in API component. bookshop.api included. bookshop.application included. bookshop.domain included. bookshop.infrastructure included.\n\nAll good.\n\nNow produce final answer."
+      }
+    }
+  ],
+  "created": 1788186008,
+  "model": "nvidia-nemotron-3-super-120b",
+  "object": "chat.completion",
+  "metadata": null,
+  "moderation": null,
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1698,
+    "prompt_tokens": 4455,
+    "total_tokens": 6153,
+    "completion_tokens_details": null,
+    "compute_units": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cache_write_tokens": null,
+      "cached_tokens": 3456,
+      "image_tokens": null,
+      "text_tokens": null
+    },
+    "cache_created_input_tokens": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 3456,
+    "speed": null
+  }
+}

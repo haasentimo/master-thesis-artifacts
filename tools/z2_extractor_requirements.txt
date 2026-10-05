@@ -1,0 +1,62 @@
+# z2_extractor_requirements.txt — gepinnte Laufzeit fuer die Faktenextraktion der
+# zweiten B1-Eingabe (Z2-Protokoll §3a-2, `input_facts.json`).
+#
+# Erzeugt am 02.09.2026, Auftrag S2a, aus `~/ma/venv-extractor/bin/pip freeze`.
+# Venv: ~/ma/venv-extractor (ausserhalb aller Repositorien), Python 3.12.3.
+# Aufrufform: PYTHONPATH=~/ma/ma-llm-arch-extractor/src ~/ma/venv-extractor/bin/python …
+# Das Extractor-Paket selbst ist NICHT installiert (kein `pip install -e .`), damit
+# kein `*.egg-info` in das Messgegenstands-Repo geschrieben wird.
+#
+# DIES IST EINE REKONSTRUKTION. Die am 31.08.2026 fuer die Z1-Laeufe verwendete
+# Umgebung ist in keinem Artefakt lokalisiert und damit NICHT BEZEUGT. Die Pins unten
+# sind aus zwei Quellen erschlossen:
+#
+#   (a) data/z1/k2/run0/run_manifest.json, Feld `vorbedingungen.environment`:
+#         python 3.12.3 · pydantic 2.13.5 · openai 3.6.0
+#       -> pydantic==2.13.5 und openai==3.6.0 sind hieraus GEPINNT.
+#   (b) ~/ma/ma-llm-arch-extractor/pyproject.toml @ 5c0b65a, `dependencies`:
+#         pydantic>=2.0, ruamel.yaml>=0.18, openai>=1.0, typer>=0.12
+#       -> nur Untergrenzen, keine exakten Versionen.
+#   (c) Lockfile (requirements*.txt / uv.lock / poetry.lock / requirements.lock):
+#       EXISTIERT NICHT im Extractor-Repo (`git ls-files | grep -iE 'requirement|lock'`
+#       ohne Treffer, `find` ohne Treffer). Die vorrangige Quelle fehlt also.
+#
+# NICHT GEPINNT — von pip am 02.09.2026 aufgeloest, keine Quelle nennt eine Version:
+#   ruamel.yaml, typer sowie saemtliche transitiven Abhaengigkeiten
+#   (annotated-doc, annotated-types, anyio, h11, httpcore2, httpx2, idna, jiter,
+#    markdown-it-py, mdurl, pydantic_core, Pygments, rich, shellingham, sniffio,
+#    truststore, typing-inspection, typing_extensions).
+# Die `dev`-Extras aus pyproject.toml (pytest>=8.0, tiktoken>=0.7) sind NICHT
+# installiert — sie sind keine Laufzeitabhaengigkeit der Faktenextraktion.
+#
+# VALIDIERUNG (Tor aus S2a-D, 02.09.2026): diese Umgebung erzeugt auf
+# `fixtures/rich_repo` eine BYTEGLEICHE `input_facts.json` zu beiden archivierten
+# Kopien (`data/z1/k2/run0/…` und `data/z1/k2_trunkiert/run0/…`):
+#   17 048 B, SHA256 f8976558e498fb374f9ce63c1ec9bfb522a3ceb156ba1e421aeeea79b42afdae,
+#   16 Faktenrecords, `cmp` beidseitig Exit 0.
+# Belegt ist damit die AEQUIVALENZ FUER DIE FAKTENEXTRAKTION, nicht die Identitaet
+# der am 31.08.2026 verwendeten Umgebung.
+#
+# --- ab hier woertlich `pip freeze`, 02.09.2026 ---------------------------------
+annotated-doc==0.0.5
+annotated-types==0.8.0
+anyio==4.14.2
+h11==0.16.0
+httpcore2==2.12.0
+httpx2==2.12.0
+idna==3.19
+jiter==0.16.0
+markdown-it-py==4.2.0
+mdurl==0.1.2
+openai==3.6.0
+pydantic==2.13.5
+pydantic_core==2.46.5
+Pygments==2.21.0
+rich==15.0.0
+ruamel.yaml==0.19.1
+shellingham==1.5.4
+sniffio==1.3.1
+truststore==0.10.4
+typer==0.27.2
+typing-inspection==0.4.4
+typing_extensions==4.16.0

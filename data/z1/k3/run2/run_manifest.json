@@ -1,0 +1,201 @@
+{
+  "base_url_profil": "https://inference.do-ai.run/v1",
+  "bedingung": "K3",
+  "externe_wanduhrzeit_s": {
+    "hinweis": "Invocation gemessen (monotone Uhr, §6.3); der Laufwert ist aus den Fortschrittszeilen des Kindprozesses abgeleitet. latency_ms in meta.json ist der Innenwert.",
+    "invocation_gemessen": 911.881,
+    "lauf_abgeleitet": 211.766
+  },
+  "extractor_run_dir": "20260831T142751_r2",
+  "invocation": {
+    "argv": [
+      "-m",
+      "llm_arch.cli",
+      "extract",
+      "fixtures/rich_repo",
+      "--provider",
+      "digitalocean",
+      "--model",
+      "nvidia-nemotron-3-super-120b",
+      "--runs",
+      "3"
+    ],
+    "cwd": "/home/haasentimo/ma/ma-llm-arch-extractor",
+    "external_wall_s_invocation": 911.881,
+    "external_wall_s_per_run": {
+      "run0": 403.228,
+      "run1": 296.061,
+      "run2": 211.766
+    },
+    "finished_utc": "2026-08-31T14:27:51.959368+00:00",
+    "new_run_dirs": [
+      "20260831T142007_r0",
+      "20260831T142439_r1",
+      "20260831T142751_r2"
+    ],
+    "returncode": 0,
+    "stalled": false,
+    "started_utc": "2026-08-31T14:13:56.778993+00:00"
+  },
+  "modell": "nvidia-nemotron-3-super-120b",
+  "profil": "digitalocean",
+  "schema": "z1-run-manifest/1",
+  "schema_smoke": {
+    "echo_zeichengleich": true,
+    "external_wall_s": 25.441,
+    "http_status": 200,
+    "model_angefordert": "nvidia-nemotron-3-super-120b",
+    "model_echo": "nvidia-nemotron-3-super-120b",
+    "pydantic": "2.13.5",
+    "schema_sha256_archived": "a83a84af306d647f2d4d9618a39f9b0059431015d3e5234bce931df642012ec0",
+    "system_fingerprint": null
+  },
+  "slot": "run2",
+  "umgebungsparameter": {
+    "hinweis": "seed steht NICHT im Laufrecord (29 Felder ohne ihn, §3.3 (1)); gesendet, aber nicht als wirksam angenommen.",
+    "seed": 0
+  },
+  "verdikt": {
+    "P1": "FEHL",
+    "P2": "OK",
+    "attempts": [
+      {
+        "P1": "FEHL",
+        "P1_problems": [
+          "components[0] (Component): Fremdschlüssel 'contained_modules:'",
+          "components[1] (Component): Fremdschlüssel 'contained_modules:'",
+          "components[2] (Component): Fremdschlüssel 'contained_modules:'",
+          "components[3] (Component): Fremdschlüssel 'contained_modules:'"
+        ],
+        "P2": "OK",
+        "attempt": 0,
+        "decisive": false,
+        "parsed_counts": {
+          "components": 4,
+          "relations": 5
+        },
+        "parsed_source": "re-parse",
+        "raw_counts": {
+          "components": 4,
+          "relations": 5
+        },
+        "raw_response": "data/z1/k3/run2/extractor/attempts/attempt_0/raw_response.json",
+        "reparsed_counts": {
+          "components": 4,
+          "relations": 5
+        }
+      },
+      {
+        "P1": "FEHL",
+        "P1_problems": [
+          "components[0] (Component): Fremdschlüssel 'contained_modules:'",
+          "components[1] (Component): Fremdschlüssel 'contained_modules:'",
+          "components[2] (Component): Fremdschlüssel 'contained_modules:'",
+          "components[3] (Component): Fremdschlüssel 'contained_modules:'"
+        ],
+        "P2": "OK",
+        "attempt": 1,
+        "decisive": false,
+        "parsed_counts": {
+          "components": 4,
+          "relations": 5
+        },
+        "parsed_source": "re-parse",
+        "raw_counts": {
+          "components": 4,
+          "relations": 5
+        },
+        "raw_response": "data/z1/k3/run2/extractor/attempts/attempt_1/raw_response.json",
+        "reparsed_counts": {
+          "components": 4,
+          "relations": 5
+        }
+      },
+      {
+        "P1": "FEHL",
+        "P1_problems": [
+          "components[0] (Component): Fremdschlüssel 'contained_modules:'",
+          "components[1] (Component): Fremdschlüssel 'contained_modules:'",
+          "components[2] (Component): Fremdschlüssel 'contained_modules:'",
+          "components[3] (Component): Fremdschlüssel 'contained_modules:'"
+        ],
+        "P2": "OK",
+        "attempt": 2,
+        "decisive": true,
+        "parsed_counts": {
+          "components": 4,
+          "relations": 5
+        },
+        "parsed_source": "arch_model.json",
+        "raw_counts": {
+          "components": 4,
+          "relations": 5
+        },
+        "raw_response": "data/z1/k3/run2/extractor/attempts/attempt_2/raw_response.json",
+        "reparsed_counts": {
+          "components": 4,
+          "relations": 5
+        }
+      }
+    ],
+    "attempts_used": 3,
+    "gruende": [
+      "valid_final == false nach allen Versuchen (§5.2)",
+      "P1 (Fremdschlüssel) im letzten Versuch: [\"components[0] (Component): Fremdschlüssel 'contained_modules:'\", \"components[1] (Component): Fremdschlüssel 'contained_modules:'\", \"components[2] (Component): Fremdschlüssel 'contained_modules:'\", \"components[3] (Component): Fremdschlüssel 'contained_modules:'\"]"
+    ],
+    "gueltig": false,
+    "provenienz": {
+      "base_url": "https://inference.do-ai.run/v1/",
+      "model": "nvidia-nemotron-3-super-120b",
+      "model_version": "nvidia-nemotron-3-super-120b",
+      "prompt_version": "v3",
+      "provider": "digitalocean",
+      "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+      "repo_path": "fixtures/rich_repo",
+      "run_index": 2,
+      "temperature": 0.0,
+      "timestamp": "2026-08-31T14:27:51.792254+00:00"
+    },
+    "valid_final": false,
+    "valid_raw": false,
+    "zaehler": {
+      "completion_tokens": 870,
+      "component_count": 0,
+      "latency_ms": 55330.45276000121,
+      "module_count": 0,
+      "prompt_tokens": 5793
+    }
+  },
+  "vorbedingungen": {
+    "arch_model_schema": {
+      "archived_sha256": "a83a84af306d647f2d4d9618a39f9b0059431015d3e5234bce931df642012ec0",
+      "wire_matches_registration": "True",
+      "wire_sha256": "1a4cf09cbe22e08dba4ff2d4a4c09234e37131e8d4fab78be654ff7248f70b23"
+    },
+    "checked_utc": "2026-08-31T14:13:34.069650+00:00",
+    "condition": "k3",
+    "environment": {
+      "openai": "3.6.0",
+      "pydantic": "2.13.5",
+      "python": "3.12.3",
+      "registriert_in_protokoll": "python 3.12.3 · pydantic 2.13.5 · openai 3.6.0"
+    },
+    "extractor_head": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+    "extractor_porcelain": "leer",
+    "extractor_root": "/home/haasentimo/ma/ma-llm-arch-extractor",
+    "input_blobs": {
+      "geprueft": "28 von 28 gleich"
+    },
+    "prompt": {
+      "PROMPT_VERSION": "v3",
+      "blob_sha1": "6c8e4639441df6081c6d5bf9bc29b40c04033f61",
+      "blob_sha256": "ed9e1ebd51c6328968ecd7645bd073c4512f99b2512ad75f35f486272f946d46",
+      "file": "src/llm_arch/abstraction/prompt.py"
+    },
+    "thesis_repo": {
+      "check_doc_invariants": "Exit 0",
+      "porcelain_ausserhalb_data_z1": "leer",
+      "porcelain_geduldet_unter_data_z1": []
+    }
+  }
+}

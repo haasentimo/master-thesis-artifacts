@@ -1,0 +1,63 @@
+{
+  "components": [
+    {
+      "id": "api",
+      "name": "API",
+      "kind": "component",
+      "description": "HTTP handlers for browsing/searching the catalog and processing checkout requests.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "application",
+      "name": "Application",
+      "kind": "component",
+      "description": "Use\u2011case services that orchestrate domain logic with infrastructure adapters.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "domain",
+      "name": "Domain",
+      "kind": "component",
+      "description": "Pure domain model: entities, aggregates, and pricing rules.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "infrastructure",
+      "name": "Infrastructure",
+      "kind": "component",
+      "description": "In\u2011memory persistence adapters and external service stubs.",
+      "role": null,
+      "contained_modules": []
+    }
+  ],
+  "relations": [
+    {
+      "from": "api",
+      "to": "application",
+      "kind": "depends_on"
+    },
+    {
+      "from": "api",
+      "to": "domain",
+      "kind": "depends_on"
+    },
+    {
+      "from": "application",
+      "to": "domain",
+      "kind": "depends_on"
+    },
+    {
+      "from": "application",
+      "to": "infrastructure",
+      "kind": "depends_on"
+    },
+    {
+      "from": "infrastructure",
+      "to": "domain",
+      "kind": "depends_on"
+    }
+  ]
+}

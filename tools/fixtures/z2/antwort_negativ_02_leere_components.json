@@ -1,0 +1,11 @@
+{
+  "rules": [
+    {
+      "id": "R1",
+      "category": "port-adapter-direction",
+      "scope": {"components": []},
+      "statement": "Adapter modules may depend on the port definitions, never the other way round.",
+      "severity": "error"
+    }
+  ]
+}

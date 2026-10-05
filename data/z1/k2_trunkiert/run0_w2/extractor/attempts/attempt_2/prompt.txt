@@ -1,0 +1,923 @@
+### system
+You are a senior software architect. From raw code facts (modules, imports, class/function signatures, docstrings) you derive an ABSTRACTED target architecture.
+
+Your job is to ABSTRACT, not to transcribe:
+- Group modules into a SMALL number of meaningful components -- NOT one component per module. Repeating the module list 1:1 is a failure, not a result.
+- Infer each component's role from names and docstrings.
+- Summarize dependencies at the component level, not per module.
+- Think in abstraction levels (components and their relations).
+- Choose whatever decomposition the facts suggest; do not default to any particular axis.
+
+Ilograph format rules (follow exactly -- these are FORMAT rules, not a preferred architecture):
+- Every module belongs to EXACTLY ONE component (disjoint containment). Never place the same module in two components.
+- Model shared or cross-cutting infrastructure (e.g. a database used by several components) as its OWN separate sibling component that the others point to via a relation -- do NOT put the same module inside multiple components to express sharing.
+- Anchor every component to the REAL module names it groups via `contained_modules` (use the exact dotted names from the facts).
+
+Component relations are REQUIRED, not optional. Read the `imports` in the facts: whenever a module in one component imports a module in another component, emit a deduplicated component-level `relation` between those two components. Do NOT invent relations that no import supports; do NOT omit relations that imports do support. An architecture that has components but an empty `relations` list is INCOMPLETE.
+
+Output strictly conforms to the provided JSON schema.
+
+### user
+Here are the extracted code facts as JSON:
+
+[
+  {
+    "module_name": "bookshop",
+    "module_docstring": "A small layered bookshop application (richer extraction fixture).",
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.api",
+    "module_docstring": null,
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.api.catalog_routes",
+    "module_docstring": "HTTP handlers for browsing and searching the catalog.",
+    "imports": [
+      {
+        "module": "bookshop.application.inventory",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "InventoryService",
+            "alias": null
+          }
+        ],
+        "alias": null
+      },
+      {
+        "module": "bookshop.domain.book",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "Genre",
+            "alias": null
+          }
+        ],
+        "alias": null
+      }
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "search_books",
+        "signature": "(service: InventoryService, term: str) -> dict",
+        "decorators": [],
+        "docstring": "Handle a catalog search request."
+      },
+      {
+        "name": "browse_genre",
+        "signature": "(service: InventoryService, genre: str) -> dict",
+        "decorators": [],
+        "docstring": "Handle a browse-by-genre request."
+      }
+    ]
+  },
+  {
+    "module_name": "bookshop.api.checkout_routes",
+    "module_docstring": "HTTP handlers for the checkout flow.",
+    "imports": [
+      {
+        "module": "bookshop.application.checkout",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "CheckoutService",
+            "alias": null
+          }
+        ],
+        "alias": null
+      },
+      {
+        "module": "bookshop.domain.order",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "EmptyOrderError",
+            "alias": null
+          },
+          {
+            "name": "Order",
+            "alias": null
+          }
+        ],
+        "alias": null
+      }
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "checkout",
+        "signature": "(service: CheckoutService, order: Order) -> dict",
+        "decorators": [],
+        "docstring": "Handle a checkout request, mapping domain errors to a response."
+      }
+    ]
+  },
+  {
+    "module_name": "bookshop.application",
+    "module_docstring": null,
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.application.checkout",
+    "module_docstring": "Use-case service that turns a draft order into a paid, stored order.\n\nOrchestrates domain pricing rules with the persistence and payment\nadapters from the infrastructure layer.",
+    "imports": [
+      {
+        "module": "bookshop.domain",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "pricing",
+            "alias": null
+          }
+        ],
+        "alias": null
+      },
+      {
+        "module": "bookshop.domain.order",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "EmptyOrderError",
+            "alias": null
+          },
+          {
+            "name": "Order",
+            "alias": null
+          },
+          {
+            "name": "OrderStatus",
+            "alias": null
+          }
+        ],
+        "alias": null
+      },
+      {
+        "module": "bookshop.infrastructure.order_repository",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "InMemoryOrderRepository",
+            "alias": null
+          }
+        ],
+        "alias": null
+      },
+      {
+        "module": "bookshop.infrastructure.payment_gateway",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "FakePaymentGateway",
+            "alias": null
+          }
+        ],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "CheckoutService",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Coordinates pricing, payment and order persistence.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, orders: InMemoryOrderRepository, gateway: FakePaymentGateway) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "place",
+            "signature": "(self, order: Order) -> dict",
+            "decorators": [],
+            "docstring": "Price, charge and persist an order; return a result summary."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.application.inventory",
+    "module_docstring": "Use-case service for browsing and searching available stock.",
+    "imports": [
+      {
+        "module": "bookshop.domain.book",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "Book",
+            "alias": null
+          },
+          {
+            "name": "Genre",
+            "alias": null
+          }
+        ],
+        "alias": null
+      },
+      {
+        "module": "bookshop.infrastructure.book_repository",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "InMemoryBookRepository",
+            "alias": null
+          }
+        ],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "InventoryService",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Read-side service over the book repository's catalog.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, books: InMemoryBookRepository) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "search",
+            "signature": "(self, term: str) -> list[Book]",
+            "decorators": [],
+            "docstring": "Search the current catalog for a term."
+          },
+          {
+            "name": "browse",
+            "signature": "(self, genre: Genre) -> list[Book]",
+            "decorators": [],
+            "docstring": "List all books in a genre."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.domain",
+    "module_docstring": null,
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.domain.book",
+    "module_docstring": "Catalog domain entities: books and their authors.\n\nPure domain model with no infrastructure dependencies.",
+    "imports": [
+      {
+        "module": "dataclasses",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "dataclass",
+            "alias": null
+          },
+          {
+            "name": "field",
+            "alias": null
+          }
+        ],
+        "alias": null
+      },
+      {
+        "module": "enum",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "Enum",
+            "alias": null
+          }
+        ],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "Genre",
+        "bases": [
+          "str",
+          "Enum"
+        ],
+        "decorators": [],
+        "docstring": "Coarse classification used for browsing the catalog.",
+        "methods": []
+      },
+      {
+        "name": "Author",
+        "bases": [],
+        "decorators": [
+          "dataclass(frozen=True)"
+        ],
+        "docstring": "A book author, identified by a stable id.",
+        "methods": []
+      },
+      {
+        "name": "Book",
+        "bases": [],
+        "decorators": [
+          "dataclass"
+        ],
+        "docstring": "A sellable book with a list price expressed in cents.",
+        "methods": [
+          {
+            "name": "matches",
+            "signature": "(self, term: str) -> bool",
+            "decorators": [],
+            "docstring": "Return True if a search term occurs in title, author or tags."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.domain.catalog",
+    "module_docstring": "The catalog aggregate and its search behaviour.",
+    "imports": [
+      {
+        "module": "bookshop.domain.book",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "Book",
+            "alias": null
+          },
+          {
+            "name": "Genre",
+            "alias": null
+          }
+        ],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "Catalog",
+        "bases": [],
+        "decorators": [],
+        "docstring": "An in-memory collection of books with simple query operations.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, books: list[Book]) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "search",
+            "signature": "(self, term: str) -> list[Book]",
+            "decorators": [],
+            "docstring": "Return every book whose title, author or tags match the term."
+          },
+          {
+            "name": "by_genre",
+            "signature": "(self, genre: Genre) -> list[Book]",
+            "decorators": [],
+            "docstring": "Return every book in the given genre."
+          },
+          {
+            "name": "find",
+            "signature": "(self, isbn: str) -> Book | None",
+            "decorators": [],
+            "docstring": "Look up a single book by its ISBN."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.domain.order",
+    "module_docstring": "Order aggregate: line items, status and invariants.",
+    "imports": [
+      {
+        "module": "dataclasses",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "dataclass",
+            "alias": null
+          },
+          {
+            "name": "field",
+            "alias": null
+          }
+        ],
+        "alias": null
+      },
+      {
+        "module": "enum",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "Enum",
+            "alias": null
+          }
+        ],
+        "alias": null
+      },
+      {
+        "module": "bookshop.domain.book",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "Book",
+            "alias": null
+          }
+        ],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "OrderStatus",
+        "bases": [
+          "str",
+          "Enum"
+        ],
+        "decorators": [],
+        "docstring": "Lifecycle states of a customer order.",
+        "methods": []
+      },
+      {
+        "name": "LineItem",
+        "bases": [],
+        "decorators": [
+          "dataclass"
+        ],
+        "docstring": "A quantity of a single book within an order.",
+        "methods": [
+          {
+            "name": "subtotal_cents",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "List-price subtotal for this line, before any discounts."
+          }
+        ]
+      },
+      {
+        "name": "Order",
+        "bases": [],
+        "decorators": [
+          "dataclass"
+        ],
+        "docstring": "A customer order aggregating line items and a status.",
+        "methods": [
+          {
+            "name": "add",
+            "signature": "(self, book: Book, quantity: int) -> None",
+            "decorators": [],
+            "docstring": "Add a quantity of a book to the order."
+          },
+          {
+            "name": "gross_cents",
+            "signature": "(self) -> int",
+            "decorators": [],
+            "docstring": "Sum of all line subtotals before discounts."
+          }
+        ]
+      },
+      {
+        "name": "EmptyOrderError",
+        "bases": [
+          "Exception"
+        ],
+        "decorators": [],
+        "docstring": "Raised when an order with no items is placed.",
+        "methods": []
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.domain.pricing",
+    "module_docstring": "Pure pricing rules: discounts applied to an order's gross total.",
+    "imports": [
+      {
+        "module": "bookshop.domain.order",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "Order",
+            "alias": null
+          }
+        ],
+        "alias": null
+      }
+    ],
+    "classes": [],
+    "functions": [
+      {
+        "name": "total_quantity",
+        "signature": "(order: Order) -> int",
+        "decorators": [],
+        "docstring": "Total number of books across all line items."
+      },
+      {
+        "name": "discount_rate",
+        "signature": "(order: Order) -> float",
+        "decorators": [],
+        "docstring": "Fraction discounted from the gross total for this order."
+      },
+      {
+        "name": "net_cents",
+        "signature": "(order: Order) -> int",
+        "decorators": [],
+        "docstring": "Order total after applying the bulk discount, in cents."
+      }
+    ]
+  },
+  {
+    "module_name": "bookshop.infrastructure",
+    "module_docstring": null,
+    "imports": [],
+    "classes": [],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.infrastructure.book_repository",
+    "module_docstring": "In-memory persistence adapter for the book catalog.",
+    "imports": [
+      {
+        "module": "bookshop.domain.book",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "Book",
+            "alias": null
+          }
+        ],
+        "alias": null
+      },
+      {
+        "module": "bookshop.domain.catalog",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "Catalog",
+            "alias": null
+          }
+        ],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "InMemoryBookRepository",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Stores books and hands out a Catalog view over them.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "add",
+            "signature": "(self, book: Book) -> None",
+            "decorators": [],
+            "docstring": "Persist a book keyed by its ISBN."
+          },
+          {
+            "name": "get",
+            "signature": "(self, isbn: str) -> Book | None",
+            "decorators": [],
+            "docstring": "Fetch a stored book by ISBN."
+          },
+          {
+            "name": "catalog",
+            "signature": "(self) -> Catalog",
+            "decorators": [],
+            "docstring": "Build a Catalog aggregate from all stored books."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.infrastructure.order_repository",
+    "module_docstring": "In-memory persistence adapter for orders.",
+    "imports": [
+      {
+        "module": "bookshop.domain.order",
+        "relative_level": 0,
+        "names": [
+          {
+            "name": "Order",
+            "alias": null
+          }
+        ],
+        "alias": null
+      }
+    ],
+    "classes": [
+      {
+        "name": "InMemoryOrderRepository",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Stores orders under an auto-incrementing id.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "save",
+            "signature": "(self, order: Order) -> int",
+            "decorators": [],
+            "docstring": "Persist an order and return its assigned id."
+          },
+          {
+            "name": "get",
+            "signature": "(self, order_id: int) -> Order | None",
+            "decorators": [],
+            "docstring": "Fetch a stored order by id."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "bookshop.infrastructure.payment_gateway",
+    "module_docstring": "Adapter to an external payment provider (faked for the fixture).",
+    "imports": [],
+    "classes": [
+      {
+        "name": "PaymentError",
+        "bases": [
+          "Exception"
+        ],
+        "decorators": [],
+        "docstring": "Raised when an external charge is declined.",
+        "methods": []
+      },
+      {
+        "name": "FakePaymentGateway",
+        "bases": [],
+        "decorators": [],
+        "docstring": "Pretends to talk to an external payment API over the network.",
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": [],
+            "docstring": null
+          },
+          {
+            "name": "charge",
+            "signature": "(self, customer_id: str, amount_cents: int) -> str",
+            "decorators": [],
+            "docstring": "Charge a customer and return an opaque transaction id."
+          }
+        ]
+      }
+    ],
+    "functions": []
+  }
+]
+
+Produce the abstracted architecture.
+
+### assistant
+{
+  "components": [
+    {
+      "id": "bookshop.domain.book",
+      "name": "Book",
+      "description": "Represents a book with a title, author, ISBN, and genre."
+    },
+    {
+      "id": "bookshop.domain.catalog",
+      "name": "Catalog",
+      "description": "An in-memory collection of books with simple query operations."
+    },
+    {
+      "id": "bookshop.domain.order",
+      "name": "Order",
+      "description": "A customer order aggregating line items and a status."
+    },
+    {
+      "id": "bookshop.domain.pricing",
+      "name": "Pricing",
+      "description": "Pure pricing rules: discounts applied to an order's gross total."
+    },
+    {
+      "id": "bookshop.infrastructure.book_repository",
+      "name": "Book Repository",
+      "description": "In-memory persistence adapter for the book catalog."
+    },
+    {
+      "id": "bookshop.infrastructure.order_repository",
+      "name": "Order Repository",
+      "description": "In-memory persistence adapter for orders."
+    },
+    {
+      "id": "bookshop.infrastructure.payment_gateway",
+      "name": "Payment Gateway",
+      "description": "Adapter to an external payment provider (faked for the fixture)."
+    }
+  ],
+  "relations": [
+    {
+      "from": "bookshop.domain.catalog",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.domain.order",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.domain.order",
+      "to": "bookshop.domain.pricing",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.book_repository",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.order_repository",
+      "to": "bookshop.domain.order",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.payment_gateway",
+      "to": "bookshop.domain.order",
+      "kind": "uses"
+    }
+  ]
+}
+
+### user
+Your previous output was INVALID for these reasons:
+- completeness: module 'bookshop.api.catalog_routes' is not placed in any component
+- completeness: module 'bookshop.api.checkout_routes' is not placed in any component
+- completeness: module 'bookshop.application.checkout' is not placed in any component
+- completeness: module 'bookshop.application.inventory' is not placed in any component
+- completeness: module 'bookshop.domain.book' is not placed in any component
+- completeness: module 'bookshop.domain.catalog' is not placed in any component
+- completeness: module 'bookshop.domain.order' is not placed in any component
+- completeness: module 'bookshop.domain.pricing' is not placed in any component
+- completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component
+- completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component
+- completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component
+
+Fix ONLY these problems and return a corrected architecture that conforms to the JSON schema. Keep the rest of your decomposition unchanged.
+
+### assistant
+{
+  "components": [
+    {
+      "id": "bookshop.domain.book",
+      "name": "Book",
+      "description": "Represents a book with a title, author, ISBN, and genre."
+    },
+    {
+      "id": "bookshop.domain.catalog",
+      "name": "Catalog",
+      "description": "An in-memory collection of books with simple query operations."
+    },
+    {
+      "id": "bookshop.domain.order",
+      "name": "Order",
+      "description": "A customer order aggregating line items and a status."
+    },
+    {
+      "id": "bookshop.domain.pricing",
+      "name": "Pricing",
+      "description": "Pure pricing rules: discounts applied to an order's gross total."
+    },
+    {
+      "id": "bookshop.infrastructure.book_repository",
+      "name": "Book Repository",
+      "description": "In-memory persistence adapter for the book catalog."
+    },
+    {
+      "id": "bookshop.infrastructure.order_repository",
+      "name": "Order Repository",
+      "description": "In-memory persistence adapter for orders."
+    },
+    {
+      "id": "bookshop.infrastructure.payment_gateway",
+      "name": "Payment Gateway",
+      "description": "Adapter to an external payment provider (faked for the fixture)."
+    },
+    {
+      "id": "bookshop.application.checkout",
+      "name": "Checkout",
+      "description": "Application service for processing customer orders."
+    },
+    {
+      "id": "bookshop.application.inventory",
+      "name": "Inventory",
+      "description": "Application service for managing book inventory."
+    },
+    {
+      "id": "bookshop.api.catalog_routes",
+      "name": "Catalog Routes",
+      "description": "API endpoints for catalog operations."
+    },
+    {
+      "id": "bookshop.api.checkout_routes",
+      "name": "Checkout Routes",
+      "description": "API endpoints for checkout operations."
+    }
+  ],
+  "relations": [
+    {
+      "from": "bookshop.domain.catalog",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.domain.order",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.domain.order",
+      "to": "bookshop.domain.pricing",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.book_repository",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.order_repository",
+      "to": "bookshop.domain.order",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.payment_gateway",
+      "to": "bookshop.domain.order",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.application.checkout",
+      "to": "bookshop.domain.order",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.application.checkout",
+      "to": "bookshop.domain.pricing",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.application.inventory",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.api.catalog_routes",
+      "to": "bookshop.domain.catalog",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.api.checkout_routes",
+      "to": "bookshop.application.checkout",
+      "kind": "uses"
+    }
+  ]
+}
+
+### user
+Your previous output was INVALID for these reasons:
+- completeness: module 'bookshop.api.catalog_routes' is not placed in any component
+- completeness: module 'bookshop.api.checkout_routes' is not placed in any component
+- completeness: module 'bookshop.application.checkout' is not placed in any component
+- completeness: module 'bookshop.application.inventory' is not placed in any component
+- completeness: module 'bookshop.domain.book' is not placed in any component
+- completeness: module 'bookshop.domain.catalog' is not placed in any component
+- completeness: module 'bookshop.domain.order' is not placed in any component
+- completeness: module 'bookshop.domain.pricing' is not placed in any component
+- completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component
+- completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component
+- completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component
+
+Fix ONLY these problems and return a corrected architecture that conforms to the JSON schema. Keep the rest of your decomposition unchanged.

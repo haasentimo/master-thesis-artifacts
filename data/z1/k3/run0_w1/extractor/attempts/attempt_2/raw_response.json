@@ -1,0 +1,48 @@
+{
+  "id": "chatcmpl-5702b31a-6ce3-4ae0-a83f-f37f2a0eaca6",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"components\": [\n    {\n      \"description\": \"Project root package.\",\n      \"id\": \"Root\",\n      \"name\": \"Root\",\n      \"contained_modules:\": [\"bookshop\"]\n    },\n    {\n      \"description\": \"HTTP handlers for catalog browsing, searching, and checkout.\",\n      \"id\": \"API\",\n      \"name\": \"API\",\n      \"contained_modules:\": [\"bookshop.api\", \"bookshop.api.catalog_routes\", \"bookshop.api.checkout_routes\"]\n    },\n    {\n      \"description\": \"Use-case services orchestrating domain operations and infrastructure adapters.\",\n      \"id\": \"Application\",\n      \"name\": \"Application\",\n      \"contained_modules:\": [\"bookshop.application\", \"bookshop.application.checkout\", \"bookshop.application.inventory\"]\n    },\n    {\n      \"description\": \"Core business model: books, orders, pricing rules, and catalog aggregates.\",\n      \"id\": \"Domain\",\n      \"name\": \"Domain\",\n      \"contained_modules:\": [\"bookshop.domain\", \"bookshop.domain.book\", \"bookshop.domain.catalog\", \"bookshop.domain.order\", \"bookshop.domain.pricing\"]\n    },\n    {\n      \"description\": \"Persistence adapters and external service stubs (in-memory repositories, fake payment gateway).\",\n      \"id\": \"Infrastructure\",\n      \"name\": \"Infrastructure\",\n      \"contained_modules:\": [\"bookshop.infrastructure\", \"bookshop.infrastructure.book_repository\", \"bookshop.infrastructure.order_repository\", \"bookshop.infrastructure.payment_gateway\"]\n    }\n  ],\n  \"relations\": [\n    {\n      \"from\": \"API\",\n      \"to\": \"Application\"\n    },\n    {\n      \"from\": \"API\",\n      \"to\": \"Domain\"\n    },\n    {\n      \"from\": \"Application\",\n      \"to\": \"Domain\"\n    },\n    {\n      \"from\": \"Application\",\n      \"to\": \"Infrastructure\"\n    },\n    {\n      \"from\": \"Infrastructure\",\n      \"to\": \"Domain\"\n    }\n  ]\n}",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning_content": "We need to ensure each module is placed in exactly one component. The previous output had the same components but the error says modules not placed. Wait, the output includes them: e.g., API component includes bookshop.api.catalog_routes and bookshop.api.checkout_routes. Application includes bookshop.application.checkout and bookshop.application.inventory. Domain includes bookshop.domain.book, .catalog, .order, .pricing. Infrastructure includes bookshop.infrastructure.book_repository, .order_repository, .payment_gateway. So they are placed. Why error? Possibly because the key \"contained_modules:\" has a colon after the key? The schema expects \"contained_modules\": list. In our output we wrote \"contained_modules:\": with colon inside the key string, which is wrong. The correct key is \"contained_modules\". The previous output had a typo: \"contained_modules:\": (with colon inside the string). That likely caused parsing to think it's a different key and not recognized, leading to missing modules. We need to fix that.\n\nThus produce same decomposition but with correct key \"contained_modules\": [list].\n\nAlso ensure JSON is valid.\n\nLet's craft final answer."
+      }
+    }
+  ],
+  "created": 1788186727,
+  "model": "nvidia-nemotron-3-super-120b",
+  "object": "chat.completion",
+  "metadata": null,
+  "moderation": null,
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 680,
+    "prompt_tokens": 5823,
+    "total_tokens": 6503,
+    "completion_tokens_details": null,
+    "compute_units": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cache_write_tokens": null,
+      "cached_tokens": 4608,
+      "image_tokens": null,
+      "text_tokens": null
+    },
+    "cache_created_input_tokens": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 4608,
+    "speed": null
+  }
+}

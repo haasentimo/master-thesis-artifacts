@@ -1,0 +1,48 @@
+{
+  "id": "chatcmpl-ac37d804-aa2c-4a34-bde9-2d5cce993534",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"components\": [\n    {\n      \"description\": \"HTTP handlers exposing the bookshop functionality.\",\n      \"id\": \"API\",\n      \"name\": \"API\",\n      \"contained_modules:\": [\n        \"bookshop\",\n        \"bookshop.api\",\n        \"bookshop.api.catalog_routes\",\n        \"bookshop.api.checkout_routes\"\n      ]\n    },\n    {\n      \"description\": \"Use-case services orchestrating domain objects and infrastructure adapters.\",\n      \"id\": \"Application\",\n      \"name\": \"Application\",\n      \"contained_modules:\": [\n        \"bookshop.application\",\n        \"bookshop.application.checkout\",\n        \"bookshop.application.inventory\"\n      ]\n    },\n    {\n      \"description\": \"Pure business model entities, aggregates, and rules.\",\n      \"id\": \"Domain\",\n      \"name\": \"Domain\",\n      \"contained_modules:\": [\n        \"bookshop.domain\",\n        \"bookshop.domain.book\",\n        \"bookshop.domain.catalog\",\n        \"bookshop.domain.order\",\n        \"bookshop.domain.pricing\"\n      ]\n    },\n    {\n      \"description\": \"Persistence and external service adapters (in\u2011memory repositories, fake payment gateway).\",\n      \"id\": \"Infrastructure\",\n      \"name\": \"Infrastructure\",\n      \"contained_modules:\": [\n        \"bookshop.infrastructure\",\n        \"bookshop.infrastructure.book_repository\",\n        \"bookshop.infrastructure.order_repository\",\n        \"bookshop.infrastructure.payment_gateway\"\n      ]\n    }\n  ],\n  \"relations\": [\n    {\n      \"from\": \"API\",\n      \"to\": \"Application\"\n    },\n    {\n      \"from\": \"API\",\n      \"to\": \"Domain\"\n    },\n    {\n      \"from\": \"Application\",\n      \"to\": \"Domain\"\n    },\n    {\n      \"from\": \"Application\",\n      \"to\": \"Infrastructure\"\n    },\n    {\n      \"from\": \"Infrastructure\",\n      \"to\": \"Domain\"\n    }\n  ]\n}",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning_content": "We need to output a JSON with components and relations. The previous output had a syntax error: \"contained_modules:\" with colon inside key. Should be \"contained_modules\": [ ... ]. Also need to ensure each module appears exactly once. The previous output had correct modules but the key was wrong. Let's fix that.\n\nWe need to keep the same decomposition: components API, Application, Domain, Infrastructure with same contained modules.\n\nThus produce JSON:\n\n{\n  \"components\": [\n    {\n      \"description\": \"...\",\n      \"id\": \"API\",\n      \"name\": \"API\",\n      \"contained_modules\": [\n        \"bookshop\",\n        \"bookshop.api\",\n        \"bookshop.api.catalog_routes\",\n        \"bookshop.api.checkout_routes\"\n      ]\n    },\n    {\n      \"description\": \"...\",\n      \"id\": \"Application\",\n      \"name\": \"Application\",\n      \"contained_modules\": [\n        \"bookshop.application\",\n        \"bookshop.application.checkout\",\n        \"bookshop.application.inventory\"\n      ]\n    },\n    {\n      \"description\": \"...\",\n      \"id\": \"Domain\",\n      \"name\": \"Domain\",\n      \"contained_modules\": [\n        \"bookshop.domain\",\n        \"bookshop.domain.book\",\n        \"bookshop.domain.catalog\",\n        \"bookshop.domain.order\",\n        \"bookshop.domain.pricing\"\n      ]\n    },\n    {\n      \"description\": \"...\",\n      \"id\": \"Infrastructure\",\n      \"name\": \"Infrastructure\",\n      \"contained_modules\": [\n        \"bookshop.infrastructure\",\n        \"bookshop.infrastructure.book_repository\",\n        \"bookshop.infrastructure.order_repository\",\n        \"bookshop.infrastructure.payment_gateway\"\n      ]\n    }\n  ],\n  \"relations\": [\n    {\"from\": \"API\", \"to\": \"Application\"},\n    {\"from\": \"API\", \"to\": \"Domain\"},\n    {\"from\": \"Application\", \"to\": \"Domain\"},\n    {\"from\": \"Application\", \"to\": \"Infrastructure\"},\n    {\"from\": \"Infrastructure\", \"to\": \"Domain\"}\n  ]\n}\n\nMake sure JSON is valid. No trailing commas. Use double quotes.\n\nLet's output."
+      }
+    }
+  ],
+  "created": 1788186420,
+  "model": "nvidia-nemotron-3-super-120b",
+  "object": "chat.completion",
+  "metadata": null,
+  "moderation": null,
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 870,
+    "prompt_tokens": 5793,
+    "total_tokens": 6663,
+    "completion_tokens_details": null,
+    "compute_units": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cache_write_tokens": null,
+      "cached_tokens": 4608,
+      "image_tokens": null,
+      "text_tokens": null
+    },
+    "cache_created_input_tokens": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 4608,
+    "speed": null
+  }
+}

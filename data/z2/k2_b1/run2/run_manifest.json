@@ -1,0 +1,211 @@
+{
+  "schema": "z2-run-manifest/1",
+  "bedingung": "K2",
+  "zelle": "k2_b1",
+  "slot": "run2",
+  "protokoll": {
+    "pfad": "docs/protokolle/z2_protokoll_regelableitung.md",
+    "sha256": "862fdc3b7cfb264482db155575437edb25b1b436f92b5444b2137f1e332d9dde",
+    "commit": "35aff9bd777a204977a77ab7fc25df09e9983da6",
+    "stand": "eingefroren; Kopf-Freeze-Vermerk im Dokument"
+  },
+  "nachrichten": {
+    "system_sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0",
+    "system_bytes": 2283,
+    "user_sha256": "21741e034a9c129638d9c3228111e0a11ae82a4e275b6a291edcf5866b8d4eb1",
+    "user_bytes": 107307,
+    "struktur": "zwei Nachrichten nach A2/R3"
+  },
+  "eingaben": {
+    "ist_modell": {
+      "pfad": "data/z2/eingaben/ist_modell.yaml",
+      "bytes": 42959,
+      "sha256": "146dbb055e059b9dd948b27e185f33a2cb56557a534c55e0daf983c892336673"
+    },
+    "input_facts": {
+      "pfad": "data/z2/eingaben/input_facts.json",
+      "bytes": 64245,
+      "sha256": "f670593a7add275c364ebff5a5529cb95a787a10de5e0c80f97cd46574eb282a"
+    }
+  },
+  "modell": "qwen2.5-coder:7b",
+  "modell_echo": "qwen2.5-coder:7b",
+  "provider": "ollama",
+  "base_url": "http://localhost:11434/v1",
+  "endpunkt": "http://localhost:11434/v1/chat/completions",
+  "schemaname": "architecture_rules",
+  "fenster": {
+    "gesetzt": {
+      "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+      "wert": 32768
+    },
+    "wirksam": [
+      {
+        "NAME": "qwen2.5-coder:7b",
+        "ID": "dae161e27b0e",
+        "SIZE": "6.8 GB",
+        "PROCESSOR": "8%/92% CPU/GPU",
+        "CONTEXT": 32768,
+        "UNTIL": "4 minutes from now"
+      }
+    ]
+  },
+  "ollama": {
+    "ollama_stop": {
+      "aufruf": "ollama stop qwen2.5-coder:7b",
+      "returncode": 0,
+      "stderr": "\u001b[?25l\u001b[?2026h\u001b[?25l\u001b[1G\u001b[K\u001b[?25h\u001b[?2026l\u001b[2K\u001b[1G\u001b[?25h"
+    },
+    "ollama_ps_vor": {
+      "roh": "NAME    ID    SIZE    PROCESSOR    CONTEXT    UNTIL \n",
+      "zeilen": [
+        "NAME    ID    SIZE    PROCESSOR    CONTEXT    UNTIL "
+      ],
+      "eintraege": []
+    },
+    "ollama_ps_nach": {
+      "roh": "NAME                ID              SIZE      PROCESSOR         CONTEXT    UNTIL              \nqwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now    \n",
+      "zeilen": [
+        "NAME                ID              SIZE      PROCESSOR         CONTEXT    UNTIL              ",
+        "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now    "
+      ],
+      "eintraege": [
+        {
+          "NAME": "qwen2.5-coder:7b",
+          "ID": "dae161e27b0e",
+          "SIZE": "6.8 GB",
+          "PROCESSOR": "8%/92% CPU/GPU",
+          "CONTEXT": 32768,
+          "UNTIL": "4 minutes from now"
+        }
+      ]
+    },
+    "digest": {
+      "pfad": "/home/haasentimo/.ollama/models/manifests/registry.ollama.ai/library/qwen2.5-coder/7b",
+      "digest": null,
+      "hinweis": "Manifest nicht gefunden -- Digest nicht erhoben"
+    }
+  },
+  "delivery_assurance": "hard",
+  "delivery_assurance_begruendung": "Lokaler Endpunkt: der Sollwert der Prompt-Tokenzahl ist aus M11 registriert, der Tokenisierer ist derselbe, und das Fenster ist ueber den systemd-Drop-in gesetzt und ueber `ollama ps` bezeugt. Alle drei Detektorkriterien aus §3b (b)/(b2)/(b3) binden.",
+  "lieferzusicherung": {
+    "delivery_assurance": "hard",
+    "gemeldete_prompt_tokens": 23405,
+    "gesetztes_fenster": 32768,
+    "sollwert": 23405,
+    "monotonie_bezug": 14451,
+    "kriterien": [
+      {
+        "kriterium": "soll_toleranz",
+        "regel": "gemeldete Zahl im Band 23288-23522 (Sollwert 23405, Toleranz +/-0.5%, beidseitig; keine Unterschreitungsregel)",
+        "rechnung": "23405 im Band [23288, 23522]",
+        "gilt": true,
+        "urteil": "spricht nicht an",
+        "grund_wenn_aus": ""
+      },
+      {
+        "kriterium": "b_fenstergleichstand",
+        "regel": "ungueltig bei Gleichstand mit dem Fenster 32768 oder weniger als 64 Token Abstand darunter (Verdachtsbereich ab 32705)",
+        "rechnung": "32768 - 23405 = 9363",
+        "gilt": true,
+        "urteil": "spricht nicht an",
+        "grund_wenn_aus": ""
+      },
+      {
+        "kriterium": "b2_monotonie",
+        "regel": "die gemeldete Zahl des vollen Prompts muss mindestens so gross sein wie die Einzelmessung seiner groessten Komponente (14451)",
+        "rechnung": "23405 gegen 14451",
+        "gilt": true,
+        "urteil": "spricht nicht an",
+        "grund_wenn_aus": ""
+      },
+      {
+        "kriterium": "b3_halbfenster",
+        "regel": "ungueltig bei Gleichstand mit Fenster/2 + 2 = 16386 oder weniger als 64 Token darunter",
+        "rechnung": "16386 - 23405 = -7019",
+        "gilt": true,
+        "urteil": "spricht nicht an",
+        "grund_wenn_aus": ""
+      }
+    ],
+    "verletzt": [],
+    "urteil": "LIEFERUNG ZUGESICHERT",
+    "delivery_assurance_begruendung": "Lokaler Endpunkt: der Sollwert der Prompt-Tokenzahl ist aus M11 registriert, der Tokenisierer ist derselbe, und das Fenster ist ueber den systemd-Drop-in gesetzt und ueber `ollama ps` bezeugt. Alle drei Detektorkriterien aus §3b (b)/(b2)/(b3) binden.",
+    "monotonie_bezug_herkunft": "M11a, Faktenbasis in der gezogenen Fassung",
+    "sollwert_herkunft": "M11",
+    "wirksames_fenster": {
+      "gemessen": [
+        32768
+      ],
+      "gesetzt": 32768,
+      "quelle": "`ollama ps`, Spalte CONTEXT"
+    }
+  },
+  "bytegatter": {
+    "gatter": [
+      {
+        "gatter": "G1",
+        "gegenstand": "system-Nachricht (Anhang A, A3)",
+        "soll_sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0",
+        "ist_sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0",
+        "soll_bytes": 2283,
+        "ist_bytes": 2283,
+        "herkunft_soll": "M11, Nachricht der Rolle `system`",
+        "urteil": "GEHALTEN"
+      },
+      {
+        "gatter": "G2",
+        "gegenstand": "user-Nachricht (Anhang A, A2, Zusammensetzungsformel)",
+        "soll_sha256": "21741e034a9c129638d9c3228111e0a11ae82a4e275b6a291edcf5866b8d4eb1",
+        "ist_sha256": "21741e034a9c129638d9c3228111e0a11ae82a4e275b6a291edcf5866b8d4eb1",
+        "soll_bytes": 107307,
+        "ist_bytes": 107307,
+        "herkunft_soll": "M11, Nachricht der Rolle `user`",
+        "urteil": "GEHALTEN"
+      }
+    ],
+    "urteil": "GEHALTEN",
+    "registrierte_sollwerte": {
+      "quelle": "data/z2/messungen/tokenmessung_2026-09-02.json",
+      "quelle_sha256": "a9625d88ec0746b90b9e21955c69fad9bc078431e24a3b58a8b10ebc0461b280",
+      "G1_system": {
+        "sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0",
+        "bytes": 2283,
+        "herkunft": "M11, Nachricht der Rolle `system`"
+      },
+      "G2_user": {
+        "sha256": "21741e034a9c129638d9c3228111e0a11ae82a4e275b6a291edcf5866b8d4eb1",
+        "bytes": 107307,
+        "herkunft": "M11, Nachricht der Rolle `user`"
+      },
+      "soll_prompt_tokens": {
+        "wert": 23405,
+        "herkunft": "M11"
+      },
+      "monotonie_bezug": {
+        "wert": 14451,
+        "herkunft": "M11a, Faktenbasis in der gezogenen Fassung"
+      },
+      "basiszahl_B": {
+        "wert": 30,
+        "herkunft": "M1"
+      }
+    }
+  },
+  "zeitstempel": {
+    "start": "2026-09-02T20:26:58+0200",
+    "ende": "2026-09-02T20:27:25+0200"
+  },
+  "werkzeug": {
+    "pfad": "tools/run_z2.py",
+    "sha256": "c886da13fac988fffe462b0bb3b0d9cecdfdd1cbe109f6751304e0949a107975"
+  },
+  "git_head": "3c6545cbd9b12983408f28421ae5c0a6b83338b5",
+  "aufruf": {
+    "temperature": 0,
+    "seed": 0,
+    "seed_hinweis": "gesendet, aber nicht als wirksam angenommen (Z1-Protokoll §3.3 (1), T-Z1-5)",
+    "max_tokens": "nicht gesetzt -- ein abgeschnittenes Generat saehe wie Modellversagen aus (§3b, Generat-Reserve)",
+    "options": "nicht gesendet -- das Fenster ist eine Eigenschaft des Servers (systemd-Drop-in), nicht des Calls"
+  }
+}

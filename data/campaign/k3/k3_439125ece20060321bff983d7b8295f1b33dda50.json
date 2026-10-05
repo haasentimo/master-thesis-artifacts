@@ -1,0 +1,262 @@
+{
+  "result_schema_version": "1",
+  "run_id": "20260827T070459Z-93f41460",
+  "timestamp": "2026-08-27T07:08:11.902Z",
+  "provenance": {
+    "topology_sha256": "e97013685ff217d85095b637459a2eb02d2f4effb9f9ad44d1f45798144ec25d",
+    "rules_sha256": "72fa851ffd9eae3865827f959e962f564216fe48948e792944537d64a8d87b95",
+    "prompt_template_sha256": "65e78f38e7b1fee20000ea70c654df042f5e0831fc6a68ccb340f833bd915035",
+    "user_prompt_render_sha256": "45780c70c486ea8f608d1b2ca11178049a02b7a6ece9ba33fcdc8d1b815b03ef",
+    "checker_git_head": "348ca9daa456af4954f11f7152fc45201035297e",
+    "target_repo_git_head": "439125ece20060321bff983d7b8295f1b33dda50",
+    "base_ref": "0d651041ed87dd03f2f78359713633fac01c0a66",
+    "rule_graph_mode": "diff",
+    "model_requested": "nvidia-nemotron-3-super-120b",
+    "endpoint": "https://inference.do-ai.run/v1",
+    "seed_requested": 42,
+    "temperature_requested": 0,
+    "runs_requested": 3,
+    "timeout_ms": 600000,
+    "changed_files_count": 1,
+    "control_files_count": 0
+  },
+  "runs": [
+    {
+      "run_index": 0,
+      "findings": [
+        {
+          "match_key": "layer-violation|identity_repository|depot.identity.repository.customer_repo|identity_repository->identity_services",
+          "source": "rule-engine",
+          "rule_id": "DERIVED:forbidden-edge",
+          "category": "layer-violation",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.customer_repo",
+          "file": "src/depot/identity/repository/customer_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "identity_repository",
+            "to": "identity_services"
+          },
+          "reason": "Module depot.identity.repository.customer_repo imports depot.identity.services.customer_service; component identity_repository must not depend on identity_services (edge not in the allowed topology).",
+          "suggestion": "Remove the dependency or invert it (define a port in identity_services's consumer and depend on the abstraction).",
+          "confidence": null
+        },
+        {
+          "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.repository.customer_repo|identity_repository->identity_services",
+          "source": "llm",
+          "rule_id": "R-LAYER-1",
+          "category": "FORBIDDEN_RELATION",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.customer_repo",
+          "file": "src/depot/identity/repository/customer_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "identity_repository",
+            "to": "identity_services"
+          },
+          "reason": "Repository layer imports from services layer, violating strict layer ordering (api -> services -> repository -> models) within the identity bounded context; back calls are forbidden.",
+          "suggestion": "Remove the import of depot.identity.services.customer_service. If service functionality is required, depend on an interface defined in core or invert the dependency so that services depend on repository via events or callbacks.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-LAYER-1",
+          "scope": {
+            "components": [
+              "identity_api",
+              "identity_repository",
+              "identity_services",
+              "orders_api",
+              "orders_repository",
+              "orders_services",
+              "billing_api",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/customer_repo.py"
+        },
+        {
+          "rule_id": "R-PLACE-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "identity_repository",
+              "orders_models",
+              "orders_repository",
+              "billing_models",
+              "billing_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/customer_repo.py"
+        },
+        {
+          "rule_id": "R-SIG-1",
+          "scope": {
+            "components": [
+              "identity_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/customer_repo.py"
+        }
+      ]
+    },
+    {
+      "run_index": 1,
+      "findings": [
+        {
+          "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.repository.customer_repo|identity_repository->identity_services",
+          "source": "llm",
+          "rule_id": "R-LAYER-1",
+          "category": "FORBIDDEN_RELATION",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.customer_repo",
+          "file": "src/depot/identity/repository/customer_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "identity_repository",
+            "to": "identity_services"
+          },
+          "reason": "Import from repository layer to services layer violates strict layering (repository may only depend on models).",
+          "suggestion": "Remove the import of depot.identity.services.customer_service; move any needed service interaction to the service layer or use dependency injection via interfaces in core.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-LAYER-1",
+          "scope": {
+            "components": [
+              "identity_api",
+              "identity_repository",
+              "identity_services",
+              "orders_api",
+              "orders_repository",
+              "orders_services",
+              "billing_api",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/customer_repo.py"
+        },
+        {
+          "rule_id": "R-PLACE-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "identity_repository",
+              "orders_models",
+              "orders_repository",
+              "billing_models",
+              "billing_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/customer_repo.py"
+        },
+        {
+          "rule_id": "R-SIG-1",
+          "scope": {
+            "components": [
+              "identity_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/customer_repo.py"
+        }
+      ]
+    },
+    {
+      "run_index": 2,
+      "findings": [
+        {
+          "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.repository.customer_repo|identity_repository->identity_services",
+          "source": "llm",
+          "rule_id": "R-LAYER-1",
+          "category": "FORBIDDEN_RELATION",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.customer_repo",
+          "file": "src/depot/identity/repository/customer_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "identity_repository",
+            "to": "identity_services"
+          },
+          "reason": "The repository layer (identity_repository) imports from the services layer (identity_services), which is a higher layer. This violates the strict layering order api -> services -> repository -> models, constituting a back call (lower layer depending on higher layer).",
+          "suggestion": "Remove the import of depot.identity.services.customer_service from customer_repo.py. If service functionality is needed, invert the dependency so that the service layer depends on the repository layer (as allowed by identity_services -> identity_repository) and call repository methods from the service, not vice‑versa.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-LAYER-1",
+          "scope": {
+            "components": [
+              "identity_api",
+              "identity_repository",
+              "identity_services",
+              "orders_api",
+              "orders_repository",
+              "orders_services",
+              "billing_api",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/customer_repo.py"
+        },
+        {
+          "rule_id": "R-PLACE-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "identity_repository",
+              "orders_models",
+              "orders_repository",
+              "billing_models",
+              "billing_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/customer_repo.py"
+        },
+        {
+          "rule_id": "R-SIG-1",
+          "scope": {
+            "components": [
+              "identity_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/customer_repo.py"
+        }
+      ]
+    }
+  ],
+  "validity": {
+    "status": "completed",
+    "runs_completed": 3,
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 0,
+    "skipped_count": 0,
+    "invalid_reasons": [],
+    "exit_code": 1
+  },
+  "skipped": []
+}

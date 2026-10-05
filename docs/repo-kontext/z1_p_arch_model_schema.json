@@ -1,0 +1,123 @@
+{
+  "$defs": {
+    "Component": {
+      "description": "A layer, component or service grouping one or more real modules.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "default": "component",
+          "enum": [
+            "layer",
+            "component",
+            "service"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "role": {
+          "anyOf": [
+            {
+              "enum": [
+                "domain",
+                "application",
+                "infrastructure",
+                "api",
+                "presentation",
+                "shared"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Role"
+        },
+        "contained_modules": {
+          "description": "Real dotted module names from the facts (node anchors).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Contained Modules",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "Component",
+      "type": "object"
+    },
+    "Relation": {
+      "description": "A dependency between two components, by their ids.",
+      "properties": {
+        "from": {
+          "title": "From",
+          "type": "string"
+        },
+        "to": {
+          "title": "To",
+          "type": "string"
+        },
+        "kind": {
+          "default": "depends_on",
+          "enum": [
+            "depends_on",
+            "uses"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ],
+      "title": "Relation",
+      "type": "object"
+    }
+  },
+  "description": "The full abstracted architecture: components and their relations.",
+  "properties": {
+    "components": {
+      "items": {
+        "$ref": "#/$defs/Component"
+      },
+      "title": "Components",
+      "type": "array"
+    },
+    "relations": {
+      "items": {
+        "$ref": "#/$defs/Relation"
+      },
+      "title": "Relations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "components"
+  ],
+  "title": "ArchModel",
+  "type": "object"
+}

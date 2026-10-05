@@ -1,0 +1,48 @@
+{
+  "id": "chatcmpl-7a21ac91-e3c2-4c43-acc5-c98d2ead7530",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"components\": [\n    {\n      \"description\": \"HTTP handlers exposing the bookshop functionality.\",\n      \"id\": \"API\",\n      \"name\": \"API\",\n      \"contained_modules:\": [\n        \"bookshop\",\n        \"bookshop.api\",\n        \"bookshop.api.catalog_routes\",\n        \"bookshop.api.checkout_routes\"\n      ]\n    },\n    {\n      \"description\": \"Use-case services orchestrating domain objects and infrastructure adapters.\",\n      \"id\": \"Application\",\n      \"name\": \"Application\",\n      \"contained_modules:\": [\n        \"bookshop.application\",\n        \"bookshop.application.checkout\",\n        \"bookshop.application.inventory\"\n      ]\n    },\n    {\n      \"description\": \"Pure business model entities, aggregates, and rules.\",\n      \"id\": \"Domain\",\n      \"name\": \"Domain\",\n      \"contained_modules:\": [\n        \"bookshop.domain\",\n        \"bookshop.domain.book\",\n        \"bookshop.domain.catalog\",\n        \"bookshop.domain.order\",\n        \"bookshop.domain.pricing\"\n      ]\n    },\n    {\n      \"description\": \"Persistence and external service adapters (in\u2011memory repositories, fake payment gateway).\",\n      \"id\": \"Infrastructure\",\n      \"name\": \"Infrastructure\",\n      \"contained_modules:\": [\n        \"bookshop.infrastructure\",\n        \"bookshop.infrastructure.book_repository\",\n        \"bookshop.infrastructure.order_repository\",\n        \"bookshop.infrastructure.payment_gateway\"\n      ]\n    }\n  ],\n  \"relations\": [\n    {\n      \"from\": \"API\",\n      \"to\": \"Application\"\n    },\n    {\n      \"from\": \"API\",\n      \"to\": \"Domain\"\n    },\n    {\n      \"from\": \"Application\",\n      \"to\": \"Domain\"\n    },\n    {\n      \"from\": \"Application\",\n      \"to\": \"Infrastructure\"\n    },\n    {\n      \"from\": \"Infrastructure\",\n      \"to\": \"Domain\"\n    }\n  ]\n}",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning_content": "We need to fix the component definitions: they must contain all modules exactly once. The previous output had components with \"contained_modules:\" but the key is wrong: should be \"contained_modules\" (no colon). Also they listed some modules but not all. We need to include all modules in exactly one component.\n\nWe need to keep the decomposition unchanged: they had four components: API, Application, Domain, Infrastructure. We need to assign each module to one of these.\n\nList all modules from facts:\n\n- bookshop\n- bookshop.api\n- bookshop.api.catalog_routes\n- bookshop.api.checkout_routes\n- bookshop.application\n- bookshop.application.checkout\n- bookshop.application.inventory\n- bookshop.domain\n- bookshop.domain.book\n- bookshop.domain.catalog\n- bookshop.domain.order\n- bookshop.domain.pricing\n- bookshop.infrastructure\n- bookshop.infrastructure.book_repository\n- bookshop.infrastructure.order_repository\n- bookshop.infrastructure.payment_gateway\n\nNow assign:\n\nAPI component: likely includes bookshop, bookshop.api, bookshop.api.catalog_routes, bookshop.api.checkout_routes.\n\nApplication component: bookshop.application, bookshop.application.checkout, bookshop.application.inventory.\n\nDomain component: bookshop.domain, bookshop.domain.book, bookshop.domain.catalog, bookshop.domain.order, bookshop.domain.pricing.\n\nInfrastructure component: bookshop.infrastructure, bookshop.infrastructure.book_repository, bookshop.infrastructure.order_repository, bookshop.infrastructure.payment_gateway.\n\nThat covers all.\n\nNow we need to output JSON with components list, each with description, id, name, contained_modules (exact list). Also relations: we need to compute component-level relations based on imports.\n\nWe need to deduce relations from imports between modules across components.\n\nLet's compute.\n\nWe'll map each module to component.\n\nComponent mapping:\n\nAPI: bookshop, bookshop.api, bookshop.api.catalog_routes, bookshop.api.checkout_routes\n\nApplication: bookshop.application, bookshop.application.checkout, bookshop.application.inventory\n\nDomain: bookshop.domain, bookshop.domain.book, bookshop.domain.catalog, bookshop.domain.order, bookshop.domain.pricing\n\nInfrastructure: bookshop.infrastructure, bookshop.infrastructure.book_repository, bookshop.infrastructure.order_repository, bookshop.infrastructure.payment_gateway\n\nNow examine imports for each module and see cross-component dependencies.\n\nWe'll go through each module's imports list.\n\n1. bookshop: imports [] -> none.\n\n2. bookshop.api: imports [] -> none.\n\n3. bookshop.api.catalog_routes: imports:\n   - bookshop.application.inventory (module) -> that's in Application component.\n   - bookshop.domain.book -> Domain component.\nThus relations: API -> Application, API -> Domain.\n\n4. bookshop.api.checkout_routes: imports:\n   - bookshop.application.checkout -> Application.\n   - bookshop.domain.order -> Domain.\nThus API -> Application (already), API -> Domain (already).\n\n5. bookshop.application: imports [] -> none.\n\n6. bookshop.application.checkout: imports:\n   - bookshop.domain (module) -> Domain.\n   - bookshop.domain.order -> Domain.\n   - bookshop.infrastructure.order_repository -> Infrastructure.\n   - bookshop.infrastructure.payment_gateway -> Infrastructure.\nThus Application -> Domain, Application -> Infrastructure.\n\n7. bookshop.application.inventory: imports:\n   - bookshop.domain.book -> Domain.\n   - bookshop.infrastructure.book_repository -> Infrastructure.\nThus Application -> Domain (already), Application -> Infrastructure (already).\n\n8. bookshop.domain: imports [] -> none.\n\n9. bookshop.domain.book: imports:\n   - dataclasses (external) ignore? Not part of our modules; we only consider internal modules? Probably only internal modules; external not needed for component relations.\n   - enum (external) ignore.\nThus none.\n\n10. bookshop.domain.catalog: imports:\n    - bookshop.domain.book -> Domain (same component) -> no cross-component.\n\n11. bookshop.domain.order: imports:\n    - dataclasses, enum external.\n    - bookshop.domain.book -> Domain (same).\nThus none.\n\n12. bookshop.domain.pricing: imports:\n    - bookshop.domain.order -> Domain (same).\nThus none.\n\n13. bookshop.infrastructure: imports [] -> none.\n\n14. bookshop.infrastructure.book_repository: imports:\n    - bookshop.domain.book -> Domain.\n    - bookshop.domain.catalog -> Domain.\nThus Infrastructure -> Domain.\n\n15. bookshop.infrastructure.order_repository: imports:\n    - bookshop.domain.order -> Domain.\nThus Infrastructure -> Domain (already).\n\n16. bookshop.infrastructure.payment_gateway: imports [] -> none.\n\nNow collect unique component-level relations:\n\nFrom above:\n- API -> Application\n- API -> Domain\n- Application -> Domain\n- Application -> Infrastructure\n- Infrastructure -> Domain\n\nAlso note: any relation from Infrastructure to Application? No.\n\nCheck also if any relation from Domain to something else? No.\n\nThus relations list: (from, to) pairs.\n\nWe need to output JSON with components and relations.\n\nMake sure component IDs are strings, names strings, description strings.\n\nWe'll keep same descriptions as before but adjust.\n\nNow produce JSON.\n\nImportant: key \"contained_modules\" not \"contained_modules:\".\n\nLet's craft."
+      }
+    }
+  ],
+  "created": 1788186354,
+  "model": "nvidia-nemotron-3-super-120b",
+  "object": "chat.completion",
+  "metadata": null,
+  "moderation": null,
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1543,
+    "prompt_tokens": 5124,
+    "total_tokens": 6667,
+    "completion_tokens_details": null,
+    "compute_units": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cache_write_tokens": null,
+      "cached_tokens": 3456,
+      "image_tokens": null,
+      "text_tokens": null
+    },
+    "cache_created_input_tokens": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 3456,
+    "speed": null
+  }
+}

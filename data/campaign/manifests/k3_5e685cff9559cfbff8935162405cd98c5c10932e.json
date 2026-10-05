@@ -1,0 +1,165 @@
+{
+ "run": {
+  "config": "K3",
+  "injection_id": "I29",
+  "tag": "inj/29",
+  "sha": "5e685cff9559cfbff8935162405cd98c5c10932e",
+  "category_l1": "API_CONTRACT",
+  "scenario_l2": "SIGNATURE_DEVIATION",
+  "carrier_module": "depot.identity.repository.session_repo",
+  "runs": 3
+ },
+ "rule_graph_mode": "diff",
+ "rule_graph_mode_source": "derived from category_l1 (protocol \u00a76 Nachtrag Rev. 31)",
+ "attempt": 1,
+ "is_smoke_test": false,
+ "started": "2026-08-27T10:45:41+02:00",
+ "command": "CONFORMANCE_API_KEY=<DO_MODEL_ACCESS_KEY aus ~/ma/.secrets/do.env> CONFORMANCE_BASE_URL=https://inference.do-ai.run/v1 CONFORMANCE_MODEL=nvidia-nemotron-3-super-120b node /home/haasentimo/ma/tritongraph-measure/packages/triton-conformance/dist/cli.js --topology /home/haasentimo/ma/masterarbeit/data/soll/depot_soll.ilograph.yaml --rules /home/haasentimo/ma/masterarbeit/data/soll/architecture-rules.yaml --src-root src --rule-graph diff --base 0d651041ed87dd03f2f78359713633fac01c0a66 --runs 3 --timeout-ms 600000 --run-log /home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5e685cff9559cfbff8935162405cd98c5c10932e.jsonl --json-out /home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5e685cff9559cfbff8935162405cd98c5c10932e.json",
+ "argv": [
+  "node",
+  "/home/haasentimo/ma/tritongraph-measure/packages/triton-conformance/dist/cli.js",
+  "--topology",
+  "/home/haasentimo/ma/masterarbeit/data/soll/depot_soll.ilograph.yaml",
+  "--rules",
+  "/home/haasentimo/ma/masterarbeit/data/soll/architecture-rules.yaml",
+  "--src-root",
+  "src",
+  "--rule-graph",
+  "diff",
+  "--base",
+  "0d651041ed87dd03f2f78359713633fac01c0a66",
+  "--runs",
+  "3",
+  "--timeout-ms",
+  "600000",
+  "--run-log",
+  "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5e685cff9559cfbff8935162405cd98c5c10932e.jsonl",
+  "--json-out",
+  "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5e685cff9559cfbff8935162405cd98c5c10932e.json"
+ ],
+ "env_overrides": {
+  "CONFORMANCE_API_KEY": "<redacted>",
+  "CONFORMANCE_BASE_URL": "https://inference.do-ai.run/v1",
+  "CONFORMANCE_MODEL": "nvidia-nemotron-3-super-120b"
+ },
+ "abs_repo_path": "/home/haasentimo/ma/ma-conformance-testrepo",
+ "cwd": "/home/haasentimo/ma/ma-conformance-testrepo",
+ "machine": {
+  "uname": "Linux DESKTOP-PJA89CF 5.15.153.1-microsoft-standard-WSL2 #1 SMP Fri Mar 29 23:14:13 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+  "python3": "Python 3.12.3",
+  "node": "v22.23.2"
+ },
+ "machine_reference_d2_m5d": {
+  "uname": "Linux DESKTOP-PJA89CF 5.15.153.1-microsoft-standard-WSL2 #1 SMP Fri Mar 29 23:14:13 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+  "python3": "Python 3.12.3",
+  "node": "v22.23.2"
+ },
+ "target_repo_git_head": "5e685cff9559cfbff8935162405cd98c5c10932e",
+ "base_ref": "0d651041ed87dd03f2f78359713633fac01c0a66",
+ "measurement_path": "/home/haasentimo/ma/tritongraph-measure",
+ "phase04_freeze": "phase04-freeze = 348ca9daa456af4954f11f7152fc45201035297e",
+ "checker_git_head": "348ca9daa456af4954f11f7152fc45201035297e",
+ "checker_git_status_porcelain": "",
+ "dist_cli_js_sha256": "c0bbdfebbdce5899cc7d24d271b8fc43c9fc53aec5e8b0f3e3e91c3d43d35d95",
+ "dist_cli_js_mtime": "2026-08-26T23:05:14+02:00",
+ "exit_code": 1,
+ "external_wall_clock_ms": 404302,
+ "not_performed": false,
+ "soll_validator": {
+  "validator_exit_code": 0,
+  "expected_cycles": 0,
+  "expected_whitelist_edge": null,
+  "expected_sole_importers": {
+   "identity_mappers": [
+    "identity_api"
+   ],
+   "orders_mappers": [
+    "orders_api"
+   ],
+   "billing_mappers": [
+    "billing_api"
+   ],
+   "orders_services_pricing": [
+    "orders_services"
+   ],
+   "core_adapters_internal": [
+    "core_adapters"
+   ]
+  },
+  "points_1_to_5": "all OK",
+  "point_6": "measured importer sets equal the calculated expectation",
+  "i1_point_4": [
+   "OK I1 violations = 0 []"
+  ],
+  "i1_violations_recorded": [],
+  "stdout": "soll     : /home/haasentimo/ma/masterarbeit/data/soll/depot_soll.ilograph.yaml\ntestrepo : /home/haasentimo/ma/ma-conformance-testrepo\nexpected : Soll-only ['depot.billing.legacy_invoice_index', 'depot.billing.legacy_tax_models', 'depot.identity.legacy_token_index', 'depot.orders.legacy_order_index'], cycles 0\n\n[1] Soll module list against the file tree, both directions\n      Soll 77, tree 73\n  OK   only in the Soll = 4 ['depot.billing.legacy_invoice_index', 'depot.billing.legacy_tax_models', 'depot.identity.legacy_token_index', 'depot.orders.legacy_order_index'], expected ['depot.billing.legacy_invoice_index', 'depot.billing.legacy_tax_models', 'depot.identity.legacy_token_index', 'depot.orders.legacy_order_index']\n  OK   only in the tree = 0 [] (expected 0)\n\n[2] Every component occurs in at least one relation\n      resources declaring modules 19, relation endpoints 19\n  OK   components without a relation = 0 []\n\n[3] rules[]: scopes against the topology, categories against protocol \u00a73\n      rules 16\n  OK   (3a) scoped components outside the topology = 0 []\n  OK   (3b) components scoped by no rule = 0 []\n  OK   (3c) categories outside the level-1 encoding = 0 []\n  OK   (3d) level-1 categories carried by no rule = 0 []\n\n[4] Build rule I1 \u2014 no edge from the shared components into orders_*/billing_*\n  OK   I1 violations = 0 []\n\n[5] Z2' (i) \u2014 the four cycle pairs in code-unit order\n  OK   S=identity_api      T=identity_mappers          S<T=True  [Pos 9: 'a'(0x61) < 'm'(0x6D)]\n  OK   S=orders_api        T=orders_mappers            S<T=True  [Pos 7: 'a'(0x61) < 'm'(0x6D)]\n  OK   S=billing_api       T=billing_mappers           S<T=True  [Pos 8: 'a'(0x61) < 'm'(0x6D)]\n  OK   S=orders_services   T=orders_services_pricing   S<T=True  [prefix: 'orders_services' is a proper prefix, 8 chars shorter]\n\n[6] Z2' (ii) \u2014 sole importer per component\n  OK   identity_mappers         importers = 1 ['identity_api']\n  OK   orders_mappers           importers = 1 ['orders_api']\n  OK   billing_mappers          importers = 1 ['billing_api']\n  OK   orders_services_pricing  importers = 1 ['orders_services']\n  OK   core_adapters_internal   importers = 1 ['core_adapters']\n\n[7] Component graph of the actual state\n  OK   cycles = 0 (expected 0) []\n\n[8] No module edge outside the whitelist\n      mapped cross-component module edges = 81, whitelist relations = 39\n  OK   edges outside the whitelist = 0 []\n\nRESULT: OK\n",
+  "stderr": ""
+ },
+ "k2_context_window": null,
+ "grimp_cache": [],
+ "artefacts": {
+  "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_5e685cff9559cfbff8935162405cd98c5c10932e.json",
+  "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5e685cff9559cfbff8935162405cd98c5c10932e.jsonl",
+  "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5e685cff9559cfbff8935162405cd98c5c10932e.json"
+ },
+ "postrun": {
+  "verdict": "VALID",
+  "reasons": [],
+  "detail": {
+   "mode": "injection",
+   "runs": 3,
+   "run_id": "20260827T083857Z-e8f30a86",
+   "status": "completed",
+   "exit_code": 1,
+   "exit_code_note": "not a validity criterion (protocol \u00a76 Nachtrag Rev. 26)",
+   "changed_files_count": 1,
+   "control_files_count": 0,
+   "graph_files_count": 1,
+   "runs_requested": 3,
+   "calls_total": 3,
+   "rule_graph_mode": "diff",
+   "counting_rules": "changed_files_count == 1 AND calls_total == 1 * runs (3)",
+   "invalid_reasons": [],
+   "calls_invalid": 0,
+   "calls_transport_failed": 0,
+   "wall_clock_ms_inner": 404271,
+   "token_budget": {
+    "window": {
+     "context_length": 1000000,
+     "max_output_tokens": 32768
+    },
+    "window_source": "registered constant (campaign_spec.CONTEXT_WINDOW['K3'])",
+    "window_registered": 1000000,
+    "max_tokens_in_plus_out": 2708,
+    "max_call": {
+     "module": "depot.identity.repository.session_repo",
+     "run_index": 1,
+     "tokens_in_total": 1164,
+     "tokens_out_total": 1544,
+     "attempts_used": 1
+    },
+    "calls_read": 3,
+    "note": "`usage` is null in the measured logs; the counts come from `tokens_in_total` + `tokens_out_total` of the call record, read PER CALL and never accumulated over the repetitions",
+    "exceedances": []
+   },
+   "records_by_mechanism": [
+    {
+     "run_index": 0,
+     "records_derived": 0,
+     "records_llm": 1
+    },
+    {
+     "run_index": 1,
+     "records_derived": 0,
+     "records_llm": 1
+    },
+    {
+     "run_index": 2,
+     "records_derived": 0,
+     "records_llm": 1
+    }
+   ],
+   "records_note": "reported separately, never as a sum \u2014 an evaluation carrying only the total is invalid (protocol Rev. 25)"
+  }
+ }
+}

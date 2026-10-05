@@ -1,0 +1,3436 @@
+### system
+You are a software architect reviewing a Python codebase.
+
+You will receive two blocks of input:
+BLOCK 1 is a model of the code's current structure: packages, modules,
+the classes and functions they contain, and the import and inheritance
+edges that exist between them.
+BLOCK 2 lists, for each module, the signatures of its classes and functions.
+
+Your task is to PROPOSE ARCHITECTURE RULES for this codebase.
+
+A rule states what SHOULD hold or SHOULD BE FORBIDDEN. Propose a rule
+even when the current code already satisfies it — the point is not to
+describe what the code does, but to state a constraint a reviewer could
+enforce against future changes. Do not summarise the input.
+
+Base your rules on what you can see in the two blocks, but you are not
+limited to restating it. Consider what a codebase of this shape should
+require, and where a plausible future change would be a mistake.
+
+Return one JSON object with a single key "rules", holding an array.
+Each element has exactly these fields:
+
+  "id"       a short unique identifier for this rule within your answer
+  "category" a short label you choose yourself, naming the kind of
+             constraint this rule expresses. Use whatever labels fit the
+             rules you propose; they are not taken from a fixed list.
+  "scope"    an object with one key, "components", holding one or more
+             names taken verbatim from BLOCK 1 — the parts of the
+             codebase the rule applies to
+  "statement" one or two sentences of plain English stating the rule.
+             This field carries the rule: it must be specific enough
+             that a reviewer could decide whether the codebase violates
+             it. Do not restate the id or the category here.
+  "severity" either "error" or "warning"
+
+Example of the required shape, for an unrelated codebase:
+
+{"rules": [
+  {"id": "R1",
+   "category": "logging-discipline",
+   "scope": {"components": ["shop.web", "shop.jobs"]},
+   "statement": "Modules in these components must not import the standard logging module directly. They obtain a logger from the shared logging helper instead.",
+   "severity": "warning"}
+]}
+
+Output the JSON object and nothing else. No prose before or after it, no
+markdown fences, no fields other than the five listed above.
+
+
+### user
+### BLOCK 1 - CURRENT ARCHITECTURE MODEL (Ilograph YAML)
+
+description: Full code-model export for ma-conformance-testrepo.
+resources:
+  - id: depot
+    name: depot
+    subtitle: package · 4 folders
+    x-triton-node-type: package
+    x-triton-package-scope: true
+    children:
+      - id: depot.billing
+        name: billing
+        subtitle: package · 5 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: depot.billing.api
+            name: api
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.billing.api.routes
+                name: routes
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.api.routes::class:InvoiceRoutes
+                    name: InvoiceRoutes
+                    subtitle: class
+                  - id: depot.billing.api.routes::class:PaymentRoutes
+                    name: PaymentRoutes
+                    subtitle: class
+                  - id: depot.billing.api.routes::function:status_for
+                    name: status_for
+                    subtitle: function
+              - id: depot.billing.api.schemas
+                name: schemas
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.api.schemas::class:InvoiceDraft
+                    name: InvoiceDraft
+                    subtitle: class
+                  - id: depot.billing.api.schemas::class:SettlementNotice
+                    name: SettlementNotice
+                    subtitle: class
+                  - id: depot.billing.api.schemas::class:StatementBatch
+                    name: StatementBatch
+                    subtitle: class
+                  - id: depot.billing.api.schemas::function:error_body
+                    name: error_body
+                    subtitle: function
+          - id: depot.billing.mappers
+            name: mappers
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.billing.mappers.invoice_mapper
+                name: invoice_mapper
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.mappers.invoice_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.billing.mappers.invoice_mapper::function:to_document_header
+                    name: to_document_header
+                    subtitle: function
+                  - id: depot.billing.mappers.invoice_mapper::function:check_number
+                    name: check_number
+                    subtitle: function
+                  - id: depot.billing.mappers.invoice_mapper::function:is_settled
+                    name: is_settled
+                    subtitle: function
+              - id: depot.billing.mappers.payment_mapper
+                name: payment_mapper
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.mappers.payment_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.billing.mappers.payment_mapper::function:to_remittance_line
+                    name: to_remittance_line
+                    subtitle: function
+                  - id: depot.billing.mappers.payment_mapper::function:normalise_notice
+                    name: normalise_notice
+                    subtitle: function
+          - id: depot.billing.models
+            name: models
+            subtitle: package · 4 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.billing.models.invoice_models
+                name: invoice_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.models.invoice_models::class:Invoice
+                    name: Invoice
+                    subtitle: class
+              - id: depot.billing.models.invoice_view_models
+                name: invoice_view_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.models.invoice_view_models::class:DebtorStatementLine
+                    name: DebtorStatementLine
+                    subtitle: class
+              - id: depot.billing.models.legacy_tax_models
+                name: legacy_tax_models
+                subtitle: module · 2 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.models.legacy_tax_models::class:LegacyTaxRate
+                    name: LegacyTaxRate
+                    subtitle: class
+                  - id: depot.billing.models.legacy_tax_models::class:LegacyTaxTable
+                    name: LegacyTaxTable
+                    subtitle: class
+              - id: depot.billing.models.payment_models
+                name: payment_models
+                subtitle: module · 2 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.models.payment_models::class:Payment
+                    name: Payment
+                    subtitle: class
+                  - id: depot.billing.models.payment_models::function:cash_at_counter
+                    name: cash_at_counter
+                    subtitle: function
+          - id: depot.billing.repository
+            name: repository
+            subtitle: package · 3 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.billing.repository.invoice_query
+                name: invoice_query
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-cross-artefact-relations:
+                  - from: depot.billing.repository.invoice_query::class:InvoiceQuery
+                    to: depot.core.ports::class:PaymentLedger
+                    label: extends
+                x-triton-inner-artefacts:
+                  - id: depot.billing.repository.invoice_query::class:InvoiceQuery
+                    name: InvoiceQuery
+                    subtitle: class
+              - id: depot.billing.repository.invoice_repo
+                name: invoice_repo
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.repository.invoice_repo::class:InvoiceRepository
+                    name: InvoiceRepository
+                    subtitle: class
+              - id: depot.billing.repository.legacy_invoice_index
+                name: legacy_invoice_index
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.repository.legacy_invoice_index::class:LegacyInvoiceIndex
+                    name: LegacyInvoiceIndex
+                    subtitle: class
+          - id: depot.billing.services
+            name: services
+            subtitle: package · 3 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.billing.services.dunning_service
+                name: dunning_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.services.dunning_service::class:DunningService
+                    name: DunningService
+                    subtitle: class
+              - id: depot.billing.services.invoice_service
+                name: invoice_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.services.invoice_service::class:InvoiceService
+                    name: InvoiceService
+                    subtitle: class
+              - id: depot.billing.services.ledger_service
+                name: ledger_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.billing.services.ledger_service::class:LedgerService
+                    name: LedgerService
+                    subtitle: class
+      - id: depot.core
+        name: core
+        subtitle: package · 4 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: depot.core.adapters
+            name: adapters
+            subtitle: package · 2 folders · 1 artefact
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            x-triton-inner-artefacts:
+              - id: depot.core.adapters::function:__getattr__
+                name: __getattr__
+                subtitle: function
+            children:
+              - id: depot.core.adapters.internal
+                name: internal
+                subtitle: package · 2 folders
+                x-triton-node-type: package
+                x-triton-package-scope: true
+                children:
+                  - id: depot.core.adapters.internal.cache
+                    name: cache
+                    subtitle: module · 1 artefact
+                    x-triton-project-kind: module
+                    x-triton-inner-artefacts:
+                      - id: depot.core.adapters.internal.cache::class:LruCache
+                        name: LruCache
+                        subtitle: class
+                  - id: depot.core.adapters.internal.session
+                    name: session
+                    subtitle: module · 2 artefacts
+                    x-triton-project-kind: module
+                    x-triton-inner-artefacts:
+                      - id: depot.core.adapters.internal.session::class:Session
+                        name: Session
+                        subtitle: class
+                      - id: depot.core.adapters.internal.session::class:SessionFactory
+                        name: SessionFactory
+                        subtitle: class
+              - id: depot.core.adapters.storage
+                name: storage
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-cross-artefact-relations:
+                  - from: depot.core.adapters.storage::class:ParcelDocumentStore
+                    to: depot.core.ports::class:DocumentStore
+                    label: extends
+                x-triton-inner-artefacts:
+                  - id: depot.core.adapters.storage::class:ParcelDocumentStore
+                    name: ParcelDocumentStore
+                    subtitle: class
+          - id: depot.core.config
+            name: config
+            subtitle: module · 1 artefact
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: depot.core.config::class:DepotSettings
+                name: DepotSettings
+                subtitle: class
+          - id: depot.core.errors
+            name: errors
+            subtitle: module · 5 artefacts
+            x-triton-project-kind: module
+            x-triton-inner-artefact-relations:
+              - from: depot.core.errors::class:NotFoundError
+                to: depot.core.errors::class:DepotError
+                label: extends
+              - from: depot.core.errors::class:ValidationError
+                to: depot.core.errors::class:DepotError
+                label: extends
+              - from: depot.core.errors::class:ConflictError
+                to: depot.core.errors::class:DepotError
+                label: extends
+              - from: depot.core.errors::class:PermissionDeniedError
+                to: depot.core.errors::class:DepotError
+                label: extends
+            x-triton-inner-artefacts:
+              - id: depot.core.errors::class:DepotError
+                name: DepotError
+                subtitle: class
+              - id: depot.core.errors::class:NotFoundError
+                name: NotFoundError
+                subtitle: class
+              - id: depot.core.errors::class:ValidationError
+                name: ValidationError
+                subtitle: class
+              - id: depot.core.errors::class:ConflictError
+                name: ConflictError
+                subtitle: class
+              - id: depot.core.errors::class:PermissionDeniedError
+                name: PermissionDeniedError
+                subtitle: class
+          - id: depot.core.ports
+            name: ports
+            subtitle: module · 11 artefacts
+            x-triton-project-kind: module
+            x-triton-cross-artefact-relations:
+              - from: depot.billing.repository.invoice_query::class:InvoiceQuery
+                to: depot.core.ports::class:PaymentLedger
+                label: extends
+              - from: depot.core.adapters.storage::class:ParcelDocumentStore
+                to: depot.core.ports::class:DocumentStore
+                label: extends
+              - from: depot.identity.repository.session_repo::class:SessionRepository
+                to: depot.core.ports::class:SessionStore
+                label: extends
+              - from: depot.orders.repository.order_query::class:OrderQuery
+                to: depot.core.ports::class:DiscountCatalog
+                label: extends
+            x-triton-inner-artefacts:
+              - id: depot.core.ports::class:Clock
+                name: Clock
+                subtitle: class
+              - id: depot.core.ports::class:TokenSigner
+                name: TokenSigner
+                subtitle: class
+              - id: depot.core.ports::class:SessionStore
+                name: SessionStore
+                subtitle: class
+              - id: depot.core.ports::class:DocumentStore
+                name: DocumentStore
+                subtitle: class
+              - id: depot.core.ports::class:IdGenerator
+                name: IdGenerator
+                subtitle: class
+              - id: depot.core.ports::class:NotificationSender
+                name: NotificationSender
+                subtitle: class
+              - id: depot.core.ports::class:ShelfAllocator
+                name: ShelfAllocator
+                subtitle: class
+              - id: depot.core.ports::class:RateProvider
+                name: RateProvider
+                subtitle: class
+              - id: depot.core.ports::class:DiscountCatalog
+                name: DiscountCatalog
+                subtitle: class
+              - id: depot.core.ports::class:PaymentGateway
+                name: PaymentGateway
+                subtitle: class
+              - id: depot.core.ports::class:PaymentLedger
+                name: PaymentLedger
+                subtitle: class
+      - id: depot.identity
+        name: identity
+        subtitle: package · 5 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: depot.identity.api
+            name: api
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.identity.api.routes
+                name: routes
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.api.routes::class:CustomerRoutes
+                    name: CustomerRoutes
+                    subtitle: class
+                  - id: depot.identity.api.routes::class:RoleRoutes
+                    name: RoleRoutes
+                    subtitle: class
+                  - id: depot.identity.api.routes::function:status_for
+                    name: status_for
+                    subtitle: function
+              - id: depot.identity.api.schemas
+                name: schemas
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.api.schemas::class:CustomerRegistration
+                    name: CustomerRegistration
+                    subtitle: class
+                  - id: depot.identity.api.schemas::class:ContactChange
+                    name: ContactChange
+                    subtitle: class
+                  - id: depot.identity.api.schemas::class:SignOn
+                    name: SignOn
+                    subtitle: class
+                  - id: depot.identity.api.schemas::function:error_body
+                    name: error_body
+                    subtitle: function
+          - id: depot.identity.mappers
+            name: mappers
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.identity.mappers.customer_mapper
+                name: customer_mapper
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.mappers.customer_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.identity.mappers.customer_mapper::function:to_slip_line
+                    name: to_slip_line
+                    subtitle: function
+                  - id: depot.identity.mappers.customer_mapper::function:apply_changes
+                    name: apply_changes
+                    subtitle: function
+              - id: depot.identity.mappers.role_mapper
+                name: role_mapper
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.mappers.role_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.identity.mappers.role_mapper::function:from_name
+                    name: from_name
+                    subtitle: function
+                  - id: depot.identity.mappers.role_mapper::function:catalogue
+                    name: catalogue
+                    subtitle: function
+          - id: depot.identity.models
+            name: models
+            subtitle: package · 3 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.identity.models.customer_models
+                name: customer_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.models.customer_models::class:Customer
+                    name: Customer
+                    subtitle: class
+              - id: depot.identity.models.customer_view_models
+                name: customer_view_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.models.customer_view_models::class:CustomerSummary
+                    name: CustomerSummary
+                    subtitle: class
+              - id: depot.identity.models.role_models
+                name: role_models
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.models.role_models::class:Role
+                    name: Role
+                    subtitle: class
+                  - id: depot.identity.models.role_models::function:counter_clerk
+                    name: counter_clerk
+                    subtitle: function
+                  - id: depot.identity.models.role_models::function:dispatcher
+                    name: dispatcher
+                    subtitle: function
+                  - id: depot.identity.models.role_models::function:depot_manager
+                    name: depot_manager
+                    subtitle: function
+          - id: depot.identity.repository
+            name: repository
+            subtitle: package · 3 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.identity.repository.customer_repo
+                name: customer_repo
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.repository.customer_repo::class:CustomerRepository
+                    name: CustomerRepository
+                    subtitle: class
+              - id: depot.identity.repository.legacy_token_index
+                name: legacy_token_index
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.repository.legacy_token_index::class:LegacyTokenIndex
+                    name: LegacyTokenIndex
+                    subtitle: class
+              - id: depot.identity.repository.session_repo
+                name: session_repo
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-cross-artefact-relations:
+                  - from: depot.identity.repository.session_repo::class:SessionRepository
+                    to: depot.core.ports::class:SessionStore
+                    label: extends
+                x-triton-inner-artefacts:
+                  - id: depot.identity.repository.session_repo::class:SessionRepository
+                    name: SessionRepository
+                    subtitle: class
+          - id: depot.identity.services
+            name: services
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.identity.services.customer_service
+                name: customer_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.services.customer_service::class:CustomerService
+                    name: CustomerService
+                    subtitle: class
+              - id: depot.identity.services.token_service
+                name: token_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.identity.services.token_service::class:TokenService
+                    name: TokenService
+                    subtitle: class
+      - id: depot.orders
+        name: orders
+        subtitle: package · 5 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: depot.orders.api
+            name: api
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.orders.api.routes
+                name: routes
+                subtitle: module · 2 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.api.routes::class:OrderRoutes
+                    name: OrderRoutes
+                    subtitle: class
+                  - id: depot.orders.api.routes::function:status_for
+                    name: status_for
+                    subtitle: function
+              - id: depot.orders.api.schemas
+                name: schemas
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.api.schemas::class:OrderDraft
+                    name: OrderDraft
+                    subtitle: class
+                  - id: depot.orders.api.schemas::class:LineBatch
+                    name: LineBatch
+                    subtitle: class
+                  - id: depot.orders.api.schemas::class:QuoteRequest
+                    name: QuoteRequest
+                    subtitle: class
+                  - id: depot.orders.api.schemas::function:error_body
+                    name: error_body
+                    subtitle: function
+          - id: depot.orders.mappers
+            name: mappers
+            subtitle: package · 2 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.orders.mappers.order_line_mapper
+                name: order_line_mapper
+                subtitle: module · 3 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.mappers.order_line_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.orders.mappers.order_line_mapper::function:to_shelf_label
+                    name: to_shelf_label
+                    subtitle: function
+                  - id: depot.orders.mappers.order_line_mapper::function:normalise_request
+                    name: normalise_request
+                    subtitle: function
+              - id: depot.orders.mappers.order_mapper
+                name: order_mapper
+                subtitle: module · 4 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.mappers.order_mapper::function:to_payload
+                    name: to_payload
+                    subtitle: function
+                  - id: depot.orders.mappers.order_mapper::function:to_board_line
+                    name: to_board_line
+                    subtitle: function
+                  - id: depot.orders.mappers.order_mapper::function:check_zone
+                    name: check_zone
+                    subtitle: function
+                  - id: depot.orders.mappers.order_mapper::function:next_states
+                    name: next_states
+                    subtitle: function
+          - id: depot.orders.models
+            name: models
+            subtitle: package · 5 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.orders.models.discount_models
+                name: discount_models
+                subtitle: module · 2 artefacts
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.models.discount_models::class:Discount
+                    name: Discount
+                    subtitle: class
+                  - id: depot.orders.models.discount_models::function:house_codes
+                    name: house_codes
+                    subtitle: function
+              - id: depot.orders.models.order_line_models
+                name: order_line_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.models.order_line_models::class:OrderLine
+                    name: OrderLine
+                    subtitle: class
+              - id: depot.orders.models.order_line_view_models
+                name: order_line_view_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.models.order_line_view_models::class:PackingListRow
+                    name: PackingListRow
+                    subtitle: class
+              - id: depot.orders.models.order_models
+                name: order_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.models.order_models::class:Order
+                    name: Order
+                    subtitle: class
+              - id: depot.orders.models.order_view_models
+                name: order_view_models
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.models.order_view_models::class:OrderBoardRow
+                    name: OrderBoardRow
+                    subtitle: class
+          - id: depot.orders.repository
+            name: repository
+            subtitle: package · 4 folders
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            children:
+              - id: depot.orders.repository.legacy_order_index
+                name: legacy_order_index
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.repository.legacy_order_index::class:LegacyOrderIndex
+                    name: LegacyOrderIndex
+                    subtitle: class
+              - id: depot.orders.repository.order_line_repo
+                name: order_line_repo
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.repository.order_line_repo::class:OrderLineRepository
+                    name: OrderLineRepository
+                    subtitle: class
+              - id: depot.orders.repository.order_query
+                name: order_query
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-cross-artefact-relations:
+                  - from: depot.orders.repository.order_query::class:OrderQuery
+                    to: depot.core.ports::class:DiscountCatalog
+                    label: extends
+                x-triton-inner-artefacts:
+                  - id: depot.orders.repository.order_query::class:OrderQuery
+                    name: OrderQuery
+                    subtitle: class
+              - id: depot.orders.repository.order_repo
+                name: order_repo
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.repository.order_repo::class:OrderRepository
+                    name: OrderRepository
+                    subtitle: class
+          - id: depot.orders.services
+            name: services
+            subtitle: package · 5 folders · 2 artefacts
+            x-triton-node-type: package
+            x-triton-package-scope: true
+            x-triton-inner-artefacts:
+              - id: depot.orders.services::function:quote_parcel_cents
+                name: quote_parcel_cents
+                subtitle: function
+              - id: depot.orders.services::function:weight_band
+                name: weight_band
+                subtitle: function
+            children:
+              - id: depot.orders.services.catalog_service
+                name: catalog_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.services.catalog_service::class:CatalogService
+                    name: CatalogService
+                    subtitle: class
+              - id: depot.orders.services.checkout_service
+                name: checkout_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.services.checkout_service::class:CheckoutService
+                    name: CheckoutService
+                    subtitle: class
+              - id: depot.orders.services.order_service
+                name: order_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.services.order_service::class:OrderService
+                    name: OrderService
+                    subtitle: class
+              - id: depot.orders.services.pricing
+                name: pricing
+                subtitle: package · 1 folder
+                x-triton-node-type: package
+                x-triton-package-scope: true
+                children:
+                  - id: depot.orders.services.pricing.engine
+                    name: engine
+                    subtitle: module · 1 artefact
+                    x-triton-project-kind: module
+                    x-triton-inner-artefacts:
+                      - id: depot.orders.services.pricing.engine::class:PricingEngine
+                        name: PricingEngine
+                        subtitle: class
+              - id: depot.orders.services.refund_service
+                name: refund_service
+                subtitle: module · 1 artefact
+                x-triton-project-kind: module
+                x-triton-inner-artefacts:
+                  - id: depot.orders.services.refund_service::class:RefundService
+                    name: RefundService
+                    subtitle: class
+perspectives:
+  - name: dependencies
+    orientation: leftToRight
+    color: royalblue
+    relations:
+      - from: depot.billing.api.routes
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.api.routes
+        to: depot.billing.mappers.invoice_mapper
+        label: imports
+      - from: depot.billing.api.routes
+        to: depot.billing.mappers.payment_mapper
+        label: imports
+      - from: depot.billing.api.routes
+        to: depot.billing.services.invoice_service
+        label: imports
+      - from: depot.billing.api.schemas
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.mappers.invoice_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.mappers.invoice_mapper
+        to: depot.billing.models.invoice_models
+        label: imports
+      - from: depot.billing.mappers.payment_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.mappers.payment_mapper
+        to: depot.billing.models.payment_models
+        label: imports
+      - from: depot.billing.models.invoice_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.models.invoice_view_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.models.payment_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.billing.repository.invoice_query
+        to: depot.core.ports
+        label: imports
+      - from: depot.billing.repository.invoice_query
+        to: depot.billing.models.payment_models
+        label: imports
+      - from: depot.billing.repository.invoice_repo
+        to: depot.core.ports
+        label: imports
+      - from: depot.billing.repository.invoice_repo
+        to: depot.billing.models.invoice_models
+        label: imports
+      - from: depot.billing.services.dunning_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.billing.services.dunning_service
+        to: depot.billing.repository.invoice_query
+        label: imports
+      - from: depot.billing.services.invoice_service
+        to: depot.core.adapters.storage
+        label: imports
+      - from: depot.billing.services.invoice_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.billing.services.invoice_service
+        to: depot.identity.services.customer_service
+        label: imports
+      - from: depot.billing.services.invoice_service
+        to: depot.billing.repository.invoice_repo
+        label: imports
+      - from: depot.billing.services.ledger_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.billing.services.ledger_service
+        to: depot.billing.repository.invoice_repo
+        label: imports
+      - from: depot.core.adapters
+        to: depot.core.adapters.internal.cache
+        label: imports
+      - from: depot.core.adapters
+        to: depot.core.adapters.internal.session
+        label: imports
+      - from: depot.core.adapters
+        to: depot.core.ports
+        label: imports
+      - from: depot.core.adapters.storage
+        to: depot.core.ports
+        label: imports
+      - from: depot.identity.api.routes
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.api.routes
+        to: depot.identity.mappers.customer_mapper
+        label: imports
+      - from: depot.identity.api.routes
+        to: depot.identity.mappers.role_mapper
+        label: imports
+      - from: depot.identity.api.routes
+        to: depot.identity.services.customer_service
+        label: imports
+      - from: depot.identity.api.schemas
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.mappers.customer_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.mappers.customer_mapper
+        to: depot.identity.models.customer_models
+        label: imports
+      - from: depot.identity.mappers.role_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.mappers.role_mapper
+        to: depot.identity.models.role_models
+        label: imports
+      - from: depot.identity.models.customer_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.models.customer_view_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.models.role_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.identity.repository.customer_repo
+        to: depot.core.ports
+        label: imports
+      - from: depot.identity.repository.customer_repo
+        to: depot.identity.models.customer_models
+        label: imports
+      - from: depot.identity.repository.session_repo
+        to: depot.core.ports
+        label: imports
+      - from: depot.identity.repository.session_repo
+        to: depot.identity.models.role_models
+        label: imports
+      - from: depot.identity.services.customer_service
+        to: depot.core.adapters.storage
+        label: imports
+      - from: depot.identity.services.customer_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.identity.services.customer_service
+        to: depot.identity.repository.customer_repo
+        label: imports
+      - from: depot.identity.services.token_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.identity.services.token_service
+        to: depot.identity.repository.session_repo
+        label: imports
+      - from: depot.orders.api.routes
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.api.routes
+        to: depot.orders.mappers.order_line_mapper
+        label: imports
+      - from: depot.orders.api.routes
+        to: depot.orders.mappers.order_mapper
+        label: imports
+      - from: depot.orders.api.routes
+        to: depot.orders.services.order_service
+        label: imports
+      - from: depot.orders.api.schemas
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.mappers.order_line_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.mappers.order_line_mapper
+        to: depot.orders.models.order_line_models
+        label: imports
+      - from: depot.orders.mappers.order_mapper
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.mappers.order_mapper
+        to: depot.orders.models.order_models
+        label: imports
+      - from: depot.orders.models.discount_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.models.order_line_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.models.order_line_view_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.models.order_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.models.order_view_models
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.repository.order_line_repo
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.repository.order_line_repo
+        to: depot.orders.models.order_line_models
+        label: imports
+      - from: depot.orders.repository.order_query
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.repository.order_query
+        to: depot.orders.models.discount_models
+        label: imports
+      - from: depot.orders.repository.order_repo
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.repository.order_repo
+        to: depot.orders.models.order_models
+        label: imports
+      - from: depot.orders.services
+        to: depot.orders.services.pricing.engine
+        label: imports
+      - from: depot.orders.services.catalog_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.services.catalog_service
+        to: depot.orders.repository.order_query
+        label: imports
+      - from: depot.orders.services.checkout_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.services.checkout_service
+        to: depot.orders.repository.order_line_repo
+        label: imports
+      - from: depot.orders.services.order_service
+        to: depot.core.adapters.storage
+        label: imports
+      - from: depot.orders.services.order_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.services.order_service
+        to: depot.identity.services.customer_service
+        label: imports
+      - from: depot.orders.services.order_service
+        to: depot.orders.repository.order_repo
+        label: imports
+      - from: depot.orders.services.pricing.engine
+        to: depot.core.errors
+        label: imports
+      - from: depot.orders.services.refund_service
+        to: depot.core.ports
+        label: imports
+      - from: depot.orders.services.refund_service
+        to: depot.orders.repository.order_repo
+        label: imports
+
+### BLOCK 2 - EXTRACTED CODE FACTS (JSON)
+
+[
+  {
+    "module_name": "depot.billing.api.routes",
+    "classes": [
+      {
+        "name": "InvoiceRoutes",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, invoices: depot.billing.services.invoice_service.InvoiceService) -> None",
+            "decorators": []
+          },
+          {
+            "name": "post_invoice",
+            "signature": "(self, customer_reference: str, order_reference: str, net_cents: int) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "get_invoice",
+            "signature": "(self, number: str) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "post_issue",
+            "signature": "(self, number: str, issued_at: float) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "get_document_header",
+            "signature": "(self, number: str) -> dict[str, str]",
+            "decorators": []
+          },
+          {
+            "name": "get_invoices_of_customer",
+            "signature": "(self, customer_reference: str) -> dict[str, object]",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "PaymentRoutes",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, invoices: depot.billing.services.invoice_service.InvoiceService) -> None",
+            "decorators": []
+          },
+          {
+            "name": "post_statement",
+            "signature": "(self, notices: list[dict[str, object]]) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "post_settlement",
+            "signature": "(self, number: str, amount_cents: int) -> dict[str, object]",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "status_for",
+        "signature": "(error: depot.core.errors.DepotError) -> int",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.billing.api.schemas",
+    "classes": [
+      {
+        "name": "InvoiceDraft",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, customer_reference: str, order_reference: str, net_cents: int) -> None",
+            "decorators": []
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "SettlementNotice",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, number: str, amount_cents: int) -> None",
+            "decorators": []
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "StatementBatch",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, notices: list[dict[str, object]]) -> None",
+            "decorators": []
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "error_body",
+        "signature": "(error: depot.core.errors.DepotError) -> dict[str, str]",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.billing.mappers.invoice_mapper",
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(invoice: depot.billing.models.invoice_models.Invoice) -> dict[str, object]",
+        "decorators": []
+      },
+      {
+        "name": "to_document_header",
+        "signature": "(invoice: depot.billing.models.invoice_models.Invoice) -> str",
+        "decorators": []
+      },
+      {
+        "name": "check_number",
+        "signature": "(number: str) -> str",
+        "decorators": []
+      },
+      {
+        "name": "is_settled",
+        "signature": "(invoice: depot.billing.models.invoice_models.Invoice) -> bool",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.billing.mappers.payment_mapper",
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(payment: depot.billing.models.payment_models.Payment) -> dict[str, object]",
+        "decorators": []
+      },
+      {
+        "name": "to_remittance_line",
+        "signature": "(payment: depot.billing.models.payment_models.Payment) -> str",
+        "decorators": []
+      },
+      {
+        "name": "normalise_notice",
+        "signature": "(notice: dict[str, object]) -> dict[str, object]",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.billing.models.invoice_models",
+    "classes": [
+      {
+        "name": "Invoice",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "vat_cents",
+            "signature": "(self) -> int",
+            "decorators": []
+          },
+          {
+            "name": "gross_cents",
+            "signature": "(self) -> int",
+            "decorators": []
+          },
+          {
+            "name": "open_cents",
+            "signature": "(self) -> int",
+            "decorators": []
+          },
+          {
+            "name": "issue",
+            "signature": "(self, issued_at: float) -> None",
+            "decorators": []
+          },
+          {
+            "name": "settle",
+            "signature": "(self, amount_cents: int) -> int",
+            "decorators": []
+          },
+          {
+            "name": "due_at",
+            "signature": "(self) -> float | None",
+            "decorators": []
+          },
+          {
+            "name": "is_overdue",
+            "signature": "(self, now_epoch: float) -> bool",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.models.invoice_view_models",
+    "classes": [
+      {
+        "name": "DebtorStatementLine",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "bucket",
+            "signature": "(self) -> str",
+            "decorators": []
+          },
+          {
+            "name": "counts_towards_dunning",
+            "signature": "(self) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "printed_amount",
+            "signature": "(self) -> str",
+            "decorators": []
+          },
+          {
+            "name": "headline",
+            "signature": "(self) -> str",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.models.legacy_tax_models",
+    "classes": [
+      {
+        "name": "LegacyTaxRate",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, code: str, percent_scaled: int, valid_from: str, valid_to: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "applies_on",
+            "signature": "(self, day: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "tax_cents",
+            "signature": "(self, net_cents: int) -> int",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "LegacyTaxTable",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "load_line",
+            "signature": "(self, line: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "rate_on",
+            "signature": "(self, day: str) -> LegacyTaxRate | None",
+            "decorators": []
+          },
+          {
+            "name": "codes",
+            "signature": "(self) -> list[str]",
+            "decorators": []
+          },
+          {
+            "name": "size",
+            "signature": "(self) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.models.payment_models",
+    "classes": [
+      {
+        "name": "Payment",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, reference: str, amount_cents: int, method: str, received_at: float, remittance_note: str='') -> None",
+            "decorators": []
+          },
+          {
+            "name": "normalise",
+            "signature": "(self, reference: str) -> str",
+            "decorators": []
+          },
+          {
+            "name": "looks_matchable",
+            "signature": "(self) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "is_reversible",
+            "signature": "(self) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "printed_amount",
+            "signature": "(self) -> str",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "cash_at_counter",
+        "signature": "(amount_cents: int, received_at: float, slip: str) -> Payment",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.billing.repository.invoice_query",
+    "classes": [
+      {
+        "name": "InvoiceQuery",
+        "bases": [
+          "depot.core.ports.PaymentLedger"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "settled_cents",
+            "signature": "(self, invoice_number: str) -> int",
+            "decorators": []
+          },
+          {
+            "name": "book",
+            "signature": "(self, payment: PaymentRecord, known_numbers: list[str]) -> str",
+            "decorators": []
+          },
+          {
+            "name": "match",
+            "signature": "(self, payment: PaymentRecord, known_numbers: list[str]) -> str",
+            "decorators": []
+          },
+          {
+            "name": "payments_of",
+            "signature": "(self, invoice_number: str) -> list[PaymentRecord]",
+            "decorators": []
+          },
+          {
+            "name": "unmatched_cents",
+            "signature": "(self) -> int",
+            "decorators": []
+          },
+          {
+            "name": "last_payment_at",
+            "signature": "(self, invoice_number: str) -> float | None",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.repository.invoice_repo",
+    "classes": [
+      {
+        "name": "InvoiceRepository",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, ids: depot.core.ports.IdGenerator) -> None",
+            "decorators": []
+          },
+          {
+            "name": "create",
+            "signature": "(self, customer_reference: str, order_reference: str, net_cents: int) -> str",
+            "decorators": []
+          },
+          {
+            "name": "get",
+            "signature": "(self, number: str) -> InvoiceRecord | None",
+            "decorators": []
+          },
+          {
+            "name": "issue",
+            "signature": "(self, number: str, issued_at: float) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "settle",
+            "signature": "(self, number: str, amount_cents: int) -> int",
+            "decorators": []
+          },
+          {
+            "name": "count_reminder",
+            "signature": "(self, number: str) -> int",
+            "decorators": []
+          },
+          {
+            "name": "overdue",
+            "signature": "(self, now_epoch: float) -> list[str]",
+            "decorators": []
+          },
+          {
+            "name": "of_customer",
+            "signature": "(self, customer_reference: str) -> list[str]",
+            "decorators": []
+          },
+          {
+            "name": "open_total_cents",
+            "signature": "(self) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.repository.legacy_invoice_index",
+    "classes": [
+      {
+        "name": "LegacyInvoiceIndex",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "load_line",
+            "signature": "(self, line: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "looks_legacy",
+            "signature": "(self, old_number: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "resolve",
+            "signature": "(self, old_number: str) -> str | None",
+            "decorators": []
+          },
+          {
+            "name": "size",
+            "signature": "(self) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.services.dunning_service",
+    "classes": [
+      {
+        "name": "DunningService",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, payments: depot.billing.repository.invoice_query.InvoiceQuery, notifier: depot.core.ports.NotificationSender) -> None",
+            "decorators": []
+          },
+          {
+            "name": "template_for",
+            "signature": "(self, reminders_sent: int) -> str",
+            "decorators": []
+          },
+          {
+            "name": "is_quiet",
+            "signature": "(self, invoice_number: str, now_epoch: float) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "should_remind",
+            "signature": "(self, invoice_number: str, gross_cents: int, now_epoch: float) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "remind",
+            "signature": "(self, invoice_number: str, recipient: str, gross_cents: int, reminders_sent: int, now_epoch: float) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "unmatched_cents",
+            "signature": "(self) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.services.invoice_service",
+    "classes": [
+      {
+        "name": "InvoiceService",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, invoices: depot.billing.repository.invoice_repo.InvoiceRepository, customers: depot.identity.services.customer_service.CustomerService, notifier: depot.core.ports.NotificationSender, documents: depot.core.adapters.storage.ParcelDocumentStore) -> None",
+            "decorators": []
+          },
+          {
+            "name": "raise_invoice",
+            "signature": "(self, customer_reference: str, order_reference: str, net_cents: int) -> str",
+            "decorators": []
+          },
+          {
+            "name": "fetch",
+            "signature": "(self, number: str) -> depot.billing.repository.invoice_repo.InvoiceRecord | None",
+            "decorators": []
+          },
+          {
+            "name": "issue",
+            "signature": "(self, number: str, issued_at: float) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "settle",
+            "signature": "(self, number: str, amount_cents: int) -> int",
+            "decorators": []
+          },
+          {
+            "name": "file_document",
+            "signature": "(self, number: str, day: str, document: bytes) -> str",
+            "decorators": []
+          },
+          {
+            "name": "document",
+            "signature": "(self, number: str, day: str) -> bytes | None",
+            "decorators": []
+          },
+          {
+            "name": "invoices_of",
+            "signature": "(self, customer_reference: str) -> list[str]",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.billing.services.ledger_service",
+    "classes": [
+      {
+        "name": "LedgerService",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, invoices: depot.billing.repository.invoice_repo.InvoiceRepository) -> None",
+            "decorators": []
+          },
+          {
+            "name": "post_invoice",
+            "signature": "(self, number: str, clock: depot.core.ports.Clock) -> str",
+            "decorators": []
+          },
+          {
+            "name": "post_settlement",
+            "signature": "(self, number: str, amount_cents: int, day: str) -> str",
+            "decorators": []
+          },
+          {
+            "name": "record",
+            "signature": "(self, day: str, debit: str, credit: str, amount_cents: int) -> None",
+            "decorators": []
+          },
+          {
+            "name": "journal",
+            "signature": "(self) -> list[str]",
+            "decorators": []
+          },
+          {
+            "name": "balance_cents",
+            "signature": "(self, account: str) -> int",
+            "decorators": []
+          },
+          {
+            "name": "receivable_cents",
+            "signature": "(self) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.adapters",
+    "classes": [],
+    "functions": [
+      {
+        "name": "__getattr__",
+        "signature": "(name: str) -> object",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.core.adapters.internal.cache",
+    "classes": [
+      {
+        "name": "LruCache",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, capacity: int=256) -> None",
+            "decorators": []
+          },
+          {
+            "name": "get",
+            "signature": "(self, key: str) -> str | None",
+            "decorators": []
+          },
+          {
+            "name": "put",
+            "signature": "(self, key: str, value: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "invalidate",
+            "signature": "(self, key: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "clear",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "size",
+            "signature": "(self) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.adapters.internal.session",
+    "classes": [
+      {
+        "name": "Session",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, connection_string: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "execute",
+            "signature": "(self, statement: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "commit",
+            "signature": "(self) -> int",
+            "decorators": []
+          },
+          {
+            "name": "rollback",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "close",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "pending",
+            "signature": "(self) -> int",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "SessionFactory",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, connection_string: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "open",
+            "signature": "(self) -> Session",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.adapters.storage",
+    "classes": [
+      {
+        "name": "ParcelDocumentStore",
+        "bases": [
+          "depot.core.ports.DocumentStore"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, bucket: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "key_for",
+            "signature": "(self, tracking_code: str, day: str, kind: str) -> str",
+            "decorators": []
+          },
+          {
+            "name": "put_label",
+            "signature": "(self, tracking_code: str, day: str, label: bytes) -> str",
+            "decorators": []
+          },
+          {
+            "name": "put_manifest",
+            "signature": "(self, tracking_code: str, day: str, manifest: bytes) -> str",
+            "decorators": []
+          },
+          {
+            "name": "read",
+            "signature": "(self, key: str) -> bytes | None",
+            "decorators": []
+          },
+          {
+            "name": "drop",
+            "signature": "(self, key: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "keys_of_day",
+            "signature": "(self, day: str) -> list[str]",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.config",
+    "classes": [
+      {
+        "name": "DepotSettings",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, database_url: str, depot_code: str, currency: str=DEFAULT_CURRENCY, session_ttl_seconds: int=DEFAULT_SESSION_TTL_SECONDS, max_parcel_weight_grams: int=MAX_PARCEL_WEIGHT_GRAMS, max_parcel_girth_cm: int=MAX_PARCEL_GIRTH_CM) -> None",
+            "decorators": []
+          },
+          {
+            "name": "accepts_weight",
+            "signature": "(self, weight_grams: int) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "accepts_girth",
+            "signature": "(self, length_cm: int, width_cm: int, height_cm: int) -> bool",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.errors",
+    "classes": [
+      {
+        "name": "DepotError",
+        "bases": [
+          "Exception"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, message: str) -> None",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "NotFoundError",
+        "bases": [
+          "DepotError"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, entity: str, reference: str) -> None",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "ValidationError",
+        "bases": [
+          "DepotError"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, field: str, reason: str) -> None",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "ConflictError",
+        "bases": [
+          "DepotError"
+        ],
+        "decorators": [],
+        "methods": []
+      },
+      {
+        "name": "PermissionDeniedError",
+        "bases": [
+          "DepotError"
+        ],
+        "decorators": [],
+        "methods": []
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.core.ports",
+    "classes": [
+      {
+        "name": "Clock",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "now_epoch",
+            "signature": "(self) -> float",
+            "decorators": []
+          },
+          {
+            "name": "today_iso",
+            "signature": "(self) -> str",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "TokenSigner",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "sign",
+            "signature": "(self, subject: str, ttl_seconds: int) -> str",
+            "decorators": []
+          },
+          {
+            "name": "verify",
+            "signature": "(self, token: str) -> str | None",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "SessionStore",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "touch",
+            "signature": "(self, session_id: str, ttl_seconds: int) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "revoke",
+            "signature": "(self, session_id: str) -> None",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "DocumentStore",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "key_for",
+            "signature": "(self, tracking_code: str, day: str, kind: str) -> str",
+            "decorators": []
+          },
+          {
+            "name": "put_label",
+            "signature": "(self, tracking_code: str, day: str, label: bytes) -> str",
+            "decorators": []
+          },
+          {
+            "name": "put_manifest",
+            "signature": "(self, tracking_code: str, day: str, manifest: bytes) -> str",
+            "decorators": []
+          },
+          {
+            "name": "read",
+            "signature": "(self, key: str) -> bytes | None",
+            "decorators": []
+          },
+          {
+            "name": "drop",
+            "signature": "(self, key: str) -> bool",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "IdGenerator",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "new_id",
+            "signature": "(self, prefix: str) -> str",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "NotificationSender",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "send",
+            "signature": "(self, recipient: str, template: str, fields: dict[str, str]) -> bool",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "ShelfAllocator",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "reserve",
+            "signature": "(self, depot_code: str, parcel_count: int) -> str",
+            "decorators": []
+          },
+          {
+            "name": "release",
+            "signature": "(self, slot: str) -> bool",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "RateProvider",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "rate_cents",
+            "signature": "(self, zone: str, weight_grams: int) -> int",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "DiscountCatalog",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "percent_for",
+            "signature": "(self, code: str, subtotal_cents: int) -> int",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "PaymentGateway",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "refund",
+            "signature": "(self, payment_reference: str, amount_cents: int) -> str",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "PaymentLedger",
+        "bases": [
+          "typing.Protocol"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "settled_cents",
+            "signature": "(self, invoice_number: str) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.api.routes",
+    "classes": [
+      {
+        "name": "CustomerRoutes",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, customers: depot.identity.services.customer_service.CustomerService) -> None",
+            "decorators": []
+          },
+          {
+            "name": "post_customer",
+            "signature": "(self, email: str, display_name: str, phone: str) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "get_customer",
+            "signature": "(self, reference: str) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "patch_customer",
+            "signature": "(self, reference: str, changes: dict[str, str]) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "post_block",
+            "signature": "(self, reference: str, reason: str) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "post_address_confirmation",
+            "signature": "(self, reference: str, confirmed_at: float) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "get_blocked",
+            "signature": "(self) -> dict[str, object]",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "RoleRoutes",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "get_roles",
+            "signature": "(self) -> list[dict[str, object]]",
+            "decorators": []
+          },
+          {
+            "name": "get_role",
+            "signature": "(self, name: str) -> dict[str, object]",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "status_for",
+        "signature": "(error: depot.core.errors.DepotError) -> int",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.identity.api.schemas",
+    "classes": [
+      {
+        "name": "CustomerRegistration",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, email: str, display_name: str, phone: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "ContactChange",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, fields: dict[str, str]) -> None",
+            "decorators": []
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "SignOn",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, terminal: str, role_name: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "error_body",
+        "signature": "(error: depot.core.errors.DepotError) -> dict[str, str]",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.identity.mappers.customer_mapper",
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(customer: depot.identity.models.customer_models.Customer) -> dict[str, object]",
+        "decorators": []
+      },
+      {
+        "name": "to_slip_line",
+        "signature": "(customer: depot.identity.models.customer_models.Customer) -> str",
+        "decorators": []
+      },
+      {
+        "name": "apply_changes",
+        "signature": "(customer: depot.identity.models.customer_models.Customer, changes: dict[str, str]) -> int",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.identity.mappers.role_mapper",
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(role: depot.identity.models.role_models.Role) -> dict[str, object]",
+        "decorators": []
+      },
+      {
+        "name": "from_name",
+        "signature": "(name: str) -> depot.identity.models.role_models.Role",
+        "decorators": []
+      },
+      {
+        "name": "catalogue",
+        "signature": "() -> list[dict[str, object]]",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.identity.models.customer_models",
+    "classes": [
+      {
+        "name": "Customer",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "mark_verified",
+            "signature": "(self, verified_at: float) -> None",
+            "decorators": []
+          },
+          {
+            "name": "block",
+            "signature": "(self, reason: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "unblock",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "rename",
+            "signature": "(self, display_name: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "may_collect",
+            "signature": "(self) -> bool",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.models.customer_view_models",
+    "classes": [
+      {
+        "name": "CustomerSummary",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "shelf_pressure",
+            "signature": "(self) -> float",
+            "decorators": []
+          },
+          {
+            "name": "is_overflowing",
+            "signature": "(self) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "needs_reminder",
+            "signature": "(self, now_epoch: float, grace_seconds: float) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "headline",
+            "signature": "(self) -> str",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.models.role_models",
+    "classes": [
+      {
+        "name": "Role",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, name: str, permissions: frozenset[str]) -> None",
+            "decorators": []
+          },
+          {
+            "name": "grants",
+            "signature": "(self, permission: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "outranks",
+            "signature": "(self, other: 'Role') -> bool",
+            "decorators": []
+          },
+          {
+            "name": "require",
+            "signature": "(self, permission: str) -> None",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "counter_clerk",
+        "signature": "() -> Role",
+        "decorators": []
+      },
+      {
+        "name": "dispatcher",
+        "signature": "() -> Role",
+        "decorators": []
+      },
+      {
+        "name": "depot_manager",
+        "signature": "() -> Role",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.identity.repository.customer_repo",
+    "classes": [
+      {
+        "name": "CustomerRepository",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, ids: depot.core.ports.IdGenerator) -> None",
+            "decorators": []
+          },
+          {
+            "name": "create",
+            "signature": "(self, email: str, display_name: str, phone: str) -> str",
+            "decorators": []
+          },
+          {
+            "name": "verify",
+            "signature": "(self, reference: str, confirmed_at: float) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "get",
+            "signature": "(self, reference: str) -> depot.identity.models.customer_models.Customer | None",
+            "decorators": []
+          },
+          {
+            "name": "find_by_email",
+            "signature": "(self, email: str) -> depot.identity.models.customer_models.Customer | None",
+            "decorators": []
+          },
+          {
+            "name": "block",
+            "signature": "(self, reference: str, reason: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "blocked_references",
+            "signature": "(self) -> list[str]",
+            "decorators": []
+          },
+          {
+            "name": "count",
+            "signature": "(self) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.repository.legacy_token_index",
+    "classes": [
+      {
+        "name": "LegacyTokenIndex",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "load_line",
+            "signature": "(self, line: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "resolve",
+            "signature": "(self, token: str) -> str | None",
+            "decorators": []
+          },
+          {
+            "name": "knows",
+            "signature": "(self, token: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "size",
+            "signature": "(self) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.repository.session_repo",
+    "classes": [
+      {
+        "name": "SessionRepository",
+        "bases": [
+          "depot.core.ports.SessionStore"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "open",
+            "signature": "(self, session_id: str, role: depot.identity.models.role_models.Role, expires_at: float) -> None",
+            "decorators": []
+          },
+          {
+            "name": "touch",
+            "signature": "(self, session_id: str, ttl_seconds: int) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "revoke",
+            "signature": "(self, session_id: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "role_of",
+            "signature": "(self, session_id: str) -> depot.identity.models.role_models.Role | None",
+            "decorators": []
+          },
+          {
+            "name": "expires_at",
+            "signature": "(self, session_id: str) -> float | None",
+            "decorators": []
+          },
+          {
+            "name": "drop_expired",
+            "signature": "(self, now_epoch: float) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.services.customer_service",
+    "classes": [
+      {
+        "name": "CustomerService",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, customers: depot.identity.repository.customer_repo.CustomerRepository, notifier: depot.core.ports.NotificationSender, documents: depot.core.adapters.storage.ParcelDocumentStore) -> None",
+            "decorators": []
+          },
+          {
+            "name": "register",
+            "signature": "(self, email: str, display_name: str, phone: str) -> str",
+            "decorators": []
+          },
+          {
+            "name": "fetch",
+            "signature": "(self, reference: str) -> depot.identity.repository.customer_repo.CustomerRecord | None",
+            "decorators": []
+          },
+          {
+            "name": "confirm_address",
+            "signature": "(self, reference: str, confirmed_at: float) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "block",
+            "signature": "(self, reference: str, reason: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "file_handover_form",
+            "signature": "(self, reference: str, day: str, form: bytes) -> str",
+            "decorators": []
+          },
+          {
+            "name": "handover_form",
+            "signature": "(self, reference: str, day: str) -> bytes | None",
+            "decorators": []
+          },
+          {
+            "name": "blocked_today",
+            "signature": "(self) -> list[str]",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.identity.services.token_service",
+    "classes": [
+      {
+        "name": "TokenService",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, sessions: depot.identity.repository.session_repo.SessionRepository) -> None",
+            "decorators": []
+          },
+          {
+            "name": "issue",
+            "signature": "(self, session_id: str, signer: depot.core.ports.TokenSigner) -> str",
+            "decorators": []
+          },
+          {
+            "name": "subject_of",
+            "signature": "(self, session_id: str) -> str",
+            "decorators": []
+          },
+          {
+            "name": "revoke",
+            "signature": "(self, session_id: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "is_live",
+            "signature": "(self, session_id: str, now_epoch: float) -> bool",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.api.routes",
+    "classes": [
+      {
+        "name": "OrderRoutes",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, orders: depot.orders.services.order_service.OrderService) -> None",
+            "decorators": []
+          },
+          {
+            "name": "post_order",
+            "signature": "(self, customer_reference: str, destination_zone: str) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "get_order",
+            "signature": "(self, reference: str) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "post_lines",
+            "signature": "(self, reference: str, lines: list[dict[str, object]]) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "post_placement",
+            "signature": "(self, reference: str, placed_at: float) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "delete_order",
+            "signature": "(self, reference: str) -> dict[str, object]",
+            "decorators": []
+          },
+          {
+            "name": "get_board",
+            "signature": "(self, reference: str) -> dict[str, str]",
+            "decorators": []
+          },
+          {
+            "name": "get_open_of_customer",
+            "signature": "(self, customer_reference: str) -> dict[str, object]",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "status_for",
+        "signature": "(error: depot.core.errors.DepotError) -> int",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.api.schemas",
+    "classes": [
+      {
+        "name": "OrderDraft",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, customer_reference: str, destination_zone: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "LineBatch",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, lines: list[dict[str, object]]) -> None",
+            "decorators": []
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": []
+          }
+        ]
+      },
+      {
+        "name": "QuoteRequest",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, zone: str, weight_grams: int, code: str='') -> None",
+            "decorators": []
+          },
+          {
+            "name": "validate",
+            "signature": "(self) -> None",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "error_body",
+        "signature": "(error: depot.core.errors.DepotError) -> dict[str, str]",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.mappers.order_line_mapper",
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(line: depot.orders.models.order_line_models.OrderLine) -> dict[str, object]",
+        "decorators": []
+      },
+      {
+        "name": "to_shelf_label",
+        "signature": "(line: depot.orders.models.order_line_models.OrderLine) -> str",
+        "decorators": []
+      },
+      {
+        "name": "normalise_request",
+        "signature": "(lines: list[dict[str, object]]) -> list[dict[str, object]]",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.mappers.order_mapper",
+    "classes": [],
+    "functions": [
+      {
+        "name": "to_payload",
+        "signature": "(order: depot.orders.models.order_models.Order) -> dict[str, object]",
+        "decorators": []
+      },
+      {
+        "name": "to_board_line",
+        "signature": "(order: depot.orders.models.order_models.Order) -> str",
+        "decorators": []
+      },
+      {
+        "name": "check_zone",
+        "signature": "(zone: str) -> str",
+        "decorators": []
+      },
+      {
+        "name": "next_states",
+        "signature": "(order: depot.orders.models.order_models.Order) -> list[str]",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.models.discount_models",
+    "classes": [
+      {
+        "name": "Discount",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, code: str, percent: int, min_subtotal_cents: int=0, zones: frozenset[str]=frozenset()) -> None",
+            "decorators": []
+          },
+          {
+            "name": "applies_to",
+            "signature": "(self, subtotal_cents: int, zone: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "cut_cents",
+            "signature": "(self, subtotal_cents: int) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": [
+      {
+        "name": "house_codes",
+        "signature": "() -> list[Discount]",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.models.order_line_models",
+    "classes": [
+      {
+        "name": "OrderLine",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "check",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "total_cents",
+            "signature": "(self) -> int",
+            "decorators": []
+          },
+          {
+            "name": "total_weight_grams",
+            "signature": "(self) -> int",
+            "decorators": []
+          },
+          {
+            "name": "needs_two_hands",
+            "signature": "(self) -> bool",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.models.order_line_view_models",
+    "classes": [
+      {
+        "name": "PackingListRow",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "marks",
+            "signature": "(self) -> list[str]",
+            "decorators": []
+          },
+          {
+            "name": "is_fragile",
+            "signature": "(self) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "check_digit",
+            "signature": "(self) -> int",
+            "decorators": []
+          },
+          {
+            "name": "barcode",
+            "signature": "(self) -> str",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.models.order_models",
+    "classes": [
+      {
+        "name": "Order",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "move_to",
+            "signature": "(self, status: str) -> None",
+            "decorators": []
+          },
+          {
+            "name": "place",
+            "signature": "(self, placed_at: float) -> None",
+            "decorators": []
+          },
+          {
+            "name": "cancel",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "is_open",
+            "signature": "(self) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "add_line_total",
+            "signature": "(self, amount_cents: int) -> None",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.models.order_view_models",
+    "classes": [
+      {
+        "name": "OrderBoardRow",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "waited_seconds",
+            "signature": "(self, now_epoch: float) -> float",
+            "decorators": []
+          },
+          {
+            "name": "is_urgent",
+            "signature": "(self, now_epoch: float) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "sort_key",
+            "signature": "(self, now_epoch: float) -> tuple[int, float]",
+            "decorators": []
+          },
+          {
+            "name": "label",
+            "signature": "(self) -> str",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.repository.legacy_order_index",
+    "classes": [
+      {
+        "name": "LegacyOrderIndex",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "load_line",
+            "signature": "(self, line: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "looks_legacy",
+            "signature": "(self, old_number: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "resolve",
+            "signature": "(self, old_number: str) -> str | None",
+            "decorators": []
+          },
+          {
+            "name": "size",
+            "signature": "(self) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.repository.order_line_repo",
+    "classes": [
+      {
+        "name": "OrderLineRepository",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, ids: depot.core.ports.IdGenerator) -> None",
+            "decorators": []
+          },
+          {
+            "name": "add",
+            "signature": "(self, order_reference: str, description: str, weight_grams: int, quantity: int, unit_price_cents: int, fragile: bool=False) -> str",
+            "decorators": []
+          },
+          {
+            "name": "get",
+            "signature": "(self, reference: str) -> OrderLineRecord | None",
+            "decorators": []
+          },
+          {
+            "name": "of_order",
+            "signature": "(self, order_reference: str) -> list[OrderLineRecord]",
+            "decorators": []
+          },
+          {
+            "name": "drop",
+            "signature": "(self, reference: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "subtotal_cents",
+            "signature": "(self, order_reference: str) -> int",
+            "decorators": []
+          },
+          {
+            "name": "weight_grams",
+            "signature": "(self, order_reference: str) -> int",
+            "decorators": []
+          },
+          {
+            "name": "two_hand_lines",
+            "signature": "(self, order_reference: str) -> list[str]",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.repository.order_query",
+    "classes": [
+      {
+        "name": "OrderQuery",
+        "bases": [
+          "depot.core.ports.DiscountCatalog"
+        ],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self) -> None",
+            "decorators": []
+          },
+          {
+            "name": "percent_for",
+            "signature": "(self, code: str, subtotal_cents: int) -> int",
+            "decorators": []
+          },
+          {
+            "name": "cut_cents",
+            "signature": "(self, code: str, subtotal_cents: int, zone: str) -> int",
+            "decorators": []
+          },
+          {
+            "name": "find",
+            "signature": "(self, code: str) -> DiscountRecord | None",
+            "decorators": []
+          },
+          {
+            "name": "codes_for_zone",
+            "signature": "(self, zone: str) -> list[str]",
+            "decorators": []
+          },
+          {
+            "name": "reload",
+            "signature": "(self, discounts: list[DiscountRecord]) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.repository.order_repo",
+    "classes": [
+      {
+        "name": "OrderRepository",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, ids: depot.core.ports.IdGenerator) -> None",
+            "decorators": []
+          },
+          {
+            "name": "create",
+            "signature": "(self, customer_reference: str, destination_zone: str) -> str",
+            "decorators": []
+          },
+          {
+            "name": "get",
+            "signature": "(self, reference: str) -> OrderRecord | None",
+            "decorators": []
+          },
+          {
+            "name": "place",
+            "signature": "(self, reference: str, placed_at: float) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "cancel",
+            "signature": "(self, reference: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "book_line",
+            "signature": "(self, reference: str, amount_cents: int) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "open_of_customer",
+            "signature": "(self, customer_reference: str) -> list[str]",
+            "decorators": []
+          },
+          {
+            "name": "count",
+            "signature": "(self) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.services",
+    "classes": [],
+    "functions": [
+      {
+        "name": "quote_parcel_cents",
+        "signature": "(weight_grams: int, fragile: bool, two_hands: bool) -> int",
+        "decorators": []
+      },
+      {
+        "name": "weight_band",
+        "signature": "(weight_grams: int) -> int",
+        "decorators": []
+      }
+    ]
+  },
+  {
+    "module_name": "depot.orders.services.catalog_service",
+    "classes": [
+      {
+        "name": "CatalogService",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, discounts: depot.orders.repository.order_query.OrderQuery) -> None",
+            "decorators": []
+          },
+          {
+            "name": "quote_cents",
+            "signature": "(self, zone: str, weight_grams: int, rates: depot.core.ports.RateProvider) -> int",
+            "decorators": []
+          },
+          {
+            "name": "net_cents",
+            "signature": "(self, zone: str, subtotal_cents: int, code: str) -> int",
+            "decorators": []
+          },
+          {
+            "name": "offers_for",
+            "signature": "(self, zone: str) -> list[str]",
+            "decorators": []
+          },
+          {
+            "name": "honours",
+            "signature": "(self, code: str) -> bool",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.services.checkout_service",
+    "classes": [
+      {
+        "name": "CheckoutService",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, lines: depot.orders.repository.order_line_repo.OrderLineRepository, shelves: depot.core.ports.ShelfAllocator) -> None",
+            "decorators": []
+          },
+          {
+            "name": "hand_over",
+            "signature": "(self, order_reference: str, depot_code: str) -> str",
+            "decorators": []
+          },
+          {
+            "name": "slot_of",
+            "signature": "(self, order_reference: str) -> str | None",
+            "decorators": []
+          },
+          {
+            "name": "take_back",
+            "signature": "(self, order_reference: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "two_hand_warning",
+            "signature": "(self, order_reference: str) -> list[str]",
+            "decorators": []
+          },
+          {
+            "name": "handed_weight_grams",
+            "signature": "(self, order_reference: str) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.services.order_service",
+    "classes": [
+      {
+        "name": "OrderService",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, orders: depot.orders.repository.order_repo.OrderRepository, customers: depot.identity.services.customer_service.CustomerService, notifier: depot.core.ports.NotificationSender, documents: depot.core.adapters.storage.ParcelDocumentStore) -> None",
+            "decorators": []
+          },
+          {
+            "name": "open_order",
+            "signature": "(self, customer_reference: str, destination_zone: str) -> str",
+            "decorators": []
+          },
+          {
+            "name": "fetch",
+            "signature": "(self, reference: str) -> depot.orders.repository.order_repo.OrderRecord | None",
+            "decorators": []
+          },
+          {
+            "name": "place",
+            "signature": "(self, reference: str, placed_at: float) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "cancel",
+            "signature": "(self, reference: str) -> bool",
+            "decorators": []
+          },
+          {
+            "name": "file_dispatch_manifest",
+            "signature": "(self, reference: str, day: str, manifest: bytes) -> str",
+            "decorators": []
+          },
+          {
+            "name": "dispatch_manifest",
+            "signature": "(self, reference: str, day: str) -> bytes | None",
+            "decorators": []
+          },
+          {
+            "name": "open_orders_of",
+            "signature": "(self, customer_reference: str) -> list[str]",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.services.pricing.engine",
+    "classes": [
+      {
+        "name": "PricingEngine",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, handling_percent: int=0) -> None",
+            "decorators": []
+          },
+          {
+            "name": "band_of",
+            "signature": "(self, weight_grams: int) -> int",
+            "decorators": []
+          },
+          {
+            "name": "base_cents",
+            "signature": "(self, weight_grams: int) -> int",
+            "decorators": []
+          },
+          {
+            "name": "quote_cents",
+            "signature": "(self, weight_grams: int, fragile: bool, two_hands: bool) -> int",
+            "decorators": []
+          },
+          {
+            "name": "round_up",
+            "signature": "(self, amount_cents: int) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  },
+  {
+    "module_name": "depot.orders.services.refund_service",
+    "classes": [
+      {
+        "name": "RefundService",
+        "bases": [],
+        "decorators": [],
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, orders: depot.orders.repository.order_repo.OrderRepository) -> None",
+            "decorators": []
+          },
+          {
+            "name": "refund",
+            "signature": "(self, reference: str, payment_reference: str, gateway: depot.core.ports.PaymentGateway) -> str",
+            "decorators": []
+          },
+          {
+            "name": "refundable_cents",
+            "signature": "(self, reference: str) -> int",
+            "decorators": []
+          },
+          {
+            "name": "fee_cents",
+            "signature": "(self, reference: str) -> int",
+            "decorators": []
+          }
+        ]
+      }
+    ],
+    "functions": []
+  }
+]

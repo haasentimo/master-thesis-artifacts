@@ -1,0 +1,39 @@
+{
+  "components": [
+    {
+      "id": "api",
+      "name": "API",
+      "kind": "component",
+      "description": "HTTP API layer handling requests and routing.",
+      "role": null,
+      "contained_modules": []
+    }
+  ],
+  "relations": [
+    {
+      "from": "api",
+      "to": "application",
+      "kind": "depends_on"
+    },
+    {
+      "from": "api",
+      "to": "domain",
+      "kind": "depends_on"
+    },
+    {
+      "from": "application",
+      "to": "domain",
+      "kind": "depends_on"
+    },
+    {
+      "from": "application",
+      "to": "infrastructure",
+      "kind": "depends_on"
+    },
+    {
+      "from": "infrastructure",
+      "to": "domain",
+      "kind": "depends_on"
+    }
+  ]
+}

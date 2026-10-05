@@ -1,0 +1,111 @@
+{
+ "run": {
+  "config": "K4",
+  "injection_id": "I12",
+  "tag": "inj/12",
+  "sha": "cb1fb228ff6021071a8c6b2a88506a80f138eafb",
+  "category_l1": "FORBIDDEN_RELATION",
+  "scenario_l2": "INDEPENDENCE",
+  "carrier_module": "depot.orders.repository.order_line_repo",
+  "runs": null
+ },
+ "rule_graph_mode": null,
+ "rule_graph_mode_source": "derived from category_l1 (protocol \u00a76 Nachtrag Rev. 31)",
+ "attempt": 1,
+ "is_smoke_test": false,
+ "started": "2026-08-27T12:30:25+02:00",
+ "command": "PYTHONPATH=src /home/haasentimo/ma/venv/bin/lint-imports --config /home/haasentimo/ma/masterarbeit/data/soll/importlinter.ini --no-cache",
+ "argv": [
+  "/home/haasentimo/ma/venv/bin/lint-imports",
+  "--config",
+  "/home/haasentimo/ma/masterarbeit/data/soll/importlinter.ini",
+  "--no-cache"
+ ],
+ "env_overrides": {
+  "PYTHONPATH": "src"
+ },
+ "abs_repo_path": "/home/haasentimo/ma/ma-conformance-testrepo",
+ "cwd": "/home/haasentimo/ma/ma-conformance-testrepo",
+ "machine": {
+  "uname": "Linux DESKTOP-PJA89CF 5.15.153.1-microsoft-standard-WSL2 #1 SMP Fri Mar 29 23:14:13 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+  "python3": "Python 3.12.3",
+  "node": "v22.23.2"
+ },
+ "machine_reference_d2_m5d": {
+  "uname": "Linux DESKTOP-PJA89CF 5.15.153.1-microsoft-standard-WSL2 #1 SMP Fri Mar 29 23:14:13 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux",
+  "python3": "Python 3.12.3",
+  "node": "v22.23.2"
+ },
+ "target_repo_git_head": "cb1fb228ff6021071a8c6b2a88506a80f138eafb",
+ "base_ref": "0d651041ed87dd03f2f78359713633fac01c0a66",
+ "measurement_path": "/home/haasentimo/ma/tritongraph-measure",
+ "phase04_freeze": "phase04-freeze = 348ca9daa456af4954f11f7152fc45201035297e",
+ "checker_git_head": "348ca9daa456af4954f11f7152fc45201035297e",
+ "checker_git_status_porcelain": "",
+ "dist_cli_js_sha256": "c0bbdfebbdce5899cc7d24d271b8fc43c9fc53aec5e8b0f3e3e91c3d43d35d95",
+ "dist_cli_js_mtime": "2026-08-26T23:05:14+02:00",
+ "exit_code": 1,
+ "external_wall_clock_ms": 109,
+ "not_performed": false,
+ "soll_validator": {
+  "validator_exit_code": 1,
+  "expected_cycles": 0,
+  "expected_whitelist_edge": "orders_repository -> billing_repository",
+  "expected_sole_importers": {
+   "identity_mappers": [
+    "identity_api"
+   ],
+   "orders_mappers": [
+    "orders_api"
+   ],
+   "billing_mappers": [
+    "billing_api"
+   ],
+   "orders_services_pricing": [
+    "orders_services"
+   ],
+   "core_adapters_internal": [
+    "core_adapters"
+   ]
+  },
+  "points_1_to_5": "all OK",
+  "point_6": "measured importer sets equal the calculated expectation",
+  "i1_point_4": [
+   "OK I1 violations = 0 []"
+  ],
+  "i1_violations_recorded": [],
+  "stdout": "soll     : /home/haasentimo/ma/masterarbeit/data/soll/depot_soll.ilograph.yaml\ntestrepo : /home/haasentimo/ma/ma-conformance-testrepo\nexpected : Soll-only ['depot.billing.legacy_invoice_index', 'depot.billing.legacy_tax_models', 'depot.identity.legacy_token_index', 'depot.orders.legacy_order_index'], cycles 0\n\n[1] Soll module list against the file tree, both directions\n      Soll 77, tree 73\n  OK   only in the Soll = 4 ['depot.billing.legacy_invoice_index', 'depot.billing.legacy_tax_models', 'depot.identity.legacy_token_index', 'depot.orders.legacy_order_index'], expected ['depot.billing.legacy_invoice_index', 'depot.billing.legacy_tax_models', 'depot.identity.legacy_token_index', 'depot.orders.legacy_order_index']\n  OK   only in the tree = 0 [] (expected 0)\n\n[2] Every component occurs in at least one relation\n      resources declaring modules 19, relation endpoints 19\n  OK   components without a relation = 0 []\n\n[3] rules[]: scopes against the topology, categories against protocol \u00a73\n      rules 16\n  OK   (3a) scoped components outside the topology = 0 []\n  OK   (3b) components scoped by no rule = 0 []\n  OK   (3c) categories outside the level-1 encoding = 0 []\n  OK   (3d) level-1 categories carried by no rule = 0 []\n\n[4] Build rule I1 \u2014 no edge from the shared components into orders_*/billing_*\n  OK   I1 violations = 0 []\n\n[5] Z2' (i) \u2014 the four cycle pairs in code-unit order\n  OK   S=identity_api      T=identity_mappers          S<T=True  [Pos 9: 'a'(0x61) < 'm'(0x6D)]\n  OK   S=orders_api        T=orders_mappers            S<T=True  [Pos 7: 'a'(0x61) < 'm'(0x6D)]\n  OK   S=billing_api       T=billing_mappers           S<T=True  [Pos 8: 'a'(0x61) < 'm'(0x6D)]\n  OK   S=orders_services   T=orders_services_pricing   S<T=True  [prefix: 'orders_services' is a proper prefix, 8 chars shorter]\n\n[6] Z2' (ii) \u2014 sole importer per component\n  OK   identity_mappers         importers = 1 ['identity_api']\n  OK   orders_mappers           importers = 1 ['orders_api']\n  OK   billing_mappers          importers = 1 ['billing_api']\n  OK   orders_services_pricing  importers = 1 ['orders_services']\n  OK   core_adapters_internal   importers = 1 ['core_adapters']\n\n[7] Component graph of the actual state\n  OK   cycles = 0 (expected 0) []\n\n[8] No module edge outside the whitelist\n      mapped cross-component module edges = 82, whitelist relations = 39\n  FAIL edges outside the whitelist = 1 ['orders_repository -> billing_repository (depot.orders.repository.order_line_repo -> depot.billing.repository.invoice_repo)']\n\nRESULT: FAIL\n",
+  "stderr": ""
+ },
+ "k2_context_window": null,
+ "grimp_cache": [
+  {
+   "stage": "before",
+   "present": false,
+   "removed": false
+  },
+  {
+   "stage": "after",
+   "present": false,
+   "removed": false
+  }
+ ],
+ "artefacts": {
+  "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k4_cb1fb228ff6021071a8c6b2a88506a80f138eafb.json",
+  "stdout": "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_cb1fb228ff6021071a8c6b2a88506a80f138eafb.stdout.txt",
+  "stderr": "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_cb1fb228ff6021071a8c6b2a88506a80f138eafb.stderr.txt"
+ },
+ "stdout_bytes": 1653,
+ "stderr_bytes": 0,
+ "postrun": {
+  "verdict": "VALID",
+  "reasons": [],
+  "detail": {
+   "kept": 12,
+   "broken": 1,
+   "evaluated": 13,
+   "expected_contracts": 13,
+   "note": "the hit count is the measurement; only completeness of the rule set is checked"
+  }
+ }
+}

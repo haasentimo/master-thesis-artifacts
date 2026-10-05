@@ -1,0 +1,34 @@
+{
+  "id": "chatcmpl-259",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"components\": [\n    {\n      \"id\": \"bookshop\",\n      \"name\": \"Bookshop\",\n      \"description\": \"A small layered bookshop application (richer extraction fixture).\",\n      \"contained_modules\": [\n        \"bookshop.api\",\n        \"bookshop.application\",\n        \"bookshop.domain\",\n        \"bookshop.infrastructure\"\n      ]\n    },\n    {\n      \"id\": \"bookshop.api\",\n      \"name\": \"API\",\n      \"description\": \"HTTP handlers for browsing and searching the catalog, and the checkout flow.\",\n      \"contained_modules\": [\n        \"bookshop.api.catalog_routes\",\n        \"bookshop.api.checkout_routes\"\n      ]\n    },\n    {\n      \"id\": \"bookshop.application\",\n      \"name\": \"Application\",\n      \"description\": \"Use-case services that orchestrate domain logic with infrastructure adapters.\",\n      \"contained_modules\": [\n        \"bookshop.application.checkout\",\n        \"bookshop.application.inventory\"\n      ]\n    },\n    {\n      \"id\": \"bookshop.domain\",\n      \"name\": \"Domain\",\n      \"description\": \"Pure domain model with no infrastructure dependencies.\",\n      \"contained_modules\": [\n        \"bookshop.domain.book\",\n        \"bookshop.domain.catalog\",\n        \"bookshop.domain.order\",\n        \"bookshop.domain.pricing\"\n      ]\n    },\n    {\n      \"id\": \"bookshop.infrastructure\",\n      \"name\": \"Infrastructure\",\n      \"description\": \"Adapters to external systems and in-memory persistence.\",\n      \"contained_modules\": [\n        \"bookshop.infrastructure.book_repository\",\n        \"bookshop.infrastructure.order_repository\",\n        \"bookshop.infrastructure.payment_gateway\"\n      ]\n    }\n  ],\n  \"relations\": [\n    {\n      \"from\": \"bookshop.api.catalog_routes\",\n      \"to\": \"bookshop.application.inventory\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.api.checkout_routes\",\n      \"to\": \"bookshop.application.checkout\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.application.checkout\",\n      \"to\": \"bookshop.domain.order\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.application.checkout\",\n      \"to\": \"bookshop.infrastructure.order_repository\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.application.checkout\",\n      \"to\": \"bookshop.infrastructure.payment_gateway\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.application.inventory\",\n      \"to\": \"bookshop.domain.book\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.application.inventory\",\n      \"to\": \"bookshop.infrastructure.book_repository\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.domain.catalog\",\n      \"to\": \"bookshop.domain.book\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.domain.order\",\n      \"to\": \"bookshop.domain.book\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.domain.order\",\n      \"to\": \"bookshop.domain.pricing\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.infrastructure.book_repository\",\n      \"to\": \"bookshop.domain.book\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.infrastructure.book_repository\",\n      \"to\": \"bookshop.domain.catalog\",\n      \"kind\": \"uses\"\n    },\n    {\n      \"from\": \"bookshop.infrastructure.order_repository\",\n      \"to\": \"bookshop.domain.order\",\n      \"kind\": \"uses\"\n    }\n  ]\n}",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null
+      }
+    }
+  ],
+  "created": 1788199111,
+  "model": "qwen2.5-coder:7b",
+  "object": "chat.completion",
+  "metadata": null,
+  "moderation": null,
+  "service_tier": null,
+  "system_fingerprint": "fp_ollama",
+  "usage": {
+    "completion_tokens": 776,
+    "prompt_tokens": 6685,
+    "total_tokens": 7461,
+    "completion_tokens_details": null,
+    "compute_units": null,
+    "prompt_tokens_details": null
+  }
+}

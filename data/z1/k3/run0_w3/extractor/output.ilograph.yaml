@@ -1,0 +1,22 @@
+resources:
+- id: api
+  name: API
+  subtitle: HTTP API layer handling requests and routing.
+perspectives:
+- name: Dependencies
+  relations:
+  - from: api
+    to: application
+    label: depends_on
+  - from: api
+    to: domain
+    label: depends_on
+  - from: application
+    to: domain
+    label: depends_on
+  - from: application
+    to: infrastructure
+    label: depends_on
+  - from: infrastructure
+    to: domain
+    label: depends_on

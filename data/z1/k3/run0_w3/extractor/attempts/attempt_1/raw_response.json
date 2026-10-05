@@ -1,0 +1,48 @@
+{
+  "id": "chatcmpl-d7d2cb35-6285-453b-9c86-79c20c8a9eb7",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"components\": [\n    {\n      \"description\": \"HTTP API layer handling requests and routing.\",\n      \"id\": \"api\",\n      \"name\": \"API\",\n      \"contained_modules: [\"\n        \t: \"bookshop\",\n        \t\"bookshop.api\": \"\",\n        \t\"bookshop.api.catalog_routes\": \"\",\n        \t\"bookshop.api.checkout_routes\": \"\"\n      }\n    ],\n    \"relations\": [\n      {\n        \"from\": \"api\",\n        \"to\": \"application\"\n      },\n      {\n        \"from\": \"api\",\n        \"to\": \"domain\"\n      },\n      {\n        \"from\": \"application\",\n        \"to\": \"domain\"\n      },\n      {\n        \"from\": \"application\",\n        \"to\": \"infrastructure\"\n      },\n      {\n        \"from\": \"infrastructure\",\n        \"to\": \"domain\"\n      }\n    ]\n  }",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning_content": "We need to produce a corrected architecture with components covering all modules, disjoint containment, and relations based on imports.\n\nWe need to infer components from module names and docstrings. Likely components: API, Application, Domain, Infrastructure. But we need to ensure each module is placed exactly once.\n\nLet's list all modules:\n\n- bookshop\n- bookshop.api\n- bookshop.api.catalog_routes\n- bookshop.api.checkout_routes\n- bookshop.application\n- bookshop.application.checkout\n- bookshop.application.inventory\n- bookshop.domain\n- bookshop.domain.book\n- bookshop.domain.catalog\n- bookshop.domain.order\n- bookshop.domain.pricing\n- bookshop.infrastructure\n- bookshop.infrastructure.book_repository\n- bookshop.infrastructure.order_repository\n- bookshop.infrastructure.payment_gateway\n\nWe need to assign each to a component.\n\nWe can have components: API, Application, Domain, Infrastructure, maybe Core? But we need to group logically.\n\nGiven typical layered architecture: API (presentation), Application (use cases), Domain (business logic), Infrastructure (persistence, external). The top-level modules like bookshop, bookshop.api, bookshop.application, bookshop.domain, bookshop.infrastructure could be package markers; they could belong to respective components as well.\n\nWe need to ensure each module belongs to exactly one component.\n\nLet's define components:\n\n- Component \"api\": contains bookshop, bookshop.api, bookshop.api.catalog_routes, bookshop.api.checkout_routes\n- Component \"application\": contains bookshop.application, bookshop.application.checkout, bookshop.application.inventory\n- Component \"domain\": contains bookshop.domain, bookshop.domain.book, bookshop.domain.catalog, bookshop.domain.order, bookshop.domain.pricing\n- Component \"infrastructure\": contains bookshop.infrastructure, bookshop.infrastructure.book_repository, bookshop.infrastructure.order_repository, bookshop.infrastructure.payment_gateway\n\nCheck: all modules accounted.\n\nNow compute relations based on imports.\n\nWe need to examine each import and map from component of importing module to component of imported module.\n\nLet's list imports per module:\n\n1. bookshop: imports [] -> none.\n\n2. bookshop.api: imports [] -> none.\n\n3. bookshop.api.catalog_routes:\n   imports:\n   - bookshop.application.inventory (module)\n   - bookshop.domain.book\n\n   So from api component to application component (via bookshop.application.inventory) and api to domain (via bookshop.domain.book).\n\n4. bookshop.api.checkout_routes:\n   imports:\n   - bookshop.application.checkout\n   - bookshop.domain.order\n\n   So api -> application, api -> domain.\n\n5. bookshop.application: imports [] -> none.\n\n6. bookshop.application.checkout:\n   imports:\n   - bookshop.domain (module) (they imported pricing? Actually they imported bookshop.domain (the module) with name pricing? Wait: they imported bookshop.domain (relative_level 0, names: pricing). That's importing the domain module's submodule? Actually they imported bookshop.domain (the package) and used name pricing (which is a submodule). So import from bookshop.domain (module) -> domain component.\n   - bookshop.domain.order\n   - bookshop.infrastructure.order_repository\n   - bookshop.infrastructure.payment_gateway\n\n   So from application component to domain (multiple), application to infrastructure.\n\n7. bookshop.application.inventory:\n   imports:\n   - bookshop.domain.book\n   - bookshop.infrastructure.book_repository\n\n   So application -> domain, application -> infrastructure.\n\n8. bookshop.domain: imports [] -> none.\n\n9. bookshop.domain.book:\n   imports: dataclasses, enum (standard library) - ignore external? Only consider internal imports? The instruction: \"Read the imports in the facts: whenever a module in one component imports a module in another component, emit a deduplicated component-level relation\". So only consider imports that are to other modules in the facts (i.e., internal). dataclasses and enum are stdlib, not in facts, so ignore.\n\n   So none.\n\n10. bookshop.domain.catalog:\n    imports: bookshop.domain.book (internal) -> domain to domain (same component) -> no relation needed (since same component). So ignore.\n\n11. bookshop.domain.order:\n    imports: dataclasses, enum, bookshop.domain.book (internal) -> domain to domain (same) ignore.\n\n12. bookshop.domain.pricing:\n    imports: bookshop.domain.order (internal) -> domain to domain ignore.\n\n13. bookshop.infrastructure: imports [] -> none.\n\n14. bookshop.infrastructure.book_repository:\n    imports: bookshop.domain.book, bookshop.domain.catalog (both internal) -> infrastructure -> domain.\n\n15. bookshop.infrastructure.order_repository:\n    imports: bookshop.domain.order -> infrastructure -> domain.\n\n16. bookshop.infrastructure.payment_gateway:\n    imports: [] -> none.\n\nNow compile unique component-level relations:\n\nFrom api to application (via catalog_routes and checkout_routes) -> relation api -> application.\nFrom api to domain (via catalog_routes and checkout_routes) -> api -> domain.\nFrom application to domain (via checkout, inventory) -> application -> domain.\nFrom application to infrastructure (via checkout, inventory) -> application -> infrastructure.\nFrom infrastructure to domain (via book_repository, order_repository) -> infrastructure -> domain.\n\nAlso note: application to domain also via checkout import of bookshop.domain (the module) but still domain.\n\nAny other? api to ? maybe api to infrastructure? Not directly.\n\nNow ensure we have components defined.\n\nNow produce JSON with components list and relations list.\n\nComponent objects need: description, id, name, contained_modules (list of strings). Use exact dotted names.\n\nLet's craft.\n\nComponent \"api\":\n description: \"HTTP API layer handling requests and routing.\"\n id: \"api\"\n name: \"API\"\n contained_modules: [\"bookshop\", \"bookshop.api\", \"bookshop.api.catalog_routes\", \"bookshop.api.checkout_routes\"]\n\nComponent \"application\":\n description: \"Use-case services orchestrating domain operations.\"\n id: \"application\"\n name: \"Application\"\n contained_modules: [\"bookshop.application\", \"bookshop.application.checkout\", \"bookshop.application.inventory\"]\n\nComponent \"domain\":\n description: \"Core business logic and domain model.\"\n id: \"domain\"\n name: \"Domain\"\n contained_modules: [\"bookshop.domain\", \"bookshop.domain.book\", \"bookshop.domain.catalog\", \"bookshop.domain.order\", \"bookshop.domain.pricing\"]\n\nComponent \"infrastructure\":\n description: \"Persistence and external adapters.\"\n id: \"infrastructure\"\n name: \"Infrastructure\"\n contained_modules: [\"bookshop.infrastructure\", \"bookshop.infrastructure.book_repository\", \"bookshop.infrastructure.order_repository\", \"bookshop.infrastructure.payment_gateway\"]\n\nNow relations list: each relation object with from and to ids.\n\nRelations:\n- from: \"api\", to: \"application\"\n- from: \"api\", to: \"domain\"\n- from: \"application\", to: \"domain\"\n- from: \"application\", to: \"infrastructure\"\n- from: \"infrastructure\", to: \"domain\"\n\nMake sure no duplicates.\n\nNow output JSON.\n\nCheck that all modules are accounted: yes.\n\nNow produce final answer."
+      }
+    }
+  ],
+  "created": 1788187242,
+  "model": "nvidia-nemotron-3-super-120b",
+  "object": "chat.completion",
+  "metadata": null,
+  "moderation": null,
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1724,
+    "prompt_tokens": 4986,
+    "total_tokens": 6710,
+    "completion_tokens_details": null,
+    "compute_units": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cache_write_tokens": null,
+      "cached_tokens": 3456,
+      "image_tokens": null,
+      "text_tokens": null
+    },
+    "cache_created_input_tokens": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 3456,
+    "speed": null
+  }
+}

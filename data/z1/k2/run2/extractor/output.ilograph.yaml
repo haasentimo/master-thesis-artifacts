@@ -1,0 +1,95 @@
+resources:
+- id: bookshop
+  name: Bookshop
+  subtitle: A small layered bookshop application (richer extraction fixture).
+  children:
+  - id: bookshop.api
+    name: bookshop.api
+  - id: bookshop.application
+    name: bookshop.application
+  - id: bookshop.domain
+    name: bookshop.domain
+  - id: bookshop.infrastructure
+    name: bookshop.infrastructure
+- id: bookshop.api
+  name: API
+  subtitle: HTTP handlers for browsing and searching the catalog, and the 
+    checkout flow.
+  children:
+  - id: bookshop.api.catalog_routes
+    name: bookshop.api.catalog_routes
+  - id: bookshop.api.checkout_routes
+    name: bookshop.api.checkout_routes
+- id: bookshop.application
+  name: Application
+  subtitle: Use-case services that orchestrate domain logic with infrastructure 
+    adapters.
+  children:
+  - id: bookshop.application.checkout
+    name: bookshop.application.checkout
+  - id: bookshop.application.inventory
+    name: bookshop.application.inventory
+- id: bookshop.domain
+  name: Domain
+  subtitle: Pure domain model with no infrastructure dependencies.
+  children:
+  - id: bookshop.domain.book
+    name: bookshop.domain.book
+  - id: bookshop.domain.catalog
+    name: bookshop.domain.catalog
+  - id: bookshop.domain.order
+    name: bookshop.domain.order
+  - id: bookshop.domain.pricing
+    name: bookshop.domain.pricing
+- id: bookshop.infrastructure
+  name: Infrastructure
+  subtitle: Adapters to external systems and in-memory persistence.
+  children:
+  - id: bookshop.infrastructure.book_repository
+    name: bookshop.infrastructure.book_repository
+  - id: bookshop.infrastructure.order_repository
+    name: bookshop.infrastructure.order_repository
+  - id: bookshop.infrastructure.payment_gateway
+    name: bookshop.infrastructure.payment_gateway
+perspectives:
+- name: Dependencies
+  relations:
+  - from: bookshop.api.catalog_routes
+    to: bookshop.application.inventory
+    label: uses
+  - from: bookshop.api.checkout_routes
+    to: bookshop.application.checkout
+    label: uses
+  - from: bookshop.application.checkout
+    to: bookshop.domain.order
+    label: uses
+  - from: bookshop.application.checkout
+    to: bookshop.infrastructure.order_repository
+    label: uses
+  - from: bookshop.application.checkout
+    to: bookshop.infrastructure.payment_gateway
+    label: uses
+  - from: bookshop.application.inventory
+    to: bookshop.domain.book
+    label: uses
+  - from: bookshop.application.inventory
+    to: bookshop.infrastructure.book_repository
+    label: uses
+  - from: bookshop.domain.catalog
+    to: bookshop.domain.book
+    label: uses
+  - from: bookshop.domain.order
+    to: bookshop.domain.book
+    label: uses
+  - from: bookshop.domain.order
+    to: bookshop.domain.pricing
+    label: uses
+  - from: bookshop.infrastructure.book_repository
+    to: bookshop.domain.book
+    label: uses
+  - from: bookshop.infrastructure.book_repository
+    to: bookshop.domain.catalog
+    label: uses
+  - from: bookshop.infrastructure.order_repository
+    to: bookshop.domain.order
+    label: uses

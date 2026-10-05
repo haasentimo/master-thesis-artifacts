@@ -1,0 +1,16 @@
+{
+  "valid": false,
+  "errors": [
+    "completeness: module 'bookshop.api.catalog_routes' is not placed in any component",
+    "completeness: module 'bookshop.api.checkout_routes' is not placed in any component",
+    "completeness: module 'bookshop.application.checkout' is not placed in any component",
+    "completeness: module 'bookshop.application.inventory' is not placed in any component",
+    "completeness: module 'bookshop.domain.book' is not placed in any component",
+    "completeness: module 'bookshop.domain.catalog' is not placed in any component",
+    "completeness: module 'bookshop.domain.order' is not placed in any component",
+    "completeness: module 'bookshop.domain.pricing' is not placed in any component",
+    "completeness: module 'bookshop.infrastructure.book_repository' is not placed in any component",
+    "completeness: module 'bookshop.infrastructure.order_repository' is not placed in any component",
+    "completeness: module 'bookshop.infrastructure.payment_gateway' is not placed in any component"
+  ]
+}

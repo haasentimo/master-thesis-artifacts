@@ -1,0 +1,56 @@
+
+╔══╗─────────▶╔╗ ╔╗      ╔╗◀───┐
+╚╣╠╝◀─────┐  ╔╝╚╗║║────▶╔╝╚╗   │
+ ║║   ╔══╦══╦╩╗╔╝║║  ╔╦═╩╗╔╝╔═╦══╗
+ ║║╔══╣╔╗║╔╗║╔╣║ ║║ ╔╬╣╔╗║║ ║│║╔═╝
+╔╣╠╣║║║╚╝║╚╝║║║╚╗║╚═╝║║║║║╚╗║═╣║
+╚══╩╩╩╣╔═╩══╩╝╚═╝╚═══╩╩╝╚╩═╩╩═╩╝
+  └──▶║║                    ▲ 
+      ╚╝────────────────────┘
+
+
+---------
+Contracts
+---------
+
+Analyzed 75 files, 91 dependencies.
+-----------------------------------
+
+Layered spine of every bounded context BROKEN
+identity.api skips no layer KEPT
+identity.services skips no layer KEPT
+orders.api skips no layer KEPT
+orders.services skips no layer KEPT
+billing.api skips no layer KEPT
+billing.services skips no layer KEPT
+Only the adapter facade may reach into the adapter internals KEPT
+orders and billing are mutually independent KEPT
+No cycles between sibling packages BROKEN
+identity declares all of its direct children KEPT
+orders declares all of its direct children KEPT
+billing declares all of its direct children KEPT
+
+Contracts: 11 kept, 2 broken.
+
+
+----------------
+Broken contracts
+----------------
+
+Layered spine of every bounded context
+--------------------------------------
+
+depot.billing.repository is not allowed to import depot.billing.services:
+
+- depot.billing.repository.invoice_repo -> 
+depot.billing.services.invoice_service (l.10)
+
+
+No cycles between sibling packages
+----------------------------------
+
+No cycles are allowed in depot.billing.
+It could be made acyclic by removing 1 dependency:
+
+- .repository -> .services (1 import)
+

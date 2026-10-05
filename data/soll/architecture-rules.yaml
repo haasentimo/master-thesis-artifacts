@@ -1,0 +1,433 @@
+# Architecture rules of the target model ("Soll") of the conformance test repository
+# `ma-conformance-testrepo`. Read by the checker through `loadSoll`
+# (packages/triton-conformance/src/run.ts:262-266) -> `parseArchitectureRules`
+# (rules.ts:37-42). Hand-written and reviewed; the topology next to it
+# (`depot_soll.ilograph.yaml`) is generated.
+#
+# Source: docs/planung/c1_komponentenschnitt.md Rev. 2 §8 (rule list and scopes),
+# docs/protokolle/eval_protokoll_phase04.md Rev. 17 §3 (categories, recipes, port
+# reservation, R-PLACE-1 clauses, singular rule), the four baseline build reports
+# (4b1-4b4; the verbatim signatures come from 4b2 §5, 4b3 §4, 4b4 §3).
+#
+# THE RULE SET EXPRESSES THE FROZEN TARGET ARCHITECTURE, NOT THE INJECTION PLAN
+# (protocol §1 Rev. 13). A rule without a matching injection is correct and wanted; it
+# contributes to the false-positive measurement. R-CORE-1 is such a rule.
+#
+# Schema, from the parser, not from memory:
+#   required : id, category, kind, statement, severity, scope.components  (rules.ts:65-73)
+#   kind     : structural | semantic                                      (rules.ts:56)
+#   severity : error | warning                                            (rules.ts:58)
+#   optional : predicate {type: import-boundary, allowed_importers: [..]} (rules.ts:76-83)
+#
+# The six `category` strings are character-identical with the level-1 encoding of
+# protocol §3; `category` is the first segment of the `match_key`
+# (matchKey.ts:26 -> `category|component|module|subjectKey`), so any deviation breaks
+# the eval join.
+#
+# EVERY statement names the expected SUBJECT SHAPE, uniformly across all sixteen rules
+# (added 23.08.2026, protocol §4 Nachtrag Rev. 19). Structural categories
+# (FORBIDDEN_RELATION, CYCLE) close with `subject.from` / `subject.to`; the four
+# element categories (ABSENCE_REQUIRED, FORBIDDEN_SIGNATURE_TYPE, STRUCTURAL_PLACEMENT,
+# API_CONTRACT) close with `subject.offending_type` in the binding spelling of protocol
+# §3 Rev. 18. The field names are those of the answer schema (`llmClient.ts:200-214`)
+# and of `validate.ts:56-58`. Reason: `subjectKey` is the fourth segment of the
+# `match_key` (`matchKey.ts:23-26`) and is built from `offending_type` OR from
+# `from->to`; a model that picks the other form for a rule produces a key that joins
+# against nothing. `strict` is then measuring the model's format choice, not its
+# recognition. Uniform on purpose — an uneven assignment would bias the comparison
+# BETWEEN categories for a reason that has nothing to do with the model.
+#
+# `severity` is uniformly `error` for all sixteen rules: it is rendered into the prompt
+# (contextBuilder.ts:92) and a mixed assignment would be a variable that is not
+# preregistered.
+#
+# SHA256 of this file goes into the run header as `rules_sha256` (run.ts:284) and via
+# `buildProvenance` into the `--json-out` document (run.ts:311) — NOT into the
+# individual `llm_call` lines; those are joined on `run_id`.
+
+rules:
+
+  # ── FORBIDDEN_RELATION ────────────────────────────────────────────────────────
+
+  - id: R-LAYER-1
+    category: FORBIDDEN_RELATION
+    kind: structural
+    severity: error
+    scope:
+      components:
+        - identity_api
+        - identity_repository
+        - identity_services
+        - orders_api
+        - orders_repository
+        - orders_services
+        - billing_api
+        - billing_repository
+        - billing_services
+    statement: >-
+      Inside every bounded context (`identity`, `orders`, `billing`) the layers are
+      strictly ordered: `api` -> `services` -> `repository` -> `models`. A module may
+      depend only on the layer directly below it in its own context. Two things are
+      therefore forbidden: an import from a lower layer into a higher one (a back call,
+      for example a module of `<context>.repository` importing `<context>.services`),
+      and an import that skips the intermediate layer (a skip call, for example a module
+      of `<context>.api` importing `<context>.repository` directly instead of going
+      through `<context>.services`). Report the finding as a dependency edge:
+      `subject.from` is the importing component, `subject.to` the imported one.
+
+  - id: R-PROTECT-1
+    category: FORBIDDEN_RELATION
+    kind: structural
+    severity: error
+    scope:
+      components:
+        - core_adapters
+        - core_adapters_internal
+        - identity_services
+        - orders_services
+        - billing_services
+    statement: >-
+      The package `depot.core.adapters.internal` (component `core_adapters_internal`) is
+      internal to the adapter package. The adapter facade `depot.core.adapters` is its
+      only permitted importer. Every other component — in particular the three service
+      components `identity_services`, `orders_services` and `billing_services` — must go
+      through the public surface of `depot.core.adapters` and must never import a module
+      of `depot.core.adapters.internal` directly, past the facade. Report the finding as
+      a dependency edge: `subject.from` is the importing component, `subject.to` the
+      imported one.
+    # INACTIVE FIELD, DELIBERATELY PRESENT. `predicate` is parsed (rules.ts:76-83) and
+    # then never evaluated anywhere in the checker — grep over
+    # packages/triton-conformance/src and editor/src finds parsing and the type
+    # declaration only, no consumer (b1_bericht_matchkey.md, B1). It is written here
+    # because the Soll CAN express the allow-list while the engine ignores it and
+    # import-linter delivers it through `type = protected`; that asymmetry is a UF3
+    # finding. No measurement result may ever be traced back to this field.
+    predicate:
+      type: import-boundary
+      allowed_importers:
+        - core_adapters
+
+  - id: R-INDEP-1
+    category: FORBIDDEN_RELATION
+    kind: structural
+    severity: error
+    scope:
+      components:
+        - orders_api
+        - orders_mappers
+        - orders_models
+        - orders_repository
+        - orders_services
+        - orders_services_pricing
+        - billing_api
+        - billing_mappers
+        - billing_models
+        - billing_repository
+        - billing_services
+    statement: >-
+      The bounded contexts `orders` and `billing` are mutually independent. No module of
+      any `orders_*` component may import a module of any `billing_*` component, and no
+      module of any `billing_*` component may import a module of any `orders_*`
+      component — in either direction and at every layer, `api`, `services`,
+      `repository`, `models` and `mappers` alike. Whatever the two contexts share is
+      reached through `core`, through the adapter facade `depot.core.adapters`, or
+      through `identity_services`. Report the finding as a dependency edge:
+      `subject.from` is the importing component, `subject.to` the imported one.
+
+  - id: R-CORE-1
+    category: FORBIDDEN_RELATION
+    kind: structural
+    severity: error
+    scope:
+      components:
+        - core
+        - core_adapters
+        - core_adapters_internal
+    statement: >-
+      The kernel and its adapters do not depend on any business context. The component
+      `core` (`depot`, `depot.core` and its modules `config`, `errors`, `ports`) has no
+      outgoing dependency at all. `core_adapters` may depend only on `core` and on
+      `core_adapters_internal`; `core_adapters_internal` may depend only on `core`. No
+      module of these three components may import a module of `identity_*`, `orders_*`
+      or `billing_*`: the direction of dependency always points towards the kernel,
+      never out of it. Report the finding as a dependency edge: `subject.from` is the
+      importing component, `subject.to` the imported one.
+
+  # ── CYCLE ─────────────────────────────────────────────────────────────────────
+
+  - id: R-CYCLE-1
+    category: CYCLE
+    kind: structural
+    severity: error
+    scope:
+      components:
+        - identity_api
+        - identity_mappers
+        - orders_api
+        - orders_mappers
+        - billing_api
+        - billing_mappers
+    statement: >-
+      Within a bounded context the sibling packages `<context>.api` and
+      `<context>.mappers` must not form an import cycle. The only permitted direction is
+      `<context>.api` -> `<context>.mappers`: the API layer builds its payloads through
+      the mappers. A module of `<context>.mappers` must never import a module of
+      `<context>.api`; such a back edge closes a cycle between two sibling packages of
+      the same context. Report the finding as a dependency edge: `subject.from` is the
+      importing component, `subject.to` the imported one — the edge that closes the
+      cycle.
+
+  - id: R-CYCLE-2
+    category: CYCLE
+    kind: structural
+    severity: error
+    scope:
+      components:
+        - orders_services
+        - orders_services_pricing
+    statement: >-
+      The sub-package `depot.orders.services.pricing` must not form an import cycle with
+      its parent package `depot.orders.services`. The only permitted direction is parent
+      -> child: `depot.orders.services` wires the pricing sub-package in. A module of
+      `depot.orders.services.pricing` must never import a module of
+      `depot.orders.services`; such a back edge from a child onto its own parent package
+      closes a cycle. Report the finding as a dependency edge: `subject.from` is the
+      importing component, `subject.to` the imported one — the edge that closes the
+      cycle.
+
+  # ── ABSENCE_REQUIRED ──────────────────────────────────────────────────────────
+  #
+  # Four single rules, one per carrier component, because each of the four ports is
+  # reserved to exactly one module (protocol §3 Nachtrag Rev. 16 (A)). The port type is
+  # spelled fully qualified, exactly as the clean baseline writes it in the annotation;
+  # this spelling is what the manifest expects as `offending_type` and is binding for C4
+  # (protocol §3 Nachtrag 23.08., Rev. 18). On an absence the offending thing is missing
+  # from the code and has no name there — the name comes from the rule (Decision Record
+  # P, point 3), so it must be stated here or `expected_match_key` is not computable.
+  #
+  # NO VERBATIM TARGET SIGNATURE HERE (shortened 23.08.2026, protocol §3 Nachtrag Rev.
+  # 18). What is preregistered for this category is the TYPE SPELLING (Komponentenschnitt
+  # §8: „Typschreibweise im `statement` identisch zur Manifest-Erwartung"), not the
+  # signature. Quoting the whole signature would turn an absence check into a string
+  # comparison and inflate ABSENCE_REQUIRED against the baselines, which reach the
+  # signature level not at all. The verbatim signature is rule content for API_CONTRACT
+  # (R-SIG-1…4) and there only.
+  #
+  # Carrier module and method stay MANDATORY: rule scopes are component-wide
+  # (`contextBuilder.ts:19`), so every module of a component sees every rule of that
+  # component. Without the carrier named, R-PORT-2 and R-PORT-3 would be
+  # indistinguishable on any module of `orders_services`.
+
+  - id: R-PORT-1
+    category: ABSENCE_REQUIRED
+    kind: semantic
+    severity: error
+    scope:
+      components:
+        - identity_services
+    statement: >-
+      The token service `depot.identity.services.token_service` must obtain its token
+      signing through the port `depot.core.ports.TokenSigner` and through nothing else.
+      Its public method `TokenService.issue` is required to carry that port type in its
+      public signature. If the reference is absent there, the required port reference is
+      missing and the module reaches its signing capability past the port. Report
+      `depot.core.ports.TokenSigner` as `subject.offending_type`, under that exact name.
+
+  - id: R-PORT-2
+    category: ABSENCE_REQUIRED
+    kind: semantic
+    severity: error
+    scope:
+      components:
+        - orders_services
+    statement: >-
+      The catalogue service `depot.orders.services.catalog_service` must obtain carrier
+      tariffs through the port `depot.core.ports.RateProvider` and through nothing else.
+      Its public method `CatalogService.quote_cents` is required to carry that port type
+      in its public signature. If the reference is absent there, the required port
+      reference is missing and the module reaches the tariff source past the port.
+      Report `depot.core.ports.RateProvider` as `subject.offending_type`, under that
+      exact name.
+
+  - id: R-PORT-3
+    category: ABSENCE_REQUIRED
+    kind: semantic
+    severity: error
+    scope:
+      components:
+        - orders_services
+    statement: >-
+      The refund service `depot.orders.services.refund_service` must reach the payment
+      provider through the port `depot.core.ports.PaymentGateway` and through nothing
+      else. Its public method `RefundService.refund` is required to carry that port type
+      in its public signature. If the reference is absent there, the required port
+      reference is missing and the module reaches the payment provider past the port.
+      Report `depot.core.ports.PaymentGateway` as `subject.offending_type`, under that
+      exact name.
+
+  - id: R-PORT-4
+    category: ABSENCE_REQUIRED
+    kind: semantic
+    severity: error
+    scope:
+      components:
+        - billing_services
+    statement: >-
+      The ledger service `depot.billing.services.ledger_service` must obtain the booking
+      day through the port `depot.core.ports.Clock` and through nothing else. Its public
+      method `LedgerService.post_invoice` is required to carry that port type in its
+      public signature. If the reference is absent there, the required port reference is
+      missing and the module takes its booking day from somewhere past the port. Report
+      `depot.core.ports.Clock` as `subject.offending_type`, under that exact name.
+      (`LedgerService.post_settlement` deliberately takes the value date as `day: str`
+      and is not covered by this rule.)
+
+  # ── FORBIDDEN_SIGNATURE_TYPE ──────────────────────────────────────────────────
+
+  - id: R-FRAMEWORK-1
+    category: FORBIDDEN_SIGNATURE_TYPE
+    kind: semantic
+    severity: error
+    scope:
+      components:
+        - identity_models
+        - orders_models
+        - billing_models
+    statement: >-
+      Modules of the `models` layer (`depot.<context>.models`) MAY import the
+      persistence framework `sqlalchemy.orm` — the object-relational mapping is this
+      layer's own tool, and the import as such is expressly allowed and is never a
+      violation. What is forbidden is the persistence/session type in a public
+      signature: no parameter annotation and no return annotation of a public function
+      or of a public method may name `sqlalchemy.orm.Session` or any other type of the
+      `sqlalchemy.orm` namespace. Public signatures of the `models` layer carry builtins
+      and project-local types only. Explicitly permitted and NOT a violation:
+      `sqlalchemy.orm.Mapped[...]` in a class attribute annotation and calls to
+      `sqlalchemy.orm.mapped_column(...)` in the class body — that is the declarative
+      mapping itself, not a leak into the API of the module. Report the persistence type
+      that appears in the signature as `subject.offending_type`, verbatim as it is
+      written there.
+
+  # ── STRUCTURAL_PLACEMENT ──────────────────────────────────────────────────────
+  #
+  # Two suffix clauses, both one-sided ("the name implies the location"), form
+  # preregistered in protocol §3 Nachtrag Rev. 15. DELIBERATELY NO LOCATION CLAUSE:
+  # a placement rule would let import-linter find the same KIND of violation through
+  # `layers`/`exhaustive = True`, and the preregistered matrix cell
+  # K4/`INCORRECT_LOCATION` would move from "teilweise" to "ja" through a rule
+  # formulation instead of a measurement (protocol §3 (vi), c1_modulliste.md §D.9).
+
+  - id: R-PLACE-1
+    category: STRUCTURAL_PLACEMENT
+    kind: semantic
+    severity: error
+    scope:
+      components:
+        - identity_models
+        - identity_repository
+        - orders_models
+        - orders_repository
+        - billing_models
+        - billing_repository
+    statement: >-
+      Module names in this repository imply where the module belongs. Clause 1 — a
+      module whose name ends in `_repo`, `_query` or `_index` belongs in the
+      `repository` package of its bounded context, that is in
+      `depot.<context>.repository`. Clause 2 — a module whose name ends in `_models`
+      belongs in the `models` package of its bounded context, that is in
+      `depot.<context>.models`. Both clauses read in ONE direction only: the name
+      implies the location, never the other way round. They say nothing about how a
+      module that already lies in one of those packages has to be named, and they do not
+      apply to the package modules `depot.<context>.models` and
+      `depot.<context>.repository` themselves, whose last name segment is `models`
+      respectively `repository` and not `_models` respectively
+      `_repo`/`_query`/`_index`. A module that carries one of these suffixes and lies
+      anywhere else breaks the naming convention of its target layer. Report the full
+      dotted module path of the misnamed-for-its-place module as
+      `subject.offending_type`.
+
+  # ── API_CONTRACT ──────────────────────────────────────────────────────────────
+  #
+  # Four single rules, one per carrier component. All four check UNIFORMLY through the
+  # `statement` wording and not against a Protocol in the repository (protocol §3
+  # Nachtrag Rev. 16 (B)): `depot.orders.mappers.order_line_mapper` (R-SIG-4) does not
+  # import `depot.core.ports` and can reference no Protocol, and an unequal treatment of
+  # four rules of the same category would not be justifiable. The target signatures are
+  # copied verbatim from the build reports (4b2 §5, 4b3 §4, 4b4 §3). The symbol name is
+  # spelled the way the extractor emits it into `FactSignature.symbol` — `Class.method`
+  # for a method (rawAstFacts.ts:51-55), the bare name for a top-level function — because
+  # that is what the model sees in the prompt and what the manifest will expect as
+  # `offending_type`. The signature of R-SIG-4 is wrapped over several lines in the source
+  # (black) and therefore carries a magic trailing comma there; it is reproduced here on
+  # one logical line WITHOUT that comma. The token sequence is otherwise identical, and
+  # the comma is a formatting artifact of the line break, not part of the contract.
+
+  - id: R-SIG-1
+    category: API_CONTRACT
+    kind: semantic
+    severity: error
+    scope:
+      components:
+        - identity_repository
+    statement: >-
+      The class `SessionRepository` in `depot.identity.repository.session_repo`
+      implements the port `depot.core.ports.SessionStore` and must carry its method
+      exactly with the target signature `def touch(self, session_id: str, ttl_seconds:
+      int) -> bool:`. Every parameter name, every parameter type and the return type are
+      part of the contract: neither `session_id: str` nor `ttl_seconds: int` nor the
+      return type `bool` may deviate, and no parameter may be added or dropped. A
+      deviating signature breaks the API contract even when the module still imports and
+      type-checks. Report the symbol `SessionRepository.touch` as
+      `subject.offending_type`.
+
+  - id: R-SIG-2
+    category: API_CONTRACT
+    kind: semantic
+    severity: error
+    scope:
+      components:
+        - orders_repository
+    statement: >-
+      The class `OrderQuery` in `depot.orders.repository.order_query` implements the
+      port `depot.core.ports.DiscountCatalog` and must carry its method exactly with the
+      target signature `def percent_for(self, code: str, subtotal_cents: int) -> int:`.
+      Every parameter name, every parameter type and the return type are part of the
+      contract: neither `code: str` nor `subtotal_cents: int` nor the return type `int`
+      may deviate, and no parameter may be added or dropped. A deviating signature
+      breaks the API contract even when the module still imports and type-checks. Report
+      the symbol `OrderQuery.percent_for` as `subject.offending_type`.
+
+  - id: R-SIG-3
+    category: API_CONTRACT
+    kind: semantic
+    severity: error
+    scope:
+      components:
+        - billing_repository
+    statement: >-
+      The class `InvoiceQuery` in `depot.billing.repository.invoice_query` implements
+      the port `depot.core.ports.PaymentLedger` and must carry its method exactly with
+      the target signature `def settled_cents(self, invoice_number: str) -> int:`. Every
+      parameter name, every parameter type and the return type are part of the contract:
+      neither `invoice_number: str` nor the return type `int` may deviate, and no
+      parameter may be added or dropped. A deviating signature breaks the API contract
+      even when the module still imports and type-checks. Report the symbol
+      `InvoiceQuery.settled_cents` as `subject.offending_type`.
+
+  - id: R-SIG-4
+    category: API_CONTRACT
+    kind: semantic
+    severity: error
+    scope:
+      components:
+        - orders_mappers
+    statement: >-
+      The public function `to_payload` in `depot.orders.mappers.order_line_mapper` must
+      carry exactly the target signature `def to_payload(line:
+      depot.orders.models.order_line_models.OrderLine) -> dict[str, object]:`. The
+      parameter name, the parameter type and the return type are part of the contract:
+      neither `line: depot.orders.models.order_line_models.OrderLine` nor the return
+      type `dict[str, object]` may deviate, and no parameter may be added or dropped.
+      This module implements no Protocol; this rule wording is the whole contract. A
+      deviating signature breaks it even when the module still imports and type-checks.
+      Report the symbol `to_payload` as `subject.offending_type`.

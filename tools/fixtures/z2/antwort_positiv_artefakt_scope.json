@@ -1,0 +1,11 @@
+{
+  "rules": [
+    {
+      "id": "R1",
+      "category": "constructor-injection",
+      "scope": {"components": ["depot.billing.api", "depot.billing.api.routes", "depot.billing.api.routes::class:InvoiceRoutes"]},
+      "statement": "A route class must receive its collaborators through its constructor and must not build a repository or a client of its own.",
+      "severity": "error"
+    }
+  ]
+}

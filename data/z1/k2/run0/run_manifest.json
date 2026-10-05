@@ -1,0 +1,173 @@
+{
+  "base_url_profil": "http://localhost:11434/v1",
+  "bedingung": "K2",
+  "externe_wanduhrzeit_s": {
+    "hinweis": "Invocation gemessen (monotone Uhr, §6.3); der Laufwert ist aus den Fortschrittszeilen des Kindprozesses abgeleitet. latency_ms in meta.json ist der Innenwert.",
+    "invocation_gemessen": 85.363,
+    "lauf_abgeleitet": 29.539
+  },
+  "extractor_run_dir": "20260831T175646_r0",
+  "invocation": {
+    "argv": [
+      "-m",
+      "llm_arch.cli",
+      "extract",
+      "fixtures/rich_repo",
+      "--provider",
+      "ollama",
+      "--model",
+      "qwen2.5-coder:7b",
+      "--runs",
+      "3"
+    ],
+    "cwd": "/home/haasentimo/ma/ma-llm-arch-extractor",
+    "external_wall_s_invocation": 85.363,
+    "external_wall_s_per_run": {
+      "run0": 29.539,
+      "run1": 27.549,
+      "run2": 27.483
+    },
+    "finished_utc": "2026-08-31T17:57:39.246536+00:00",
+    "new_run_dirs": [
+      "20260831T175646_r0",
+      "20260831T175714_r1",
+      "20260831T175739_r2"
+    ],
+    "returncode": 0,
+    "stalled": false,
+    "started_utc": "2026-08-31T17:56:18.980426+00:00"
+  },
+  "modell": "qwen2.5-coder:7b",
+  "profil": "ollama",
+  "schema": "z1-run-manifest/1",
+  "schema_smoke": null,
+  "slot": "run0",
+  "umgebungsparameter": {
+    "hinweis": "seed steht NICHT im Laufrecord (29 Felder ohne ihn, §3.3 (1)); gesendet, aber nicht als wirksam angenommen.",
+    "seed": 0
+  },
+  "verdikt": {
+    "P1": "OK",
+    "P2": "OK",
+    "attempts": [
+      {
+        "P1": "OK",
+        "P2": "OK",
+        "attempt": 0,
+        "decisive": false,
+        "parsed_counts": {
+          "components": 5,
+          "relations": 13
+        },
+        "parsed_source": "re-parse",
+        "raw_counts": {
+          "components": 5,
+          "relations": 13
+        },
+        "raw_response": "data/z1/k2/run0/extractor/attempts/attempt_0/raw_response.json",
+        "reparsed_counts": {
+          "components": 5,
+          "relations": 13
+        }
+      },
+      {
+        "P1": "OK",
+        "P2": "OK",
+        "attempt": 1,
+        "decisive": false,
+        "parsed_counts": {
+          "components": 5,
+          "relations": 13
+        },
+        "parsed_source": "re-parse",
+        "raw_counts": {
+          "components": 5,
+          "relations": 13
+        },
+        "raw_response": "data/z1/k2/run0/extractor/attempts/attempt_1/raw_response.json",
+        "reparsed_counts": {
+          "components": 5,
+          "relations": 13
+        }
+      },
+      {
+        "P1": "OK",
+        "P2": "OK",
+        "attempt": 2,
+        "decisive": true,
+        "parsed_counts": {
+          "components": 5,
+          "relations": 13
+        },
+        "parsed_source": "arch_model.json",
+        "raw_counts": {
+          "components": 5,
+          "relations": 13
+        },
+        "raw_response": "data/z1/k2/run0/extractor/attempts/attempt_2/raw_response.json",
+        "reparsed_counts": {
+          "components": 5,
+          "relations": 13
+        }
+      }
+    ],
+    "attempts_used": 3,
+    "gruende": [
+      "valid_final == false nach allen Versuchen (§5.2)"
+    ],
+    "gueltig": false,
+    "provenienz": {
+      "base_url": "http://localhost:11434/v1/",
+      "model": "qwen2.5-coder:7b",
+      "model_version": "qwen2.5-coder:7b",
+      "prompt_version": "v3",
+      "provider": "ollama",
+      "repo_commit": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+      "repo_path": "fixtures/rich_repo",
+      "run_index": 0,
+      "temperature": 0.0,
+      "timestamp": "2026-08-31T17:56:46.586792+00:00"
+    },
+    "valid_final": false,
+    "valid_raw": false,
+    "zaehler": {
+      "completion_tokens": 776,
+      "component_count": 4,
+      "latency_ms": 9166.239108999434,
+      "module_count": 11,
+      "prompt_tokens": 6685
+    }
+  },
+  "vorbedingungen": {
+    "arch_model_schema": {
+      "archived_sha256": "a83a84af306d647f2d4d9618a39f9b0059431015d3e5234bce931df642012ec0",
+      "wire_matches_registration": "True",
+      "wire_sha256": "1a4cf09cbe22e08dba4ff2d4a4c09234e37131e8d4fab78be654ff7248f70b23"
+    },
+    "checked_utc": "2026-08-31T17:56:18.979260+00:00",
+    "condition": "k2",
+    "environment": {
+      "openai": "3.6.0",
+      "pydantic": "2.13.5",
+      "python": "3.12.3",
+      "registriert_in_protokoll": "python 3.12.3 · pydantic 2.13.5 · openai 3.6.0"
+    },
+    "extractor_head": "5c0b65a82cc3d8af47c022d779ff63d8a20a9e08",
+    "extractor_porcelain": "leer",
+    "extractor_root": "/home/haasentimo/ma/ma-llm-arch-extractor",
+    "input_blobs": {
+      "geprueft": "28 von 28 gleich"
+    },
+    "prompt": {
+      "PROMPT_VERSION": "v3",
+      "blob_sha1": "6c8e4639441df6081c6d5bf9bc29b40c04033f61",
+      "blob_sha256": "ed9e1ebd51c6328968ecd7645bd073c4512f99b2512ad75f35f486272f946d46",
+      "file": "src/llm_arch/abstraction/prompt.py"
+    },
+    "thesis_repo": {
+      "check_doc_invariants": "Exit 0",
+      "porcelain_ausserhalb_data_z1": "leer",
+      "porcelain_geduldet_unter_data_z1": []
+    }
+  }
+}

@@ -1,0 +1,7420 @@
+{
+ "c11_run_head": {
+  "auftrag": "C11 — erster und einziger Auswertungslauf über den vollständigen Messbestand",
+  "zeitstempel_start": "2026-08-28T13:16:10+02:00",
+  "zeitstempel_ende": "2026-08-28T13:16:11+02:00",
+  "laufzeit": "0.29 s wall, 23868 KB maxrss",
+  "cwd": "/home/haasentimo/ma/masterarbeit",
+  "git_head": "dc865d1aa90fb0816ac5f9d7bcd268025fdfe9bf",
+  "maschine": "DESKTOP-PJA89CF · Linux 5.15.153.1-microsoft-standard-WSL2 x86_64",
+  "aufrufzeile": "python3 tools/evaluate_campaign.py --with-campaign --json-out data/campaign/eval/c11_eval_full.json --markdown-out data/campaign/eval/c11_eval_full.md",
+  "exit": 0,
+  "instrumente_sha256": {
+   "tools/evaluate_campaign.py": "5125cd595913b1226b888e67035f24f2831e0f4818b28dad4b261a57a0528eed",
+   "tools/match_k4k5.py": "ad3edcb1ee8537ee758d8212055371957c0493f3d8e218267d182fb9fc060022",
+   "tools/check_doc_invariants.py": "6cc16ef9c041b8721500fc521a437ea090fcacd209cf275561f673a1e52b7018"
+  },
+  "protokoll_sha256": "9e63c37067a5a62ef95dd2d0710620939b9f03e5b0258995f01e597db5653f48",
+  "spezifikation_sha256": "50f593d07801dd421aad1e644016bf4861af382afbc41749546e1ecad8785017",
+  "campaign_blockhashes": {
+   "control": {
+    "sha256sums_sha256": "c9699b4417833a6a6a006ce51ce5062589c3c4a1266bb6ea5579539ac2b8fdda",
+    "gelistete_artefakte": 14
+   },
+   "k1": {
+    "sha256sums_sha256": "ced9954f333936dc20630f91b275f63a47e7e69f9d530bf8a0abe5680ead6907",
+    "gelistete_artefakte": 96
+   },
+   "k2": {
+    "sha256sums_sha256": "debd5a93309e682126de886928b6fcc1c9ba4e2dd9548d2037f33512ac1bb26e",
+    "gelistete_artefakte": 96
+   },
+   "k3": {
+    "sha256sums_sha256": "7023d23663ba022dff98a4d888cde16e3f3b198849144344a6ba83a1281bfb88",
+    "gelistete_artefakte": 183
+   },
+   "k4": {
+    "sha256sums_sha256": "cc8dbce674920d2a61f9954eca3fa6eb766e971705283f8ca4321fa9906f29d0",
+    "gelistete_artefakte": 96
+   },
+   "k5": {
+    "sha256sums_sha256": "07ff89aaff4956afc2dfb3b88efa7b3fa548dcc8d4978c49a56677ba3b0d0741",
+    "gelistete_artefakte": 96
+   },
+   "manifests_json_dateien": 189
+  },
+  "rohausgabe_sha256_vor_kopfeinfuegung": {
+   "c11_eval_full.json": "28fc40bb334f73615b669cda45eccd8cca62d71d49aa613d429ddd0e2075283c",
+   "c11_eval_full.md": "aecba18c8187f8bdd2693883cf46406687f42fd7ce55e7cd9809793af43c8df5"
+  },
+  "kopfeinfuegung": "Markdown: Kopf vorangestellt, Rendering danach bytegleich. JSON: ein Schlüssel `c11_run_head` nach der öffnenden Klammer eingefügt, alle Ergebniswerte bytegleich. Keine Zelle angefasst."
+ },
+ "manifest_completeness": {
+  "line_count": 32,
+  "ids_gapless": "I01..I32",
+  "distribution_by_scenario": "3/3/3/3/3/1/4/4/4/4",
+  "each_carrier_module_appears_exactly_once": true,
+  "all_rule_ids_exist_in_architecture_rules_yaml_and_scope_covers_carrier_component": true,
+  "all_six_level1_categories_populated": true,
+  "level1_category_strings_char_identical_to_rules_yaml": true,
+  "cycle_rows_satisfy_z1_z4_and_z2prime_i_ii": true,
+  "z4_order_comparison_source": "reused from docs/planung/c1_modulliste.md §3 (already machine-checked and frozen there): identity_api<identity_mappers (pos 9, a<m), orders_api<orders_mappers (pos 7, a<m), billing_api<billing_mappers (pos 8, a<m), orders_services<orders_services_pricing (prefix)",
+  "incorrect_location_rows_name_origin_and_phantom_and_target_is_direct_child_of_context_package": true,
+  "layer_back_call_rows_carry_preregistered_k4_double_report": true,
+  "no_forbidden_relation_row_carries_k1_co_finding": true
+ },
+ "control_denominator": 52,
+ "false_positives": {
+  "K2": {
+   "config": "K2",
+   "denominator": 52,
+   "run_indices": [
+    0,
+    1,
+    2
+   ],
+   "modulewise_all": [
+    49,
+    49,
+    49
+   ],
+   "modulewise_headline": [
+    49,
+    49,
+    49
+   ],
+   "modulewise_less_preregistered": [
+    49,
+    49,
+    49
+   ],
+   "findingwise": [
+    155,
+    153,
+    153
+   ],
+   "modulewise_all_median": 49,
+   "modulewise_all_span": [
+    49,
+    49
+   ],
+   "headline_median": 49,
+   "headline_span": [
+    49,
+    49
+   ],
+   "less_preregistered_median": 49,
+   "less_preregistered_span": [
+    49,
+    49
+   ],
+   "findingwise_median": 153,
+   "findingwise_span": [
+    153,
+    155
+   ],
+   "derived_per_run": [
+    0,
+    0,
+    0
+   ]
+  },
+  "K3": {
+   "config": "K3",
+   "denominator": 52,
+   "run_indices": [
+    0,
+    1,
+    2
+   ],
+   "modulewise_all": [
+    2,
+    1,
+    0
+   ],
+   "modulewise_headline": [
+    2,
+    1,
+    0
+   ],
+   "modulewise_less_preregistered": [
+    2,
+    1,
+    0
+   ],
+   "findingwise": [
+    2,
+    1,
+    0
+   ],
+   "modulewise_all_median": 1,
+   "modulewise_all_span": [
+    0,
+    2
+   ],
+   "headline_median": 1,
+   "headline_span": [
+    0,
+    2
+   ],
+   "less_preregistered_median": 1,
+   "less_preregistered_span": [
+    0,
+    2
+   ],
+   "findingwise_median": 1,
+   "findingwise_span": [
+    0,
+    2
+   ],
+   "derived_per_run": [
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "preregistered_control": {
+  "K2": [
+   {
+    "config": "K2",
+    "label": "Adapterfassade `depot.core.adapters`, `R-PROTECT-1`",
+    "source": "Protokoll §5 Nachtrag Rev. 16",
+    "per_run": [
+     3,
+     3,
+     3
+    ],
+    "runs_with": 3,
+    "runs_total": 3
+   },
+   {
+    "config": "K2",
+    "label": "Nicht-Träger-Portregel auf `orders_services` (`R-PORT-2`/`R-PORT-3`)",
+    "source": "Protokoll §5 Nachtrag Rev. 18",
+    "per_run": [
+     2,
+     0,
+     0
+    ],
+    "runs_with": 1,
+    "runs_total": 3
+   }
+  ],
+  "K3": [
+   {
+    "config": "K3",
+    "label": "Adapterfassade `depot.core.adapters`, `R-PROTECT-1`",
+    "source": "Protokoll §5 Nachtrag Rev. 16",
+    "per_run": [
+     0,
+     0,
+     0
+    ],
+    "runs_with": 0,
+    "runs_total": 3
+   },
+   {
+    "config": "K3",
+    "label": "Nicht-Träger-Portregel auf `orders_services` (`R-PORT-2`/`R-PORT-3`)",
+    "source": "Protokoll §5 Nachtrag Rev. 18",
+    "per_run": [
+     0,
+     0,
+     0
+    ],
+    "runs_with": 0,
+    "runs_total": 3
+   }
+  ]
+ },
+ "rule_id_distribution": {
+  "K2": {
+   "R-CORE-1": 153,
+   "R-LAYER-1": 66,
+   "R-FRAMEWORK-1": 63,
+   "R-PLACE-1": 54,
+   "R-PROTECT-1": 36,
+   "R-INDEP-1": 30,
+   "R-CYCLE-1": 12,
+   "R-CYCLE-2": 12,
+   "R-SIG-1": 9,
+   "R-SIG-4": 6,
+   "R-PORT-2": 4,
+   "R-PORT-3": 4,
+   "R-PORT-1": 3,
+   "R-PORT-4": 3,
+   "R-SIG-2": 3,
+   "R-SIG-3": 3
+  },
+  "K3": {
+   "R-SIG-3": 2,
+   "R-SIG-2": 1
+  }
+ },
+ "reference_classes": {
+  "K2": {
+   "counts": {
+    "Selbstbezug": 329,
+    "nicht zuordenbar": 84,
+    "Fremdbezug": 36,
+    "Zielbezug": 12
+   },
+   "pct": {
+    "Selbstbezug": 71.4,
+    "nicht zuordenbar": 18.2,
+    "Fremdbezug": 7.8,
+    "Zielbezug": 2.6
+   },
+   "archived_total": 461,
+   "own_total": 461,
+   "agrees": true
+  },
+  "K3": null
+ },
+ "t7": {
+  "totals": {
+   "K1": {
+    "invocations": 32,
+    "valid": 32,
+    "invalid": 0,
+    "injections_seen": 32,
+    "injections_valid": 32,
+    "missing": [],
+    "calls_total": 0,
+    "calls_invalid": 0,
+    "calls_transport_failed": 0,
+    "calls_measured": 0,
+    "valid_final": 0,
+    "valid_final_share": null,
+    "skipped_count": 0,
+    "invalid_reasons": {},
+    "repetitions": 0,
+    "wall_clock_ms": 2513,
+    "not_performed": 0
+   },
+   "K2": {
+    "invocations": 32,
+    "valid": 32,
+    "invalid": 0,
+    "injections_seen": 32,
+    "injections_valid": 32,
+    "missing": [],
+    "calls_total": 96,
+    "calls_invalid": 0,
+    "calls_transport_failed": 0,
+    "calls_measured": 96,
+    "valid_final": 96,
+    "valid_final_share": 1.0,
+    "skipped_count": 0,
+    "invalid_reasons": {},
+    "repetitions": 0,
+    "wall_clock_ms": 252155,
+    "not_performed": 0
+   },
+   "K3": {
+    "invocations": 61,
+    "valid": 32,
+    "invalid": 29,
+    "injections_seen": 32,
+    "injections_valid": 32,
+    "missing": [],
+    "calls_total": 183,
+    "calls_invalid": 0,
+    "calls_transport_failed": 50,
+    "calls_measured": 133,
+    "valid_final": 133,
+    "valid_final_share": 1.0,
+    "skipped_count": 0,
+    "invalid_reasons": {
+     "transport_failure": 29
+    },
+    "repetitions": 29,
+    "wall_clock_ms": 9190542,
+    "not_performed": 0
+   },
+   "K4": {
+    "invocations": 32,
+    "valid": 32,
+    "invalid": 0,
+    "injections_seen": 32,
+    "injections_valid": 32,
+    "missing": [],
+    "calls_total": 0,
+    "calls_invalid": 0,
+    "calls_transport_failed": 0,
+    "calls_measured": 0,
+    "valid_final": 0,
+    "valid_final_share": null,
+    "skipped_count": 0,
+    "invalid_reasons": {},
+    "repetitions": 0,
+    "wall_clock_ms": 3621,
+    "not_performed": 0
+   },
+   "K5": {
+    "invocations": 32,
+    "valid": 32,
+    "invalid": 0,
+    "injections_seen": 32,
+    "injections_valid": 32,
+    "missing": [],
+    "calls_total": 0,
+    "calls_invalid": 0,
+    "calls_transport_failed": 0,
+    "calls_measured": 0,
+    "valid_final": 0,
+    "valid_final_share": null,
+    "skipped_count": 0,
+    "invalid_reasons": {},
+    "repetitions": 0,
+    "wall_clock_ms": 9917,
+    "not_performed": 0
+   }
+  },
+  "valid": {
+   "K1": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21",
+    "I22",
+    "I23",
+    "I24",
+    "I25",
+    "I26",
+    "I27",
+    "I28",
+    "I29",
+    "I30",
+    "I31",
+    "I32"
+   ],
+   "K2": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21",
+    "I22",
+    "I23",
+    "I24",
+    "I25",
+    "I26",
+    "I27",
+    "I28",
+    "I29",
+    "I30",
+    "I31",
+    "I32"
+   ],
+   "K3": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21",
+    "I22",
+    "I23",
+    "I24",
+    "I25",
+    "I26",
+    "I27",
+    "I28",
+    "I29",
+    "I30",
+    "I31",
+    "I32"
+   ],
+   "K4": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21",
+    "I22",
+    "I23",
+    "I24",
+    "I25",
+    "I26",
+    "I27",
+    "I28",
+    "I29",
+    "I30",
+    "I31",
+    "I32"
+   ],
+   "K5": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21",
+    "I22",
+    "I23",
+    "I24",
+    "I25",
+    "I26",
+    "I27",
+    "I28",
+    "I29",
+    "I30",
+    "I31",
+    "I32"
+   ]
+  },
+  "missing": {
+   "K1": [],
+   "K2": [],
+   "K3": [],
+   "K4": [],
+   "K5": []
+  },
+  "invalid_invocations": [
+   {
+    "config": "K3",
+    "injection_id": "I09",
+    "attempt": 1,
+    "manifest": "k3_06e052e19c153503f751611d7f813f18f204d8f0.json",
+    "repetition": null,
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I09",
+    "attempt": 2,
+    "manifest": "k3_06e052e19c153503f751611d7f813f18f204d8f0_r2.json",
+    "repetition": "r2",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 2
+   },
+   {
+    "config": "K3",
+    "injection_id": "I09",
+    "attempt": 3,
+    "manifest": "k3_06e052e19c153503f751611d7f813f18f204d8f0_r3.json",
+    "repetition": "r3",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I09",
+    "attempt": 4,
+    "manifest": "k3_06e052e19c153503f751611d7f813f18f204d8f0_r4.json",
+    "repetition": "r4",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 3
+   },
+   {
+    "config": "K3",
+    "injection_id": "I22",
+    "attempt": 1,
+    "manifest": "k3_08a622b024e9174d7ce62863f385b369c8c27b12.json",
+    "repetition": null,
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I07",
+    "attempt": 1,
+    "manifest": "k3_0993e01b26b7cc91bb70840207860fcc15dba286.json",
+    "repetition": null,
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I07",
+    "attempt": 2,
+    "manifest": "k3_0993e01b26b7cc91bb70840207860fcc15dba286_r2.json",
+    "repetition": "r2",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I23",
+    "attempt": 1,
+    "manifest": "k3_28a75749496229bb1db37d85f68347572bd84c49.json",
+    "repetition": null,
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 3
+   },
+   {
+    "config": "K3",
+    "injection_id": "I23",
+    "attempt": 2,
+    "manifest": "k3_28a75749496229bb1db37d85f68347572bd84c49_r2.json",
+    "repetition": "r2",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 2
+   },
+   {
+    "config": "K3",
+    "injection_id": "I23",
+    "attempt": 3,
+    "manifest": "k3_28a75749496229bb1db37d85f68347572bd84c49_r3.json",
+    "repetition": "r3",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I23",
+    "attempt": 4,
+    "manifest": "k3_28a75749496229bb1db37d85f68347572bd84c49_r4.json",
+    "repetition": "r4",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 3
+   },
+   {
+    "config": "K3",
+    "injection_id": "I23",
+    "attempt": 5,
+    "manifest": "k3_28a75749496229bb1db37d85f68347572bd84c49_r5.json",
+    "repetition": "r5",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 3
+   },
+   {
+    "config": "K3",
+    "injection_id": "I20",
+    "attempt": 1,
+    "manifest": "k3_35061d852631049ff74f65451368d7e85fd733bd.json",
+    "repetition": null,
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 2
+   },
+   {
+    "config": "K3",
+    "injection_id": "I20",
+    "attempt": 2,
+    "manifest": "k3_35061d852631049ff74f65451368d7e85fd733bd_r2.json",
+    "repetition": "r2",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 2
+   },
+   {
+    "config": "K3",
+    "injection_id": "I13",
+    "attempt": 1,
+    "manifest": "k3_3be646fed3bdb2449b153f912d42fbb63b719776.json",
+    "repetition": null,
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I13",
+    "attempt": 2,
+    "manifest": "k3_3be646fed3bdb2449b153f912d42fbb63b719776_r2.json",
+    "repetition": "r2",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 2
+   },
+   {
+    "config": "K3",
+    "injection_id": "I16",
+    "attempt": 1,
+    "manifest": "k3_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf.json",
+    "repetition": null,
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 3
+   },
+   {
+    "config": "K3",
+    "injection_id": "I16",
+    "attempt": 2,
+    "manifest": "k3_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf_r2.json",
+    "repetition": "r2",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I06",
+    "attempt": 1,
+    "manifest": "k3_531a1ff2616aaa13f8c317fe7d40f56135caacaf.json",
+    "repetition": null,
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 2
+   },
+   {
+    "config": "K3",
+    "injection_id": "I06",
+    "attempt": 2,
+    "manifest": "k3_531a1ff2616aaa13f8c317fe7d40f56135caacaf_r2.json",
+    "repetition": "r2",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I11",
+    "attempt": 1,
+    "manifest": "k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85.json",
+    "repetition": null,
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I11",
+    "attempt": 2,
+    "manifest": "k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r2.json",
+    "repetition": "r2",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I11",
+    "attempt": 3,
+    "manifest": "k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r3.json",
+    "repetition": "r3",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I11",
+    "attempt": 4,
+    "manifest": "k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r4.json",
+    "repetition": "r4",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 3
+   },
+   {
+    "config": "K3",
+    "injection_id": "I11",
+    "attempt": 5,
+    "manifest": "k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r5.json",
+    "repetition": "r5",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 2
+   },
+   {
+    "config": "K3",
+    "injection_id": "I05",
+    "attempt": 1,
+    "manifest": "k3_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e.json",
+    "repetition": null,
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I05",
+    "attempt": 2,
+    "manifest": "k3_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e_r2.json",
+    "repetition": "r2",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 1
+   },
+   {
+    "config": "K3",
+    "injection_id": "I21",
+    "attempt": 1,
+    "manifest": "k3_dd414657d12197a1ca79152d401f75eb4b5f5f57.json",
+    "repetition": null,
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 2
+   },
+   {
+    "config": "K3",
+    "injection_id": "I21",
+    "attempt": 2,
+    "manifest": "k3_dd414657d12197a1ca79152d401f75eb4b5f5f57_r2.json",
+    "repetition": "r2",
+    "invalid_reasons": [
+     "transport_failure"
+    ],
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 2
+   }
+  ],
+  "acceptance": [
+   {
+    "scope": "K1/K2/K3, Injektionslauf",
+    "rule": "`changed_files_count == 1`",
+    "expected": "1 je Invocation",
+    "measured": "1 in 125 von 125 Invocationen",
+    "met": true,
+    "note": ""
+   },
+   {
+    "scope": "K1/K2/K3, Injektionslauf",
+    "rule": "`calls_total == 1 × runs`",
+    "expected": "K1: 1 · K2/K3: 3",
+    "measured": "K1: 0 · K2: 3 · K3: 3",
+    "met": true,
+    "note": "**Abweichung zum Skelettwortlaut bei K1:** der ausgeführte Akzeptanztest verlangt für K1 `calls_total == 0` (deterministischer Pfad, kein Modell) — `tools/postrun_check.py`, §6 Nachtrag Rev. 24/26. Gemessen ist 0. Beide Fassungen stehen hier nebeneinander; angeglichen wird keine."
+   },
+   {
+    "scope": "K4",
+    "rule": "ausgewertete Contracts `kept + broken`",
+    "expected": "13",
+    "measured": "32 von 32 Aufrufen mit `kept + broken` = 13",
+    "met": null,
+    "note": "`erfüllt` ist im Skelett als `n. b.` vorregistriert — die Trefferzahl ist die Messung, geprüft ist allein die Vollständigkeit der Regelmenge."
+   },
+   {
+    "scope": "K5",
+    "rule": "gesammelte Tests, Sammelphase fehlerfrei",
+    "expected": "24",
+    "measured": "32 von 32 Aufrufen mit `collected` = 24",
+    "met": true,
+    "note": ""
+   }
+  ],
+  "crosscheck_journal": {
+   "K1": {
+    "journal_invocations": 32,
+    "journal_valid": 32,
+    "journal_missing": [],
+    "divergences": []
+   },
+   "K2": {
+    "journal_invocations": 32,
+    "journal_valid": 32,
+    "journal_missing": [],
+    "divergences": []
+   },
+   "K3": {
+    "journal_invocations": 61,
+    "journal_valid": 32,
+    "journal_missing": [],
+    "divergences": []
+   },
+   "K4": {
+    "journal_invocations": 32,
+    "journal_valid": 32,
+    "journal_missing": [],
+    "divergences": []
+   },
+   "K5": {
+    "journal_invocations": 32,
+    "journal_valid": 32,
+    "journal_missing": [],
+    "divergences": []
+   }
+  }
+ },
+ "journal": {
+  "valid": {
+   "K2": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21",
+    "I22",
+    "I23",
+    "I24",
+    "I25",
+    "I26",
+    "I27",
+    "I28",
+    "I29",
+    "I30",
+    "I31",
+    "I32"
+   ],
+   "K3": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21",
+    "I22",
+    "I23",
+    "I24",
+    "I25",
+    "I26",
+    "I27",
+    "I28",
+    "I29",
+    "I30",
+    "I31",
+    "I32"
+   ],
+   "K1": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21",
+    "I22",
+    "I23",
+    "I24",
+    "I25",
+    "I26",
+    "I27",
+    "I28",
+    "I29",
+    "I30",
+    "I31",
+    "I32"
+   ],
+   "K4": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21",
+    "I22",
+    "I23",
+    "I24",
+    "I25",
+    "I26",
+    "I27",
+    "I28",
+    "I29",
+    "I30",
+    "I31",
+    "I32"
+   ],
+   "K5": [
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "I06",
+    "I07",
+    "I08",
+    "I09",
+    "I10",
+    "I11",
+    "I12",
+    "I13",
+    "I14",
+    "I15",
+    "I16",
+    "I17",
+    "I18",
+    "I19",
+    "I20",
+    "I21",
+    "I22",
+    "I23",
+    "I24",
+    "I25",
+    "I26",
+    "I27",
+    "I28",
+    "I29",
+    "I30",
+    "I31",
+    "I32"
+   ]
+  },
+  "missing": {
+   "K1": [],
+   "K2": [],
+   "K3": [],
+   "K4": [],
+   "K5": []
+  },
+  "invalid_rows": [
+   {
+    "timestamp": "2026-08-27T09:25:00+02:00",
+    "config": "K3",
+    "injection_id": "I05",
+    "attempt": 1,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T09:26:25+02:00",
+    "config": "K3",
+    "injection_id": "I06",
+    "attempt": 1,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_531a1ff2616aaa13f8c317fe7d40f56135caacaf.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_531a1ff2616aaa13f8c317fe7d40f56135caacaf.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_531a1ff2616aaa13f8c317fe7d40f56135caacaf.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T09:30:18+02:00",
+    "config": "K3",
+    "injection_id": "I07",
+    "attempt": 1,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_0993e01b26b7cc91bb70840207860fcc15dba286.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_0993e01b26b7cc91bb70840207860fcc15dba286.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_0993e01b26b7cc91bb70840207860fcc15dba286.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T09:40:23+02:00",
+    "config": "K3",
+    "injection_id": "I09",
+    "attempt": 1,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_06e052e19c153503f751611d7f813f18f204d8f0.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_06e052e19c153503f751611d7f813f18f204d8f0.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_06e052e19c153503f751611d7f813f18f204d8f0.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T09:50:21+02:00",
+    "config": "K3",
+    "injection_id": "I11",
+    "attempt": 1,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T09:57:43+02:00",
+    "config": "K3",
+    "injection_id": "I13",
+    "attempt": 1,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_3be646fed3bdb2449b153f912d42fbb63b719776.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_3be646fed3bdb2449b153f912d42fbb63b719776.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_3be646fed3bdb2449b153f912d42fbb63b719776.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T10:05:38+02:00",
+    "config": "K3",
+    "injection_id": "I16",
+    "attempt": 1,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T10:19:46+02:00",
+    "config": "K3",
+    "injection_id": "I20",
+    "attempt": 1,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_35061d852631049ff74f65451368d7e85fd733bd.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_35061d852631049ff74f65451368d7e85fd733bd.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_35061d852631049ff74f65451368d7e85fd733bd.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T10:21:43+02:00",
+    "config": "K3",
+    "injection_id": "I21",
+    "attempt": 1,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_dd414657d12197a1ca79152d401f75eb4b5f5f57.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_dd414657d12197a1ca79152d401f75eb4b5f5f57.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_dd414657d12197a1ca79152d401f75eb4b5f5f57.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T10:24:26+02:00",
+    "config": "K3",
+    "injection_id": "I22",
+    "attempt": 1,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_08a622b024e9174d7ce62863f385b369c8c27b12.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_08a622b024e9174d7ce62863f385b369c8c27b12.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_08a622b024e9174d7ce62863f385b369c8c27b12.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T10:24:45+02:00",
+    "config": "K3",
+    "injection_id": "I23",
+    "attempt": 1,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_28a75749496229bb1db37d85f68347572bd84c49.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_28a75749496229bb1db37d85f68347572bd84c49.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_28a75749496229bb1db37d85f68347572bd84c49.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T12:02:10+02:00",
+    "config": "K3",
+    "injection_id": "I05",
+    "attempt": 2,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e_r2.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e_r2.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e_r2.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T12:03:29+02:00",
+    "config": "K3",
+    "injection_id": "I06",
+    "attempt": 2,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_531a1ff2616aaa13f8c317fe7d40f56135caacaf_r2.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_531a1ff2616aaa13f8c317fe7d40f56135caacaf_r2.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_531a1ff2616aaa13f8c317fe7d40f56135caacaf_r2.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T12:05:49+02:00",
+    "config": "K3",
+    "injection_id": "I07",
+    "attempt": 2,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_0993e01b26b7cc91bb70840207860fcc15dba286_r2.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_0993e01b26b7cc91bb70840207860fcc15dba286_r2.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_0993e01b26b7cc91bb70840207860fcc15dba286_r2.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T12:07:13+02:00",
+    "config": "K3",
+    "injection_id": "I09",
+    "attempt": 2,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_06e052e19c153503f751611d7f813f18f204d8f0_r2.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_06e052e19c153503f751611d7f813f18f204d8f0_r2.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_06e052e19c153503f751611d7f813f18f204d8f0_r2.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T12:09:21+02:00",
+    "config": "K3",
+    "injection_id": "I11",
+    "attempt": 2,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r2.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r2.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r2.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T12:10:19+02:00",
+    "config": "K3",
+    "injection_id": "I13",
+    "attempt": 2,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_3be646fed3bdb2449b153f912d42fbb63b719776_r2.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_3be646fed3bdb2449b153f912d42fbb63b719776_r2.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_3be646fed3bdb2449b153f912d42fbb63b719776_r2.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T12:11:57+02:00",
+    "config": "K3",
+    "injection_id": "I16",
+    "attempt": 2,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf_r2.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf_r2.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf_r2.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T12:13:17+02:00",
+    "config": "K3",
+    "injection_id": "I20",
+    "attempt": 2,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_35061d852631049ff74f65451368d7e85fd733bd_r2.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_35061d852631049ff74f65451368d7e85fd733bd_r2.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_35061d852631049ff74f65451368d7e85fd733bd_r2.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T12:14:46+02:00",
+    "config": "K3",
+    "injection_id": "I21",
+    "attempt": 2,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_dd414657d12197a1ca79152d401f75eb4b5f5f57_r2.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_dd414657d12197a1ca79152d401f75eb4b5f5f57_r2.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_dd414657d12197a1ca79152d401f75eb4b5f5f57_r2.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-27T12:18:33+02:00",
+    "config": "K3",
+    "injection_id": "I23",
+    "attempt": 2,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_28a75749496229bb1db37d85f68347572bd84c49_r2.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_28a75749496229bb1db37d85f68347572bd84c49_r2.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_28a75749496229bb1db37d85f68347572bd84c49_r2.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-28T08:08:55+02:00",
+    "config": "K3",
+    "injection_id": "I09",
+    "attempt": 3,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_06e052e19c153503f751611d7f813f18f204d8f0_r3.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_06e052e19c153503f751611d7f813f18f204d8f0_r3.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_06e052e19c153503f751611d7f813f18f204d8f0_r3.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-28T08:10:22+02:00",
+    "config": "K3",
+    "injection_id": "I11",
+    "attempt": 3,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r3.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r3.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r3.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-28T08:18:35+02:00",
+    "config": "K3",
+    "injection_id": "I23",
+    "attempt": 3,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 1"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_28a75749496229bb1db37d85f68347572bd84c49_r3.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_28a75749496229bb1db37d85f68347572bd84c49_r3.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_28a75749496229bb1db37d85f68347572bd84c49_r3.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-28T08:19:55+02:00",
+    "config": "K3",
+    "injection_id": "I09",
+    "attempt": 4,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_06e052e19c153503f751611d7f813f18f204d8f0_r4.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_06e052e19c153503f751611d7f813f18f204d8f0_r4.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_06e052e19c153503f751611d7f813f18f204d8f0_r4.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-28T08:20:13+02:00",
+    "config": "K3",
+    "injection_id": "I11",
+    "attempt": 4,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r4.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r4.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r4.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-28T08:20:32+02:00",
+    "config": "K3",
+    "injection_id": "I23",
+    "attempt": 4,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_28a75749496229bb1db37d85f68347572bd84c49_r4.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_28a75749496229bb1db37d85f68347572bd84c49_r4.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_28a75749496229bb1db37d85f68347572bd84c49_r4.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-28T08:53:02+02:00",
+    "config": "K3",
+    "injection_id": "I23",
+    "attempt": 5,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 3"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_28a75749496229bb1db37d85f68347572bd84c49_r5.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_28a75749496229bb1db37d85f68347572bd84c49_r5.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_28a75749496229bb1db37d85f68347572bd84c49_r5.json"
+    }
+   },
+   {
+    "timestamp": "2026-08-28T09:07:38+02:00",
+    "config": "K3",
+    "injection_id": "I11",
+    "attempt": 5,
+    "verdict": "INVALID",
+    "reasons": [
+     "invalid_reasons = ['transport_failure']",
+     "calls_transport_failed = 2"
+    ],
+    "is_smoke_test": false,
+    "paths": {
+     "manifest": "/home/haasentimo/ma/masterarbeit/data/campaign/manifests/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r5.json",
+     "run_log": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r5.jsonl",
+     "json_out": "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85_r5.json"
+    }
+   }
+  ]
+ },
+ "manifest_missing": {
+  "K2": [],
+  "K3": []
+ },
+ "injections": {
+  "I01": {
+   "id": "I01",
+   "scenario_l2": "LAYER_BACK_CALL",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.identity.repository.customer_repo",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 8,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I02": {
+   "id": "I02",
+   "scenario_l2": "LAYER_BACK_CALL",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.orders.repository.order_repo",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I03": {
+   "id": "I03",
+   "scenario_l2": "LAYER_BACK_CALL",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.billing.repository.invoice_repo",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I04": {
+   "id": "I04",
+   "scenario_l2": "LAYER_SKIP_CALL",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.identity.api.routes",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I05": {
+   "id": "I05",
+   "scenario_l2": "LAYER_SKIP_CALL",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.orders.api.routes",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 1,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I06": {
+   "id": "I06",
+   "scenario_l2": "LAYER_SKIP_CALL",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.billing.api.routes",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "2",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "2",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      2,
+      2,
+      2
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I07": {
+   "id": "I07",
+   "scenario_l2": "PROTECTED_MODULE",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.identity.services.customer_service",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "2",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "2",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      2,
+      2,
+      2
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 1,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I08": {
+   "id": "I08",
+   "scenario_l2": "PROTECTED_MODULE",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.orders.services.order_service",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 8,
+     "rest": {
+      "value": "3",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "2",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "-1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      3,
+      3,
+      3
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I09": {
+   "id": "I09",
+   "scenario_l2": "PROTECTED_MODULE",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.billing.services.invoice_service",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 8,
+     "rest": {
+      "value": "3",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "3",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      3,
+      3,
+      3
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 1,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I10": {
+   "id": "I10",
+   "scenario_l2": "INDEPENDENCE",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.orders.services.checkout_service",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 11,
+     "rest": {
+      "value": "2",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "3",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      2,
+      2,
+      2
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I11": {
+   "id": "I11",
+   "scenario_l2": "INDEPENDENCE",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.billing.services.dunning_service",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 8,
+     "rest": {
+      "value": "3",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "3",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      3,
+      3,
+      3
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 1,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I12": {
+   "id": "I12",
+   "scenario_l2": "INDEPENDENCE",
+   "category_l1": "FORBIDDEN_RELATION",
+   "carrier_module": "depot.orders.repository.order_line_repo",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 7,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "2",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I13": {
+   "id": "I13",
+   "scenario_l2": "CYCLE_SIBLING",
+   "category_l1": "CYCLE",
+   "carrier_module": "depot.identity.mappers.customer_mapper",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": null,
+      "marker": "n. b.",
+      "note": "Ausgabeform trägt kein Modul",
+      "source": "Protokoll §4 Nachtrag Rev. 30 (A-17)"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I14": {
+   "id": "I14",
+   "scenario_l2": "CYCLE_SIBLING",
+   "category_l1": "CYCLE",
+   "carrier_module": "depot.orders.mappers.order_mapper",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": null,
+      "marker": "n. b.",
+      "note": "Ausgabeform trägt kein Modul",
+      "source": "Protokoll §4 Nachtrag Rev. 30 (A-17)"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I15": {
+   "id": "I15",
+   "scenario_l2": "CYCLE_SIBLING",
+   "category_l1": "CYCLE",
+   "carrier_module": "depot.billing.mappers.invoice_mapper",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": null,
+      "marker": "n. b.",
+      "note": "Ausgabeform trägt kein Modul",
+      "source": "Protokoll §4 Nachtrag Rev. 30 (A-17)"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I16": {
+   "id": "I16",
+   "scenario_l2": "CYCLE_PARENT_CHILD",
+   "category_l1": "CYCLE",
+   "carrier_module": "depot.orders.services.pricing.engine",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": "n. b.",
+      "note": "Ausgabeform trägt kein Modul",
+      "source": "Protokoll §4 Nachtrag Rev. 30 (A-17)"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I17": {
+   "id": "I17",
+   "scenario_l2": "MISSING_PORT_REFERENCE",
+   "category_l1": "ABSENCE_REQUIRED",
+   "carrier_module": "depot.identity.services.token_service",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 6,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I18": {
+   "id": "I18",
+   "scenario_l2": "MISSING_PORT_REFERENCE",
+   "category_l1": "ABSENCE_REQUIRED",
+   "carrier_module": "depot.orders.services.catalog_service",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I19": {
+   "id": "I19",
+   "scenario_l2": "MISSING_PORT_REFERENCE",
+   "category_l1": "ABSENCE_REQUIRED",
+   "carrier_module": "depot.orders.services.refund_service",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 6,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I20": {
+   "id": "I20",
+   "scenario_l2": "MISSING_PORT_REFERENCE",
+   "category_l1": "ABSENCE_REQUIRED",
+   "carrier_module": "depot.billing.services.ledger_service",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 12,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I21": {
+   "id": "I21",
+   "scenario_l2": "FRAMEWORK_TYPE_IN_SIGNATURE",
+   "category_l1": "FORBIDDEN_SIGNATURE_TYPE",
+   "carrier_module": "depot.identity.models.customer_models",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I22": {
+   "id": "I22",
+   "scenario_l2": "FRAMEWORK_TYPE_IN_SIGNATURE",
+   "category_l1": "FORBIDDEN_SIGNATURE_TYPE",
+   "carrier_module": "depot.orders.models.order_models",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "5",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "-4",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      5,
+      5,
+      5
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 1,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I23": {
+   "id": "I23",
+   "scenario_l2": "FRAMEWORK_TYPE_IN_SIGNATURE",
+   "category_l1": "FORBIDDEN_SIGNATURE_TYPE",
+   "carrier_module": "depot.orders.models.order_line_models",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "4",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "-3",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      4,
+      4,
+      4
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I24": {
+   "id": "I24",
+   "scenario_l2": "FRAMEWORK_TYPE_IN_SIGNATURE",
+   "category_l1": "FORBIDDEN_SIGNATURE_TYPE",
+   "carrier_module": "depot.billing.models.invoice_models",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I25": {
+   "id": "I25",
+   "scenario_l2": "INCORRECT_LOCATION",
+   "category_l1": "STRUCTURAL_PLACEMENT",
+   "carrier_module": "depot.orders.legacy_order_index",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I26": {
+   "id": "I26",
+   "scenario_l2": "INCORRECT_LOCATION",
+   "category_l1": "STRUCTURAL_PLACEMENT",
+   "carrier_module": "depot.billing.legacy_invoice_index",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I27": {
+   "id": "I27",
+   "scenario_l2": "INCORRECT_LOCATION",
+   "category_l1": "STRUCTURAL_PLACEMENT",
+   "carrier_module": "depot.identity.legacy_token_index",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I28": {
+   "id": "I28",
+   "scenario_l2": "INCORRECT_LOCATION",
+   "category_l1": "STRUCTURAL_PLACEMENT",
+   "carrier_module": "depot.billing.legacy_tax_models",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": 0,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I29": {
+   "id": "I29",
+   "scenario_l2": "SIGNATURE_DEVIATION",
+   "category_l1": "API_CONTRACT",
+   "carrier_module": "depot.identity.repository.session_repo",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I30": {
+   "id": "I30",
+   "scenario_l2": "SIGNATURE_DEVIATION",
+   "category_l1": "API_CONTRACT",
+   "carrier_module": "depot.orders.repository.order_query",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I31": {
+   "id": "I31",
+   "scenario_l2": "SIGNATURE_DEVIATION",
+   "category_l1": "API_CONTRACT",
+   "carrier_module": "depot.billing.repository.invoice_query",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 5,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  },
+  "I32": {
+   "id": "I32",
+   "scenario_l2": "SIGNATURE_DEVIATION",
+   "category_l1": "API_CONTRACT",
+   "carrier_module": "depot.orders.mappers.order_line_mapper",
+   "configs": {
+    "K1": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K2": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "ja",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      1,
+      1,
+      1
+     ]
+    },
+    "K3": {
+     "strict": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "localized": {
+      "value": 1,
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "strict_fp": 2,
+     "rest": {
+      "value": "0",
+      "marker": null,
+      "note": "",
+      "source": "C3b"
+     },
+     "campaign": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "delta": {
+      "value": "1",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "kein_en": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "sv": {
+      "value": "nein",
+      "marker": null,
+      "note": "",
+      "source": ""
+     },
+     "rest_per_run": [
+      0,
+      0,
+      0
+     ]
+    },
+    "K4": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    },
+    "K5": {
+     "strict": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "localized": {
+      "value": null,
+      "marker": " — ",
+      "note": "Kategorie von dieser Konfiguration nicht ausdrückbar",
+      "source": "T1/T8"
+     },
+     "strict_fp": 0
+    }
+   }
+  }
+ },
+ "co_findings": [
+  {
+   "injection": "I01",
+   "config": "K4",
+   "form": "acyclic_block",
+   "reason": "pre-registered K4 double report: the injected back edge closes a sibling cycle services ↔ repository and is reported by the acyclic_siblings contract in addition to the layers contract (protocol §4 Am. 13.08. (a)/(c); T9 case 3) — neither hit nor false positive"
+  },
+  {
+   "injection": "I02",
+   "config": "K4",
+   "form": "acyclic_block",
+   "reason": "pre-registered K4 double report: the injected back edge closes a sibling cycle services ↔ repository and is reported by the acyclic_siblings contract in addition to the layers contract (protocol §4 Am. 13.08. (a)/(c); T9 case 3) — neither hit nor false positive"
+  },
+  {
+   "injection": "I03",
+   "config": "K4",
+   "form": "acyclic_block",
+   "reason": "pre-registered K4 double report: the injected back edge closes a sibling cycle services ↔ repository and is reported by the acyclic_siblings contract in addition to the layers contract (protocol §4 Am. 13.08. (a)/(c); T9 case 3) — neither hit nor false positive"
+  },
+  {
+   "injection": "I13",
+   "config": "K1",
+   "match_key": "layer-violation|identity_mappers|depot.identity.mappers.customer_mapper|identity_mappers->identity_api",
+   "run_index": 0
+  },
+  {
+   "injection": "I13",
+   "config": "K5",
+   "form": "allowlist_violation",
+   "reason": "footnote 7: K5 reports the injected back edge as a NON-LISTED EDGE, not as a cycle — 'In strict: kein Treffer (Kategoriesegment weicht ab). In localized: Treffer auf der Stelle, Kategorie \"nicht gelistete Kante\" statt CYCLE' (T9 case 7). Neither hit nor false positive; booked without a new class"
+  },
+  {
+   "injection": "I14",
+   "config": "K1",
+   "match_key": "layer-violation|orders_mappers|depot.orders.mappers.order_mapper|orders_mappers->orders_api",
+   "run_index": 0
+  },
+  {
+   "injection": "I14",
+   "config": "K5",
+   "form": "allowlist_violation",
+   "reason": "footnote 7: K5 reports the injected back edge as a NON-LISTED EDGE, not as a cycle — 'In strict: kein Treffer (Kategoriesegment weicht ab). In localized: Treffer auf der Stelle, Kategorie \"nicht gelistete Kante\" statt CYCLE' (T9 case 7). Neither hit nor false positive; booked without a new class"
+  },
+  {
+   "injection": "I15",
+   "config": "K1",
+   "match_key": "layer-violation|billing_mappers|depot.billing.mappers.invoice_mapper|billing_mappers->billing_api",
+   "run_index": 0
+  },
+  {
+   "injection": "I15",
+   "config": "K5",
+   "form": "allowlist_violation",
+   "reason": "footnote 7: K5 reports the injected back edge as a NON-LISTED EDGE, not as a cycle — 'In strict: kein Treffer (Kategoriesegment weicht ab). In localized: Treffer auf der Stelle, Kategorie \"nicht gelistete Kante\" statt CYCLE' (T9 case 7). Neither hit nor false positive; booked without a new class"
+  },
+  {
+   "injection": "I16",
+   "config": "K1",
+   "match_key": "layer-violation|orders_services_pricing|depot.orders.services.pricing.engine|orders_services_pricing->orders_services",
+   "run_index": 0
+  },
+  {
+   "injection": "I16",
+   "config": "K5",
+   "form": "allowlist_violation",
+   "reason": "footnote 7: K5 reports the injected back edge as a NON-LISTED EDGE, not as a cycle — 'In strict: kein Treffer (Kategoriesegment weicht ab). In localized: Treffer auf der Stelle, Kategorie \"nicht gelistete Kante\" statt CYCLE' (T9 case 7). Neither hit nor false positive; booked without a new class"
+  }
+ ],
+ "specials": [
+  {
+   "injection": "I01",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 0,
+   "match_key": "STRUCTURAL_PLACEMENT|identity_repository|depot.identity.repository.customer_repo|depot.identity.repository.customer_repo"
+  },
+  {
+   "injection": "I01",
+   "config": "K2",
+   "category": "API_CONTRACT",
+   "run_index": 0,
+   "match_key": "API_CONTRACT|identity_repository|depot.identity.repository.customer_repo|CustomerRepository.touch"
+  },
+  {
+   "injection": "I01",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 1,
+   "match_key": "STRUCTURAL_PLACEMENT|identity_repository|depot.identity.repository.customer_repo|depot.identity.repository.customer_repo"
+  },
+  {
+   "injection": "I01",
+   "config": "K2",
+   "category": "API_CONTRACT",
+   "run_index": 1,
+   "match_key": "API_CONTRACT|identity_repository|depot.identity.repository.customer_repo|CustomerRepository.touch"
+  },
+  {
+   "injection": "I01",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 2,
+   "match_key": "STRUCTURAL_PLACEMENT|identity_repository|depot.identity.repository.customer_repo|depot.identity.repository.customer_repo"
+  },
+  {
+   "injection": "I01",
+   "config": "K2",
+   "category": "API_CONTRACT",
+   "run_index": 2,
+   "match_key": "API_CONTRACT|identity_repository|depot.identity.repository.customer_repo|CustomerRepository.touch"
+  },
+  {
+   "injection": "I02",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 0,
+   "match_key": "STRUCTURAL_PLACEMENT|orders_repository|depot.orders.repository.order_repo|depot.orders.repository.order_repo"
+  },
+  {
+   "injection": "I02",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 1,
+   "match_key": "STRUCTURAL_PLACEMENT|orders_repository|depot.orders.repository.order_repo|depot.orders.repository.order_repo"
+  },
+  {
+   "injection": "I02",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 2,
+   "match_key": "STRUCTURAL_PLACEMENT|orders_repository|depot.orders.repository.order_repo|depot.orders.repository.order_repo"
+  },
+  {
+   "injection": "I03",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 0,
+   "match_key": "STRUCTURAL_PLACEMENT|billing_repository|depot.billing.repository.invoice_repo|depot.billing.repository.invoice_repo"
+  },
+  {
+   "injection": "I03",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 1,
+   "match_key": "STRUCTURAL_PLACEMENT|billing_repository|depot.billing.repository.invoice_repo|depot.billing.repository.invoice_repo"
+  },
+  {
+   "injection": "I03",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 2,
+   "match_key": "STRUCTURAL_PLACEMENT|billing_repository|depot.billing.repository.invoice_repo|depot.billing.repository.invoice_repo"
+  },
+  {
+   "injection": "I04",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 0,
+   "match_key": "CYCLE|identity_api|depot.identity.api.routes|identity_mappers->identity_api"
+  },
+  {
+   "injection": "I04",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 1,
+   "match_key": "CYCLE|identity_api|depot.identity.api.routes|identity_mappers->identity_api"
+  },
+  {
+   "injection": "I04",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 2,
+   "match_key": "CYCLE|identity_api|depot.identity.api.routes|identity_mappers->identity_api"
+  },
+  {
+   "injection": "I05",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 0,
+   "match_key": "CYCLE|orders_api|depot.orders.api.routes|orders_api->orders_mappers"
+  },
+  {
+   "injection": "I05",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 1,
+   "match_key": "CYCLE|orders_api|depot.orders.api.routes|orders_api->orders_mappers"
+  },
+  {
+   "injection": "I05",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 2,
+   "match_key": "CYCLE|orders_api|depot.orders.api.routes|orders_api->orders_mappers"
+  },
+  {
+   "injection": "I08",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 0,
+   "match_key": "CYCLE|orders_services|depot.orders.services.order_service|orders_services_pricing->orders_services"
+  },
+  {
+   "injection": "I08",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 1,
+   "match_key": "CYCLE|orders_services|depot.orders.services.order_service|orders_services_pricing->orders_services"
+  },
+  {
+   "injection": "I08",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 2,
+   "match_key": "CYCLE|orders_services|depot.orders.services.order_service|orders_services_pricing->orders_services"
+  },
+  {
+   "injection": "I10",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 0,
+   "match_key": "CYCLE|orders_services|depot.orders.services.checkout_service|orders_services_pricing->orders_services"
+  },
+  {
+   "injection": "I10",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 1,
+   "match_key": "CYCLE|orders_services|depot.orders.services.checkout_service|orders_services_pricing->orders_services"
+  },
+  {
+   "injection": "I10",
+   "config": "K2",
+   "category": "CYCLE",
+   "run_index": 2,
+   "match_key": "CYCLE|orders_services|depot.orders.services.checkout_service|orders_services_pricing->orders_services"
+  },
+  {
+   "injection": "I12",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 0,
+   "match_key": "STRUCTURAL_PLACEMENT|orders_repository|depot.orders.repository.order_line_repo|depot.orders.repository.order_line_repo"
+  },
+  {
+   "injection": "I12",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 1,
+   "match_key": "STRUCTURAL_PLACEMENT|orders_repository|depot.orders.repository.order_line_repo|depot.orders.repository.order_line_repo"
+  },
+  {
+   "injection": "I12",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 2,
+   "match_key": "STRUCTURAL_PLACEMENT|orders_repository|depot.orders.repository.order_line_repo|depot.orders.repository.order_line_repo"
+  },
+  {
+   "injection": "I14",
+   "config": "K2",
+   "category": "API_CONTRACT",
+   "run_index": 0,
+   "match_key": "API_CONTRACT|orders_mappers|depot.orders.mappers.order_mapper|to_payload"
+  },
+  {
+   "injection": "I14",
+   "config": "K2",
+   "category": "API_CONTRACT",
+   "run_index": 1,
+   "match_key": "API_CONTRACT|orders_mappers|depot.orders.mappers.order_mapper|to_payload"
+  },
+  {
+   "injection": "I14",
+   "config": "K2",
+   "category": "API_CONTRACT",
+   "run_index": 2,
+   "match_key": "API_CONTRACT|orders_mappers|depot.orders.mappers.order_mapper|to_payload"
+  },
+  {
+   "injection": "I15",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|billing_mappers|depot.billing.mappers.invoice_mapper|billing_mappers->billing_api"
+  },
+  {
+   "injection": "I15",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 1,
+   "match_key": "FORBIDDEN_RELATION|billing_mappers|depot.billing.mappers.invoice_mapper|billing_mappers->billing_api"
+  },
+  {
+   "injection": "I15",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 2,
+   "match_key": "FORBIDDEN_RELATION|billing_mappers|depot.billing.mappers.invoice_mapper|billing_mappers->billing_api"
+  },
+  {
+   "injection": "I16",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|orders_services_pricing|depot.orders.services.pricing.engine|orders_services_pricing->core"
+  },
+  {
+   "injection": "I16",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 1,
+   "match_key": "FORBIDDEN_RELATION|orders_services_pricing|depot.orders.services.pricing.engine|orders_services_pricing->core"
+  },
+  {
+   "injection": "I16",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 2,
+   "match_key": "FORBIDDEN_RELATION|orders_services_pricing|depot.orders.services.pricing.engine|orders_services_pricing->core"
+  },
+  {
+   "injection": "I17",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|identity_services|depot.identity.services.token_service|identity_services->identity_repository"
+  },
+  {
+   "injection": "I17",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 1,
+   "match_key": "FORBIDDEN_RELATION|identity_services|depot.identity.services.token_service|identity_services->identity_repository"
+  },
+  {
+   "injection": "I17",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 2,
+   "match_key": "FORBIDDEN_RELATION|identity_services|depot.identity.services.token_service|identity_services->identity_repository"
+  },
+  {
+   "injection": "I18",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|orders_services|depot.orders.services.catalog_service|orders_services->orders_repository"
+  },
+  {
+   "injection": "I18",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 1,
+   "match_key": "FORBIDDEN_RELATION|orders_services|depot.orders.services.catalog_service|orders_services->orders_repository"
+  },
+  {
+   "injection": "I18",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 2,
+   "match_key": "FORBIDDEN_RELATION|orders_services|depot.orders.services.catalog_service|orders_services->orders_repository"
+  },
+  {
+   "injection": "I19",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|orders_services|depot.orders.services.refund_service|orders_services->orders_repository"
+  },
+  {
+   "injection": "I19",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|orders_services|depot.orders.services.refund_service|orders_services->core_adapters_internal"
+  },
+  {
+   "injection": "I19",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 1,
+   "match_key": "FORBIDDEN_RELATION|orders_services|depot.orders.services.refund_service|orders_services->orders_repository"
+  },
+  {
+   "injection": "I19",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 2,
+   "match_key": "FORBIDDEN_RELATION|orders_services|depot.orders.services.refund_service|orders_services->orders_repository"
+  },
+  {
+   "injection": "I20",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|billing_services|depot.billing.services.ledger_service|billing_services->invoice_repo"
+  },
+  {
+   "injection": "I20",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|billing_services|depot.billing.services.ledger_service|billing_services->core_adapters_internal"
+  },
+  {
+   "injection": "I20",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|billing_services|depot.billing.services.ledger_service|billing_services->identity_services"
+  },
+  {
+   "injection": "I20",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 1,
+   "match_key": "FORBIDDEN_RELATION|billing_services|depot.billing.services.ledger_service|billing_services->invoice_repo"
+  },
+  {
+   "injection": "I20",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 1,
+   "match_key": "FORBIDDEN_RELATION|billing_services|depot.billing.services.ledger_service|billing_services->core_adapters_internal"
+  },
+  {
+   "injection": "I20",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 1,
+   "match_key": "FORBIDDEN_RELATION|billing_services|depot.billing.services.ledger_service|billing_services->identity_services"
+  },
+  {
+   "injection": "I20",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 2,
+   "match_key": "FORBIDDEN_RELATION|billing_services|depot.billing.services.ledger_service|billing_services->invoice_repo"
+  },
+  {
+   "injection": "I20",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 2,
+   "match_key": "FORBIDDEN_RELATION|billing_services|depot.billing.services.ledger_service|billing_services->core_adapters_internal"
+  },
+  {
+   "injection": "I20",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 2,
+   "match_key": "FORBIDDEN_RELATION|billing_services|depot.billing.services.ledger_service|billing_services->identity_services"
+  },
+  {
+   "injection": "I24",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|billing_models|depot.billing.models.invoice_models|billing_models->external/unmapped"
+  },
+  {
+   "injection": "I24",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 1,
+   "match_key": "FORBIDDEN_RELATION|billing_models|depot.billing.models.invoice_models|billing_models->external/unmapped"
+  },
+  {
+   "injection": "I24",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 2,
+   "match_key": "FORBIDDEN_RELATION|billing_models|depot.billing.models.invoice_models|billing_models->external/unmapped"
+  },
+  {
+   "injection": "I27",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.legacy_token_index|identity_repository->identity_services"
+  },
+  {
+   "injection": "I27",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 1,
+   "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.legacy_token_index|identity_repository->identity_services"
+  },
+  {
+   "injection": "I27",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 2,
+   "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.legacy_token_index|identity_repository->identity_services"
+  },
+  {
+   "injection": "I29",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 0,
+   "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.repository.session_repo|identity_repository->core"
+  },
+  {
+   "injection": "I29",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 1,
+   "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.repository.session_repo|identity_repository->core"
+  },
+  {
+   "injection": "I29",
+   "config": "K2",
+   "category": "FORBIDDEN_RELATION",
+   "run_index": 2,
+   "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.repository.session_repo|identity_repository->core"
+  },
+  {
+   "injection": "I30",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 0,
+   "match_key": "STRUCTURAL_PLACEMENT|orders_repository|depot.orders.repository.order_query|depot.orders.repository.order_query"
+  },
+  {
+   "injection": "I30",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 1,
+   "match_key": "STRUCTURAL_PLACEMENT|orders_repository|depot.orders.repository.order_query|depot.orders.repository.order_query"
+  },
+  {
+   "injection": "I30",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 2,
+   "match_key": "STRUCTURAL_PLACEMENT|orders_repository|depot.orders.repository.order_query|depot.orders.repository.order_query"
+  },
+  {
+   "injection": "I31",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 0,
+   "match_key": "STRUCTURAL_PLACEMENT|billing_repository|depot.billing.repository.invoice_query|depot.billing.repository.invoice_query"
+  },
+  {
+   "injection": "I31",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 1,
+   "match_key": "STRUCTURAL_PLACEMENT|billing_repository|depot.billing.repository.invoice_query|depot.billing.repository.invoice_query"
+  },
+  {
+   "injection": "I31",
+   "config": "K2",
+   "category": "STRUCTURAL_PLACEMENT",
+   "run_index": 2,
+   "match_key": "STRUCTURAL_PLACEMENT|billing_repository|depot.billing.repository.invoice_query|depot.billing.repository.invoice_query"
+  }
+ ],
+ "with_campaign": true,
+ "reads": {
+  "total": 565,
+  "campaign_run_artifacts": [
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_06e052e19c153503f751611d7f813f18f204d8f0.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_08a622b024e9174d7ce62863f385b369c8c27b12.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_0993e01b26b7cc91bb70840207860fcc15dba286.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_28a75749496229bb1db37d85f68347572bd84c49.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_307e57327a81d94dea84614d9fc9d8d82b839f97.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_33ad86a07dd626c59541c91334d33f3e1e76bc04.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_35061d852631049ff74f65451368d7e85fd733bd.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_3d3374571153656f012a15d01df7f5e8dcb88c8e.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_3de8357bc191821fe60922022be257c47959d35d.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_4165fab5c82b1194572461fdb232c1af264e66f5.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_439125ece20060321bff983d7b8295f1b33dda50.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_531a1ff2616aaa13f8c317fe7d40f56135caacaf.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_5601a944ea1da65b1e2b03c5e74a8237336a2e85.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_5e685cff9559cfbff8935162405cd98c5c10932e.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_604d30460ce9a602b7b635f8f6de08c113acf9bf.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_72dc7461f9ecb5cdd53293f1f94d7418e98a3401.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_792cb6867f55634bc3f8bfac321b392ea5507a48.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_864da9678e6a10137a2fd2d4b1a7d73082db403f.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_91ed6a80d415c68eed7661a21ea554ba32da9c83.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_ad210637f542736323c4d2f5da4254c4c4e60bad.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_b3fb12905f7f3becc803d1915af5654da35643bb.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_c5faa0a65f0a85e9bb1a1ecac950806650449ec1.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_cb1fb228ff6021071a8c6b2a88506a80f138eafb.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_dd414657d12197a1ca79152d401f75eb4b5f5f57.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_e1829642b304a016d0b2f11087c2b215f8368942.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_ef114806ec2360f19eb9dc9425d79ed153b9a769.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_diff_efe5c81f526d183fcb6634e65df00e7f90b0dbc3.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_full_3be646fed3bdb2449b153f912d42fbb63b719776.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_full_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_full_616cb02982e634670c4dbaa84d5efbf4df63c61a.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k1/k1_full_a9d644515812b98877af4e63e0f9a3f119ee7e88.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_06e052e19c153503f751611d7f813f18f204d8f0.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_08a622b024e9174d7ce62863f385b369c8c27b12.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_0993e01b26b7cc91bb70840207860fcc15dba286.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_28a75749496229bb1db37d85f68347572bd84c49.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_307e57327a81d94dea84614d9fc9d8d82b839f97.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_33ad86a07dd626c59541c91334d33f3e1e76bc04.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_35061d852631049ff74f65451368d7e85fd733bd.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_3be646fed3bdb2449b153f912d42fbb63b719776.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_3d3374571153656f012a15d01df7f5e8dcb88c8e.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_3de8357bc191821fe60922022be257c47959d35d.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_4165fab5c82b1194572461fdb232c1af264e66f5.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_439125ece20060321bff983d7b8295f1b33dda50.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_531a1ff2616aaa13f8c317fe7d40f56135caacaf.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_5601a944ea1da65b1e2b03c5e74a8237336a2e85.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_5e685cff9559cfbff8935162405cd98c5c10932e.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_604d30460ce9a602b7b635f8f6de08c113acf9bf.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_616cb02982e634670c4dbaa84d5efbf4df63c61a.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_72dc7461f9ecb5cdd53293f1f94d7418e98a3401.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_792cb6867f55634bc3f8bfac321b392ea5507a48.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_864da9678e6a10137a2fd2d4b1a7d73082db403f.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_91ed6a80d415c68eed7661a21ea554ba32da9c83.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_a9d644515812b98877af4e63e0f9a3f119ee7e88.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_ad210637f542736323c4d2f5da4254c4c4e60bad.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_b3fb12905f7f3becc803d1915af5654da35643bb.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_c5faa0a65f0a85e9bb1a1ecac950806650449ec1.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_cb1fb228ff6021071a8c6b2a88506a80f138eafb.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_dd414657d12197a1ca79152d401f75eb4b5f5f57.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_e1829642b304a016d0b2f11087c2b215f8368942.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_ef114806ec2360f19eb9dc9425d79ed153b9a769.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k2/k2_efe5c81f526d183fcb6634e65df00e7f90b0dbc3.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_06e052e19c153503f751611d7f813f18f204d8f0.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_08a622b024e9174d7ce62863f385b369c8c27b12.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_0993e01b26b7cc91bb70840207860fcc15dba286.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_28a75749496229bb1db37d85f68347572bd84c49.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_307e57327a81d94dea84614d9fc9d8d82b839f97.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_33ad86a07dd626c59541c91334d33f3e1e76bc04.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_35061d852631049ff74f65451368d7e85fd733bd.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_3be646fed3bdb2449b153f912d42fbb63b719776.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_3d3374571153656f012a15d01df7f5e8dcb88c8e.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_3de8357bc191821fe60922022be257c47959d35d.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_4165fab5c82b1194572461fdb232c1af264e66f5.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_439125ece20060321bff983d7b8295f1b33dda50.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_531a1ff2616aaa13f8c317fe7d40f56135caacaf.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5601a944ea1da65b1e2b03c5e74a8237336a2e85.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_5e685cff9559cfbff8935162405cd98c5c10932e.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_604d30460ce9a602b7b635f8f6de08c113acf9bf.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_616cb02982e634670c4dbaa84d5efbf4df63c61a.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_72dc7461f9ecb5cdd53293f1f94d7418e98a3401.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_792cb6867f55634bc3f8bfac321b392ea5507a48.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_864da9678e6a10137a2fd2d4b1a7d73082db403f.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_91ed6a80d415c68eed7661a21ea554ba32da9c83.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_a9d644515812b98877af4e63e0f9a3f119ee7e88.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_ad210637f542736323c4d2f5da4254c4c4e60bad.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_b3fb12905f7f3becc803d1915af5654da35643bb.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_c5faa0a65f0a85e9bb1a1ecac950806650449ec1.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_cb1fb228ff6021071a8c6b2a88506a80f138eafb.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_dd414657d12197a1ca79152d401f75eb4b5f5f57.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_e1829642b304a016d0b2f11087c2b215f8368942.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_ef114806ec2360f19eb9dc9425d79ed153b9a769.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k3/k3_efe5c81f526d183fcb6634e65df00e7f90b0dbc3.json",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_06e052e19c153503f751611d7f813f18f204d8f0.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_08a622b024e9174d7ce62863f385b369c8c27b12.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_0993e01b26b7cc91bb70840207860fcc15dba286.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_28a75749496229bb1db37d85f68347572bd84c49.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_307e57327a81d94dea84614d9fc9d8d82b839f97.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_33ad86a07dd626c59541c91334d33f3e1e76bc04.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_35061d852631049ff74f65451368d7e85fd733bd.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_3be646fed3bdb2449b153f912d42fbb63b719776.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_3d3374571153656f012a15d01df7f5e8dcb88c8e.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_3de8357bc191821fe60922022be257c47959d35d.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_4165fab5c82b1194572461fdb232c1af264e66f5.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_439125ece20060321bff983d7b8295f1b33dda50.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_531a1ff2616aaa13f8c317fe7d40f56135caacaf.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_5601a944ea1da65b1e2b03c5e74a8237336a2e85.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_5e685cff9559cfbff8935162405cd98c5c10932e.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_604d30460ce9a602b7b635f8f6de08c113acf9bf.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_616cb02982e634670c4dbaa84d5efbf4df63c61a.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_72dc7461f9ecb5cdd53293f1f94d7418e98a3401.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_792cb6867f55634bc3f8bfac321b392ea5507a48.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_864da9678e6a10137a2fd2d4b1a7d73082db403f.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_91ed6a80d415c68eed7661a21ea554ba32da9c83.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_a9d644515812b98877af4e63e0f9a3f119ee7e88.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_ad210637f542736323c4d2f5da4254c4c4e60bad.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_b3fb12905f7f3becc803d1915af5654da35643bb.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_c5faa0a65f0a85e9bb1a1ecac950806650449ec1.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_cb1fb228ff6021071a8c6b2a88506a80f138eafb.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_dd414657d12197a1ca79152d401f75eb4b5f5f57.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_e1829642b304a016d0b2f11087c2b215f8368942.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_ef114806ec2360f19eb9dc9425d79ed153b9a769.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k4/k4_efe5c81f526d183fcb6634e65df00e7f90b0dbc3.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_06e052e19c153503f751611d7f813f18f204d8f0.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_08a622b024e9174d7ce62863f385b369c8c27b12.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_0993e01b26b7cc91bb70840207860fcc15dba286.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_28a75749496229bb1db37d85f68347572bd84c49.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_307e57327a81d94dea84614d9fc9d8d82b839f97.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_33ad86a07dd626c59541c91334d33f3e1e76bc04.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_35061d852631049ff74f65451368d7e85fd733bd.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_3be646fed3bdb2449b153f912d42fbb63b719776.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_3d3374571153656f012a15d01df7f5e8dcb88c8e.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_3de8357bc191821fe60922022be257c47959d35d.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_4165fab5c82b1194572461fdb232c1af264e66f5.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_439125ece20060321bff983d7b8295f1b33dda50.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_43f9fa5ec1b6fbf4aaae26296a41b752c2e3f9cf.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_531a1ff2616aaa13f8c317fe7d40f56135caacaf.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_5601a944ea1da65b1e2b03c5e74a8237336a2e85.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_5e685cff9559cfbff8935162405cd98c5c10932e.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_604d30460ce9a602b7b635f8f6de08c113acf9bf.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_616cb02982e634670c4dbaa84d5efbf4df63c61a.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_72dc7461f9ecb5cdd53293f1f94d7418e98a3401.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_792cb6867f55634bc3f8bfac321b392ea5507a48.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_864da9678e6a10137a2fd2d4b1a7d73082db403f.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_91ed6a80d415c68eed7661a21ea554ba32da9c83.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_a9d644515812b98877af4e63e0f9a3f119ee7e88.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_ad210637f542736323c4d2f5da4254c4c4e60bad.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_b3fb12905f7f3becc803d1915af5654da35643bb.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_c5faa0a65f0a85e9bb1a1ecac950806650449ec1.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_cb1fb228ff6021071a8c6b2a88506a80f138eafb.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_dbcd05b8935ac3d007464f2e0d72c08ef0a9931e.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_dd414657d12197a1ca79152d401f75eb4b5f5f57.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_e1829642b304a016d0b2f11087c2b215f8368942.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_ef114806ec2360f19eb9dc9425d79ed153b9a769.stdout.txt",
+   "/home/haasentimo/ma/masterarbeit/data/campaign/k5/k5_efe5c81f526d183fcb6634e65df00e7f90b0dbc3.stdout.txt"
+  ]
+ }
+}

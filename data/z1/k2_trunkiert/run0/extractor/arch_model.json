@@ -1,0 +1,149 @@
+{
+  "components": [
+    {
+      "id": "bookshop.domain.book",
+      "name": "Book",
+      "kind": "component",
+      "description": "Represents a book with a title, author, ISBN, and genre.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "bookshop.domain.catalog",
+      "name": "Catalog",
+      "kind": "component",
+      "description": "An in-memory collection of books with simple query operations.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "bookshop.domain.order",
+      "name": "Order",
+      "kind": "component",
+      "description": "A customer order aggregating line items and a status.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "bookshop.domain.pricing",
+      "name": "Pricing",
+      "kind": "component",
+      "description": "Pure pricing rules: discounts applied to an order's gross total.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "bookshop.infrastructure.book_repository",
+      "name": "Book Repository",
+      "kind": "component",
+      "description": "In-memory persistence adapter for the book catalog.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "bookshop.infrastructure.order_repository",
+      "name": "Order Repository",
+      "kind": "component",
+      "description": "In-memory persistence adapter for orders.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "bookshop.infrastructure.payment_gateway",
+      "name": "Payment Gateway",
+      "kind": "component",
+      "description": "Adapter to an external payment provider (faked for the fixture).",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "bookshop.application.checkout",
+      "name": "Checkout",
+      "kind": "component",
+      "description": "Application service for processing customer orders.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "bookshop.application.inventory",
+      "name": "Inventory",
+      "kind": "component",
+      "description": "Application service for managing book inventory.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "bookshop.api.catalog_routes",
+      "name": "Catalog Routes",
+      "kind": "component",
+      "description": "API endpoints for catalog operations.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "bookshop.api.checkout_routes",
+      "name": "Checkout Routes",
+      "kind": "component",
+      "description": "API endpoints for checkout operations.",
+      "role": null,
+      "contained_modules": []
+    }
+  ],
+  "relations": [
+    {
+      "from": "bookshop.domain.catalog",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.domain.order",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.domain.order",
+      "to": "bookshop.domain.pricing",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.book_repository",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.order_repository",
+      "to": "bookshop.domain.order",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.infrastructure.payment_gateway",
+      "to": "bookshop.domain.order",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.application.checkout",
+      "to": "bookshop.domain.order",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.application.checkout",
+      "to": "bookshop.domain.pricing",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.application.inventory",
+      "to": "bookshop.domain.book",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.api.catalog_routes",
+      "to": "bookshop.domain.catalog",
+      "kind": "uses"
+    },
+    {
+      "from": "bookshop.api.checkout_routes",
+      "to": "bookshop.application.checkout",
+      "kind": "uses"
+    }
+  ]
+}

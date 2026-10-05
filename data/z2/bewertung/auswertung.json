@@ -1,0 +1,3827 @@
+{
+  "dokument": "Auswertung der Z2-Bewertung — mechanische Auszählung",
+  "auftrag": "S11",
+  "werkzeug": "tools/tally_z2_review.py",
+  "status": "MECHANISCHE AUSZÄHLUNG OHNE DEUTUNG",
+  "keine_deutung": "Dieses Dokument zählt aus. Es beurteilt keine vorregistrierte Erwartung, bezeichnet nichts als bestätigt oder widerlegt, korrigiert keine Zuweisung des Bewerters und formuliert kein Ergebnis. Die Verdikte und der Befund 09 stehen aus und sind Sache des Autors.",
+  "schluesseloeffnung": {
+    "zeitpunkt": "2026-09-04T09:38:19+02:00",
+    "commit_mit_ausgefuelltem_blatt": "9b6c76b1fe999724b7d108d45ba7e7958fba7fe8",
+    "commit_botschaft": "docs: fill in bewertungsblatt.md",
+    "bewertung_vor_der_oeffnung_abgeschlossen": true,
+    "beleg": "P3: alle 17 Etiketten tragen in `kind`, Z2-P, Z2-G, Z2-Z sowie in „identisch mit P-xx“ und „Grenzfall“ einen Eintrag, geprüft VOR dem Öffnen des Schlüssels. Commit-Reihenfolge: b17fc98 legt das leere Blatt an, 9b6c76b füllt es aus, S11 öffnet den Schlüssel danach; der Schlüssel ist seit b17fc98 bytegleich.",
+    "schluessel_sha256": "0215a8b2ed377df1e4e074dd5f489c58a7341fc93e54362b61fcef8b78a320f2",
+    "blatt_sha256": "72ebc3170f484a391a1d991c4fa155d57d04f6bfc5374c609ac8d601c109c029",
+    "protokoll_sha256": "862fdc3b7cfb264482db155575437edb25b1b436f92b5444b2137f1e332d9dde",
+    "seed": 20260903
+  },
+  "zuordnung": [
+    {
+      "etikett": "P-01",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run1"
+      ],
+      "positionen": [
+        0
+      ],
+      "ids": [
+        "R1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run1",
+          "position": 0,
+          "id": "R1"
+        }
+      ]
+    },
+    {
+      "etikett": "P-02",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run2"
+      ],
+      "positionen": [
+        3
+      ],
+      "ids": [
+        "R4"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 3,
+          "id": "R4"
+        }
+      ]
+    },
+    {
+      "etikett": "P-03",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run0"
+      ],
+      "positionen": [
+        1
+      ],
+      "ids": [
+        "R2"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 1,
+          "id": "R2"
+        }
+      ]
+    },
+    {
+      "etikett": "P-04",
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "slots": [
+        "run0",
+        "run1",
+        "run2"
+      ],
+      "positionen": [
+        0
+      ],
+      "ids": [
+        "R1"
+      ],
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 0,
+          "id": "R1"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 0,
+          "id": "R1"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 0,
+          "id": "R1"
+        }
+      ]
+    },
+    {
+      "etikett": "P-05",
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "slots": [
+        "run0",
+        "run1",
+        "run2"
+      ],
+      "positionen": [
+        4
+      ],
+      "ids": [
+        "R5"
+      ],
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 4,
+          "id": "R5"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 4,
+          "id": "R5"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 4,
+          "id": "R5"
+        }
+      ]
+    },
+    {
+      "etikett": "P-06",
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "slots": [
+        "run0",
+        "run1",
+        "run2"
+      ],
+      "positionen": [
+        1
+      ],
+      "ids": [
+        "R2"
+      ],
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 1,
+          "id": "R2"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 1,
+          "id": "R2"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 1,
+          "id": "R2"
+        }
+      ]
+    },
+    {
+      "etikett": "P-07",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run2"
+      ],
+      "positionen": [
+        4
+      ],
+      "ids": [
+        "R5"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 4,
+          "id": "R5"
+        }
+      ]
+    },
+    {
+      "etikett": "P-08",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run2"
+      ],
+      "positionen": [
+        1
+      ],
+      "ids": [
+        "R2"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 1,
+          "id": "R2"
+        }
+      ]
+    },
+    {
+      "etikett": "P-09",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run1"
+      ],
+      "positionen": [
+        2
+      ],
+      "ids": [
+        "R3"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run1",
+          "position": 2,
+          "id": "R3"
+        }
+      ]
+    },
+    {
+      "etikett": "P-10",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run0"
+      ],
+      "positionen": [
+        0
+      ],
+      "ids": [
+        "R1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 0,
+          "id": "R1"
+        }
+      ]
+    },
+    {
+      "etikett": "P-11",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run0"
+      ],
+      "positionen": [
+        2
+      ],
+      "ids": [
+        "R3"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 2,
+          "id": "R3"
+        }
+      ]
+    },
+    {
+      "etikett": "P-12",
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "slots": [
+        "run0",
+        "run1",
+        "run2"
+      ],
+      "positionen": [
+        3
+      ],
+      "ids": [
+        "R4"
+      ],
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 3,
+          "id": "R4"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 3,
+          "id": "R4"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 3,
+          "id": "R4"
+        }
+      ]
+    },
+    {
+      "etikett": "P-13",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run2"
+      ],
+      "positionen": [
+        0
+      ],
+      "ids": [
+        "R1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 0,
+          "id": "R1"
+        }
+      ]
+    },
+    {
+      "etikett": "P-14",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run1"
+      ],
+      "positionen": [
+        1
+      ],
+      "ids": [
+        "R2"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run1",
+          "position": 1,
+          "id": "R2"
+        }
+      ]
+    },
+    {
+      "etikett": "P-15",
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "slots": [
+        "run0",
+        "run1",
+        "run2"
+      ],
+      "positionen": [
+        2
+      ],
+      "ids": [
+        "R3"
+      ],
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 2,
+          "id": "R3"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 2,
+          "id": "R3"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 2,
+          "id": "R3"
+        }
+      ]
+    },
+    {
+      "etikett": "P-16",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run0"
+      ],
+      "positionen": [
+        3
+      ],
+      "ids": [
+        "R4"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 3,
+          "id": "R4"
+        }
+      ]
+    },
+    {
+      "etikett": "P-17",
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "slots": [
+        "run2"
+      ],
+      "positionen": [
+        2
+      ],
+      "ids": [
+        "R3"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 2,
+          "id": "R3"
+        }
+      ]
+    }
+  ],
+  "gegenproben": [
+    {
+      "probe": "17 Etiketten",
+      "soll": 17,
+      "ist": 17,
+      "ok": true
+    },
+    {
+      "probe": "Summe der Vielfachheiten = 27",
+      "soll": 27,
+      "ist": 27,
+      "ok": true
+    },
+    {
+      "probe": "fünf Etiketten mit Vielfachheit 3",
+      "soll": 5,
+      "ist": 5,
+      "ok": true,
+      "etiketten": [
+        "P-04",
+        "P-05",
+        "P-06",
+        "P-12",
+        "P-15"
+      ]
+    },
+    {
+      "probe": "die fünf stammen alle aus EINER Zelle",
+      "soll": 1,
+      "ist": 1,
+      "ok": true,
+      "zellen": [
+        "k2_b1"
+      ]
+    },
+    {
+      "probe": "zwölf Etiketten mit Vielfachheit 1",
+      "soll": 12,
+      "ist": 12,
+      "ok": true,
+      "etiketten": [
+        "P-01",
+        "P-02",
+        "P-03",
+        "P-07",
+        "P-08",
+        "P-09",
+        "P-10",
+        "P-11",
+        "P-13",
+        "P-14",
+        "P-16",
+        "P-17"
+      ]
+    },
+    {
+      "probe": "Z2-R-Relation symmetrisch und transitiv auflösbar",
+      "soll": "auflösbar",
+      "ist": "auflösbar (gerichtete Angaben symmetrisiert)",
+      "ok": true,
+      "gerichtete_angaben": [
+        {
+          "von": "P-11",
+          "auf": "P-01",
+          "gegenseitig": false
+        }
+      ]
+    },
+    {
+      "probe": "jedes Etikett mit „Grenzfall = ja“ hat mindestens eine Zeile in der Grenzfall-Tabelle, und umgekehrt",
+      "soll": [
+        "P-02",
+        "P-03",
+        "P-04",
+        "P-07",
+        "P-08",
+        "P-09",
+        "P-10",
+        "P-11",
+        "P-13",
+        "P-14",
+        "P-17"
+      ],
+      "ist": [
+        "P-02",
+        "P-03",
+        "P-04",
+        "P-07",
+        "P-08",
+        "P-09",
+        "P-10",
+        "P-11",
+        "P-13",
+        "P-14",
+        "P-17"
+      ],
+      "ok": true
+    },
+    {
+      "probe": "jedes Etikett des Blattes steht im Schlüssel und umgekehrt",
+      "soll": [
+        "P-01",
+        "P-02",
+        "P-03",
+        "P-04",
+        "P-05",
+        "P-06",
+        "P-07",
+        "P-08",
+        "P-09",
+        "P-10",
+        "P-11",
+        "P-12",
+        "P-13",
+        "P-14",
+        "P-15",
+        "P-16",
+        "P-17"
+      ],
+      "ist": [
+        "P-01",
+        "P-02",
+        "P-03",
+        "P-04",
+        "P-05",
+        "P-06",
+        "P-07",
+        "P-08",
+        "P-09",
+        "P-10",
+        "P-11",
+        "P-12",
+        "P-13",
+        "P-14",
+        "P-15",
+        "P-16",
+        "P-17"
+      ],
+      "ok": true
+    }
+  ],
+  "z2r_klassen": {
+    "regel": "§6 Z2-R — Duplikate bei Übereinstimmung in Kategorie, Scope und Kernaussage; Umformulierungen zählen als ein Vorschlag. Die Zusammenführung ist die des Bewerters, unverändert übernommen.",
+    "klassen": [
+      {
+        "mitglieder": [
+          "P-01",
+          "P-11"
+        ],
+        "groesse": 2,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run0",
+          "k3_b1/run1"
+        ],
+        "dimensionen": {
+          "kind": "structural",
+          "z2p": "prüfbar",
+          "z2g": "normativ",
+          "z2z": "FORBIDDEN_RELATION",
+          "grenzfall_ja": "UNEINHEITLICH: P-01=False / P-11=True"
+        }
+      },
+      {
+        "mitglieder": [
+          "P-02"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run2"
+        ],
+        "dimensionen": {
+          "kind": "structural",
+          "z2p": "prüfbar",
+          "z2g": "unklar",
+          "z2z": "FORBIDDEN_RELATION",
+          "grenzfall_ja": true
+        }
+      },
+      {
+        "mitglieder": [
+          "P-03"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run0"
+        ],
+        "dimensionen": {
+          "kind": "semantic",
+          "z2p": "prüfbar",
+          "z2g": "normativ",
+          "z2z": "sonstige",
+          "grenzfall_ja": true
+        }
+      },
+      {
+        "mitglieder": [
+          "P-04"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k2_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k2_b1/run0",
+          "k2_b1/run1",
+          "k2_b1/run2"
+        ],
+        "dimensionen": {
+          "kind": "structural",
+          "z2p": "nicht prüfbar",
+          "z2g": "normativ",
+          "z2z": "FORBIDDEN_RELATION",
+          "grenzfall_ja": true
+        }
+      },
+      {
+        "mitglieder": [
+          "P-05"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k2_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k2_b1/run0",
+          "k2_b1/run1",
+          "k2_b1/run2"
+        ],
+        "dimensionen": {
+          "kind": "semantic",
+          "z2p": "nicht prüfbar",
+          "z2g": "normativ",
+          "z2z": "sonstige",
+          "grenzfall_ja": false
+        }
+      },
+      {
+        "mitglieder": [
+          "P-06"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k2_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k2_b1/run0",
+          "k2_b1/run1",
+          "k2_b1/run2"
+        ],
+        "dimensionen": {
+          "kind": "semantic",
+          "z2p": "nicht prüfbar",
+          "z2g": "normativ",
+          "z2z": "sonstige",
+          "grenzfall_ja": false
+        }
+      },
+      {
+        "mitglieder": [
+          "P-07"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run2"
+        ],
+        "dimensionen": {
+          "kind": "structural",
+          "z2p": "prüfbar",
+          "z2g": "Spiegelung",
+          "z2z": "FORBIDDEN_RELATION",
+          "grenzfall_ja": true
+        }
+      },
+      {
+        "mitglieder": [
+          "P-08"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run2"
+        ],
+        "dimensionen": {
+          "kind": "semantic",
+          "z2p": "prüfbar",
+          "z2g": "normativ",
+          "z2z": "keiner der sechs",
+          "grenzfall_ja": true
+        }
+      },
+      {
+        "mitglieder": [
+          "P-09"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run1"
+        ],
+        "dimensionen": {
+          "kind": "semantic",
+          "z2p": "prüfbar",
+          "z2g": "normativ",
+          "z2z": "sonstige",
+          "grenzfall_ja": true
+        }
+      },
+      {
+        "mitglieder": [
+          "P-10"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run0"
+        ],
+        "dimensionen": {
+          "kind": "semantic",
+          "z2p": "prüfbar",
+          "z2g": "normativ",
+          "z2z": "sonstige",
+          "grenzfall_ja": true
+        }
+      },
+      {
+        "mitglieder": [
+          "P-12"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k2_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k2_b1/run0",
+          "k2_b1/run1",
+          "k2_b1/run2"
+        ],
+        "dimensionen": {
+          "kind": "semantic",
+          "z2p": "nicht prüfbar",
+          "z2g": "normativ",
+          "z2z": "sonstige",
+          "grenzfall_ja": false
+        }
+      },
+      {
+        "mitglieder": [
+          "P-13"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run2"
+        ],
+        "dimensionen": {
+          "kind": "semantic",
+          "z2p": "prüfbar",
+          "z2g": "normativ",
+          "z2z": "keiner der sechs",
+          "grenzfall_ja": true
+        }
+      },
+      {
+        "mitglieder": [
+          "P-14"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run1"
+        ],
+        "dimensionen": {
+          "kind": "structural",
+          "z2p": "prüfbar",
+          "z2g": "unklar",
+          "z2z": "FORBIDDEN_RELATION",
+          "grenzfall_ja": true
+        }
+      },
+      {
+        "mitglieder": [
+          "P-15"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k2_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k2_b1/run0",
+          "k2_b1/run1",
+          "k2_b1/run2"
+        ],
+        "dimensionen": {
+          "kind": "semantic",
+          "z2p": "nicht prüfbar",
+          "z2g": "normativ",
+          "z2z": "sonstige",
+          "grenzfall_ja": false
+        }
+      },
+      {
+        "mitglieder": [
+          "P-16"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run0"
+        ],
+        "dimensionen": {
+          "kind": "structural",
+          "z2p": "prüfbar",
+          "z2g": "normativ",
+          "z2z": "FORBIDDEN_RELATION",
+          "grenzfall_ja": false
+        }
+      },
+      {
+        "mitglieder": [
+          "P-17"
+        ],
+        "groesse": 1,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run2"
+        ],
+        "dimensionen": {
+          "kind": "semantic",
+          "z2p": "prüfbar",
+          "z2g": "normativ",
+          "z2z": "sonstige",
+          "grenzfall_ja": true
+        }
+      }
+    ],
+    "zahl_der_vorschlaege_nach_inhaltlicher_dedup": 16,
+    "zahl_der_etiketten_vor_inhaltlicher_dedup": 17,
+    "nichttriviale_klassen": [
+      {
+        "mitglieder": [
+          "P-01",
+          "P-11"
+        ],
+        "groesse": 2,
+        "bedingungen": [
+          "k3_b1"
+        ],
+        "zelluebergreifend": false,
+        "laeufe": [
+          "k3_b1/run0",
+          "k3_b1/run1"
+        ],
+        "dimensionen": {
+          "kind": "structural",
+          "z2p": "prüfbar",
+          "z2g": "normativ",
+          "z2z": "FORBIDDEN_RELATION",
+          "grenzfall_ja": "UNEINHEITLICH: P-01=False / P-11=True"
+        }
+      }
+    ],
+    "zelluebergreifende_klassen": [],
+    "zelluebergreifend_vorhanden": false,
+    "vermerk": "Ob eine Klasse zellübergreifend ist, ist eine Tatsache; ihre Bedeutung bleibt offen."
+  },
+  "n1": {
+    "definition": "§7 Punkt 9 / Gate-Notiz §5b: N₁ ist die PRO-LAUF-Dedup des ERSTEN Laufs der Zelle K2 × B1 nach Z2-R, NICHT die Dedup über die drei Läufe.",
+    "lauf": "k2_b1/run0",
+    "beteiligte_etiketten": [
+      "P-04",
+      "P-05",
+      "P-06",
+      "P-12",
+      "P-15"
+    ],
+    "klassen": [
+      [
+        "P-04"
+      ],
+      [
+        "P-05"
+      ],
+      [
+        "P-06"
+      ],
+      [
+        "P-12"
+      ],
+      [
+        "P-15"
+      ]
+    ],
+    "n1": 5,
+    "schwelle": 50,
+    "zahlenvergleich": "N₁ = 5 ≤ 50",
+    "vermerk": "Zahlenvergleich, keine Entscheidung. Die Entscheidung I3 fällt datiert am 13.09.2026 durch den Autor."
+  },
+  "pro_lauf_dedup_alle_sechs_laeufe": [
+    {
+      "zelle": "k2_b1",
+      "slot": "run0",
+      "etiketten": [
+        "P-04",
+        "P-05",
+        "P-06",
+        "P-12",
+        "P-15"
+      ],
+      "roh": 5,
+      "klassen": [
+        [
+          "P-04"
+        ],
+        [
+          "P-05"
+        ],
+        [
+          "P-06"
+        ],
+        [
+          "P-12"
+        ],
+        [
+          "P-15"
+        ]
+      ],
+      "pro_lauf_dedup": 5
+    },
+    {
+      "zelle": "k2_b1",
+      "slot": "run1",
+      "etiketten": [
+        "P-04",
+        "P-05",
+        "P-06",
+        "P-12",
+        "P-15"
+      ],
+      "roh": 5,
+      "klassen": [
+        [
+          "P-04"
+        ],
+        [
+          "P-05"
+        ],
+        [
+          "P-06"
+        ],
+        [
+          "P-12"
+        ],
+        [
+          "P-15"
+        ]
+      ],
+      "pro_lauf_dedup": 5
+    },
+    {
+      "zelle": "k2_b1",
+      "slot": "run2",
+      "etiketten": [
+        "P-04",
+        "P-05",
+        "P-06",
+        "P-12",
+        "P-15"
+      ],
+      "roh": 5,
+      "klassen": [
+        [
+          "P-04"
+        ],
+        [
+          "P-05"
+        ],
+        [
+          "P-06"
+        ],
+        [
+          "P-12"
+        ],
+        [
+          "P-15"
+        ]
+      ],
+      "pro_lauf_dedup": 5
+    },
+    {
+      "zelle": "k3_b1",
+      "slot": "run0",
+      "etiketten": [
+        "P-03",
+        "P-10",
+        "P-11",
+        "P-16"
+      ],
+      "roh": 4,
+      "klassen": [
+        [
+          "P-01",
+          "P-11"
+        ],
+        [
+          "P-03"
+        ],
+        [
+          "P-10"
+        ],
+        [
+          "P-16"
+        ]
+      ],
+      "pro_lauf_dedup": 4
+    },
+    {
+      "zelle": "k3_b1",
+      "slot": "run1",
+      "etiketten": [
+        "P-01",
+        "P-09",
+        "P-14"
+      ],
+      "roh": 3,
+      "klassen": [
+        [
+          "P-01",
+          "P-11"
+        ],
+        [
+          "P-09"
+        ],
+        [
+          "P-14"
+        ]
+      ],
+      "pro_lauf_dedup": 3
+    },
+    {
+      "zelle": "k3_b1",
+      "slot": "run2",
+      "etiketten": [
+        "P-02",
+        "P-07",
+        "P-08",
+        "P-13",
+        "P-17"
+      ],
+      "roh": 5,
+      "klassen": [
+        [
+          "P-02"
+        ],
+        [
+          "P-07"
+        ],
+        [
+          "P-08"
+        ],
+        [
+          "P-13"
+        ],
+        [
+          "P-17"
+        ]
+      ],
+      "pro_lauf_dedup": 5
+    }
+  ],
+  "verteilungen": {
+    "nach_inhaltlicher_dedup": {
+      "gepoolt": {
+        "bezugsmenge": "alle 17 Etiketten nach Z2-R zusammengeführt (Äquivalenzklassen)",
+        "n": 16,
+        "z2g": {
+          "Spiegelung": 1,
+          "negierte Spiegelung": 0,
+          "normativ": 13,
+          "unklar": 2
+        },
+        "z2p": {
+          "prüfbar": 11,
+          "nicht prüfbar": 5
+        },
+        "kind": {
+          "structural": 6,
+          "semantic": 10
+        },
+        "z2z": {
+          "FORBIDDEN_RELATION": 6,
+          "CYCLE": 0,
+          "ABSENCE_REQUIRED": 0,
+          "FORBIDDEN_SIGNATURE_TYPE": 0,
+          "STRUCTURAL_PLACEMENT": 0,
+          "API_CONTRACT": 0,
+          "sonstige": 8,
+          "keiner der sechs": 2
+        }
+      },
+      "k2_b1": {
+        "bezugsmenge": "Etiketten der Zelle k2_b1 nach Z2-R zusammengeführt",
+        "n": 5,
+        "z2g": {
+          "Spiegelung": 0,
+          "negierte Spiegelung": 0,
+          "normativ": 5,
+          "unklar": 0
+        },
+        "z2p": {
+          "prüfbar": 0,
+          "nicht prüfbar": 5
+        },
+        "kind": {
+          "structural": 1,
+          "semantic": 4
+        },
+        "z2z": {
+          "FORBIDDEN_RELATION": 1,
+          "CYCLE": 0,
+          "ABSENCE_REQUIRED": 0,
+          "FORBIDDEN_SIGNATURE_TYPE": 0,
+          "STRUCTURAL_PLACEMENT": 0,
+          "API_CONTRACT": 0,
+          "sonstige": 4,
+          "keiner der sechs": 0
+        }
+      },
+      "k3_b1": {
+        "bezugsmenge": "Etiketten der Zelle k3_b1 nach Z2-R zusammengeführt",
+        "n": 11,
+        "z2g": {
+          "Spiegelung": 1,
+          "negierte Spiegelung": 0,
+          "normativ": 8,
+          "unklar": 2
+        },
+        "z2p": {
+          "prüfbar": 11,
+          "nicht prüfbar": 0
+        },
+        "kind": {
+          "structural": 5,
+          "semantic": 6
+        },
+        "z2z": {
+          "FORBIDDEN_RELATION": 5,
+          "CYCLE": 0,
+          "ABSENCE_REQUIRED": 0,
+          "FORBIDDEN_SIGNATURE_TYPE": 0,
+          "STRUCTURAL_PLACEMENT": 0,
+          "API_CONTRACT": 0,
+          "sonstige": 4,
+          "keiner der sechs": 2
+        }
+      }
+    },
+    "roh_je_etikett": {
+      "gepoolt": {
+        "bezugsmenge": "alle 17 Etiketten, ohne Z2-R-Dedup",
+        "n": 17,
+        "z2g": {
+          "Spiegelung": 1,
+          "negierte Spiegelung": 0,
+          "normativ": 14,
+          "unklar": 2
+        },
+        "z2p": {
+          "prüfbar": 12,
+          "nicht prüfbar": 5
+        },
+        "kind": {
+          "structural": 7,
+          "semantic": 10
+        },
+        "z2z": {
+          "FORBIDDEN_RELATION": 7,
+          "CYCLE": 0,
+          "ABSENCE_REQUIRED": 0,
+          "FORBIDDEN_SIGNATURE_TYPE": 0,
+          "STRUCTURAL_PLACEMENT": 0,
+          "API_CONTRACT": 0,
+          "sonstige": 8,
+          "keiner der sechs": 2
+        }
+      },
+      "k2_b1": {
+        "bezugsmenge": "Etiketten der Zelle k2_b1, ohne Z2-R-Dedup",
+        "n": 5,
+        "z2g": {
+          "Spiegelung": 0,
+          "negierte Spiegelung": 0,
+          "normativ": 5,
+          "unklar": 0
+        },
+        "z2p": {
+          "prüfbar": 0,
+          "nicht prüfbar": 5
+        },
+        "kind": {
+          "structural": 1,
+          "semantic": 4
+        },
+        "z2z": {
+          "FORBIDDEN_RELATION": 1,
+          "CYCLE": 0,
+          "ABSENCE_REQUIRED": 0,
+          "FORBIDDEN_SIGNATURE_TYPE": 0,
+          "STRUCTURAL_PLACEMENT": 0,
+          "API_CONTRACT": 0,
+          "sonstige": 4,
+          "keiner der sechs": 0
+        }
+      },
+      "k3_b1": {
+        "bezugsmenge": "Etiketten der Zelle k3_b1, ohne Z2-R-Dedup",
+        "n": 12,
+        "z2g": {
+          "Spiegelung": 1,
+          "negierte Spiegelung": 0,
+          "normativ": 9,
+          "unklar": 2
+        },
+        "z2p": {
+          "prüfbar": 12,
+          "nicht prüfbar": 0
+        },
+        "kind": {
+          "structural": 6,
+          "semantic": 6
+        },
+        "z2z": {
+          "FORBIDDEN_RELATION": 6,
+          "CYCLE": 0,
+          "ABSENCE_REQUIRED": 0,
+          "FORBIDDEN_SIGNATURE_TYPE": 0,
+          "STRUCTURAL_PLACEMENT": 0,
+          "API_CONTRACT": 0,
+          "sonstige": 4,
+          "keiner der sechs": 2
+        }
+      }
+    },
+    "roh_je_generat": {
+      "bezugsmenge": "alle 27 Vorschlagsinstanzen der sechs Läufe (Vielfachheit gewichtet, ohne jede Dedup)",
+      "n": 27,
+      "je_zelle": {
+        "k2_b1": 15,
+        "k3_b1": 12
+      }
+    }
+  },
+  "z2p_ursachen": {
+    "bezugsmenge": "alle 17 Etiketten; die Ursachen sind Bewertertext, wörtlich",
+    "nicht_pruefbar_gesamt": 5,
+    "davon_ursache_externer_import": 1,
+    "davon_andere_ursache": 4,
+    "eintraege": [
+      {
+        "etikett": "P-04",
+        "bedingung": "k2_b1",
+        "wortlaut_verdikt": "nicht entscheidbar",
+        "ursache_woertlich": "URSACHE (Pflichtvermerk §6): `logging` ist ein EXTERNES Importziel; externe Ziele haben nach der Stufe-0b-Kürzung keine Kante im Ist-Modell und keinen Signaturniederschlag. Folge der registrierten Kürzung, kein Modellfehler",
+        "ursache_externer_import": true
+      },
+      {
+        "etikett": "P-05",
+        "bedingung": "k2_b1",
+        "wortlaut_verdikt": "nicht prüfbar",
+        "ursache_woertlich": "nicht operationalisiert („consistent style\"); Docstrings sind mit Stufe 0 aus der Eingabe gezogen",
+        "ursache_externer_import": false
+      },
+      {
+        "etikett": "P-06",
+        "bedingung": "k2_b1",
+        "wortlaut_verdikt": "nicht prüfbar",
+        "ursache_woertlich": "Logikduplikation ist nur im Funktionskörper sichtbar, nicht in Kanten oder Signaturen",
+        "ursache_externer_import": false
+      },
+      {
+        "etikett": "P-12",
+        "bedingung": "k2_b1",
+        "wortlaut_verdikt": "nicht prüfbar",
+        "ursache_woertlich": "„logical modules\", „single responsibility\" nicht operationalisiert",
+        "ursache_externer_import": false
+      },
+      {
+        "etikett": "P-15",
+        "bedingung": "k2_b1",
+        "wortlaut_verdikt": "nicht prüfbar",
+        "ursache_woertlich": "„common pattern\", Lokalisierung und Nutzerfreundlichkeit von Meldungen liegen nicht in der Evidenzbasis",
+        "ursache_externer_import": false
+      }
+    ]
+  },
+  "abdeckungsmatrix": {
+    "gepoolt": {
+      "kriterium_protokoll_§7_punkt_3": "≥ 1 normativer, prüfbarer Vorschlag",
+      "belegt_streng": {
+        "FORBIDDEN_RELATION": [
+          "P-01+P-11",
+          "P-16"
+        ],
+        "CYCLE": [],
+        "ABSENCE_REQUIRED": [],
+        "FORBIDDEN_SIGNATURE_TYPE": [],
+        "STRUCTURAL_PLACEMENT": [],
+        "API_CONTRACT": []
+      },
+      "belegt_streng_zahl": 1,
+      "unbelegt_streng": [
+        "ABSENCE_REQUIRED",
+        "API_CONTRACT",
+        "CYCLE",
+        "FORBIDDEN_SIGNATURE_TYPE",
+        "STRUCTURAL_PLACEMENT"
+      ],
+      "kriterium_weit": "≥ 1 Vorschlag beliebigen Gehalts und beliebiger Prüfbarkeit",
+      "belegt_weit": {
+        "FORBIDDEN_RELATION": [
+          "P-01+P-11",
+          "P-02",
+          "P-04",
+          "P-07",
+          "P-14",
+          "P-16"
+        ],
+        "CYCLE": [],
+        "ABSENCE_REQUIRED": [],
+        "FORBIDDEN_SIGNATURE_TYPE": [],
+        "STRUCTURAL_PLACEMENT": [],
+        "API_CONTRACT": []
+      },
+      "belegt_weit_zahl": 1,
+      "unbelegt_weit": [
+        "ABSENCE_REQUIRED",
+        "API_CONTRACT",
+        "CYCLE",
+        "FORBIDDEN_SIGNATURE_TYPE",
+        "STRUCTURAL_PLACEMENT"
+      ],
+      "vorschlaege_auf_die_sich_die_matrix_stuetzt": 16,
+      "bei_dieser_vorschlagszahl_ueberhaupt_besetzbare_kategorien": 6
+    },
+    "k2_b1": {
+      "kriterium_protokoll_§7_punkt_3": "≥ 1 normativer, prüfbarer Vorschlag",
+      "belegt_streng": {
+        "FORBIDDEN_RELATION": [],
+        "CYCLE": [],
+        "ABSENCE_REQUIRED": [],
+        "FORBIDDEN_SIGNATURE_TYPE": [],
+        "STRUCTURAL_PLACEMENT": [],
+        "API_CONTRACT": []
+      },
+      "belegt_streng_zahl": 0,
+      "unbelegt_streng": [
+        "ABSENCE_REQUIRED",
+        "API_CONTRACT",
+        "CYCLE",
+        "FORBIDDEN_RELATION",
+        "FORBIDDEN_SIGNATURE_TYPE",
+        "STRUCTURAL_PLACEMENT"
+      ],
+      "kriterium_weit": "≥ 1 Vorschlag beliebigen Gehalts und beliebiger Prüfbarkeit",
+      "belegt_weit": {
+        "FORBIDDEN_RELATION": [
+          "P-04"
+        ],
+        "CYCLE": [],
+        "ABSENCE_REQUIRED": [],
+        "FORBIDDEN_SIGNATURE_TYPE": [],
+        "STRUCTURAL_PLACEMENT": [],
+        "API_CONTRACT": []
+      },
+      "belegt_weit_zahl": 1,
+      "unbelegt_weit": [
+        "ABSENCE_REQUIRED",
+        "API_CONTRACT",
+        "CYCLE",
+        "FORBIDDEN_SIGNATURE_TYPE",
+        "STRUCTURAL_PLACEMENT"
+      ],
+      "vorschlaege_auf_die_sich_die_matrix_stuetzt": 5,
+      "bei_dieser_vorschlagszahl_ueberhaupt_besetzbare_kategorien": 5
+    },
+    "k3_b1": {
+      "kriterium_protokoll_§7_punkt_3": "≥ 1 normativer, prüfbarer Vorschlag",
+      "belegt_streng": {
+        "FORBIDDEN_RELATION": [
+          "P-01+P-11",
+          "P-16"
+        ],
+        "CYCLE": [],
+        "ABSENCE_REQUIRED": [],
+        "FORBIDDEN_SIGNATURE_TYPE": [],
+        "STRUCTURAL_PLACEMENT": [],
+        "API_CONTRACT": []
+      },
+      "belegt_streng_zahl": 1,
+      "unbelegt_streng": [
+        "ABSENCE_REQUIRED",
+        "API_CONTRACT",
+        "CYCLE",
+        "FORBIDDEN_SIGNATURE_TYPE",
+        "STRUCTURAL_PLACEMENT"
+      ],
+      "kriterium_weit": "≥ 1 Vorschlag beliebigen Gehalts und beliebiger Prüfbarkeit",
+      "belegt_weit": {
+        "FORBIDDEN_RELATION": [
+          "P-01+P-11",
+          "P-02",
+          "P-07",
+          "P-14",
+          "P-16"
+        ],
+        "CYCLE": [],
+        "ABSENCE_REQUIRED": [],
+        "FORBIDDEN_SIGNATURE_TYPE": [],
+        "STRUCTURAL_PLACEMENT": [],
+        "API_CONTRACT": []
+      },
+      "belegt_weit_zahl": 1,
+      "unbelegt_weit": [
+        "ABSENCE_REQUIRED",
+        "API_CONTRACT",
+        "CYCLE",
+        "FORBIDDEN_SIGNATURE_TYPE",
+        "STRUCTURAL_PLACEMENT"
+      ],
+      "vorschlaege_auf_die_sich_die_matrix_stuetzt": 11,
+      "bei_dieser_vorschlagszahl_ueberhaupt_besetzbare_kategorien": 6
+    }
+  },
+  "grenzfaelle": {
+    "bezugsmenge_etiketten": 17,
+    "etiketten_mit_grenzfall_ja": [
+      "P-02",
+      "P-03",
+      "P-04",
+      "P-07",
+      "P-08",
+      "P-09",
+      "P-10",
+      "P-11",
+      "P-13",
+      "P-14",
+      "P-17"
+    ],
+    "je_zelle": {
+      "k2_b1": {
+        "grenzfaelle": [
+          "P-04"
+        ],
+        "etiketten": 5,
+        "anteil": 0.2
+      },
+      "k3_b1": {
+        "grenzfaelle": [
+          "P-02",
+          "P-03",
+          "P-07",
+          "P-08",
+          "P-09",
+          "P-10",
+          "P-11",
+          "P-13",
+          "P-14",
+          "P-17"
+        ],
+        "etiketten": 12,
+        "anteil": 0.8333
+      }
+    },
+    "zeilen_der_grenzfall_tabelle": 14,
+    "tabelle": [
+      {
+        "etikett": "P-02",
+        "kriterium": "Z2-G",
+        "entscheidung": "unklar",
+        "begruendung": "Die Erlaubnislisten-Lesart („may only depend on …\") verbietet realisierte Kanten (`invoice_service`/`order_service → core.adapters.storage`, `pricing.engine → core.errors`), die enge Service-zu-Service-Lesart nur im Ist abwesende. Äquivalenz zur Whitelist damit nicht eindeutig entscheidbar — nach der Grenzfall-Regel „unklar\"."
+      },
+      {
+        "etikett": "P-03",
+        "kriterium": "Z2-Z",
+        "entscheidung": "sonstige",
+        "begruendung": "Verbot der Mehrfachdefinition eines Funktionssymbols. `STRUCTURAL_PLACEMENT`/`INCORRECT_LOCATION` ist im Hauptprotokoll modulbezogen und trägt eine funktionsbezogene Zentralisierungsregel nicht; kodierbar bleibt sie als eigener Typ → Auffangkategorie."
+      },
+      {
+        "etikett": "P-04",
+        "kriterium": "Z2-Z",
+        "entscheidung": "`FORBIDDEN_RELATION`",
+        "begruendung": "Der Typ (verbotene Importbeziehung) passt, das Ziel (`logging`) ist aber extern; der Injektionsplan kennt nur repo-interne Kanten. Zuordnung zum Typ, mit Vermerk des externen Ziels."
+      },
+      {
+        "etikett": "P-07",
+        "kriterium": "Z2-G",
+        "entscheidung": "Spiegelung",
+        "begruendung": "Geschlossene Erlaubnisliste, deckungsgleich mit den realisierten Kanten (Spiegelungs-Beispiel (b)); der Verbotsschwanz trifft unter der gesättigten Baseline nur Abwesendes — kein Überschreiten der beobachteten Extension, die positive Listenform gibt den Ausschlag."
+      },
+      {
+        "etikett": "P-08",
+        "kriterium": "Z2-P",
+        "entscheidung": "prüfbar",
+        "begruendung": "Entscheidend ist das `bases`-Feld der Faktenbasis, in dem `typing.Protocol` wörtlich steht — kein externer Importfakt nötig. Grenzfall, weil `bases` keine „Signatur\" im engen Wortsinn der Z2-P-Regel ist; die extends-Fakten sind aber als Eingabebestandteil registriert (§3a-1)."
+      },
+      {
+        "etikett": "P-08",
+        "kriterium": "Z2-Z",
+        "entscheidung": "keiner der sechs",
+        "begruendung": "Aus Vererbungsinformation abgeleitete Definitionsortsregel — der in §6 (S1-A1b) vorgesehene Fall; nicht `STRUCTURAL_PLACEMENT`, das modulbezogene Ortsregeln meint."
+      },
+      {
+        "etikett": "P-09",
+        "kriterium": "Z2-P",
+        "entscheidung": "prüfbar",
+        "begruendung": "„Functions that map DepotError to HTTP status codes\" verlangt eine Deutung; entschieden über die sichtbaren Signaturen (`(error: DepotError) -> int` bzw. `-> dict[str, str]`), die die gemeinten Funktionen eindeutig ausweisen."
+      },
+      {
+        "etikett": "P-09",
+        "kriterium": "Z2-Z",
+        "entscheidung": "sonstige",
+        "begruendung": "Wie P-03: funktionsbezogene Zentralisierungsregel, von der Kodierung nicht als eigener Typ getragen."
+      },
+      {
+        "etikett": "P-10",
+        "kriterium": "Z2-Z",
+        "entscheidung": "sonstige",
+        "begruendung": "Wie P-03."
+      },
+      {
+        "etikett": "P-11",
+        "kriterium": "Z2-R",
+        "entscheidung": "identisch mit P-01",
+        "begruendung": "Kategorie (`dependency-inversion`) und Scope (drei services-Pakete) identisch; Kernaussage — Services hängen nur von Abstraktionen in `core.ports` ab, nicht von konkreten Klassen — deckungsgleich: „may only depend on protocols … or other abstract interfaces\" schliesst Repositories ebenso aus wie P-01s explizite Aufzählung. Umformulierung im Sinn von Z2-R; `severity` ist kein Z2-R-Kriterium."
+      },
+      {
+        "etikett": "P-13",
+        "kriterium": "Z2-P",
+        "entscheidung": "prüfbar",
+        "begruendung": "Wie P-08: `bases`-Feld zeigt die Exception-Vererbung."
+      },
+      {
+        "etikett": "P-13",
+        "kriterium": "Z2-Z",
+        "entscheidung": "keiner der sechs",
+        "begruendung": "Wie P-08: vererbungsbasierte Definitionsortsregel."
+      },
+      {
+        "etikett": "P-14",
+        "kriterium": "Z2-G",
+        "entscheidung": "unklar",
+        "begruendung": "Der Importverbots-Teil verbietet nur im Ist abwesende Kanten (extensional); die Konstruktorklausel („receive only service-layer dependencies\") ist eine Signatureigenschaft (intensional). Nicht eindeutig einer Seite zuordenbar — nach der Grenzfall-Regel „unklar\"."
+      },
+      {
+        "etikett": "P-17",
+        "kriterium": "Z2-Z",
+        "entscheidung": "sonstige",
+        "begruendung": "Wie P-03, auf beide Symbole zugleich bezogen."
+      }
+    ],
+    "entfallener_zweitbewerter_trigger": {
+      "wert": "20 %",
+      "fundstelle": "z2_protokoll_regelableitung.md §6, durchgestrichene „Zweitbewerter-Regel (vorregistriert)“ — überholt am 31.08.2026 (Auftrag G1, Amendment §11); §6 Punkt 3 der geltenden Fassung: „Kein Trigger, keine Pflicht.“",
+      "status": "entfallen — zur Kenntnis, ohne Deutung"
+    },
+    "anteil_gepoolt": 0.6471,
+    "auf_klassenbasis": {
+      "bezugsmenge": "Äquivalenzklassen nach Z2-R, gepoolt",
+      "klassen": 16,
+      "klassen_mit_grenzfall": 11,
+      "anteil": 0.6875
+    }
+  },
+  "stabilitaet": {
+    "k2_b1": {
+      "bezugsmenge": "Äquivalenzklassen mit mindestens einem Etikett aus k2_b1",
+      "klassen": 5,
+      "klassen_mit_wiederkehr_ge_2_von_3": 5,
+      "anteil": 1.0,
+      "je_klasse": [
+        {
+          "mitglieder": [
+            "P-04"
+          ],
+          "laeufe": [
+            "run0",
+            "run1",
+            "run2"
+          ],
+          "wiederkehr": "3/3",
+          "stabil_ge_2_von_3": true
+        },
+        {
+          "mitglieder": [
+            "P-05"
+          ],
+          "laeufe": [
+            "run0",
+            "run1",
+            "run2"
+          ],
+          "wiederkehr": "3/3",
+          "stabil_ge_2_von_3": true
+        },
+        {
+          "mitglieder": [
+            "P-06"
+          ],
+          "laeufe": [
+            "run0",
+            "run1",
+            "run2"
+          ],
+          "wiederkehr": "3/3",
+          "stabil_ge_2_von_3": true
+        },
+        {
+          "mitglieder": [
+            "P-12"
+          ],
+          "laeufe": [
+            "run0",
+            "run1",
+            "run2"
+          ],
+          "wiederkehr": "3/3",
+          "stabil_ge_2_von_3": true
+        },
+        {
+          "mitglieder": [
+            "P-15"
+          ],
+          "laeufe": [
+            "run0",
+            "run1",
+            "run2"
+          ],
+          "wiederkehr": "3/3",
+          "stabil_ge_2_von_3": true
+        }
+      ],
+      "determinismusvermerk": "In der Zelle K2 × B1 sind die drei Generate ZEICHENGLEICH — SHA256 `f71c9c743093e0c3…` über `choices[0].message.content`, 2 356 Zeichen, Fundstelle `data/z2/MANIFEST.md`, Abschnitt „Formbefund ohne Deutung: die drei Generate sind zeichengleich“. Die Wiederkehr ist dort daher KONSTRUKTIV 3/3 für jeden Vorschlag. Die Größe misst in dieser Zelle Determinismus und nicht Wiederkehr über unabhängige Ziehungen."
+    },
+    "k3_b1": {
+      "bezugsmenge": "Äquivalenzklassen mit mindestens einem Etikett aus k3_b1",
+      "klassen": 11,
+      "klassen_mit_wiederkehr_ge_2_von_3": 1,
+      "anteil": 0.0909,
+      "je_klasse": [
+        {
+          "mitglieder": [
+            "P-01",
+            "P-11"
+          ],
+          "laeufe": [
+            "run0",
+            "run1"
+          ],
+          "wiederkehr": "2/3",
+          "stabil_ge_2_von_3": true
+        },
+        {
+          "mitglieder": [
+            "P-02"
+          ],
+          "laeufe": [
+            "run2"
+          ],
+          "wiederkehr": "1/3",
+          "stabil_ge_2_von_3": false
+        },
+        {
+          "mitglieder": [
+            "P-03"
+          ],
+          "laeufe": [
+            "run0"
+          ],
+          "wiederkehr": "1/3",
+          "stabil_ge_2_von_3": false
+        },
+        {
+          "mitglieder": [
+            "P-07"
+          ],
+          "laeufe": [
+            "run2"
+          ],
+          "wiederkehr": "1/3",
+          "stabil_ge_2_von_3": false
+        },
+        {
+          "mitglieder": [
+            "P-08"
+          ],
+          "laeufe": [
+            "run2"
+          ],
+          "wiederkehr": "1/3",
+          "stabil_ge_2_von_3": false
+        },
+        {
+          "mitglieder": [
+            "P-09"
+          ],
+          "laeufe": [
+            "run1"
+          ],
+          "wiederkehr": "1/3",
+          "stabil_ge_2_von_3": false
+        },
+        {
+          "mitglieder": [
+            "P-10"
+          ],
+          "laeufe": [
+            "run0"
+          ],
+          "wiederkehr": "1/3",
+          "stabil_ge_2_von_3": false
+        },
+        {
+          "mitglieder": [
+            "P-13"
+          ],
+          "laeufe": [
+            "run2"
+          ],
+          "wiederkehr": "1/3",
+          "stabil_ge_2_von_3": false
+        },
+        {
+          "mitglieder": [
+            "P-14"
+          ],
+          "laeufe": [
+            "run1"
+          ],
+          "wiederkehr": "1/3",
+          "stabil_ge_2_von_3": false
+        },
+        {
+          "mitglieder": [
+            "P-16"
+          ],
+          "laeufe": [
+            "run0"
+          ],
+          "wiederkehr": "1/3",
+          "stabil_ge_2_von_3": false
+        },
+        {
+          "mitglieder": [
+            "P-17"
+          ],
+          "laeufe": [
+            "run2"
+          ],
+          "wiederkehr": "1/3",
+          "stabil_ge_2_von_3": false
+        }
+      ],
+      "determinismusvermerk": "In der Zelle K3 × B1 sind die drei Generate VERSCHIEDEN (SHA256 `f3514cf678fc7bec…` / `2ffde87ee71cd79c…` / `1fe29dd6972bd5f6…`, Fundstelle `data/z2/MANIFEST.md`). Die Wiederkehr ist hier über verschiedene Generate gebildet."
+    },
+    "_nicht_zusammenfassen": "Die Zahlen der beiden Zellen werden NICHT zusammengefasst und NICHT gegeneinander gerechnet."
+  },
+  "granularitaet": {
+    "hinweis": "BEOBACHTUNG, kein Kriterium (§6)",
+    "k2_b1": {
+      "bezugsmenge": "Etiketten k2_b1 (ohne Z2-R-Dedup)",
+      "etiketten": 5,
+      "summe_der_scope_eintraege": {
+        "package": 20,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "etiketten_mit_mindestens_einem": {
+        "package": 5,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      }
+    },
+    "k3_b1": {
+      "bezugsmenge": "Etiketten k3_b1 (ohne Z2-R-Dedup)",
+      "etiketten": 12,
+      "summe_der_scope_eintraege": {
+        "package": 17,
+        "module": 15,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "etiketten_mit_mindestens_einem": {
+        "package": 8,
+        "module": 4,
+        "artefact": 0,
+        "unresolved": 0
+      }
+    },
+    "gepoolt": {
+      "bezugsmenge": "Etiketten gepoolt (ohne Z2-R-Dedup)",
+      "etiketten": 17,
+      "summe_der_scope_eintraege": {
+        "package": 37,
+        "module": 15,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "etiketten_mit_mindestens_einem": {
+        "package": 13,
+        "module": 4,
+        "artefact": 0,
+        "unresolved": 0
+      }
+    }
+  },
+  "ladbarkeit_§7_punkt_8": {
+    "instrument": "parseArchitectureRules, ~/ma/tritongraph-measure/packages/triton-conformance/src/rules.ts",
+    "worktree": "~/ma/tritongraph-measure, detached auf 348ca9d",
+    "import": "DIREKT aus rules.ts, NICHT über die Paket-Barrel index.ts",
+    "laufzeit": "node v22.23.2 mit eigenem Type-Stripping; der tsx in ~/ma/tritongraph/tools/ts-to-ilograph/node_modules/.bin ist auf dieser Maschine unbrauchbar (esbuild als darwin-arm64 installiert, Host linux-x64), und ein npm install in tritongraph ist ausgeschlossen",
+    "umschreibung": "genau EINE Feldeinfügung: das vom Bewerter zugewiesene `kind`; id, category, scope, statement, severity unverändert, `predicate` bleibt leer (zulässig: types.ts:44, rules.ts:77)",
+    "nur_lesend": "kein Commit, kein Bau, kein npm install; `git status` in ~/ma/tritongraph-measure und ~/ma/tritongraph vorher und nachher leer, HEAD unverändert 348ca9d",
+    "etiketten_angenommen": 17,
+    "etiketten_gesamt": 17,
+    "alle_siebzehn_in_einem_array_angenommen": 17,
+    "klassen_angenommen": 16,
+    "klassen_gesamt": 16,
+    "fehler": [],
+    "groesse_nach_§7_punkt_8": "16 von 16 deduplizierten Vorschlägen angenommen",
+    "vermerk": "Deskriptiv und KEIN Korrektheitsmaß (§7 Punkt 8). Die `kind`-Zuweisung ist eine Bewertung, keine maschinelle Angabe."
+  },
+  "methodendetail_einsicht_ins_testrepo": "Der Bewerter hat während der Bewertung Code und Eingaben des Testrepos eingesehen. Das ist mit der Verblindung vereinbar — sie richtet sich gegen Bedingungs- und Modellkennzeichnung, nicht gegen das Repositorium; für Z2-G („verbietet Realisiertes“) ist der Blick auf das Ist notwendig. Kein Threat, aber ein zu berichtendes Methodendetail.",
+  "t_z2_10_textliche_naehe": {
+    "hinweis": "Erhoben wird die TEXTLICHE NÄHE. Es wird KEINE Aussage getroffen, ob ein Vorschlag aus dem Beispiel stammt. T-Z2-10 ist der registrierte Threat, unter dem der Autor sie einordnet.",
+    "beispiel_aus_anhang_a_a3": {
+      "id": "R1",
+      "category": "logging-discipline",
+      "statement": "Modules in these components must not import the standard logging module directly. They obtain a logger from the shared logging helper instead.",
+      "severity": "warning",
+      "scope.components": [
+        "shop.web",
+        "shop.jobs"
+      ]
+    },
+    "mass": "difflib.SequenceMatcher.ratio über NFC-normalisierte, kleingeschriebene statement-Texte",
+    "alle_werte": [
+      {
+        "etikett": "P-04",
+        "bedingung": "k2_b1",
+        "ratio": 0.741433,
+        "category": "dependency-management",
+        "severity": "warning",
+        "scope_components": [
+          "depot.billing.api",
+          "depot.billing.services",
+          "depot.billing.repository",
+          "depot.billing.models"
+        ]
+      },
+      {
+        "etikett": "P-16",
+        "bedingung": "k3_b1",
+        "ratio": 0.496732,
+        "category": "mapper-purity",
+        "severity": "warning",
+        "scope_components": [
+          "depot.billing.mappers",
+          "depot.identity.mappers",
+          "depot.orders.mappers"
+        ]
+      },
+      {
+        "etikett": "P-10",
+        "bedingung": "k3_b1",
+        "ratio": 0.440678,
+        "category": "error-handling-consistency",
+        "severity": "error",
+        "scope_components": [
+          "depot.billing.api.routes",
+          "depot.identity.api.routes",
+          "depot.orders.api.routes"
+        ]
+      },
+      {
+        "etikett": "P-11",
+        "bedingung": "k3_b1",
+        "ratio": 0.42236,
+        "category": "dependency-inversion",
+        "severity": "warning",
+        "scope_components": [
+          "depot.billing.services",
+          "depot.identity.services",
+          "depot.orders.services"
+        ]
+      },
+      {
+        "etikett": "P-08",
+        "bedingung": "k3_b1",
+        "ratio": 0.398734,
+        "category": "interface-segregation",
+        "severity": "error",
+        "scope_components": [
+          "depot"
+        ]
+      },
+      {
+        "etikett": "P-14",
+        "bedingung": "k3_b1",
+        "ratio": 0.3625,
+        "category": "layered-architecture",
+        "severity": "error",
+        "scope_components": [
+          "depot.billing.api.routes",
+          "depot.identity.api.routes",
+          "depot.orders.api.routes"
+        ]
+      },
+      {
+        "etikett": "P-03",
+        "bedingung": "k3_b1",
+        "ratio": 0.360656,
+        "category": "error-handling-consistency",
+        "severity": "error",
+        "scope_components": [
+          "depot.billing.api.schemas",
+          "depot.identity.api.schemas",
+          "depot.orders.api.schemas"
+        ]
+      },
+      {
+        "etikett": "P-06",
+        "bedingung": "k2_b1",
+        "ratio": 0.340694,
+        "category": "code-reusability",
+        "severity": "warning",
+        "scope_components": [
+          "depot.billing.api",
+          "depot.billing.services",
+          "depot.billing.repository",
+          "depot.billing.models"
+        ]
+      },
+      {
+        "etikett": "P-07",
+        "bedingung": "k3_b1",
+        "ratio": 0.287425,
+        "category": "data-access-layer",
+        "severity": "error",
+        "scope_components": [
+          "depot.billing.repository",
+          "depot.identity.repository",
+          "depot.orders.repository"
+        ]
+      },
+      {
+        "etikett": "P-09",
+        "bedingung": "k3_b1",
+        "ratio": 0.249258,
+        "category": "error-handling-centralization",
+        "severity": "warning",
+        "scope_components": [
+          "depot.billing.api.routes",
+          "depot.identity.api.routes",
+          "depot.orders.api.routes",
+          "depot.billing.api.schemas",
+          "depot.identity.api.schemas",
+          "depot.orders.api.schemas"
+        ]
+      },
+      {
+        "etikett": "P-13",
+        "bedingung": "k3_b1",
+        "ratio": 0.235294,
+        "category": "error-handling",
+        "severity": "error",
+        "scope_components": [
+          "depot"
+        ]
+      },
+      {
+        "etikett": "P-01",
+        "bedingung": "k3_b1",
+        "ratio": 0.227692,
+        "category": "dependency-inversion",
+        "severity": "error",
+        "scope_components": [
+          "depot.billing.services",
+          "depot.identity.services",
+          "depot.orders.services"
+        ]
+      },
+      {
+        "etikett": "P-15",
+        "bedingung": "k2_b1",
+        "ratio": 0.088643,
+        "category": "error-handling",
+        "severity": "error",
+        "scope_components": [
+          "depot.billing.api",
+          "depot.billing.services",
+          "depot.billing.repository",
+          "depot.billing.models"
+        ]
+      },
+      {
+        "etikett": "P-02",
+        "bedingung": "k3_b1",
+        "ratio": 0.078947,
+        "category": "dependency-control",
+        "severity": "error",
+        "scope_components": [
+          "depot.billing.services",
+          "depot.orders.services"
+        ]
+      },
+      {
+        "etikett": "P-05",
+        "bedingung": "k2_b1",
+        "ratio": 0.071259,
+        "category": "code-quality",
+        "severity": "error",
+        "scope_components": [
+          "depot.billing.api",
+          "depot.billing.services",
+          "depot.billing.repository",
+          "depot.billing.models"
+        ]
+      },
+      {
+        "etikett": "P-17",
+        "bedingung": "k3_b1",
+        "ratio": 0.040909,
+        "category": "duplication",
+        "severity": "warning",
+        "scope_components": [
+          "depot"
+        ]
+      },
+      {
+        "etikett": "P-12",
+        "bedingung": "k2_b1",
+        "ratio": 0.032172,
+        "category": "code-organization",
+        "severity": "error",
+        "scope_components": [
+          "depot.billing.api",
+          "depot.billing.services",
+          "depot.billing.repository",
+          "depot.billing.models"
+        ]
+      }
+    ],
+    "drei_hoechste": [
+      {
+        "etikett": "P-04",
+        "bedingung": "k2_b1",
+        "ratio": 0.741433,
+        "category": "dependency-management",
+        "severity": "warning",
+        "scope_components": [
+          "depot.billing.api",
+          "depot.billing.services",
+          "depot.billing.repository",
+          "depot.billing.models"
+        ]
+      },
+      {
+        "etikett": "P-16",
+        "bedingung": "k3_b1",
+        "ratio": 0.496732,
+        "category": "mapper-purity",
+        "severity": "warning",
+        "scope_components": [
+          "depot.billing.mappers",
+          "depot.identity.mappers",
+          "depot.orders.mappers"
+        ]
+      },
+      {
+        "etikett": "P-10",
+        "bedingung": "k3_b1",
+        "ratio": 0.440678,
+        "category": "error-handling-consistency",
+        "severity": "error",
+        "scope_components": [
+          "depot.billing.api.routes",
+          "depot.identity.api.routes",
+          "depot.orders.api.routes"
+        ]
+      }
+    ],
+    "hoechster": {
+      "etikett": "P-04",
+      "bedingung": "k2_b1",
+      "ratio": 0.741433,
+      "category": "dependency-management",
+      "severity": "warning",
+      "scope_components": [
+        "depot.billing.api",
+        "depot.billing.services",
+        "depot.billing.repository",
+        "depot.billing.models"
+      ],
+      "wortdiff_beispiel_gegen_vorschlag": [
+        "- modules",
+        "- in",
+        "+ classes",
+        "+ and",
+        "+ functions",
+        "+ within",
+        "- these",
+        "?    --\n",
+        "+ the",
+        "+ billing",
+        "  components",
+        "  must",
+        "  not",
+        "+ directly",
+        "  import",
+        "  the",
+        "  standard",
+        "  logging",
+        "- module",
+        "+ module.",
+        "?       +\n",
+        "- directly.",
+        "+ instead,",
+        "  they",
+        "+ should",
+        "  obtain",
+        "  a",
+        "  logger",
+        "  from",
+        "- the",
+        "+ a",
+        "  shared",
+        "  logging",
+        "  helper",
+        "- instead.",
+        "+ module."
+      ],
+      "statement_beispiel": "Modules in these components must not import the standard logging module directly. They obtain a logger from the shared logging helper instead.",
+      "statement_vorschlag": "Classes and functions within the billing components must not directly import the standard logging module. Instead, they should obtain a logger from a shared logging helper module.",
+      "felderabgleich": {
+        "category": {
+          "beispiel": "logging-discipline",
+          "vorschlag": "dependency-management",
+          "gleich": false
+        },
+        "severity": {
+          "beispiel": "warning",
+          "vorschlag": "warning",
+          "gleich": true
+        },
+        "scope_components": {
+          "beispiel": [
+            "shop.web",
+            "shop.jobs"
+          ],
+          "vorschlag": [
+            "depot.billing.api",
+            "depot.billing.services",
+            "depot.billing.repository",
+            "depot.billing.models"
+          ],
+          "gleich": false
+        }
+      }
+    }
+  },
+  "ausstehend": [
+    "§7 Punkt 5 (Überlapp mit den sechzehn autorenformulierten Statements) — NICHT erhoben; „sinngemäß vorgeschlagen“ ist eine Bewerterleistung.",
+    "Die Verdikte zu E1–E4 und Befund 09 — Sache des Autors.",
+    "Die Entscheidung I3 — fällt datiert am 13.09.2026."
+  ],
+  "gemeldet_nicht_geaendert": [
+    "Klasse P-01+P-11: die Mitglieder tragen auf „grenzfall_ja“ verschiedene Werte (UNEINHEITLICH: P-01=False / P-11=True). Gemeldet, NICHT geändert; in die Zählung greift das nicht ein — die Klasse wird auf dieser Dimension als uneinheitlich geführt."
+  ],
+  "eintraege": [
+    {
+      "etikett": "P-01",
+      "category": "`dependency-inversion`",
+      "severity": "`error`",
+      "scope_components_roh": "`depot.billing.services` · `depot.identity.services` · `depot.orders.services`",
+      "statement": "Service classes must have their dependencies limited to interfaces defined in depot.core.ports; they must not directly instantiate or depend on concrete adapter or repository classes.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 3 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`structural` — Import-/Abhängigkeitsregel über Modulkanten",
+      "z2p_roh": "prüfbar — die verletzenden Kanten stehen im Ist-Modell (services → repository/adapters); „instantiate\" impliziert einen Import",
+      "z2g_roh": "normativ — verbietet REALISIERTE Kanten (u. a. `invoice_service → invoice_repo`, `invoice_service → core.adapters.storage`)",
+      "z2z_roh": "`FORBIDDEN_RELATION` — verbotene Importbeziehung",
+      "identisch_mit": "—",
+      "grenzfall": "nein",
+      "bemerkung": "P-11 ist nach Z2-R mit diesem Eintrag identisch (dort vermerkt und in Abschnitt 6 begründet).",
+      "kind": "structural",
+      "kind_begruendung": "Import-/Abhängigkeitsregel über Modulkanten",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "die verletzenden Kanten stehen im Ist-Modell (services → repository/adapters); „instantiate\" impliziert einen Import",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "verbietet REALISIERTE Kanten (u. a. `invoice_service → invoice_repo`, `invoice_service → core.adapters.storage`)",
+      "z2z": "FORBIDDEN_RELATION",
+      "z2z_begruendung": "verbotene Importbeziehung",
+      "grenzfall_ja": false,
+      "granularitaet": {
+        "package": 3,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.services",
+        "depot.identity.services",
+        "depot.orders.services"
+      ],
+      "category_klar": "dependency-inversion",
+      "severity_klar": "error",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run1",
+          "position": 0,
+          "id": "R1"
+        }
+      ],
+      "bedingung": "k3_b1"
+    },
+    {
+      "etikett": "P-02",
+      "category": "`dependency-control`",
+      "severity": "`error`",
+      "scope_components_roh": "`depot.billing.services` · `depot.orders.services`",
+      "statement": "Services in depot.billing.services and depot.orders.services must not depend on services in each other's packages. They may only depend on services in depot.identity.services and depot.core.services (if any) and on repositories and ports.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 2 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`structural` — Import-/Abhängigkeitsregel über Paketgrenzen",
+      "z2p_roh": "prüfbar — alle genannten Ziele sind interne Kanten des Ist-Modells; `depot.core.services` existiert nicht, die Klausel ist leer erfüllbar",
+      "z2g_roh": "unklar — Grenzfall, siehe Abschnitt 6: die Erlaubnislisten-Lesart verbietet realisierte Kanten, die enge Service-zu-Service-Lesart nur abwesende",
+      "z2z_roh": "`FORBIDDEN_RELATION` — zielt eindeutig auf Ebene 2 `INDEPENDENCE` (wechselseitige Unabhängigkeit billing ↔ orders)",
+      "identisch_mit": "—",
+      "grenzfall": "ja",
+      "bemerkung": "Realisiert und je nach Lesart verboten: `order_service`/`invoice_service → core.adapters.storage`, `orders.services.pricing.engine → core.errors`.",
+      "kind": "structural",
+      "kind_begruendung": "Import-/Abhängigkeitsregel über Paketgrenzen",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "alle genannten Ziele sind interne Kanten des Ist-Modells; `depot.core.services` existiert nicht, die Klausel ist leer erfüllbar",
+      "z2p_ursache_externer_import": false,
+      "z2g": "unklar",
+      "z2g_begruendung": "Grenzfall, siehe Abschnitt 6: die Erlaubnislisten-Lesart verbietet realisierte Kanten, die enge Service-zu-Service-Lesart nur abwesende",
+      "z2z": "FORBIDDEN_RELATION",
+      "z2z_begruendung": "zielt eindeutig auf Ebene 2 `INDEPENDENCE` (wechselseitige Unabhängigkeit billing ↔ orders)",
+      "grenzfall_ja": true,
+      "granularitaet": {
+        "package": 2,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.services",
+        "depot.orders.services"
+      ],
+      "category_klar": "dependency-control",
+      "severity_klar": "error",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 3,
+          "id": "R4"
+        }
+      ],
+      "bedingung": "k3_b1"
+    },
+    {
+      "etikett": "P-03",
+      "category": "`error-handling-consistency`",
+      "severity": "`error`",
+      "scope_components_roh": "`depot.billing.api.schemas` · `depot.identity.api.schemas` · `depot.orders.api.schemas`",
+      "statement": "These modules must not define a function named error_body; they must import it from a shared location.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 0 · module 3 · artefact 0 · unresolved 0",
+      "kind_roh": "`semantic` — Regel über Symboldefinitionen, nicht über den Importgraphen",
+      "z2p_roh": "prüfbar — Funktionsdefinitionen (Name je Modul) stehen in der Faktenbasis",
+      "z2g_roh": "normativ — verbietet Realisiertes: alle drei Schemas-Module definieren `error_body`",
+      "z2z_roh": "sonstige — Symbolzentralisierung/Duplikatverbot (Grenzfall, Abschnitt 6)",
+      "identisch_mit": "—",
+      "grenzfall": "ja",
+      "bemerkung": "Familie mit P-09/P-10/P-17; nach Z2-R nicht identisch (Kategorie, Scope bzw. Symbol verschieden).",
+      "kind": "semantic",
+      "kind_begruendung": "Regel über Symboldefinitionen, nicht über den Importgraphen",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "Funktionsdefinitionen (Name je Modul) stehen in der Faktenbasis",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "verbietet Realisiertes: alle drei Schemas-Module definieren `error_body`",
+      "z2z": "sonstige",
+      "z2z_begruendung": "Symbolzentralisierung/Duplikatverbot (Grenzfall, Abschnitt 6)",
+      "grenzfall_ja": true,
+      "granularitaet": {
+        "package": 0,
+        "module": 3,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.api.schemas",
+        "depot.identity.api.schemas",
+        "depot.orders.api.schemas"
+      ],
+      "category_klar": "error-handling-consistency",
+      "severity_klar": "error",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 1,
+          "id": "R2"
+        }
+      ],
+      "bedingung": "k3_b1"
+    },
+    {
+      "etikett": "P-04",
+      "category": "`dependency-management`",
+      "severity": "`warning`",
+      "scope_components_roh": "`depot.billing.api` · `depot.billing.services` · `depot.billing.repository` · `depot.billing.models`",
+      "statement": "Classes and functions within the billing components must not directly import the standard logging module. Instead, they should obtain a logger from a shared logging helper module.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 4 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`structural` — Importregel",
+      "z2p_roh": "nicht entscheidbar — URSACHE (Pflichtvermerk §6): `logging` ist ein EXTERNES Importziel; externe Ziele haben nach der Stufe-0b-Kürzung keine Kante im Ist-Modell und keinen Signaturniederschlag. Folge der registrierten Kürzung, kein Modellfehler",
+      "z2g_roh": "normativ — fordert eine Eigenschaft, die nicht aus dem Importgraphen folgt (externer Import in der Eingabe unsichtbar); der geforderte Logging-Helper existiert nicht",
+      "z2z_roh": "`FORBIDDEN_RELATION` — verbotene Importbeziehung, Ziel jedoch extern (Grenzfall, Abschnitt 6)",
+      "identisch_mit": "—",
+      "grenzfall": "ja",
+      "bemerkung": "—",
+      "kind": "structural",
+      "kind_begruendung": "Importregel",
+      "z2p": "nicht prüfbar",
+      "z2p_wortlaut_verdikt": "nicht entscheidbar",
+      "z2p_ursache": "URSACHE (Pflichtvermerk §6): `logging` ist ein EXTERNES Importziel; externe Ziele haben nach der Stufe-0b-Kürzung keine Kante im Ist-Modell und keinen Signaturniederschlag. Folge der registrierten Kürzung, kein Modellfehler",
+      "z2p_ursache_externer_import": true,
+      "z2g": "normativ",
+      "z2g_begruendung": "fordert eine Eigenschaft, die nicht aus dem Importgraphen folgt (externer Import in der Eingabe unsichtbar); der geforderte Logging-Helper existiert nicht",
+      "z2z": "FORBIDDEN_RELATION",
+      "z2z_begruendung": "verbotene Importbeziehung, Ziel jedoch extern (Grenzfall, Abschnitt 6)",
+      "grenzfall_ja": true,
+      "granularitaet": {
+        "package": 4,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.api",
+        "depot.billing.services",
+        "depot.billing.repository",
+        "depot.billing.models"
+      ],
+      "category_klar": "dependency-management",
+      "severity_klar": "warning",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 0,
+          "id": "R1"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 0,
+          "id": "R1"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 0,
+          "id": "R1"
+        }
+      ],
+      "bedingung": "k2_b1"
+    },
+    {
+      "etikett": "P-05",
+      "category": "`code-quality`",
+      "severity": "`error`",
+      "scope_components_roh": "`depot.billing.api` · `depot.billing.services` · `depot.billing.repository` · `depot.billing.models`",
+      "statement": "All classes and functions within the billing components should be well-documented and follow a consistent coding style. This includes using docstrings to describe the purpose and behavior of each function, and following a consistent naming convention for variables and functions.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 4 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`semantic` — Dokumentations-/Stileigenschaft",
+      "z2p_roh": "nicht prüfbar — nicht operationalisiert („consistent style\"); Docstrings sind mit Stufe 0 aus der Eingabe gezogen",
+      "z2g_roh": "normativ — fordert Eigenschaften, die nicht aus dem Importgraphen folgen",
+      "z2z_roh": "sonstige — Dokumentations-/Stilregel, kein Abweichungstyp der Kodierung",
+      "identisch_mit": "—",
+      "grenzfall": "nein",
+      "bemerkung": "—",
+      "kind": "semantic",
+      "kind_begruendung": "Dokumentations-/Stileigenschaft",
+      "z2p": "nicht prüfbar",
+      "z2p_wortlaut_verdikt": "nicht prüfbar",
+      "z2p_ursache": "nicht operationalisiert („consistent style\"); Docstrings sind mit Stufe 0 aus der Eingabe gezogen",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "fordert Eigenschaften, die nicht aus dem Importgraphen folgen",
+      "z2z": "sonstige",
+      "z2z_begruendung": "Dokumentations-/Stilregel, kein Abweichungstyp der Kodierung",
+      "grenzfall_ja": false,
+      "granularitaet": {
+        "package": 4,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.api",
+        "depot.billing.services",
+        "depot.billing.repository",
+        "depot.billing.models"
+      ],
+      "category_klar": "code-quality",
+      "severity_klar": "error",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 4,
+          "id": "R5"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 4,
+          "id": "R5"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 4,
+          "id": "R5"
+        }
+      ],
+      "bedingung": "k2_b1"
+    },
+    {
+      "etikett": "P-06",
+      "category": "`code-reusability`",
+      "severity": "`warning`",
+      "scope_components_roh": "`depot.billing.api` · `depot.billing.services` · `depot.billing.repository` · `depot.billing.models`",
+      "statement": "Classes and functions within the billing components should not duplicate logic found in other modules. Instead, they should reuse existing functions or classes where possible.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 4 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`semantic` — Eigenschaft der Implementierung, nicht der Struktur",
+      "z2p_roh": "nicht prüfbar — Logikduplikation ist nur im Funktionskörper sichtbar, nicht in Kanten oder Signaturen",
+      "z2g_roh": "normativ — fordert eine Eigenschaft, die nicht aus dem Importgraphen folgt",
+      "z2z_roh": "sonstige — Wiederverwendungs-/Duplikationsregel auf Logikebene",
+      "identisch_mit": "—",
+      "grenzfall": "nein",
+      "bemerkung": "—",
+      "kind": "semantic",
+      "kind_begruendung": "Eigenschaft der Implementierung, nicht der Struktur",
+      "z2p": "nicht prüfbar",
+      "z2p_wortlaut_verdikt": "nicht prüfbar",
+      "z2p_ursache": "Logikduplikation ist nur im Funktionskörper sichtbar, nicht in Kanten oder Signaturen",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "fordert eine Eigenschaft, die nicht aus dem Importgraphen folgt",
+      "z2z": "sonstige",
+      "z2z_begruendung": "Wiederverwendungs-/Duplikationsregel auf Logikebene",
+      "grenzfall_ja": false,
+      "granularitaet": {
+        "package": 4,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.api",
+        "depot.billing.services",
+        "depot.billing.repository",
+        "depot.billing.models"
+      ],
+      "category_klar": "code-reusability",
+      "severity_klar": "warning",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 1,
+          "id": "R2"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 1,
+          "id": "R2"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 1,
+          "id": "R2"
+        }
+      ],
+      "bedingung": "k2_b1"
+    },
+    {
+      "etikett": "P-07",
+      "category": "`data-access-layer`",
+      "severity": "`error`",
+      "scope_components_roh": "`depot.billing.repository` · `depot.identity.repository` · `depot.orders.repository`",
+      "statement": "A repository module may only import models from its own package (e.g., depot.billing.models for billing.repository) and from depot.core.ports. It must not import models from any other package.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 3 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`structural` — modulscharfe Importregel",
+      "z2p_roh": "prüfbar — alle Repository-Importkanten stehen modulscharf im Ist-Modell",
+      "z2g_roh": "Spiegelung — geschlossene Erlaubnisliste, deckungsgleich mit den realisierten Kanten: alle sieben Repository-Module importieren genau eigene models + `core.ports` (Grenzfall, Abschnitt 6)",
+      "z2z_roh": "`FORBIDDEN_RELATION` — verbotene Importbeziehung (repo → fremde models)",
+      "identisch_mit": "—",
+      "grenzfall": "ja",
+      "bemerkung": "—",
+      "kind": "structural",
+      "kind_begruendung": "modulscharfe Importregel",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "alle Repository-Importkanten stehen modulscharf im Ist-Modell",
+      "z2p_ursache_externer_import": false,
+      "z2g": "Spiegelung",
+      "z2g_begruendung": "geschlossene Erlaubnisliste, deckungsgleich mit den realisierten Kanten: alle sieben Repository-Module importieren genau eigene models + `core.ports` (Grenzfall, Abschnitt 6)",
+      "z2z": "FORBIDDEN_RELATION",
+      "z2z_begruendung": "verbotene Importbeziehung (repo → fremde models)",
+      "grenzfall_ja": true,
+      "granularitaet": {
+        "package": 3,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.repository",
+        "depot.identity.repository",
+        "depot.orders.repository"
+      ],
+      "category_klar": "data-access-layer",
+      "severity_klar": "error",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 4,
+          "id": "R5"
+        }
+      ],
+      "bedingung": "k3_b1"
+    },
+    {
+      "etikett": "P-08",
+      "category": "`interface-segregation`",
+      "severity": "`error`",
+      "scope_components_roh": "`depot`",
+      "statement": "All protocols (classes inheriting from typing.Protocol) must be defined in the depot.core.ports module. No other module may define a class that inherits from typing.Protocol.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 1 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`semantic` — Regel über Klassendefinition/Vererbung, nicht über Importkanten",
+      "z2p_roh": "prüfbar — Grenzfall, Abschnitt 6: entscheidbar über das `bases`-Feld der Faktenbasis (`typing.Protocol` steht dort wörtlich); kein externer Importfakt nötig",
+      "z2g_roh": "normativ — Vererbungs-/Definitionsort-Eigenschaft, folgt nicht aus dem Importgraphen; im Ist erfüllt (alle 11 Protocols liegen in `core.ports`)",
+      "z2z_roh": "keiner der sechs — vererbungsbasierte Definitionsortsregel (Grenzfall, Abschnitt 6)",
+      "identisch_mit": "—",
+      "grenzfall": "ja",
+      "bemerkung": "—",
+      "kind": "semantic",
+      "kind_begruendung": "Regel über Klassendefinition/Vererbung, nicht über Importkanten",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "Grenzfall, Abschnitt 6: entscheidbar über das `bases`-Feld der Faktenbasis (`typing.Protocol` steht dort wörtlich); kein externer Importfakt nötig",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "Vererbungs-/Definitionsort-Eigenschaft, folgt nicht aus dem Importgraphen; im Ist erfüllt (alle 11 Protocols liegen in `core.ports`)",
+      "z2z": "keiner der sechs",
+      "z2z_begruendung": "vererbungsbasierte Definitionsortsregel (Grenzfall, Abschnitt 6)",
+      "grenzfall_ja": true,
+      "granularitaet": {
+        "package": 1,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot"
+      ],
+      "category_klar": "interface-segregation",
+      "severity_klar": "error",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 1,
+          "id": "R2"
+        }
+      ],
+      "bedingung": "k3_b1"
+    },
+    {
+      "etikett": "P-09",
+      "category": "`error-handling-centralization`",
+      "severity": "`warning`",
+      "scope_components_roh": "`depot.billing.api.routes` · `depot.identity.api.routes` · `depot.orders.api.routes` · `depot.billing.api.schemas` · `depot.identity.api.schemas` · `depot.orders.api.schemas`",
+      "statement": "Functions that map DepotError to HTTP status codes or error response bodies must be defined only in depot.core.errors; all other modules must obtain these functions by importing from that module.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 0 · module 6 · artefact 0 · unresolved 0",
+      "kind_roh": "`semantic` — Regel über Symboldefinitionen und deren Bedeutung",
+      "z2p_roh": "prüfbar — Grenzfall, Abschnitt 6: „maps DepotError to HTTP status codes\" ist eine Deutung, entschieden über die sichtbaren Signaturen (`DepotError -> int` bzw. `-> dict[str, str]`)",
+      "z2g_roh": "normativ — verbietet Realisiertes: `status_for`/`error_body` sind in routes/schemas definiert, `core.errors` führt keine solchen Funktionen",
+      "z2z_roh": "sonstige — Symbolzentralisierung, wie P-03 (Grenzfall, Abschnitt 6)",
+      "identisch_mit": "—",
+      "grenzfall": "ja",
+      "bemerkung": "Familie mit P-03/P-10/P-17; nach Z2-R nicht identisch (Kategorie und Scope verschieden, deckt beide Funktionsfamilien zugleich).",
+      "kind": "semantic",
+      "kind_begruendung": "Regel über Symboldefinitionen und deren Bedeutung",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "Grenzfall, Abschnitt 6: „maps DepotError to HTTP status codes\" ist eine Deutung, entschieden über die sichtbaren Signaturen (`DepotError -> int` bzw. `-> dict[str, str]`)",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "verbietet Realisiertes: `status_for`/`error_body` sind in routes/schemas definiert, `core.errors` führt keine solchen Funktionen",
+      "z2z": "sonstige",
+      "z2z_begruendung": "Symbolzentralisierung, wie P-03 (Grenzfall, Abschnitt 6)",
+      "grenzfall_ja": true,
+      "granularitaet": {
+        "package": 0,
+        "module": 6,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.api.routes",
+        "depot.identity.api.routes",
+        "depot.orders.api.routes",
+        "depot.billing.api.schemas",
+        "depot.identity.api.schemas",
+        "depot.orders.api.schemas"
+      ],
+      "category_klar": "error-handling-centralization",
+      "severity_klar": "warning",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run1",
+          "position": 2,
+          "id": "R3"
+        }
+      ],
+      "bedingung": "k3_b1"
+    },
+    {
+      "etikett": "P-10",
+      "category": "`error-handling-consistency`",
+      "severity": "`error`",
+      "scope_components_roh": "`depot.billing.api.routes` · `depot.identity.api.routes` · `depot.orders.api.routes`",
+      "statement": "These modules must not define a function named status_for; they must obtain the error-to-status mapping from a shared location (e.g., depot.core.errors).",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 0 · module 3 · artefact 0 · unresolved 0",
+      "kind_roh": "`semantic` — Regel über Symboldefinitionen",
+      "z2p_roh": "prüfbar — Funktionsdefinitionen stehen in der Faktenbasis",
+      "z2g_roh": "normativ — verbietet Realisiertes: alle drei Routes-Module definieren `status_for`",
+      "z2z_roh": "sonstige — Symbolzentralisierung, wie P-03 (Grenzfall, Abschnitt 6)",
+      "identisch_mit": "—",
+      "grenzfall": "ja",
+      "bemerkung": "Familie mit P-03/P-09/P-17; nach Z2-R nicht identisch (anderes Symbol und anderer Scope als P-03).",
+      "kind": "semantic",
+      "kind_begruendung": "Regel über Symboldefinitionen",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "Funktionsdefinitionen stehen in der Faktenbasis",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "verbietet Realisiertes: alle drei Routes-Module definieren `status_for`",
+      "z2z": "sonstige",
+      "z2z_begruendung": "Symbolzentralisierung, wie P-03 (Grenzfall, Abschnitt 6)",
+      "grenzfall_ja": true,
+      "granularitaet": {
+        "package": 0,
+        "module": 3,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.api.routes",
+        "depot.identity.api.routes",
+        "depot.orders.api.routes"
+      ],
+      "category_klar": "error-handling-consistency",
+      "severity_klar": "error",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 0,
+          "id": "R1"
+        }
+      ],
+      "bedingung": "k3_b1"
+    },
+    {
+      "etikett": "P-11",
+      "category": "`dependency-inversion`",
+      "severity": "`warning`",
+      "scope_components_roh": "`depot.billing.services` · `depot.identity.services` · `depot.orders.services`",
+      "statement": "Service classes in these packages must not import or depend on concrete adapter classes; they may only depend on protocols defined in depot.core.ports or other abstract interfaces.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 3 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`structural` — Import-/Abhängigkeitsregel über Modulkanten",
+      "z2p_roh": "prüfbar — wie P-01: verletzende Kanten (services → repository/adapters) im Ist-Modell sichtbar",
+      "z2g_roh": "normativ — verbietet REALISIERTE Kanten: „may only depend on protocols … or other abstract interfaces\" schliesst die realisierten Repository- und Adapter-Kanten aus",
+      "z2z_roh": "`FORBIDDEN_RELATION` — verbotene Importbeziehung",
+      "identisch_mit": "P-01",
+      "grenzfall": "ja",
+      "bemerkung": "Duplikat von P-01 nach Z2-R (Abschnitt 6); `severity` weicht ab (warning statt error), geht aber nicht in Z2-R ein.",
+      "kind": "structural",
+      "kind_begruendung": "Import-/Abhängigkeitsregel über Modulkanten",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "wie P-01: verletzende Kanten (services → repository/adapters) im Ist-Modell sichtbar",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "verbietet REALISIERTE Kanten: „may only depend on protocols … or other abstract interfaces\" schliesst die realisierten Repository- und Adapter-Kanten aus",
+      "z2z": "FORBIDDEN_RELATION",
+      "z2z_begruendung": "verbotene Importbeziehung",
+      "grenzfall_ja": true,
+      "granularitaet": {
+        "package": 3,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.services",
+        "depot.identity.services",
+        "depot.orders.services"
+      ],
+      "category_klar": "dependency-inversion",
+      "severity_klar": "warning",
+      "identisch_mit_etiketten": [
+        "P-01"
+      ],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 2,
+          "id": "R3"
+        }
+      ],
+      "bedingung": "k3_b1"
+    },
+    {
+      "etikett": "P-12",
+      "category": "`code-organization`",
+      "severity": "`error`",
+      "scope_components_roh": "`depot.billing.api` · `depot.billing.services` · `depot.billing.repository` · `depot.billing.models`",
+      "statement": "All classes and functions within the billing components should be organized into logical modules and packages. This includes grouping related classes and functions together and ensuring that each module has a single responsibility.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 4 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`semantic` — Organisations-/Verantwortlichkeitseigenschaft",
+      "z2p_roh": "nicht prüfbar — „logical modules\", „single responsibility\" nicht operationalisiert",
+      "z2g_roh": "normativ — fordert Eigenschaften, die nicht aus dem Importgraphen folgen",
+      "z2z_roh": "sonstige — Organisations-/SRP-Regel, kein Abweichungstyp der Kodierung",
+      "identisch_mit": "—",
+      "grenzfall": "nein",
+      "bemerkung": "—",
+      "kind": "semantic",
+      "kind_begruendung": "Organisations-/Verantwortlichkeitseigenschaft",
+      "z2p": "nicht prüfbar",
+      "z2p_wortlaut_verdikt": "nicht prüfbar",
+      "z2p_ursache": "„logical modules\", „single responsibility\" nicht operationalisiert",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "fordert Eigenschaften, die nicht aus dem Importgraphen folgen",
+      "z2z": "sonstige",
+      "z2z_begruendung": "Organisations-/SRP-Regel, kein Abweichungstyp der Kodierung",
+      "grenzfall_ja": false,
+      "granularitaet": {
+        "package": 4,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.api",
+        "depot.billing.services",
+        "depot.billing.repository",
+        "depot.billing.models"
+      ],
+      "category_klar": "code-organization",
+      "severity_klar": "error",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 3,
+          "id": "R4"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 3,
+          "id": "R4"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 3,
+          "id": "R4"
+        }
+      ],
+      "bedingung": "k2_b1"
+    },
+    {
+      "etikett": "P-13",
+      "category": "`error-handling`",
+      "severity": "`error`",
+      "scope_components_roh": "`depot`",
+      "statement": "Only the depot.core.errors module may define error classes (classes inheriting from Exception). All other modules in the codebase must not define any error classes.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 1 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`semantic` — Regel über Klassendefinition/Vererbung",
+      "z2p_roh": "prüfbar — Grenzfall, Abschnitt 6, wie P-08: `bases`-Feld der Faktenbasis zeigt die Exception-Vererbung",
+      "z2g_roh": "normativ — Vererbungs-/Definitionsort-Eigenschaft, folgt nicht aus dem Importgraphen; im Ist erfüllt (alle Fehlerklassen liegen in `core.errors`)",
+      "z2z_roh": "keiner der sechs — vererbungsbasierte Definitionsortsregel, wie P-08 (Grenzfall, Abschnitt 6)",
+      "identisch_mit": "—",
+      "grenzfall": "ja",
+      "bemerkung": "Kein Duplikat von P-08 nach Z2-R: andere Kategorie und andere Kernaussage (Fehlerklassen statt Protocols).",
+      "kind": "semantic",
+      "kind_begruendung": "Regel über Klassendefinition/Vererbung",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "Grenzfall, Abschnitt 6, wie P-08: `bases`-Feld der Faktenbasis zeigt die Exception-Vererbung",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "Vererbungs-/Definitionsort-Eigenschaft, folgt nicht aus dem Importgraphen; im Ist erfüllt (alle Fehlerklassen liegen in `core.errors`)",
+      "z2z": "keiner der sechs",
+      "z2z_begruendung": "vererbungsbasierte Definitionsortsregel, wie P-08 (Grenzfall, Abschnitt 6)",
+      "grenzfall_ja": true,
+      "granularitaet": {
+        "package": 1,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot"
+      ],
+      "category_klar": "error-handling",
+      "severity_klar": "error",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 0,
+          "id": "R1"
+        }
+      ],
+      "bedingung": "k3_b1"
+    },
+    {
+      "etikett": "P-14",
+      "category": "`layered-architecture`",
+      "severity": "`error`",
+      "scope_components_roh": "`depot.billing.api.routes` · `depot.identity.api.routes` · `depot.orders.api.routes`",
+      "statement": "API route classes shall receive only service-layer dependencies (and optionally mappers) in their constructors and must not import repository, model, or adapter modules directly.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 0 · module 3 · artefact 0 · unresolved 0",
+      "kind_roh": "`structural` — Schichtenregel über Importe; die Konstruktorklausel ist signaturseitig (siehe Bemerkung)",
+      "z2p_roh": "prüfbar — Importkanten UND Konstruktorsignaturen stehen beide in der Evidenzbasis (routes-`__init__` nehmen sichtbar nur Service-Typen)",
+      "z2g_roh": "unklar — Grenzfall, Abschnitt 6: Importverbots-Teil rein extensional (Kanten im Ist abwesend), Konstruktorklausel Signatureigenschaft (intensional)",
+      "z2z_roh": "`FORBIDDEN_RELATION` — verbotene Importbeziehungen routes → repository/models/adapters",
+      "identisch_mit": "—",
+      "grenzfall": "ja",
+      "bemerkung": "Doppelnatur Kante + Signatur; kein einzelnes Ebene-2-Szenario eindeutig angezielt (deckt Skip- und Back-Richtung zugleich).",
+      "kind": "structural",
+      "kind_begruendung": "Schichtenregel über Importe; die Konstruktorklausel ist signaturseitig (siehe Bemerkung)",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "Importkanten UND Konstruktorsignaturen stehen beide in der Evidenzbasis (routes-`__init__` nehmen sichtbar nur Service-Typen)",
+      "z2p_ursache_externer_import": false,
+      "z2g": "unklar",
+      "z2g_begruendung": "Grenzfall, Abschnitt 6: Importverbots-Teil rein extensional (Kanten im Ist abwesend), Konstruktorklausel Signatureigenschaft (intensional)",
+      "z2z": "FORBIDDEN_RELATION",
+      "z2z_begruendung": "verbotene Importbeziehungen routes → repository/models/adapters",
+      "grenzfall_ja": true,
+      "granularitaet": {
+        "package": 0,
+        "module": 3,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.api.routes",
+        "depot.identity.api.routes",
+        "depot.orders.api.routes"
+      ],
+      "category_klar": "layered-architecture",
+      "severity_klar": "error",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run1",
+          "position": 1,
+          "id": "R2"
+        }
+      ],
+      "bedingung": "k3_b1"
+    },
+    {
+      "etikett": "P-15",
+      "category": "`error-handling`",
+      "severity": "`error`",
+      "scope_components_roh": "`depot.billing.api` · `depot.billing.services` · `depot.billing.repository` · `depot.billing.models`",
+      "statement": "All error handling within the billing components should be consistent and follow a common pattern. This includes using a shared error handling module and ensuring that all error messages are localized and user-friendly.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 4 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`semantic` — Muster-/Meldungseigenschaft",
+      "z2p_roh": "nicht prüfbar — „common pattern\", Lokalisierung und Nutzerfreundlichkeit von Meldungen liegen nicht in der Evidenzbasis",
+      "z2g_roh": "normativ — fordert Eigenschaften, die nicht aus dem Importgraphen folgen",
+      "z2z_roh": "sonstige — vage Konsistenzregel zur Fehlerbehandlung",
+      "identisch_mit": "—",
+      "grenzfall": "nein",
+      "bemerkung": "Berührt die Fehlerbehandlungs-Familie (P-03/P-09/P-10), nach Z2-R nicht identisch: Musterforderung statt Symbolverbot, anderer Scope.",
+      "kind": "semantic",
+      "kind_begruendung": "Muster-/Meldungseigenschaft",
+      "z2p": "nicht prüfbar",
+      "z2p_wortlaut_verdikt": "nicht prüfbar",
+      "z2p_ursache": "„common pattern\", Lokalisierung und Nutzerfreundlichkeit von Meldungen liegen nicht in der Evidenzbasis",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "fordert Eigenschaften, die nicht aus dem Importgraphen folgen",
+      "z2z": "sonstige",
+      "z2z_begruendung": "vage Konsistenzregel zur Fehlerbehandlung",
+      "grenzfall_ja": false,
+      "granularitaet": {
+        "package": 4,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.api",
+        "depot.billing.services",
+        "depot.billing.repository",
+        "depot.billing.models"
+      ],
+      "category_klar": "error-handling",
+      "severity_klar": "error",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k2_b1"
+      ],
+      "vielfachheit": 3,
+      "herkunft": [
+        {
+          "bedingung": "k2_b1",
+          "slot": "run0",
+          "position": 2,
+          "id": "R3"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run1",
+          "position": 2,
+          "id": "R3"
+        },
+        {
+          "bedingung": "k2_b1",
+          "slot": "run2",
+          "position": 2,
+          "id": "R3"
+        }
+      ],
+      "bedingung": "k2_b1"
+    },
+    {
+      "etikett": "P-16",
+      "category": "`mapper-purity`",
+      "severity": "`warning`",
+      "scope_components_roh": "`depot.billing.mappers` · `depot.identity.mappers` · `depot.orders.mappers`",
+      "statement": "Modules in these packages must not import depot.core.errors or any other error-related modules; they should perform only data transformation without error handling.",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 3 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`structural` — Importregel",
+      "z2p_roh": "prüfbar — die Kanten mappers → `core.errors` stehen im Ist-Modell; der „without error handling\"-Teil läge im Rumpf, die Verletzung ist aber schon über die Kante entscheidbar",
+      "z2g_roh": "normativ — verbietet REALISIERTE Kanten: alle sechs Mapper-Module importieren `core.errors`",
+      "z2z_roh": "`FORBIDDEN_RELATION` — verbotene Importbeziehung",
+      "identisch_mit": "—",
+      "grenzfall": "nein",
+      "bemerkung": "—",
+      "kind": "structural",
+      "kind_begruendung": "Importregel",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "die Kanten mappers → `core.errors` stehen im Ist-Modell; der „without error handling\"-Teil läge im Rumpf, die Verletzung ist aber schon über die Kante entscheidbar",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "verbietet REALISIERTE Kanten: alle sechs Mapper-Module importieren `core.errors`",
+      "z2z": "FORBIDDEN_RELATION",
+      "z2z_begruendung": "verbotene Importbeziehung",
+      "grenzfall_ja": false,
+      "granularitaet": {
+        "package": 3,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot.billing.mappers",
+        "depot.identity.mappers",
+        "depot.orders.mappers"
+      ],
+      "category_klar": "mapper-purity",
+      "severity_klar": "warning",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run0",
+          "position": 3,
+          "id": "R4"
+        }
+      ],
+      "bedingung": "k3_b1"
+    },
+    {
+      "etikett": "P-17",
+      "category": "`duplication`",
+      "severity": "`warning`",
+      "scope_components_roh": "`depot`",
+      "statement": "The functions `status_for` (signature: (error: depot.core.errors.DepotError) -> int) and `error_body` (signature: (error: depot.core.errors.DepotError) -> dict[str, str]) must not be defined in more than one module. They should be defined in a single shared utility module (e.g., depot.core.utils).",
+      "z2w_wohlgeformt": "**ja**",
+      "z2w_einzelpruefungen": "components_aufloesbar=ja, statement_nicht_leer=ja, statement_keine_wiederholung=ja, id_eindeutig=ja, category_nicht_leer=ja",
+      "z2w_befunde": "—",
+      "granularitaet_roh": "package 1 · module 0 · artefact 0 · unresolved 0",
+      "kind_roh": "`semantic` — Regel über Symboldefinitionen",
+      "z2p_roh": "prüfbar — beide Funktionsnamen samt Signaturen stehen in der Faktenbasis; Mehrfachdefinition ist abzählbar",
+      "z2g_roh": "normativ — verbietet Realisiertes: `status_for` und `error_body` sind je dreifach definiert; das genannte `depot.core.utils` existiert nicht",
+      "z2z_roh": "sonstige — Duplikat-/Zentralisierungsregel für Symbole, wie P-03 (Grenzfall, Abschnitt 6)",
+      "identisch_mit": "—",
+      "grenzfall": "ja",
+      "bemerkung": "Familie mit P-03/P-09/P-10; nach Z2-R nicht identisch (Kategorie `duplication`, Scope `depot`, beide Symbole zugleich).",
+      "kind": "semantic",
+      "kind_begruendung": "Regel über Symboldefinitionen",
+      "z2p": "prüfbar",
+      "z2p_wortlaut_verdikt": "prüfbar",
+      "z2p_ursache": "beide Funktionsnamen samt Signaturen stehen in der Faktenbasis; Mehrfachdefinition ist abzählbar",
+      "z2p_ursache_externer_import": false,
+      "z2g": "normativ",
+      "z2g_begruendung": "verbietet Realisiertes: `status_for` und `error_body` sind je dreifach definiert; das genannte `depot.core.utils` existiert nicht",
+      "z2z": "sonstige",
+      "z2z_begruendung": "Duplikat-/Zentralisierungsregel für Symbole, wie P-03 (Grenzfall, Abschnitt 6)",
+      "grenzfall_ja": true,
+      "granularitaet": {
+        "package": 1,
+        "module": 0,
+        "artefact": 0,
+        "unresolved": 0
+      },
+      "scope_components": [
+        "depot"
+      ],
+      "category_klar": "duplication",
+      "severity_klar": "warning",
+      "identisch_mit_etiketten": [],
+      "bedingungen": [
+        "k3_b1"
+      ],
+      "vielfachheit": 1,
+      "herkunft": [
+        {
+          "bedingung": "k3_b1",
+          "slot": "run2",
+          "position": 2,
+          "id": "R3"
+        }
+      ],
+      "bedingung": "k3_b1"
+    }
+  ],
+  "ueberlapp_p5": {
+    "dokument": "Überlapp §7 Punkt 5 — mechanische Auszählung der Autorenentscheidungen",
+    "auftrag": "S13",
+    "stand": "2026-09-06",
+    "werkzeug": "tools/tally_z2_overlap.py",
+    "status": "MECHANISCHE AUSZÄHLUNG OHNE DEUTUNG UND OHNE NACHBEWERTUNG",
+    "keine_nachbewertung": "Dieses Werkzeug zählt aus, was der Autor in `ueberlappmatrix.md` entschieden hat. Keine Entscheidung wurde korrigiert, ergänzt, plausibilisiert oder aus der Zählung genommen. Auffälligkeiten stehen unter `meldungen`; sie sind gemeldet, nicht gewertet.",
+    "sprachregelung": "Die Größe wird ausschliesslich geführt als „n von 16 autorenformulierten Statements haben eine Entsprechung unter den Vorschlägen“. Sie wird als Bruch n / 16 angegeben, ohne Prozentangabe — bei 16 Fällen wäre eine Prozentzahl Scheingenauigkeit.",
+    "einhegung": {
+      "charakter": "sekundär und deskriptiv (§7 Punkt 5)",
+      "kein_korrektheitsmass": true,
+      "kein_recallmass": true,
+      "autor_beider_seiten": "Der Autor hat die sechzehn Soll-Statements und das Messobjekt formuliert, auf das sie passen (§7 Punkt 5, gleiche Logik wie die Gold-Degradierung in Befund 01).",
+      "t_z2_8": "Die Affordanzen der sechs Kategorien stecken strukturell im Testrepo; eine hohe Überschneidung wäre insoweit Eigenschaft des Messobjekts, nicht Leistung des Modells."
+    },
+    "abgrenzung_zu_§7_punkt_3": "Die Abdeckungsmatrix (§7 Punkt 3, dort 1 von 6) fragt, welche der sechs KATEGORIEN durch mindestens einen normativen, prüfbaren Vorschlag belegt sind; §7 Punkt 5 fragt nach Entsprechungen zu den sechzehn EINZELNEN Statements. Verschiedene Größen, verschiedene Nenner — nicht zu verwechseln, nicht gegeneinander zu rechnen.",
+    "zweistufiges_verfahren": "Stufe 1 war die maschinelle Nachschlagearbeit aus S12 (Vorbefund, Kandidaten, Begründung, Prüfspur); Stufe 2 ist die Entscheidung des Autors je Zeile. Ausgezählt wird ausschliesslich Stufe 2.",
+    "verblindung": "Die Verblindung ist mit S11 aufgehoben. Die Aufschlüsselung je Bedingung entsteht danach und wird als solche berichtet; §7 Punkt 5 ist sekundär und deskriptiv, nicht bedingungsvergleichend — sie wird ohne Vergleichsaussage geführt.",
+    "ergebnis": {
+      "n": 7,
+      "nenner": 16,
+      "als_bruch": "7 / 16",
+      "lesart": "7 von 16 autorenformulierten Statements haben eine Entsprechung unter den Vorschlägen.",
+      "herleitung": "Zahl der Abschnitte in Teil 3 mit Entscheidungsfeld „ja“.",
+      "ja": [
+        "R-LAYER-1",
+        "R-PROTECT-1",
+        "R-INDEP-1",
+        "R-PORT-1",
+        "R-PORT-2",
+        "R-PORT-3",
+        "R-PORT-4"
+      ],
+      "nein": [
+        "R-CORE-1",
+        "R-CYCLE-1",
+        "R-CYCLE-2",
+        "R-FRAMEWORK-1",
+        "R-PLACE-1",
+        "R-SIG-1",
+        "R-SIG-2",
+        "R-SIG-3",
+        "R-SIG-4"
+      ],
+      "summenfeld_des_blattes": "___",
+      "summenfeld_vergleich": "Das Summenfeld in Teil 4 ist unausgefüllt geblieben (Eintrag '___'); ein Gegenhalten war daher nicht möglich. Maßgeblich ist die mechanische Zählung."
+    },
+    "je_zeile": [
+      {
+        "soll_id": "R-LAYER-1",
+        "soll_kategorie": "`FORBIDDEN_RELATION`",
+        "entscheidung": "ja",
+        "genannte_etiketten": [
+          "P-14"
+        ],
+        "genannte_klassen": [
+          "P-14"
+        ],
+        "vorbefund": "Kandidat vorhanden",
+        "kandidaten_des_vorbefunds": [
+          "P-07",
+          "P-14"
+        ],
+        "herkunft_der_genannten_klassen": "k3_b1"
+      },
+      {
+        "soll_id": "R-PROTECT-1",
+        "soll_kategorie": "`FORBIDDEN_RELATION`",
+        "entscheidung": "ja",
+        "genannte_etiketten": [
+          "P-01",
+          "P-11",
+          "P-14"
+        ],
+        "genannte_klassen": [
+          "P-01 + P-11",
+          "P-14"
+        ],
+        "vorbefund": "Kandidat vorhanden",
+        "kandidaten_des_vorbefunds": [
+          "P-01 + P-11",
+          "P-14"
+        ],
+        "herkunft_der_genannten_klassen": "k3_b1"
+      },
+      {
+        "soll_id": "R-INDEP-1",
+        "soll_kategorie": "`FORBIDDEN_RELATION`",
+        "entscheidung": "ja",
+        "genannte_etiketten": [
+          "P-02",
+          "P-07"
+        ],
+        "genannte_klassen": [
+          "P-02",
+          "P-07"
+        ],
+        "vorbefund": "Kandidat vorhanden",
+        "kandidaten_des_vorbefunds": [
+          "P-02",
+          "P-07"
+        ],
+        "herkunft_der_genannten_klassen": "k3_b1"
+      },
+      {
+        "soll_id": "R-CORE-1",
+        "soll_kategorie": "`FORBIDDEN_RELATION`",
+        "entscheidung": "nein",
+        "genannte_etiketten": [],
+        "genannte_klassen": [],
+        "vorbefund": "kein Kandidat",
+        "kandidaten_des_vorbefunds": [],
+        "herkunft_der_genannten_klassen": ""
+      },
+      {
+        "soll_id": "R-CYCLE-1",
+        "soll_kategorie": "`CYCLE`",
+        "entscheidung": "nein",
+        "genannte_etiketten": [],
+        "genannte_klassen": [],
+        "vorbefund": "kein Kandidat",
+        "kandidaten_des_vorbefunds": [],
+        "herkunft_der_genannten_klassen": ""
+      },
+      {
+        "soll_id": "R-CYCLE-2",
+        "soll_kategorie": "`CYCLE`",
+        "entscheidung": "nein",
+        "genannte_etiketten": [],
+        "genannte_klassen": [],
+        "vorbefund": "kein Kandidat",
+        "kandidaten_des_vorbefunds": [],
+        "herkunft_der_genannten_klassen": ""
+      },
+      {
+        "soll_id": "R-PORT-1",
+        "soll_kategorie": "`ABSENCE_REQUIRED`",
+        "entscheidung": "ja",
+        "genannte_etiketten": [
+          "P-01",
+          "P-11"
+        ],
+        "genannte_klassen": [
+          "P-01 + P-11"
+        ],
+        "vorbefund": "Kandidat vorhanden",
+        "kandidaten_des_vorbefunds": [
+          "P-01 + P-11"
+        ],
+        "herkunft_der_genannten_klassen": "k3_b1"
+      },
+      {
+        "soll_id": "R-PORT-2",
+        "soll_kategorie": "`ABSENCE_REQUIRED`",
+        "entscheidung": "ja",
+        "genannte_etiketten": [
+          "P-01",
+          "P-11"
+        ],
+        "genannte_klassen": [
+          "P-01 + P-11"
+        ],
+        "vorbefund": "Kandidat vorhanden",
+        "kandidaten_des_vorbefunds": [
+          "P-01 + P-11"
+        ],
+        "herkunft_der_genannten_klassen": "k3_b1"
+      },
+      {
+        "soll_id": "R-PORT-3",
+        "soll_kategorie": "`ABSENCE_REQUIRED`",
+        "entscheidung": "ja",
+        "genannte_etiketten": [
+          "P-01",
+          "P-11"
+        ],
+        "genannte_klassen": [
+          "P-01 + P-11"
+        ],
+        "vorbefund": "Kandidat vorhanden",
+        "kandidaten_des_vorbefunds": [
+          "P-01 + P-11"
+        ],
+        "herkunft_der_genannten_klassen": "k3_b1"
+      },
+      {
+        "soll_id": "R-PORT-4",
+        "soll_kategorie": "`ABSENCE_REQUIRED`",
+        "entscheidung": "ja",
+        "genannte_etiketten": [
+          "P-01",
+          "P-11"
+        ],
+        "genannte_klassen": [
+          "P-01 + P-11"
+        ],
+        "vorbefund": "Kandidat vorhanden",
+        "kandidaten_des_vorbefunds": [
+          "P-01 + P-11"
+        ],
+        "herkunft_der_genannten_klassen": "k3_b1"
+      },
+      {
+        "soll_id": "R-FRAMEWORK-1",
+        "soll_kategorie": "`FORBIDDEN_SIGNATURE_TYPE`",
+        "entscheidung": "nein",
+        "genannte_etiketten": [],
+        "genannte_klassen": [],
+        "vorbefund": "kein Kandidat",
+        "kandidaten_des_vorbefunds": [],
+        "herkunft_der_genannten_klassen": ""
+      },
+      {
+        "soll_id": "R-PLACE-1",
+        "soll_kategorie": "`STRUCTURAL_PLACEMENT`",
+        "entscheidung": "nein",
+        "genannte_etiketten": [],
+        "genannte_klassen": [],
+        "vorbefund": "kein Kandidat",
+        "kandidaten_des_vorbefunds": [],
+        "herkunft_der_genannten_klassen": ""
+      },
+      {
+        "soll_id": "R-SIG-1",
+        "soll_kategorie": "`API_CONTRACT`",
+        "entscheidung": "nein",
+        "genannte_etiketten": [],
+        "genannte_klassen": [],
+        "vorbefund": "kein Kandidat",
+        "kandidaten_des_vorbefunds": [],
+        "herkunft_der_genannten_klassen": ""
+      },
+      {
+        "soll_id": "R-SIG-2",
+        "soll_kategorie": "`API_CONTRACT`",
+        "entscheidung": "nein",
+        "genannte_etiketten": [],
+        "genannte_klassen": [],
+        "vorbefund": "kein Kandidat",
+        "kandidaten_des_vorbefunds": [],
+        "herkunft_der_genannten_klassen": ""
+      },
+      {
+        "soll_id": "R-SIG-3",
+        "soll_kategorie": "`API_CONTRACT`",
+        "entscheidung": "nein",
+        "genannte_etiketten": [],
+        "genannte_klassen": [],
+        "vorbefund": "kein Kandidat",
+        "kandidaten_des_vorbefunds": [],
+        "herkunft_der_genannten_klassen": ""
+      },
+      {
+        "soll_id": "R-SIG-4",
+        "soll_kategorie": "`API_CONTRACT`",
+        "entscheidung": "nein",
+        "genannte_etiketten": [],
+        "genannte_klassen": [],
+        "vorbefund": "kein Kandidat",
+        "kandidaten_des_vorbefunds": [],
+        "herkunft_der_genannten_klassen": ""
+      }
+    ],
+    "aufschluesselung_je_soll_kategorie": {
+      "bezugsmenge": "die 16 Statements, je Kategorie deren Zahl aus data/soll/architecture-rules.yaml gezählt",
+      "werte": {
+        "ABSENCE_REQUIRED": {
+          "mit_entsprechung": 4,
+          "bezugsmenge": 4
+        },
+        "API_CONTRACT": {
+          "mit_entsprechung": 0,
+          "bezugsmenge": 4
+        },
+        "CYCLE": {
+          "mit_entsprechung": 0,
+          "bezugsmenge": 2
+        },
+        "FORBIDDEN_RELATION": {
+          "mit_entsprechung": 3,
+          "bezugsmenge": 4
+        },
+        "FORBIDDEN_SIGNATURE_TYPE": {
+          "mit_entsprechung": 0,
+          "bezugsmenge": 1
+        },
+        "STRUCTURAL_PLACEMENT": {
+          "mit_entsprechung": 0,
+          "bezugsmenge": 1
+        }
+      }
+    },
+    "aufschluesselung_je_bedingung": {
+      "bezugsmenge": "die 7 Statements mit Entscheidung „ja“, aufgeschlüsselt nach der Herkunft der genannten Vorschlagsklassen",
+      "vermerk": "Entsteht nach Aufhebung der Verblindung (S11). Keine Vergleichsaussage zwischen den Bedingungen.",
+      "werte": {
+        "k3_b1": [
+          "R-INDEP-1",
+          "R-LAYER-1",
+          "R-PORT-1",
+          "R-PORT-2",
+          "R-PORT-3",
+          "R-PORT-4",
+          "R-PROTECT-1"
+        ]
+      }
+    },
+    "mehrfachnennungen": {
+      "bezugsmenge": "die 7 Statements mit Entscheidung „ja“",
+      "klasse_fuer_mehrere_statements": {
+        "P-01 + P-11": [
+          "R-PORT-1",
+          "R-PORT-2",
+          "R-PORT-3",
+          "R-PORT-4",
+          "R-PROTECT-1"
+        ],
+        "P-14": [
+          "R-LAYER-1",
+          "R-PROTECT-1"
+        ]
+      },
+      "statement_nennt_mehrere_klassen": {
+        "R-PROTECT-1": [
+          "P-01 + P-11",
+          "P-14"
+        ],
+        "R-INDEP-1": [
+          "P-02",
+          "P-07"
+        ]
+      }
+    },
+    "in_keiner_zeile_genannte_klassen": {
+      "bezugsmenge": "die 16 Z2-R-Äquivalenzklassen der bewerteten Vorschläge",
+      "zahl": 12,
+      "klassen": [
+        "P-03",
+        "P-04",
+        "P-05",
+        "P-06",
+        "P-08",
+        "P-09",
+        "P-10",
+        "P-12",
+        "P-13",
+        "P-15",
+        "P-16",
+        "P-17"
+      ]
+    },
+    "ueberstimmungsquote": {
+      "bezugsmenge": "alle 16 Zeilen",
+      "erlaeuterung": "Maschineller Vorbefund aus S12 gegen die Entscheidung des Autors. Die Zahlen belegen, in welchem Umfang der Vorbefund übernommen und in welchem er überstimmt wurde. Keine Deutung dazu.",
+      "felder": {
+        "kandidat_und_ja_bestaetigt": {
+          "zahl": 7,
+          "soll_ids": [
+            "R-LAYER-1",
+            "R-PROTECT-1",
+            "R-INDEP-1",
+            "R-PORT-1",
+            "R-PORT-2",
+            "R-PORT-3",
+            "R-PORT-4"
+          ]
+        },
+        "kandidat_und_nein_ueberstimmt_verworfen": {
+          "zahl": 0,
+          "soll_ids": []
+        },
+        "kein_kandidat_und_ja_ueberstimmt_ergaenzt": {
+          "zahl": 0,
+          "soll_ids": []
+        },
+        "kein_kandidat_und_nein_bestaetigt": {
+          "zahl": 9,
+          "soll_ids": [
+            "R-CORE-1",
+            "R-CYCLE-1",
+            "R-CYCLE-2",
+            "R-FRAMEWORK-1",
+            "R-PLACE-1",
+            "R-SIG-1",
+            "R-SIG-2",
+            "R-SIG-3",
+            "R-SIG-4"
+          ]
+        }
+      },
+      "etikettvergleich_bei_ja_mit_kandidat": [
+        {
+          "soll_id": "R-LAYER-1",
+          "genannt": [
+            "P-14"
+          ],
+          "kandidaten": [
+            "P-07",
+            "P-14"
+          ],
+          "urteil": "echte Teilmenge der Kandidaten",
+          "nicht_uebernommen": [
+            "P-07"
+          ],
+          "zusaetzlich_genannt": []
+        },
+        {
+          "soll_id": "R-PROTECT-1",
+          "genannt": [
+            "P-01 + P-11",
+            "P-14"
+          ],
+          "kandidaten": [
+            "P-01 + P-11",
+            "P-14"
+          ],
+          "urteil": "deckungsgleich",
+          "nicht_uebernommen": [],
+          "zusaetzlich_genannt": []
+        },
+        {
+          "soll_id": "R-INDEP-1",
+          "genannt": [
+            "P-02",
+            "P-07"
+          ],
+          "kandidaten": [
+            "P-02",
+            "P-07"
+          ],
+          "urteil": "deckungsgleich",
+          "nicht_uebernommen": [],
+          "zusaetzlich_genannt": []
+        },
+        {
+          "soll_id": "R-PORT-1",
+          "genannt": [
+            "P-01 + P-11"
+          ],
+          "kandidaten": [
+            "P-01 + P-11"
+          ],
+          "urteil": "deckungsgleich",
+          "nicht_uebernommen": [],
+          "zusaetzlich_genannt": []
+        },
+        {
+          "soll_id": "R-PORT-2",
+          "genannt": [
+            "P-01 + P-11"
+          ],
+          "kandidaten": [
+            "P-01 + P-11"
+          ],
+          "urteil": "deckungsgleich",
+          "nicht_uebernommen": [],
+          "zusaetzlich_genannt": []
+        },
+        {
+          "soll_id": "R-PORT-3",
+          "genannt": [
+            "P-01 + P-11"
+          ],
+          "kandidaten": [
+            "P-01 + P-11"
+          ],
+          "urteil": "deckungsgleich",
+          "nicht_uebernommen": [],
+          "zusaetzlich_genannt": []
+        },
+        {
+          "soll_id": "R-PORT-4",
+          "genannt": [
+            "P-01 + P-11"
+          ],
+          "kandidaten": [
+            "P-01 + P-11"
+          ],
+          "urteil": "deckungsgleich",
+          "nicht_uebernommen": [],
+          "zusaetzlich_genannt": []
+        }
+      ]
+    },
+    "meldungen_nicht_geaendert": [],
+    "ausstehend": [
+      "Die Verdikte zu E1–E4 stehen aus.",
+      "Befund 09 steht aus.",
+      "Die Entscheidung I3 fällt datiert am 13.09.2026."
+    ]
+  }
+}

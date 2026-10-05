@@ -1,0 +1,18 @@
+{
+  "rules": [
+    {
+      "id": "R1",
+      "category": "port-adapter-direction",
+      "scope": {"components": ["depot.core.ports"]},
+      "statement": "Adapter modules may depend on the port definitions, never the other way round.",
+      "severity": "error"
+    },
+    {
+      "id": "R1",
+      "category": "service-boundary",
+      "scope": {"components": ["depot.orders.services.order_service"]},
+      "statement": "Route modules must reach domain behaviour through a service module.",
+      "severity": "warning"
+    }
+  ]
+}

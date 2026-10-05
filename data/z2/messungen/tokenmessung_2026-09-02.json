@@ -1,0 +1,988 @@
+{
+  "dokument": "Tokenmessung der B1-Eingabe ist_modell.yaml",
+  "auftrag": "S2c-1",
+  "datum": "2026-09-02",
+  "grundlage": "Z2-Protokoll §3b (a)–(e), Amendment 02.09.2026, Commit 8fa6173",
+  "einordnung": "INSTRUMENTENMESSUNG, KEIN Z2-LAUF (§3b (a)). Die Kaltläufe zählen gegen kein Z2-Budget, sind nicht als Lauf archiviert, ihre Ausgabe ist nicht gelesen und nicht bewertet worden. Abgelegt sind ausschliesslich die in §3b (a) genannten Angaben.",
+  "werkzeug": {
+    "pfad": "tools/measure_prompt_tokens.py",
+    "was_es_ist": "Es zählt nicht selbst — es sendet einen Aufruf und liest, was der Server meldet.",
+    "was_es_nicht_ist": "NICHT tools/z2_tokenizer.py (§3b (d)) und kein Ersatz dafür; jenes künftige Werkzeug muss eine erwartete Zahl OHNE Modell-Call liefern.",
+    "unveraendert_geblieben": [
+      "tools/z1_tokenizer.py",
+      "tools/check_z1_delivery.py"
+    ]
+  },
+  "umgebung": {
+    "dienst": "ollama, systemctl is-active = active",
+    "version": "0.32.15",
+    "drop_in": "/etc/systemd/system/ollama.service.d/context.conf, 52 B",
+    "sicherungskopie": "/etc/systemd/system/ollama.service.d/context.conf.bak-16384, 52 B",
+    "OLLAMA_CONTEXT_LENGTH": 32768,
+    "gelesen": "rein lesend, ohne sudo, ohne Änderung an systemd, ohne Dienstneustart durch den Agenten"
+  },
+  "kaltlaufregel": "Vor jeder der drei Messungen wurde `ollama stop qwen2.5-coder:7b` ausgeführt. Grund ist der in check_z1_delivery.py registrierte: Ollama meldet NEU ausgewertete Token; ein warmes KV-Cache-Präfix senkt die Zahl legitim.",
+  "wegeleiter": "In diesem Auftrag NICHT angewandt. Keine Stufe gezogen. Das Anheben des Fensters FÜR DIE MESSUNG ist ausdrücklich nicht das Ziehen von Stufe 1 (§3b (b)).",
+  "nachtrag_S2c_2": {
+    "auftrag": "S2c-2",
+    "datum": "2026-09-02",
+    "was_ergaenzt_wurde": "M5–M9. Die Datensätze M1–M4 aus S2c-1 sind UNVERÄNDERT geblieben.",
+    "basiswert_nachgemessen": {
+      "kennung": "M1-Gegenprobe",
+      "gemeldet": 30,
+      "gegenprobe": "erwartet B = 30 aus S2c-1 (M1) — TRIFFT, zeichengleich",
+      "zeitstempel": "2026-09-02T14:13:35+0200",
+      "kaltlauf": "ja — `ollama stop qwen2.5-coder:7b` unmittelbar davor"
+    },
+    "vorregistrierung": {
+      "R1": "INSTRUKTIONSBUDGET für Anhang A: OBERGRENZE 1 200 Token, BINDEND. Anhang A darf sie nicht überschreiten; andernfalls wäre die hier gezogene Stufe nachträglich falsch. ZIELGRÖSSE rund 700 Token, NICHT bindend.",
+      "R2": "PROMPTSPRACHE: ENGLISCH.",
+      "R3": "NACHRICHTENSTRUKTUR: ZWEI Nachrichten — `system` trägt die Instruktion, `user` trägt die zwei Eingabeblöcke (Ist-Modell, Faktenbasis), analog zu `prompt.py` `build_messages`."
+    },
+    "rahmenkonstanten": {
+      "F1": {
+        "wert": 29,
+        "bedeutung": "Rahmenaufwand der EIN-Nachrichten-Struktur (nur `user`, Standard-System-Prompt des Modells wirksam). Aus M1: 30 = F1 + tokens('x').",
+        "verwendung": "Die Nettozahl der Einzelmessungen ist `gemeldet − 29`, die Konvention aus S2c-1."
+      },
+      "F2": {
+        "wert": 13,
+        "bedeutung": "Rahmenaufwand der ZWEI-Nachrichten-Struktur nach R3 (`system` + `user`). Aus der Messung O2: `system:'x'` + `user:'x'` meldet 15 = F2 + 2·tokens('x').",
+        "BEFUND": "F2 (13) ist KLEINER als F1 (29). Eine eigene `system`-Nachricht ERSETZT den Standard-System-Prompt, den der OpenAI-kompatible Pfad sonst einsetzt; die Nettokonvention `gemeldet − 29` aus S2c-1 gilt daher NUR für Einzelmessungen mit einer `user`-Nachricht und NICHT für die R3-Struktur. Für die R3-Struktur ist die GEMELDETE Zahl selbst die Messgrösse — sie ist es, die gegen die Schwelle steht.",
+        "messung_O2": {
+          "gemeldet": 15,
+          "zeitstempel": "2026-09-02T14:16:00+0200"
+        }
+      }
+    },
+    "fuellinstruktion": {
+      "was_sie_ist": "Ein englischer Platzhaltertext, iterativ auf GENAU 1 200 Token netto getrimmt — GEMESSEN, nicht geschätzt. Er dient AUSSCHLIESSLICH der Messung an der Obergrenze R1, ist NICHT abgelegt und ist NICHT Anhang A.",
+      "iterationen": 5,
+      "iterationsreihe": [
+        {
+          "iteration": 1,
+          "woerter": 900,
+          "gemeldet": 1047,
+          "netto": 1018
+        },
+        {
+          "iteration": 2,
+          "woerter": 1036,
+          "gemeldet": 1202,
+          "netto": 1173
+        },
+        {
+          "iteration": 3,
+          "woerter": 1056,
+          "gemeldet": 1224,
+          "netto": 1195
+        },
+        {
+          "iteration": 4,
+          "woerter": 1059,
+          "gemeldet": 1228,
+          "netto": 1199
+        },
+        {
+          "iteration": 5,
+          "woerter": 1060,
+          "gemeldet": 1229,
+          "netto": 1200
+        }
+      ],
+      "erreicht": {
+        "woerter": 1060,
+        "bytes": 6634,
+        "gemeldet": 1229,
+        "netto": 1200,
+        "sha256": "b1b01448b35fe407eeb153dddada233f73fa2fc45408f452024985efcedd6282"
+      },
+      "jede_iteration_kaltlauf": "ja — `ollama stop qwen2.5-coder:7b` vor jedem der fünf Aufrufe"
+    },
+    "trennzeilen": {
+      "block_1": "### BLOCK 1 - CURRENT ARCHITECTURE MODEL (Ilograph YAML)",
+      "block_2": "### BLOCK 2 - EXTRACTED CODE FACTS (JSON)",
+      "zusammensetzung_der_user_nachricht": "f\"{BLOCK1}\\n\\n{ist_modell.rstrip()}\\n\\n{BLOCK2}\\n\\n{faktenbasis.rstrip()}\\n\"",
+      "gilt_fuer": "M6, M8, M9 — und für Anhang A. Weicht Anhang A hiervon ab, ist die Messung zu wiederholen (R3)."
+    },
+    "kaltlaufregel": "Vor JEDER Messung dieses Nachtrags wurde `ollama stop qwen2.5-coder:7b` ausgeführt, einschliesslich der fünf Trimm-Iterationen."
+  },
+  "messungen": [
+    {
+      "kennung": "M1",
+      "zweck": "Basismessung des Template- und System-Aufwands. Eine USER-Nachricht mit dem Literal 'x'. Ergebnis B ist der konstante Aufwand aus Chat-Template und einem etwaigen Standard-System-Prompt des Modells.",
+      "nachrichtenstruktur": [
+        {
+          "rolle": "user",
+          "art": "literal",
+          "literal": "x",
+          "bytes": 1,
+          "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881"
+        }
+      ],
+      "nutzlast": {
+        "art": "literal",
+        "literal": "x",
+        "bytes": 1,
+        "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881"
+      },
+      "gemeldete_prompt_tokens": 30,
+      "completion_tokens": 1,
+      "nettozahl": {
+        "wert": null,
+        "hinweis": "M1 IST die Basis B; eine Nettozahl ist hier nicht definiert."
+      },
+      "kaltlauf": "ja — `ollama stop qwen2.5-coder:7b` unmittelbar davor, keine residente Instanz laut `ollama ps` vor der Messung",
+      "zeitstempel": "2026-09-02T12:13:42+0200",
+      "kuerzungsdetektor": {
+        "regel": "§3b (b): ungültig bei Gleichstand mit dem gesetzten Fenster oder weniger als 64 Token Abstand darunter",
+        "gesetztes_fenster": 32768,
+        "verdachtsbereich_ab": 32705,
+        "gemeldet": 30,
+        "abstand_zum_fenster": 32738,
+        "urteil": "gültig",
+        "teilmessung_nach_3b_c": "nicht erforderlich"
+      },
+      "befund": "B = 30. Der OpenAI-kompatible Pfad setzt neben dem Chat-Template offenbar auch einen Standard-System-Prompt ein; welcher Anteil auf welches entfällt, ist NICHT gemessen und wird hier nicht behauptet. B wird roh berichtet und ist die Bezugsgrösse jeder Nettozahl.",
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach jeder Messung, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "NAME": "qwen2.5-coder:7b",
+        "PROCESSOR": "8%/92% CPU/GPU",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      }
+    },
+    {
+      "kennung": "M2",
+      "zweck": "Tor der Messkette. Der archivierte Z1-Referenzprompt wird in genau der Nachrichtenstruktur gesendet, die der Extractor baut (zwei Nachrichten, system + user), und gegen die in z1_protokoll §3.3 (6) registrierte Zahl 4281 geprüft.",
+      "nutzlast_quelle": {
+        "pfad": "data/z1/k2_trunkiert/run0/extractor/attempts/attempt_0/prompt.txt",
+        "bytes": 18842,
+        "sha256": "cb2fcefddbbb1f2e81c62bc4b4231b458d12bfcc0948d3764dad7f287db0ee2d",
+        "vor der Messung geprüft": "ja, rein lesend; Datei nicht angefasst"
+      },
+      "trennregel": "zeichengleich zu tools/check_z1_delivery.py: SYSTEM_MARK '### system\\n' vom Anfang entfernt, an USER_MARK '\\n### user\\n' getrennt. Die beiden Teile wurden im Scratchpad abgelegt und NICHT archiviert; ihre SHA256 stehen unten, die Quelle bleibt bytegleich.",
+      "nachrichtenstruktur": [
+        {
+          "rolle": "system",
+          "art": "Teil der Quelle",
+          "bytes": 1691,
+          "sha256": "f42c5d71279b96ec6b12f66524c727ce3164f803fa829e9a4cbb8aa918e90d85"
+        },
+        {
+          "rolle": "user",
+          "art": "Teil der Quelle",
+          "bytes": 17130,
+          "sha256": "49125384d077b3904915f535e1a5fb04dba001aea5221cfb6553a6f049f866d3"
+        }
+      ],
+      "gemeldete_prompt_tokens": 4281,
+      "completion_tokens": 1,
+      "nettozahl": {
+        "wert": 4252,
+        "formel": "gemeldet − B + tokens(\"x\"), B = 30 (M1)",
+        "ANNAHME": "tokens(\"x\") = 1 — angenommen, nicht gemessen; die Nettozahl trägt diese Annahme."
+      },
+      "kaltlauf": "ja — `ollama stop qwen2.5-coder:7b` unmittelbar davor",
+      "zeitstempel": "2026-09-02T12:14:02+0200",
+      "kuerzungsdetektor": {
+        "regel": "§3b (b): ungültig bei Gleichstand mit dem gesetzten Fenster oder weniger als 64 Token Abstand darunter",
+        "gesetztes_fenster": 32768,
+        "verdachtsbereich_ab": 32705,
+        "gemeldet": 4281,
+        "abstand_zum_fenster": 28487,
+        "urteil": "gültig",
+        "teilmessung_nach_3b_c": "nicht erforderlich"
+      },
+      "torergebnis": {
+        "gegenprobe": 4281,
+        "quelle_der_gegenprobe": "z1_protokoll §3.3 (6); tools/check_z1_delivery.py TOKENS_REFERENCE = 4281",
+        "gemessen": 4281,
+        "differenz": 0,
+        "urteil": "TREFFER EXAKT — die Messkette ist VALIDIERT",
+        "fensterunabhaengigkeit": "4281 wurde am 31.08.2026 unter Fenster 16384 gemeldet und wird hier unter Fenster 32768 zeichengleich gemeldet. Damit ist belegt: die gemeldete Prompt-Tokenzahl ist fensterunabhängig, solange keine Kürzung eintritt. Der Gegenfall ist aktenkundig — 4281 gesendet, 2050 gemeldet unter dem Vorgabefenster 4096 (data/z1/MANIFEST.md, Nachtrag 31.08.2026)."
+      },
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach jeder Messung, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "NAME": "qwen2.5-coder:7b",
+        "PROCESSOR": "8%/92% CPU/GPU",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      }
+    },
+    {
+      "kennung": "M3",
+      "zweck": "Der Messgegenstand. data/z2/eingaben/ist_modell.yaml als EINE USER-Nachricht, unverändert, ohne Präambel und ohne Kürzung.",
+      "nachrichtenstruktur": [
+        {
+          "rolle": "user",
+          "art": "datei",
+          "pfad": "data/z2/eingaben/ist_modell.yaml",
+          "bytes": 42959,
+          "sha256": "146dbb055e059b9dd948b27e185f33a2cb56557a534c55e0daf983c892336673"
+        }
+      ],
+      "nutzlast": {
+        "pfad": "data/z2/eingaben/ist_modell.yaml",
+        "bytes": 42959,
+        "zeilen": 988,
+        "sha256": "146dbb055e059b9dd948b27e185f33a2cb56557a534c55e0daf983c892336673"
+      },
+      "gemeldete_prompt_tokens": 8467,
+      "completion_tokens": 1,
+      "nettozahl": {
+        "wert": 8438,
+        "formel": "gemeldet − B + tokens(\"x\"), B = 30 (M1)",
+        "ANNAHME": "tokens(\"x\") = 1 — angenommen, nicht gemessen; die Nettozahl trägt diese Annahme."
+      },
+      "kaltlauf": "ja — `ollama stop qwen2.5-coder:7b` unmittelbar davor",
+      "zeitstempel": "2026-09-02T12:14:20+0200",
+      "kuerzungsdetektor": {
+        "regel": "§3b (b): ungültig bei Gleichstand mit dem gesetzten Fenster oder weniger als 64 Token Abstand darunter",
+        "gesetztes_fenster": 32768,
+        "verdachtsbereich_ab": 32705,
+        "gemeldet": 8467,
+        "abstand_zum_fenster": 24301,
+        "urteil": "gültig",
+        "teilmessung_nach_3b_c": "nicht erforderlich"
+      },
+      "gueltigkeit": "VALIDIERT — M2 hat die registrierte Zahl exakt getroffen, die Messkette trägt.",
+      "beobachtung_ohne_deutung": "Die Nettozahl 8438 ist zeichengleich mit dem Wert 8438, den tools/z1_tokenizer.py unter Umgehung seines ASCII-Wächters lieferte (data/z2/MANIFEST.md, Prüfung 7). Das wird nur festgestellt. Es macht 8438 NICHT nachträglich zum Messwert: der Wert stammt aus einem Werkzeug, dessen Muster für diesen Text nach seiner eigenen Dokumentation nicht exakt ist, und §3b (a) benennt die serverseitige Zahl als Messgrösse. Gedeutet wird hier nichts.",
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach jeder Messung, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "NAME": "qwen2.5-coder:7b",
+        "PROCESSOR": "8%/92% CPU/GPU",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      }
+    },
+    {
+      "kennung": "M4",
+      "zweck": "Kürzungsdetektor nach §3b (b), angewandt auf M2 UND M3. Eine gemeldete Zahl gilt als ungültig, wenn sie dem gesetzten Fenster gleicht oder es um weniger als 64 Token unterschreitet.",
+      "nachrichtenstruktur": "keine — M4 ist eine Auswertung über M2 und M3, kein eigener Aufruf",
+      "nutzlast": null,
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach jeder Messung, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "NAME": "qwen2.5-coder:7b",
+        "PROCESSOR": "8%/92% CPU/GPU",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      },
+      "verdachtsbereich_ab": 32705,
+      "ergebnisse": {
+        "M2": {
+          "regel": "§3b (b): ungültig bei Gleichstand mit dem gesetzten Fenster oder weniger als 64 Token Abstand darunter",
+          "gesetztes_fenster": 32768,
+          "verdachtsbereich_ab": 32705,
+          "gemeldet": 4281,
+          "abstand_zum_fenster": 28487,
+          "urteil": "gültig",
+          "teilmessung_nach_3b_c": "nicht erforderlich"
+        },
+        "M3": {
+          "regel": "§3b (b): ungültig bei Gleichstand mit dem gesetzten Fenster oder weniger als 64 Token Abstand darunter",
+          "gesetztes_fenster": 32768,
+          "verdachtsbereich_ab": 32705,
+          "gemeldet": 8467,
+          "abstand_zum_fenster": 24301,
+          "urteil": "gültig",
+          "teilmessung_nach_3b_c": "nicht erforderlich"
+        }
+      },
+      "teilmessung_nach_3b_c": {
+        "durchgefuehrt": false,
+        "begruendung": "Beide Zahlen liegen weit unterhalb des Verdachtsbereichs (M2 4281, M3 8467, Verdacht ab 32705). Eine additive Teilmessung war nicht nötig; N ist nicht ausgewiesen, weil nicht geteilt wurde."
+      },
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "zeitstempel": "2026-09-02T12:14:20+0200"
+    },
+    {
+      "kennung": "M5",
+      "auftrag": "S2c-2",
+      "zweck": "Die zweite B1-Eingabe allein: `input_facts_raw.json` als EINE USER-Nachricht, unverändert, ohne Präambel.",
+      "nachrichtenstruktur": [
+        {
+          "rolle": "user",
+          "art": "datei",
+          "pfad": "data/z2/eingaben/input_facts_raw.json",
+          "bytes": 128707,
+          "sha256": "85b7a2c1834b4f954a630f3ff3ccf01ebc139a9f51039365b7759f7fbcc28951"
+        }
+      ],
+      "nutzlast": {
+        "pfad": "data/z2/eingaben/input_facts_raw.json",
+        "bytes": 128707,
+        "zeilen": 3605,
+        "records": 73,
+        "sha256": "85b7a2c1834b4f954a630f3ff3ccf01ebc139a9f51039365b7759f7fbcc28951"
+      },
+      "gemeldete_prompt_tokens": 29095,
+      "completion_tokens": 1,
+      "nettozahl": {
+        "wert": 29066,
+        "formel": "gemeldet − F1, F1 = 29 (aus M1)"
+      },
+      "kaltlauf": "ja",
+      "zeitstempel": "2026-09-02T14:14:36+0200",
+      "kuerzungsdetektor": {
+        "regel": "§3b (b): ungültig bei Gleichstand mit dem gesetzten Fenster oder weniger als 64 Token Abstand darunter",
+        "gesetztes_fenster": 32768,
+        "verdachtsbereich_ab": 32705,
+        "gemeldet": 29095,
+        "abstand_zum_fenster": 3673,
+        "urteil": "gültig"
+      },
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach der Messreihe, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      }
+    },
+    {
+      "kennung": "M6",
+      "auftrag": "S2c-2",
+      "zweck": "Der VOLLSTÄNDIGE gerenderte Prompt nach R3, mit der Füllinstruktion an der Obergrenze R1 (1 200 Token netto) und der ROHEN Faktenbasis. SCHWELLENRELEVANT ist ausschliesslich diese Messung.",
+      "nachrichtenstruktur": [
+        {
+          "rolle": "system",
+          "art": "Füllinstruktion (nicht abgelegt)",
+          "bytes": 6634,
+          "sha256": "b1b01448b35fe407eeb153dddada233f73fa2fc45408f452024985efcedd6282"
+        },
+        {
+          "rolle": "user",
+          "art": "komponiert: Trennzeile 1 + ist_modell.yaml + Trennzeile 2 + input_facts_raw.json",
+          "bytes": 171769,
+          "sha256": "0ee4cfd9923bb3cff7d2b270f1a3dfe42cc59a62b14cedca0eeb9e3218a802b4"
+        }
+      ],
+      "gemeldete_prompt_tokens": 16386,
+      "completion_tokens": 1,
+      "kaltlauf": "ja",
+      "zeitstempel": "2026-09-02T14:14:51+0200",
+      "URTEIL": "UNGÜLTIG — GEKÜRZT. Die gemeldete Zahl ist NICHT die Prompt-Grösse.",
+      "kuerzungsdetektor_nach_3b_b_woertlich": {
+        "regel": "§3b (b): ungültig bei Gleichstand mit dem gesetzten Fenster oder weniger als 64 Token Abstand darunter",
+        "gesetztes_fenster": 32768,
+        "verdachtsbereich_ab": 32705,
+        "gemeldet": 16386,
+        "abstand_zum_fenster": 16382,
+        "urteil": "gültig",
+        "ANMERKUNG": "Der in §3b (b) registrierte Detektor spricht NICHT an: 16 386 liegt 16 382 Token unter dem Fenster, weit ausserhalb des Verdachtsbereichs ab 32 705. Er hätte diese Kürzung durchgelassen."
+      },
+      "kuerzungsnachweis_ueber_die_monotonie": {
+        "regel_die_greift": "Ein Prompt, der einen anderen VOLLSTÄNDIG enthält, kann nicht WENIGER Token melden als jener.",
+        "M5_gemeldet": 29095,
+        "M6_gemeldet": 16386,
+        "verhaeltnis": "M6 enthält M5 (die Faktenbasis) vollständig, dazu das Ist-Modell, die zwei Trennzeilen und die Füllinstruktion — und meldet 12 709 Token WENIGER. Das ist arithmetisch unmöglich ohne Kürzung.",
+        "signatur_der_kuerzung": {
+          "beobachtet": 16386,
+          "formel": "Fenster / 2 + 2 = 32768 / 2 + 2 = 16386",
+          "aktenkundiger_gegenfall_aus_Z1": "4 281 gesendet, 2 050 gemeldet unter Fenster 4096 — und 4096 / 2 + 2 = 2050. ZEICHENGLEICHE Signatur (data/z1/MANIFEST.md, Nachtrag 31.08.2026; §3b (b)).",
+          "schluss": "Der Server kürzt auf die HÄLFTE des Fensters, nicht auf das Fenster. Ein Detektor, der nur die Nähe zum Fenster prüft, kann diese Kürzung nicht sehen."
+        }
+      },
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach der Messreihe, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      },
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "ersatzwert": {
+        "quelle": "additive Teilmessung nach §3b (c), siehe M7",
+        "rekonstruierte_prompt_tokens": 38748,
+        "gegen_die_schwelle": "38 748 gegen 24 000 — WEIT DARÜBER, und mit 38 748 > 32 768 auch oberhalb des Fensters. Die Wegeleiter ist zu ziehen."
+      }
+    },
+    {
+      "kennung": "M7",
+      "auftrag": "S2c-2",
+      "zweck": "Kürzungsdetektor nach §3b (b) auf M5 und M6, und — weil M6 gekürzt ist — die additive Teilmessung nach §3b (c).",
+      "nachrichtenstruktur": "keine eigene — M7 ist eine Auswertung über M5, M6 und die Teilmessungen O2/P2/P3",
+      "verdachtsbereich_ab": 32705,
+      "ergebnisse": {
+        "M5": {
+          "regel": "§3b (b): ungültig bei Gleichstand mit dem gesetzten Fenster oder weniger als 64 Token Abstand darunter",
+          "gesetztes_fenster": 32768,
+          "verdachtsbereich_ab": 32705,
+          "gemeldet": 29095,
+          "abstand_zum_fenster": 3673,
+          "urteil": "gültig",
+          "hinweis": "29 095 liegt 3 673 Token unter dem Fenster, ausserhalb des Verdachtsbereichs; keine Gegenanzeige aus der Monotonie."
+        },
+        "M6": {
+          "regel": "§3b (b): ungültig bei Gleichstand mit dem gesetzten Fenster oder weniger als 64 Token Abstand darunter",
+          "gesetztes_fenster": 32768,
+          "verdachtsbereich_ab": 32705,
+          "gemeldet": 16386,
+          "abstand_zum_fenster": 16382,
+          "urteil": "gültig",
+          "urteil_nach_woertlichem_detektor": "gültig",
+          "TATSAECHLICHES_URTEIL": "UNGÜLTIG — gekürzt, nachgewiesen über die Monotonie gegen M5 und über die Signatur Fenster/2 + 2."
+        }
+      },
+      "BEFUND_ZUM_DETEKTOR_SELBST": {
+        "setup": "§3b (b) erklärt eine gemeldete Zahl für ungültig, wenn sie dem gesetzten Fenster gleicht oder es um weniger als 64 Token unterschreitet.",
+        "resultat": "M6 wurde gekürzt und meldete 16 386 — 16 382 Token UNTER dem Fenster. Der registrierte Detektor spricht nicht an.",
+        "konsequenz": "Der Detektor aus §3b (b) ist für die beobachtete Kürzungsart BLIND. Er ist um ein zweites Kriterium zu ergänzen: (i) MONOTONIE — ein Prompt, der einen gemessenen Teil vollständig enthält, muss mindestens dessen Zahl melden; und (ii) die SIGNATUR `Fenster / 2 + 2`. Beide sind an zwei Fällen belegt (Z2 hier: 32768/2+2 = 16386; Z1 aktenkundig: 4096/2+2 = 2050). Das Nachziehen von §3b (b) ist ein EIGENER Auftrag am Protokoll; hier wird der Befund nur festgestellt."
+      },
+      "teilmessung_nach_3b_c": {
+        "durchgefuehrt": true,
+        "anlass": "M6 ungültig (gekürzt).",
+        "N": 3,
+        "teilung": "Der gerenderte Prompt zerfällt in drei Teile, die zusammen VERLUSTFREI der gesendete Text sind (`cmp` beidseitig Exit 0 gegen die zusammengesetzte user-Nachricht): P1 = die Füllinstruktion (`system`), P2 = Trennzeile 1 + Ist-Modell + Trennabstand, P3 = Trennzeile 2 + Faktenbasis.",
+        "teile": [
+          {
+            "teil": "P1",
+            "inhalt": "Füllinstruktion (system)",
+            "bytes": 6634,
+            "gemeldet": 1229,
+            "tokens": 1200
+          },
+          {
+            "teil": "P2",
+            "inhalt": "Trennzeile 1 + ist_modell.yaml + \\n\\n",
+            "bytes": 43018,
+            "sha256": "e995cd0d24286829579666ec538b58762e4f8b56ac6daa9232a7c06a3de4eab9",
+            "gemeldet": 8484,
+            "tokens": 8455,
+            "zeitstempel": "2026-09-02T14:16:03+0200"
+          },
+          {
+            "teil": "P3",
+            "inhalt": "Trennzeile 2 + input_facts_raw.json + \\n",
+            "bytes": 128751,
+            "sha256": "3fac1b43f4c215388b3e2a7f9f73725af4ebd2d1437d9cfece109e217c77f9e3",
+            "gemeldet": 29109,
+            "tokens": 29080,
+            "zeitstempel": "2026-09-02T14:16:09+0200"
+          }
+        ],
+        "formel": "rekonstruierte Prompt-Tokenzahl = F2 + tokens(P1) + tokens(P2) + tokens(P3), F2 = 13, tokens(X) = gemeldet(X) − 29",
+        "rechnung": "13 + 1 200 + 8 455 + 29 080 = 38 748",
+        "ergebnis": 38748,
+        "fehlerschranke": "Höchstens N = 3 Token, entstehend an den Teilgrenzen (§3b (c)). Für eine Schwelle von 24 000 unerheblich.",
+        "VALIDIERUNG_DER_FORMEL_an_zwei_ungekuerzten_faellen": [
+          {
+            "fall": "Kontrollmessung KTRL",
+            "aufbau": "gleiche R3-Struktur, `user` nur Block 1",
+            "gemeldet": 9668,
+            "rekonstruiert": "13 + 1 200 + 8 455 = 9 668",
+            "differenz": 0,
+            "zeitstempel": "2026-09-02T14:16:25+0200"
+          },
+          {
+            "fall": "M8",
+            "aufbau": "voller Prompt nach Stufe 0",
+            "gemeldet": 27525,
+            "rekonstruiert": "13 + 1 200 + 8 455 + 17 857 = 27 525",
+            "differenz": 0
+          },
+          {
+            "fall": "M9",
+            "aufbau": "voller Prompt nach Stufe 0 + 0b",
+            "gemeldet": 24104,
+            "rekonstruiert": "13 + 1 200 + 8 455 + 14 436 = 24 104",
+            "differenz": 0
+          }
+        ],
+        "urteil_der_validierung": "Die Formel trifft in DREI ungekürzten Fällen auf das Token genau. Der rekonstruierte Wert 38 748 für M6 trägt damit dieselbe Rechnung, die dreimal exakt war."
+      },
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "zeitstempel": "2026-09-02T14:16:25+0200"
+    },
+    {
+      "kennung": "M8",
+      "auftrag": "S2c-2",
+      "zweck": "STUFE 0 GEZOGEN. Voller Prompt nach R3, Faktenbasis um alle Docstrings und um die Records leerer `__init__.py` reduziert.",
+      "stufe": "0",
+      "werkzeug": "tools/reduce_facts.py --drop-docstrings --drop-empty-init data/z2/eingaben/input_facts_raw.json <ausgabe>",
+      "faktenbasis": {
+        "records": 52,
+        "records_vorher": 73,
+        "bytes": 77592,
+        "zeilen": 3027,
+        "sha256": "ea884ee6095e9552a8a85a9ff08eea9582212ebe73575868c7a0814b337e1395",
+        "abgelegt": false,
+        "hinweis": "Zwischenfassung der Leiter, NICHT abgelegt — abgelegt sind nur die Rohfassung und die finale Fassung nach 0 + 0b."
+      },
+      "nachrichtenstruktur": [
+        {
+          "rolle": "system",
+          "art": "Füllinstruktion (nicht abgelegt)",
+          "bytes": 6634,
+          "sha256": "b1b01448b35fe407eeb153dddada233f73fa2fc45408f452024985efcedd6282"
+        },
+        {
+          "rolle": "user",
+          "art": "komponiert",
+          "bytes": 120654,
+          "sha256": "bed59810242e18b7950a861dcd77ffe58afb203213e05eacdc94ee0c6767dad6"
+        }
+      ],
+      "gemeldete_prompt_tokens": 27525,
+      "completion_tokens": 1,
+      "kaltlauf": "ja",
+      "zeitstempel": "2026-09-02T14:17:59+0200",
+      "kuerzungsdetektor": {
+        "regel": "§3b (b): ungültig bei Gleichstand mit dem gesetzten Fenster oder weniger als 64 Token Abstand darunter",
+        "gesetztes_fenster": 32768,
+        "verdachtsbereich_ab": 32705,
+        "gemeldet": 27525,
+        "abstand_zum_fenster": 5243,
+        "urteil": "gültig",
+        "monotonie": "27 525 ≥ 17 886 (Teilmessung P3 nach Stufe 0) und ≥ 9 668 (KTRL) — keine Gegenanzeige."
+      },
+      "vorher_nachher": {
+        "vorher_M6": 38748,
+        "nachher_M8": 27525,
+        "ersparnis": 11223
+      },
+      "gegen_die_schwelle": "27 525 > 24 000 — STUFE 0 REICHT NICHT.",
+      "gegenprobe_ohne_instruktion": "Auch bei einer Instruktion von NULL Token bliebe der Prompt bei 26 325 Token und damit über 24 000. Stufe 0 kann die Schwelle für KEINE zulässige Instruktionsgrösse halten; Stufe 0b ist unausweichlich.",
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach der Messreihe, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      }
+    },
+    {
+      "kennung": "M9",
+      "auftrag": "S2c-2",
+      "zweck": "STUFE 0b ZUSÄTZLICH GEZOGEN. Voller Prompt nach R3 mit der finalen Faktenbasis `input_facts.json` (Docstrings, leere `__init__.py` und Importblöcke entfernt).",
+      "stufe": "0 + 0b",
+      "werkzeug": "tools/reduce_facts.py --drop-docstrings --drop-empty-init --drop-imports data/z2/eingaben/input_facts_raw.json data/z2/eingaben/input_facts.json",
+      "faktenbasis": {
+        "pfad": "data/z2/eingaben/input_facts.json",
+        "records": 52,
+        "bytes": 64245,
+        "zeilen": 2391,
+        "sha256": "f670593a7add275c364ebff5a5529cb95a787a10de5e0c80f97cd46574eb282a",
+        "abgelegt": true
+      },
+      "nachrichtenstruktur": [
+        {
+          "rolle": "system",
+          "art": "Füllinstruktion (nicht abgelegt)",
+          "bytes": 6634,
+          "sha256": "b1b01448b35fe407eeb153dddada233f73fa2fc45408f452024985efcedd6282"
+        },
+        {
+          "rolle": "user",
+          "art": "komponiert aus ist_modell.yaml + input_facts.json mit den Trennzeilen",
+          "bytes": 107307,
+          "sha256": "21741e034a9c129638d9c3228111e0a11ae82a4e275b6a291edcf5866b8d4eb1"
+        }
+      ],
+      "gemeldete_prompt_tokens": 24104,
+      "completion_tokens": 1,
+      "kaltlauf": "ja",
+      "zeitstempel": "2026-09-02T14:18:45+0200",
+      "kuerzungsdetektor": {
+        "regel": "§3b (b): ungültig bei Gleichstand mit dem gesetzten Fenster oder weniger als 64 Token Abstand darunter",
+        "gesetztes_fenster": 32768,
+        "verdachtsbereich_ab": 32705,
+        "gemeldet": 24104,
+        "abstand_zum_fenster": 8664,
+        "urteil": "gültig",
+        "monotonie": "24 104 ≥ 14 465 (Teilmessung P3 nach Stufe 0+0b) und ≥ 9 668 (KTRL) — keine Gegenanzeige."
+      },
+      "vorher_nachher": {
+        "vorher_M8": 27525,
+        "nachher_M9": 24104,
+        "ersparnis": 3421,
+        "gesamt_seit_M6": 14644
+      },
+      "gegen_die_schwelle": {
+        "schwelle": 24000,
+        "gemessen_bei_R1_OBERGRENZE_1200": 24104,
+        "urteil": "ÜBERSCHRITTEN um 104 Token — bei der BINDENDEN Obergrenze R1 von 1 200 Token.",
+        "gemessen_bei_R1_ZIELGROESSE_700": 23604,
+        "urteil_zielgroesse": "GEHALTEN, mit 396 Token Reserve — die Zielgrösse ist nach R1 aber NICHT bindend.",
+        "kipppunkt": "Die Schwelle hält genau dann, wenn Anhang A höchstens 1 096 Token trägt (1 200 − 104)."
+      },
+      "reserve_bis_zum_fenster": {
+        "fenster": 32768,
+        "gemessen": 24104,
+        "reserve": 8664,
+        "verlangt": "≥ 8 000 Token für das Generat (§3b, SCHWELLE)",
+        "urteil": "8 664 ≥ 8 000 — die Reservebedingung ist auch bei der Obergrenze 1 200 ERFÜLLT."
+      },
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach der Messreihe, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      }
+    },
+    {
+      "kennung": "M10",
+      "auftrag": "S3",
+      "zweck": "Die `system`-Nachricht ALLEIN: der tatsächliche Instruktionstext aus Anhang A (A3), gegen das Instruktionsbudget R1 (§3b (f)) — Obergrenze 1 000 Token BINDEND, Zielgrösse rund 700 NICHT bindend.",
+      "nachrichtenstruktur": [
+        {
+          "rolle": "system",
+          "art": "datei",
+          "pfad": "— nicht abgelegt: Wortlaut aus Anhang A (A3) des Protokolls",
+          "bytes": 2283,
+          "sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0"
+        }
+      ],
+      "nutzlast": {
+        "art": "Wortlaut aus Anhang A (A3), nicht als Datei abgelegt",
+        "bytes": 2283,
+        "zeilen": 47,
+        "sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0",
+        "hinweis": "Der Wortlaut von Anhang A (A3). Er ist NICHT als eigene Datei abgelegt: er IST Teil des Protokolls docs/protokolle/z2_protokoll_regelableitung.md. Der SHA256 ist der des Promptblocks, wie ihn A3 zwischen den Codezaun-Zeilen führt (§3b (a): SHA256 des gemessenen Textes)."
+      },
+      "gemeldete_prompt_tokens": 509,
+      "completion_tokens": 1,
+      "kaltlauf": "ja — `ollama stop qwen2.5-coder:7b` unmittelbar davor, `ollama ps` vor der Messung leer",
+      "zeitstempel": "2026-09-02T15:54:26+0200",
+      "dauer_s": 7.306,
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach jeder Messung, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      },
+      "ausgabe": "ungelesen verworfen (§3b (a): Instrumentenmessung, kein Z2-Lauf)",
+      "nettozahl": {
+        "wert": 480,
+        "formel": "gemeldet − F1, F1 = 29 (aus M1, B = 30)",
+        "vorbehalt": "Die Konvention `gemeldet − 29` ist in S2c-1 an einer EIN-Nachrichten-Struktur mit der Rolle `user` gesetzt. M10 sendet EINE Nachricht mit der Rolle `system`; der Rahmenaufwand dieser Form ist NICHT eigens gemessen. Die Zahl 480 ist deshalb mit dem Vorbehalt zu lesen, dass sie den Rahmen der user-Form abzieht. Die direkt mit der Füllinstruktion (1 200 netto) vergleichbare Zahl ist M10g."
+      },
+      "gegen_R1": {
+        "obergrenze": 1000,
+        "zielgroesse": 700,
+        "gemeldet": 509,
+        "netto": 480,
+        "urteil_obergrenze": "GEHALTEN — 480 ≤ 1 000, Reserve 520 Token. Auch die GEMELDETE Zahl 509 liegt unter der Obergrenze; das Urteil hängt nicht an der Wahl der Nettokonvention.",
+        "urteil_zielgroesse": "GEHALTEN — 480 ≤ rund 700, Reserve rund 220 Token. Die Zielgrösse ist nach §3b (f) NICHT bindend; sie ist hier dennoch erreicht.",
+        "kipppunkt_aus_S2c_2": "1 096 Token (§3b (f)). 480 liegt 616 Token darunter."
+      },
+      "kuerzungsdetektor": {
+        "regel": "§3b (b), (b2), (b3) — alle drei angewandt",
+        "gesetztes_fenster": 32768,
+        "gemeldet": 509,
+        "b_fenstergleichstand": "Abstand zum Fenster 32 259, Verdachtsbereich ab 32 705 — spricht nicht an",
+        "b2_monotonie": "M10 hat keine echte Teilnutzlast; die Bedingung ist gegenstandslos",
+        "b3_halbfenster": "Halbfenster 16386; 509 liegt 15 877 Token darunter und trifft die Signatur nicht",
+        "urteil": "gültig",
+        "teilmessung_nach_3b_c": "nicht erforderlich"
+      },
+      "befund": "Der tatsächliche Instruktionstext von Anhang A misst 509 gemeldete / 480 Netto-Token. Die BINDENDE Obergrenze R1 von 1 000 Token ist mit 520 Token Reserve gehalten, die nicht bindende Zielgrösse von rund 700 mit rund 220 Token. Anhang A ist NICHT zu kürzen."
+    },
+    {
+      "kennung": "M10g",
+      "auftrag": "S3",
+      "zweck": "GEGENPROBE zu M10: derselbe Wortlaut als EINE `user`-Nachricht. Zweck ist allein die Vergleichbarkeit — die Füllinstruktion aus S2c-2 wurde in dieser Form auf genau 1 200 Token netto getrimmt, und der Kipppunkt 1 096 ist auf ihr gerechnet.",
+      "nachrichtenstruktur": [
+        {
+          "rolle": "user",
+          "art": "datei",
+          "pfad": "— nicht abgelegt: Wortlaut aus Anhang A (A3) des Protokolls",
+          "bytes": 2283,
+          "sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0"
+        }
+      ],
+      "nutzlast": {
+        "art": "Wortlaut aus Anhang A (A3), nicht als Datei abgelegt",
+        "bytes": 2283,
+        "zeilen": 47,
+        "sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0",
+        "hinweis": "Der Wortlaut von Anhang A (A3). Er ist NICHT als eigene Datei abgelegt: er IST Teil des Protokolls docs/protokolle/z2_protokoll_regelableitung.md. Der SHA256 ist der des Promptblocks, wie ihn A3 zwischen den Codezaun-Zeilen führt (§3b (a): SHA256 des gemessenen Textes)."
+      },
+      "gemeldete_prompt_tokens": 530,
+      "completion_tokens": 1,
+      "kaltlauf": "ja — `ollama stop qwen2.5-coder:7b` unmittelbar davor, `ollama ps` vor der Messung leer",
+      "zeitstempel": "2026-09-02T15:54:36+0200",
+      "dauer_s": 3.374,
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach jeder Messung, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      },
+      "ausgabe": "ungelesen verworfen (§3b (a): Instrumentenmessung, kein Z2-Lauf)",
+      "nettozahl": {
+        "wert": 501,
+        "formel": "gemeldet − F1, F1 = 29 (aus M1, B = 30)",
+        "hinweis": "Diese Zahl ist mit der Füllinstruktion (1 200 netto) und mit dem Kipppunkt 1 096 UNMITTELBAR vergleichbar, weil sie in derselben Nachrichtenform erhoben ist."
+      },
+      "gegen_R1": {
+        "obergrenze": 1000,
+        "zielgroesse": 700,
+        "gemeldet": 530,
+        "netto": 501,
+        "urteil": "GEHALTEN — 501 ≤ 1 000 (Reserve 499) und 501 ≤ rund 700 (Reserve rund 199); 501 liegt 595 Token unter dem Kipppunkt 1 096."
+      },
+      "befund": "Beide Nachrichtenformen führen zum selben Urteil. Die Differenz M10g − M10 = 21 Token ist der Unterschied des Rahmenaufwands zwischen `user`- und `system`-Rolle; sie ist hier BEOBACHTET und wird NICHT als Konstante registriert."
+    },
+    {
+      "kennung": "M11a",
+      "auftrag": "S3",
+      "zweck": "Einzelmessung der Faktenbasis in der GEZOGENEN Fassung (`input_facts.json`, Stufen 0 und 0b) als EINE `user`-Nachricht. Sie ist die Bezugsgrösse des Monotoniekriteriums §3b (b2) für M11 und war im Messjournal nicht vorhanden: M5 misst `input_facts_raw.json`, die ROHE Fassung, die in M11 gar nicht enthalten ist.",
+      "nachrichtenstruktur": [
+        {
+          "rolle": "user",
+          "art": "datei",
+          "pfad": "data/z2/eingaben/input_facts.json",
+          "bytes": 64245,
+          "sha256": "f670593a7add275c364ebff5a5529cb95a787a10de5e0c80f97cd46574eb282a"
+        }
+      ],
+      "nutzlast": {
+        "pfad": "data/z2/eingaben/input_facts.json",
+        "bytes": 64245,
+        "zeilen": 2391,
+        "records": 52,
+        "sha256": "f670593a7add275c364ebff5a5529cb95a787a10de5e0c80f97cd46574eb282a"
+      },
+      "gemeldete_prompt_tokens": 14451,
+      "completion_tokens": 1,
+      "kaltlauf": "ja — `ollama stop qwen2.5-coder:7b` unmittelbar davor, `ollama ps` vor der Messung leer",
+      "zeitstempel": "2026-09-02T15:54:42+0200",
+      "dauer_s": 8.23,
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach jeder Messung, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      },
+      "ausgabe": "ungelesen verworfen (§3b (a): Instrumentenmessung, kein Z2-Lauf)",
+      "nettozahl": {
+        "wert": 14422,
+        "formel": "gemeldet − F1, F1 = 29 (aus M1, B = 30)"
+      },
+      "kuerzungsdetektor": {
+        "regel": "§3b (b), (b2), (b3)",
+        "gemeldet": 14451,
+        "b_fenstergleichstand": "Abstand zum Fenster 18 317 — spricht nicht an",
+        "b2_monotonie": "M11a ist echt in M5 enthalten (dieselben Records ohne Docstrings und ohne imports-Blöcke); 14 451 ≤ 29 095 — die Richtung stimmt. Eine Verletzung läge vor, wenn die kleinere Nutzlast MEHR meldete.",
+        "b3_halbfenster": "Halbfenster 16386; 14 451 liegt 1 935 Token darunter — mehr als die Toleranz von 64 Token, die Signatur ist NICHT getroffen",
+        "urteil": "gültig",
+        "teilmessung_nach_3b_c": "nicht erforderlich"
+      },
+      "befund": "Die gezogene Faktenbasis misst 14 451 gemeldete Token gegen 29 095 der rohen (M5). Die Stufen 0 und 0b haben sie auf rund die Hälfte gebracht."
+    },
+    {
+      "kennung": "M11",
+      "auftrag": "S3",
+      "zweck": "DER VOLLE PROMPT nach R3 mit dem TATSÄCHLICHEN Instruktionstext aus Anhang A — die von §3b (f) verlangte Messung. `system` = Wortlaut A3; `user` = Block 1 (ist_modell.yaml) + Block 2 (input_facts.json) mit den Trennzeilen und der Zusammensetzungsformel des Manifests. SCHWELLENRELEVANT ist ausschliesslich diese Messung.",
+      "nachrichtenstruktur": [
+        {
+          "rolle": "system",
+          "art": "datei",
+          "pfad": "— nicht abgelegt: Wortlaut aus Anhang A (A3) des Protokolls",
+          "bytes": 2283,
+          "sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0"
+        },
+        {
+          "rolle": "user",
+          "art": "datei",
+          "pfad": "— zur Laufzeit komponiert aus data/z2/eingaben/ist_modell.yaml und data/z2/eingaben/input_facts.json nach der Zusammensetzungsformel (R3)",
+          "bytes": 107307,
+          "sha256": "21741e034a9c129638d9c3228111e0a11ae82a4e275b6a291edcf5866b8d4eb1"
+        }
+      ],
+      "nutzlast": {
+        "system": {
+          "art": "Wortlaut aus Anhang A (A3), nicht als Datei abgelegt",
+          "bytes": 2283,
+          "sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0"
+        },
+        "user": {
+          "art": "komponiert aus ist_modell.yaml + input_facts.json mit den Trennzeilen",
+          "bytes": 107307,
+          "sha256": "21741e034a9c129638d9c3228111e0a11ae82a4e275b6a291edcf5866b8d4eb1",
+          "gegenprobe": "bytegleich mit der `user`-Nachricht aus M9 (S2c-2) — SHA256 und Bytezahl treffen zeichengleich. Damit ist belegt, dass die Zusammensetzung aus A2 die des Manifests IST und nicht eine neue."
+        }
+      },
+      "gemeldete_prompt_tokens": 23405,
+      "completion_tokens": 1,
+      "kaltlauf": "ja — `ollama stop qwen2.5-coder:7b` unmittelbar davor, `ollama ps` vor der Messung leer",
+      "zeitstempel": "2026-09-02T15:54:54+0200",
+      "dauer_s": 12.773,
+      "modell": "qwen2.5-coder:7b",
+      "endpunkt": "http://localhost:11434/v1/chat/completions",
+      "gesetztes_fenster": {
+        "quelle": "/etc/systemd/system/ollama.service.d/context.conf",
+        "wert": 32768
+      },
+      "wirksames_fenster": {
+        "quelle": "`ollama ps`, unmittelbar nach jeder Messung, Rohzeile",
+        "roh": "qwen2.5-coder:7b    dae161e27b0e    6.8 GB    8%/92% CPU/GPU    32768      4 minutes from now",
+        "CONTEXT": 32768,
+        "gegenprobe": "erwartet 32768 — trifft"
+      },
+      "ausgabe": "ungelesen verworfen (§3b (a): Instrumentenmessung, kein Z2-Lauf)",
+      "nettozahl": {
+        "wert": null,
+        "hinweis": "Für die R3-Struktur ist die GEMELDETE Zahl selbst die Messgrösse (S2c-2, Rahmenkonstante F2); die Konvention `gemeldet − 29` gilt nur für Einzelmessungen mit einer `user`-Nachricht."
+      },
+      "kuerzungsdetektor": {
+        "regel": "§3b (b), (b2) und (b3) — ALLE DREI angewandt, jedes für sich hinreichend für UNGÜLTIG",
+        "gesetztes_fenster": 32768,
+        "gemeldet": 23405,
+        "b_fenstergleichstand": {
+          "verdachtsbereich_ab": 32705,
+          "abstand_zum_fenster": 9363,
+          "urteil": "spricht NICHT an"
+        },
+        "b2_monotonie": {
+          "regel": "Der volle Prompt wird gegen die Einzelmessung seiner grössten Komponente geprüft, nie allein bewertet.",
+          "groesste_komponente": "die Faktenbasis in der GEZOGENEN Fassung: M11a = 14 451",
+          "zweite_komponente": "ist_modell.yaml allein: M3 = 8 467 (S2c-1)",
+          "pruefung": "23 405 ≥ 14 451 und 23 405 ≥ 8 467",
+          "nicht_gegen_M5": "M5 (29 095) ist NICHT die Bezugsgrösse: M5 misst input_facts_raw.json, und die rohe Fassung ist in M11 nicht enthalten. Ein Vergleich gegen sie prüfte eine Enthaltensein-Beziehung, die nicht besteht.",
+          "urteil": "spricht NICHT an"
+        },
+        "b3_halbfenster": {
+          "signatur": 16386,
+          "toleranz": 64,
+          "gemeldet": 23405,
+          "abstand": 7019,
+          "urteil": "spricht NICHT an — 23 405 liegt 7 019 Token ÜBER der Signatur"
+        },
+        "urteil": "GÜLTIG — keines der drei Kriterien ist erfüllt",
+        "teilmessung_nach_3b_c": "NICHT erforderlich; N entfällt"
+      },
+      "gegenprobe_additiv": {
+        "zweck": "Unabhängige Kontrolle der Zahl, ohne dass sie zum Messwert würde. Die Messgrösse bleibt die gemeldete Zahl 23 405.",
+        "rechnung": "netto(ist_modell) 8 438 + netto(input_facts) 14 422 + netto(Instruktion, user-Form) 501 + F2 13 + Trennzeilen 17 + 14 = 23 405",
+        "ergebnis": "trifft die gemeldete Zahl auf das Token genau",
+        "zweite_gegenprobe": "M9 (24 104) − M11 (23 405) = 699, und Füllinstruktion 1 200 netto − Anhang A 501 netto (M10g) = 699. Die Differenz der beiden vollen Prompts ist exakt die Differenz ihrer Instruktionen.",
+        "dritte_gegenprobe": "§3b (f) sagt einen vollen Prompt von rund 23 904 Token bei einer Instruktion von 1 000 Token voraus; dieselbe Rechnung sagt bei 501 Token 23 405 voraus — gemessen 23 405."
+      },
+      "befund": "Der volle Prompt mit dem tatsächlichen Instruktionstext misst 23 405 gemeldete Token. Der Kürzungsdetektor spricht in keinem seiner drei Kriterien an, eine additive Teilmessung war nicht erforderlich, und drei unabhängige Gegenproben treffen die Zahl."
+    },
+    {
+      "kennung": "M12",
+      "auftrag": "S3",
+      "zweck": "URTEIL der Messung M11 gegen die vorregistrierte Schwelle und gegen die Reservebedingung (§3b, SCHWELLE; §3b (f), Auflage an S3).",
+      "nachrichtenstruktur": "keine — M12 ist eine Auswertung über M10 und M11, kein eigener Aufruf",
+      "schwelle": {
+        "wert": 24000,
+        "fenster": 32768,
+        "gemessen": 23405,
+        "reserve": 595,
+        "urteil": "GEHALTEN — 23 405 ≤ 24 000, mit 595 Token Reserve.",
+        "ausdruecklich": "Die Schwelle ist NICHT verändert worden: nicht angehoben, nicht durch ihre Begründung ersetzt, nicht mit einer Toleranz versehen. Sie steht unverändert bei 24 000, wie seit dem 01.09.2026 (S1-A1) registriert."
+      },
+      "reserve_bis_zum_fenster": {
+        "fenster": 32768,
+        "gemessen": 23405,
+        "reserve": 9363,
+        "verlangt": 8000,
+        "urteil": "ERFÜLLT — 9 363 ≥ 8 000 Token für das Generat."
+      },
+      "instruktionsbudget_R1": {
+        "obergrenze": 1000,
+        "gemessen_netto": 480,
+        "urteil": "GEHALTEN (M10)",
+        "zielgroesse": 700,
+        "urteil_zielgroesse": "GEHALTEN, nicht bindend"
+      },
+      "folge": "Anhang A wird NICHT gekürzt. Das Protokoll kann eingefroren werden; die Auflage aus §3b (f) — Messung vor dem Freeze, Ergebnis nach data/z2/messungen/ und in data/z2/MANIFEST.md — ist erfüllt.",
+      "vergleich_mit_S2c_2": "M9 mass 24 104 bei einer Füllinstruktion von 1 200 Token netto und ÜBERSCHRITT die Schwelle um 104 Token. Der tatsächliche Anhang A ist mit 501 Token netto (M10g) um 699 Token kleiner als jene Füllinstruktion; genau um diesen Betrag fällt der volle Prompt. Die Verschärfung des Instruktionsbudgets aus §3b (f) trägt."
+    }
+  ],
+  "nachtrag_S3": {
+    "auftrag": "S3",
+    "datum": "2026-09-02",
+    "was_ergaenzt_wurde": "M10, M10g, M11a, M11 und M12. Die Datensätze M1–M9 aus S2c-1 und S2c-2 sind UNVERÄNDERT geblieben.",
+    "grundlage": "Z2-Protokoll §3b (a)–(c) und (f), Amendment 02.09.2026 (S1-A1c, `bf6c6e0`): ZWINGENDE AUFLAGE AN S3 — nach dem Schreiben von Anhang A wird der volle Prompt mit dem tatsächlichen Instruktionstext gemessen, mit dem Detektor einschliesslich (b2) und (b3).",
+    "einordnung": "INSTRUMENTENMESSUNG, KEIN Z2-LAUF (§3b (a)). Vier Kaltläufe, je mit `max_tokens: 1`; sie zählen gegen kein Z2-Budget, sind nicht als Lauf archiviert, und ihre Ausgabe ist nicht gelesen und nicht bewertet worden.",
+    "gemessener_text": {
+      "was": "der Wortlaut von Anhang A (A3) des Protokolls",
+      "sha256": "60ae777bf40ccd6bfc25ba2847b8d47fede7c0f3be0ae5582f88d05b7a4ed2a0",
+      "bytes": 2283,
+      "zeilen": 47,
+      "abgelegt_als_datei": false,
+      "fundstelle": "docs/protokolle/z2_protokoll_regelableitung.md, Anhang A, A3"
+    },
+    "kaltlaufregel": "Vor JEDER der vier Messungen wurde `ollama stop qwen2.5-coder:7b` ausgeführt; `ollama ps` war vor jeder Messung leer und meldete danach CONTEXT 32768.",
+    "werkzeug": {
+      "pfad": "tools/measure_prompt_tokens.py",
+      "unveraendert": "Das Werkzeug ist in diesem Auftrag NICHT geändert worden."
+    },
+    "ergebnis_in_einem_satz": "Der volle Prompt misst 23 405 Token und hält die vorregistrierte Schwelle von 24 000 mit 595 Token Reserve; die Instruktion misst 480 Token netto und hält die bindende Obergrenze R1 von 1 000 wie auch die nicht bindende Zielgrösse von rund 700."
+  }
+}

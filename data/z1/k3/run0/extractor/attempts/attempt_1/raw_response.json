@@ -1,0 +1,48 @@
+{
+  "id": "chatcmpl-ed5c33e6-2ae1-4706-9670-5d7a59618ba8",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"components\": [\n    {\n      \"description\": \"HTTP handlers for browsing/searching the catalog and checkout flow.\",\n      \"id\": \"Presentation\",\n      \"name\": \"Presentation\",\n      \"contained_modules:\": [\n        \"bookshop\",\n        \"bookshop.api\",\n        \"bookshop.api.catalog_routes\",\n        \"bookshop.api.checkout_routes\"\n      ]\n    },\n    {\n      \"description\": \"Use-case services that orchestrate domain logic with infrastructure adapters.\",\n      \"id\": \"Application\",\n      \"name\": \"Application\",\n      \"contained_modules:\": [\n        \"bookshop.application\",\n        \"bookshop.application.checkout\",\n        \"bookshop.application.inventory\"\n      ]\n    },\n    {\n      \"description\": \"Core business model including books, orders, pricing rules, and catalog aggregate.\",\n      \"id\": \"Domain\",\n      \"name\": \"Domain\",\n      \"contained_modules:\": [\n        \"bookshop.domain\",\n        \"bookshop.domain.book\",\n        \"bookshop.domain.catalog\",\n        \"bookshop.domain.order\",\n        \"bookshop.domain.pricing\"\n      ]\n    },\n    {\n      \"description\": \"In-memory persistence adapters for books and orders, and a fake payment gateway.\",\n      \"id\": \"Infrastructure\",\n      \"name\": \"Infrastructure\",\n      \"contained_modules:\": [\n        \"bookshop.infrastructure\",\n        \"bookshop.infrastructure.book_repository\",\n        \"bookshop.infrastructure.order_repository\",\n        \"bookshop.infrastructure.payment_gateway\"\n      ]\n    }\n  ],\n  \"relations\": [\n    {\n      \"from\": \"Presentation\",\n      \"to\": \"Application\"\n    },\n    {\n      \"from\": \"Presentation\",\n      \"to\": \"Domain\"\n    },\n    {\n      \"from\": \"Application\",\n      \"to\": \"Domain\"\n    },\n    {\n      \"from\": \"Application\",\n      \"to\": \"Infrastructure\"\n    },\n    {\n      \"from\": \"Infrastructure\",\n      \"to\": \"Domain\"\n    }\n  ]\n}",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": null,
+        "reasoning_content": "We need to fix the component definitions: they must contain the modules exactly as listed. The previous output had syntax errors: \"contained_modules:\" with colon inside key? Should be \"contained_modules\": [ ... ]. Also they omitted many modules. We need to include all modules in exactly one component each.\n\nWe need to keep the decomposition unchanged: we had four components: Presentation, Application, Domain, Infrastructure. We need to assign each module to one of these.\n\nLet's list all modules from facts:\n\n- bookshop\n- bookshop.api\n- bookshop.api.catalog_routes\n- bookshop.api.checkout_routes\n- bookshop.application\n- bookshop.application.checkout\n- bookshop.application.inventory\n- bookshop.domain\n- bookshop.domain.book\n- bookshop.domain.catalog\n- bookshop.domain.order\n- bookshop.domain.pricing\n- bookshop.infrastructure\n- bookshop.infrastructure.book_repository\n- bookshop.infrastructure.order_repository\n- bookshop.infrastructure.payment_gateway\n\nNow assign:\n\nPresentation: likely includes bookshop, bookshop.api, bookshop.api.catalog_routes, bookshop.api.checkout_routes.\n\nApplication: bookshop.application, bookshop.application.checkout, bookshop.application.inventory.\n\nDomain: bookshop.domain, bookshop.domain.book, bookshop.domain.catalog, bookshop.domain.order, bookshop.domain.pricing.\n\nInfrastructure: bookshop.infrastructure, bookshop.infrastructure.book_repository, bookshop.infrastructure.order_repository, bookshop.infrastructure.payment_gateway.\n\nCheck that all modules are covered.\n\nNow produce JSON with components array, each with description, id, name, contained_modules (list). Also relations: need to compute based on imports between modules across components.\n\nWe need to deduce relations from imports.\n\nLet's compute imports per module and see cross-component dependencies.\n\nWe'll map each module to component.\n\nComponent mapping:\n\nPresentation:\n- bookshop\n- bookshop.api\n- bookshop.api.catalog_routes\n- bookshop.api.checkout_routes\n\nApplication:\n- bookshop.application\n- bookshop.application.checkout\n- bookshop.application.inventory\n\nDomain:\n- bookshop.domain\n- bookshop.domain.book\n- bookshop.domain.catalog\n- bookshop.domain.order\n- bookshop.domain.pricing\n\nInfrastructure:\n- bookshop.infrastructure\n- bookshop.infrastructure.book_repository\n- bookshop.infrastructure.order_repository\n- bookshop.infrastructure.payment_gateway\n\nNow compute imports:\n\nWe'll go through each module's imports list.\n\n1. bookshop: imports [] -> none.\n\n2. bookshop.api: imports [] -> none.\n\n3. bookshop.api.catalog_routes: imports:\n   - bookshop.application.inventory (module) -> Application component (since bookshop.application.inventory is in Application)\n   - bookshop.domain.book -> Domain component\n\nThus relations: Presentation -> Application, Presentation -> Domain.\n\n4. bookshop.api.checkout_routes: imports:\n   - bookshop.application.checkout -> Application\n   - bookshop.domain.order -> Domain\n\nThus Presentation -> Application (already), Presentation -> Domain (already).\n\n5. bookshop.application: imports [] -> none.\n\n6. bookshop.application.checkout: imports:\n   - bookshop.domain (module) -> Domain (since bookshop.domain is in Domain)\n   - bookshop.domain.order -> Domain\n   - bookshop.infrastructure.order_repository -> Infrastructure\n   - bookshop.infrastructure.payment_gateway -> Infrastructure\n\nThus Application -> Domain, Application -> Infrastructure.\n\n7. bookshop.application.inventory: imports:\n   - bookshop.domain.book -> Domain\n   - bookshop.infrastructure.book_repository -> Infrastructure\n\nThus Application -> Domain, Application -> Infrastructure.\n\n8. bookshop.domain: imports [] -> none.\n\n9. bookshop.domain.book: imports:\n   - dataclasses (external) ignore? Not part of our modules; we only consider internal modules? The spec says: \"Read the imports in the facts: whenever a module in one component imports a module in another component, emit a deduplicated component-level relation\". External modules (like dataclasses, enum) are not in our facts, so ignore.\n\nThus none.\n\n10. bookshop.domain.catalog: imports:\n    - bookshop.domain.book -> Domain (same component) -> no relation.\n\n11. bookshop.domain.order: imports:\n    - dataclasses, enum (external)\n    - bookshop.domain.book -> Domain (same) -> none.\n\n12. bookshop.domain.pricing: imports:\n    - bookshop.domain.order -> Domain (same) -> none.\n\n13. bookshop.infrastructure: imports [] -> none.\n\n14. bookshop.infrastructure.book_repository: imports:\n    - bookshop.domain.book -> Domain\n    - bookshop.domain.catalog -> Domain\n\nThus Infrastructure -> Domain.\n\n15. bookshop.infrastructure.order_repository: imports:\n    - bookshop.domain.order -> Domain\n\nThus Infrastructure -> Domain.\n\n16. bookshop.infrastructure.payment_gateway: imports [] -> none.\n\nNow collect unique component-level relations:\n\nFrom above:\n- Presentation -> Application\n- Presentation -> Domain\n- Application -> Domain\n- Application -> Infrastructure\n- Infrastructure -> Domain\n\nAlso note: any relation from Presentation to Infrastructure? Not directly.\n\nCheck if any other: maybe Application -> Presentation? No.\n\nThus relations list: \n{ \"from\": \"Presentation\", \"to\": \"Application\" },\n{ \"from\": \"Presentation\", \"to\": \"Domain\" },\n{ \"from\": \"Application\", \"to\": \"Domain\" },\n{ \"from\": \"Application\", \"to\": \"Infrastructure\" },\n{ \"from\": \"Infrastructure\", \"to\": \"Domain\" }\n\nNow produce JSON with components.\n\nMake sure keys exactly as expected: \"description\", \"id\", \"name\", \"contained_modules\". The earlier output had a typo: \"contained_modules:\" with colon inside key. We'll correct.\n\nAlso ensure each component's description matches earlier but can be same.\n\nLet's craft final JSON."
+      }
+    }
+  ],
+  "created": 1788185860,
+  "model": "nvidia-nemotron-3-super-120b",
+  "object": "chat.completion",
+  "metadata": null,
+  "moderation": null,
+  "service_tier": null,
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 1676,
+    "prompt_tokens": 5133,
+    "total_tokens": 6809,
+    "completion_tokens_details": null,
+    "compute_units": null,
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cache_write_tokens": null,
+      "cached_tokens": 3456,
+      "image_tokens": null,
+      "text_tokens": null
+    },
+    "cache_created_input_tokens": 0,
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "cache_read_input_tokens": 3456,
+    "speed": null
+  }
+}

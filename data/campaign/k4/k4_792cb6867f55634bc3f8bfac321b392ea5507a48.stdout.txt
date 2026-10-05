@@ -1,0 +1,48 @@
+
+╔══╗─────────▶╔╗ ╔╗      ╔╗◀───┐
+╚╣╠╝◀─────┐  ╔╝╚╗║║────▶╔╝╚╗   │
+ ║║   ╔══╦══╦╩╗╔╝║║  ╔╦═╩╗╔╝╔═╦══╗
+ ║║╔══╣╔╗║╔╗║╔╣║ ║║ ╔╬╣╔╗║║ ║│║╔═╝
+╔╣╠╣║║║╚╝║╚╝║║║╚╗║╚═╝║║║║║╚╗║═╣║
+╚══╩╩╩╣╔═╩══╩╝╚═╝╚═══╩╩╝╚╩═╩╩═╩╝
+  └──▶║║                    ▲ 
+      ╚╝────────────────────┘
+
+
+---------
+Contracts
+---------
+
+Analyzed 75 files, 91 dependencies.
+-----------------------------------
+
+Layered spine of every bounded context KEPT
+identity.api skips no layer KEPT
+identity.services skips no layer KEPT
+orders.api skips no layer KEPT
+orders.services skips no layer KEPT
+billing.api skips no layer KEPT
+billing.services skips no layer KEPT
+Only the adapter facade may reach into the adapter internals BROKEN
+orders and billing are mutually independent KEPT
+No cycles between sibling packages KEPT
+identity declares all of its direct children KEPT
+orders declares all of its direct children KEPT
+billing declares all of its direct children KEPT
+
+Contracts: 12 kept, 1 broken.
+
+
+----------------
+Broken contracts
+----------------
+
+Only the adapter facade may reach into the adapter internals
+------------------------------------------------------------
+
+Illegal imports of protected package depot.core.adapters.internal:
+
+- depot.orders.services.order_service -> depot.core.adapters.internal.session 
+(l.9)
+
+

@@ -1,0 +1,23 @@
+{
+  "modell": "nvidia-nemotron-3-super-120b",
+  "modell_echo": "nvidia-nemotron-3-super-120b",
+  "base_url": "https://inference.do-ai.run/v1",
+  "endpunkt": "https://inference.do-ai.run/v1/chat/completions",
+  "http_status": 200,
+  "latenz_ms": 164457.858,
+  "usage": {
+    "prompt_tokens": 25030,
+    "completion_tokens": 1607,
+    "total_tokens": 26637
+  },
+  "system_fingerprint": null,
+  "finish_reason": "stop",
+  "temperature": 0,
+  "seed": 0,
+  "schemaname": "architecture_rules",
+  "delivery_assurance": "record_only",
+  "zeitstempel": {
+    "start": "2026-09-03T07:59:47+0200",
+    "ende": "2026-09-03T08:02:37+0200"
+  }
+}

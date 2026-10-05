@@ -1,0 +1,11 @@
+{
+  "rules": [
+    {
+      "id": "R1",
+      "category": "port-adapter-direction",
+      "scope": {"components": ["depot.core.ports"]},
+      "statement": "port-adapter-direction",
+      "severity": "error"
+    }
+  ]
+}

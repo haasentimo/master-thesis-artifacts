@@ -1,0 +1,31 @@
+{
+  "valid": false,
+  "errors": [
+    "relation: from 'bookshop.api.catalog_routes' references unknown component",
+    "relation: to 'bookshop.application.inventory' references unknown component",
+    "relation: from 'bookshop.api.checkout_routes' references unknown component",
+    "relation: to 'bookshop.application.checkout' references unknown component",
+    "relation: from 'bookshop.application.checkout' references unknown component",
+    "relation: to 'bookshop.domain.order' references unknown component",
+    "relation: from 'bookshop.application.checkout' references unknown component",
+    "relation: to 'bookshop.infrastructure.order_repository' references unknown component",
+    "relation: from 'bookshop.application.checkout' references unknown component",
+    "relation: to 'bookshop.infrastructure.payment_gateway' references unknown component",
+    "relation: from 'bookshop.application.inventory' references unknown component",
+    "relation: to 'bookshop.domain.book' references unknown component",
+    "relation: from 'bookshop.application.inventory' references unknown component",
+    "relation: to 'bookshop.infrastructure.book_repository' references unknown component",
+    "relation: from 'bookshop.domain.catalog' references unknown component",
+    "relation: to 'bookshop.domain.book' references unknown component",
+    "relation: from 'bookshop.domain.order' references unknown component",
+    "relation: to 'bookshop.domain.book' references unknown component",
+    "relation: from 'bookshop.domain.order' references unknown component",
+    "relation: to 'bookshop.domain.pricing' references unknown component",
+    "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+    "relation: to 'bookshop.domain.book' references unknown component",
+    "relation: from 'bookshop.infrastructure.book_repository' references unknown component",
+    "relation: to 'bookshop.domain.catalog' references unknown component",
+    "relation: from 'bookshop.infrastructure.order_repository' references unknown component",
+    "relation: to 'bookshop.domain.order' references unknown component"
+  ]
+}

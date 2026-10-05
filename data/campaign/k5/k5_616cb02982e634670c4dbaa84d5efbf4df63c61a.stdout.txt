@@ -1,0 +1,40 @@
+.F......................                                                 [100%]
+=================================== FAILURES ===================================
+_______ test_component_imports_only_whitelisted_modules[billing_mappers] _______
+
+component = 'billing_mappers'
+
+    @pytest.mark.parametrize("component", sorted(ALLOW_LIST_RULES))
+    def test_component_imports_only_whitelisted_modules(component: str) -> None:
+>       ALLOW_LIST_RULES[component].assert_applies(ARCH)
+
+../masterarbeit/data/soll/test_architecture.py:274: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../venv/lib/python3.12/site-packages/pytestarch/query_language/rule.py:212: in assert_applies
+    matcher.match(evaluable)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <pytestarch.rule_assessment.rule_check.rule_matcher.DefaultRuleMatcher object at 0x7f04c80a3080>
+evaluable = <pytestarch.eval_structure.evaluable_graph.EvaluableArchitectureGraph object at 0x7f04c73e2180>
+
+    def match(self, evaluable: EvaluableArchitecture) -> None:
+        """
+        Checks whether an expected behavior is exhibited by the EvaluableArchitecture.
+        If there are any rule violations, will raise an error detailing the violations.
+    
+        Args:
+            evaluable: object to check
+        Raises:
+            AssertionError
+        """
+        self._updated_module_requirements(evaluable)
+        rule_violations = self._find_rule_violations(evaluable)
+    
+        if rule_violations:
+>           raise AssertionError(self._create_rule_violation_message(rule_violations))
+E           AssertionError: "depot.billing.mappers.invoice_mapper" imports "depot.billing.api.routes".
+
+../venv/lib/python3.12/site-packages/pytestarch/rule_assessment/rule_check/rule_matcher.py:59: AssertionError
+=========================== short test summary info ============================
+FAILED ../masterarbeit/data/soll/test_architecture.py::test_component_imports_only_whitelisted_modules[billing_mappers]
+1 failed, 23 passed in 0.17s

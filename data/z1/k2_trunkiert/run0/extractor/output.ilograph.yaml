@@ -1,0 +1,70 @@
+resources:
+- id: bookshop.api.catalog_routes
+  name: Catalog Routes
+  subtitle: API endpoints for catalog operations.
+- id: bookshop.api.checkout_routes
+  name: Checkout Routes
+  subtitle: API endpoints for checkout operations.
+- id: bookshop.application.checkout
+  name: Checkout
+  subtitle: Application service for processing customer orders.
+- id: bookshop.application.inventory
+  name: Inventory
+  subtitle: Application service for managing book inventory.
+- id: bookshop.domain.book
+  name: Book
+  subtitle: Represents a book with a title, author, ISBN, and genre.
+- id: bookshop.domain.catalog
+  name: Catalog
+  subtitle: An in-memory collection of books with simple query operations.
+- id: bookshop.domain.order
+  name: Order
+  subtitle: A customer order aggregating line items and a status.
+- id: bookshop.domain.pricing
+  name: Pricing
+  subtitle: "Pure pricing rules: discounts applied to an order's gross total."
+- id: bookshop.infrastructure.book_repository
+  name: Book Repository
+  subtitle: In-memory persistence adapter for the book catalog.
+- id: bookshop.infrastructure.order_repository
+  name: Order Repository
+  subtitle: In-memory persistence adapter for orders.
+- id: bookshop.infrastructure.payment_gateway
+  name: Payment Gateway
+  subtitle: Adapter to an external payment provider (faked for the fixture).
+perspectives:
+- name: Dependencies
+  relations:
+  - from: bookshop.api.catalog_routes
+    to: bookshop.domain.catalog
+    label: uses
+  - from: bookshop.api.checkout_routes
+    to: bookshop.application.checkout
+    label: uses
+  - from: bookshop.application.checkout
+    to: bookshop.domain.order
+    label: uses
+  - from: bookshop.application.checkout
+    to: bookshop.domain.pricing
+    label: uses
+  - from: bookshop.application.inventory
+    to: bookshop.domain.book
+    label: uses
+  - from: bookshop.domain.catalog
+    to: bookshop.domain.book
+    label: uses
+  - from: bookshop.domain.order
+    to: bookshop.domain.book
+    label: uses
+  - from: bookshop.domain.order
+    to: bookshop.domain.pricing
+    label: uses
+  - from: bookshop.infrastructure.book_repository
+    to: bookshop.domain.book
+    label: uses
+  - from: bookshop.infrastructure.order_repository
+    to: bookshop.domain.order
+    label: uses
+  - from: bookshop.infrastructure.payment_gateway
+    to: bookshop.domain.order
+    label: uses

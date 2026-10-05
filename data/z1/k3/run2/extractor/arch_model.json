@@ -1,0 +1,63 @@
+{
+  "components": [
+    {
+      "id": "API",
+      "name": "API",
+      "kind": "component",
+      "description": "HTTP handlers exposing the bookshop functionality.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "Application",
+      "name": "Application",
+      "kind": "component",
+      "description": "Use-case services orchestrating domain objects and infrastructure adapters.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "Domain",
+      "name": "Domain",
+      "kind": "component",
+      "description": "Pure business model entities, aggregates, and rules.",
+      "role": null,
+      "contained_modules": []
+    },
+    {
+      "id": "Infrastructure",
+      "name": "Infrastructure",
+      "kind": "component",
+      "description": "Persistence and external service adapters (in\u2011memory repositories, fake payment gateway).",
+      "role": null,
+      "contained_modules": []
+    }
+  ],
+  "relations": [
+    {
+      "from": "API",
+      "to": "Application",
+      "kind": "depends_on"
+    },
+    {
+      "from": "API",
+      "to": "Domain",
+      "kind": "depends_on"
+    },
+    {
+      "from": "Application",
+      "to": "Domain",
+      "kind": "depends_on"
+    },
+    {
+      "from": "Application",
+      "to": "Infrastructure",
+      "kind": "depends_on"
+    },
+    {
+      "from": "Infrastructure",
+      "to": "Domain",
+      "kind": "depends_on"
+    }
+  ]
+}
