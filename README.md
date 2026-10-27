@@ -59,8 +59,9 @@ protocols themselves; the current versions are in `docs/protokolle/`.
 - The package is meant for checking the frozen inputs, the raw artifacts and the
   deterministic evaluation. The archived artifacts permit independent inspection of the
   reported results. The Z3 evaluation can be rerun from the included campaign artifacts
-  and clean-control stocks (see [Rerunning the C14 evaluation](#rerunning-the-c14-evaluation)),
-  while parts of Z1 depend on the separately versioned `llm_arch` extractor.
+  and clean-control stocks (see [Rerunning the C14 evaluation](#rerunning-the-c14-evaluation)).
+  The Z1 evaluation and the Z2 fact bases can be rerun from the included extractor snapshot
+  (see [Rerunning the Z1 evaluation](#rerunning-the-z1-evaluation)).
 - A byte-identical regeneration of all model responses is **not** claimed.
 - K3 depended on a hosted provider (DigitalOcean endpoint, not pinned). Its valid runs came
   from several points in time under server-side conditions that were neither controlled nor
@@ -68,8 +69,9 @@ protocols themselves; the current versions are in `docs/protokolle/`.
 - Where `system_fingerprint` was not available (recorded as `null` in the artifacts), the
   full serving identity of the model is **not** known. A seed was sent but is not assumed to
   have been effective.
-- The tools depend on code outside this package (the extractor package `llm_arch` for Z1/Z2
-  and the Triton conformance checker for Z3), which is not included.
+- The extractor package `llm_arch` (Z1/Z2) is included as a file snapshot of the registered
+  commit, without its development history (`code/`). The Triton conformance checker for Z3
+  is not included.
 
 ## Repository structure
 
@@ -85,7 +87,9 @@ protocols themselves; the current versions are in `docs/protokolle/`.
 | `data/c3b-k2/`, `data/c3b-k3/` | Z3 clean-control stocks (C3b) for K2 and K3: the 52 control modules on the baseline, input of the C14 evaluation |
 | `data/testrepo/` | Git bundles of the synthetic test repository |
 | `data/checker/` | Reference to the checker state (no code, see its README) |
-| `tools/` | Runner and evaluation tools as used, unchanged |
+| `code/ma-llm-arch-extractor/` | Snapshot of the extractor `llm_arch` at the registered commit `5c0b65a` (Z1, Z2 fact bases), see [`code/README.md`](code/README.md) |
+| `tests/fixtures/z1/` | Parse-assertion fixtures of the Z1 tools (used by `--selftest`) |
+| `tools/` | Runner and evaluation tools as used, unchanged; plus `evaluate_z1_snapshot.py`, added for this package |
 | `scripts/verify.sh` | Verification of this package |
 | `examiner-package/` | Description of the material handed to the examiners separately |
 
@@ -116,9 +120,94 @@ The script checks, from the repository root:
    relative to their own directory;
    those under `data/campaign/` use paths relative to the repository root, so they are
    checked from there;
-3. the three frozen protocols in `freezes/` against the SHA256 recorded at freeze time.
+3. the three frozen protocols in `freezes/` against the SHA256 recorded at freeze time;
+4. the extractor snapshot `code/ma-llm-arch-extractor/` against its `SNAPSHOT.json` (git
+   blob SHA1 of every file, no unlisted file, source commit `5c0b65a`; Python standard
+   library only).
 
 It exits non-zero on the first mismatch and changes no file.
+
+## Rerunning the Z1 evaluation
+
+`tools/evaluate_z1.py` computes the Z1 result (`data/z1/auswertung/z1_auswertung.json` /
+`.md`) with the unchanged extractor code. The extractor is included as a snapshot of the
+registered commit `5c0b65a82cc3d8af47c022d779ff63d8a20a9e08` in
+`code/ma-llm-arch-extractor/` (origin, content and exclusions: [`code/README.md`](code/README.md)).
+
+**Environment.** Python 3.12.3 with the pins of `tools/z2_extractor_requirements.txt`
+(pydantic 2.13.5, openai 3.6.0, ruamel.yaml 0.19.1, …). That file documents itself as a
+reconstruction: the environment of the Z1 runs on 31.08.2026 is not attested, only its
+Python, pydantic and openai versions (`run_manifest.json`). `pytest` is needed only for the
+extractor's own tests.
+
+```bash
+python3.12 -m venv .venv
+.venv/bin/pip install -r tools/z2_extractor_requirements.txt
+.venv/bin/python tools/evaluate_z1_snapshot.py --selftest
+out=$(mktemp -d)
+.venv/bin/python tools/evaluate_z1_snapshot.py --out "$out"
+```
+
+**Why a wrapper.** `evaluate_z1.py` checks its provenance through git: the extractor's
+`git rev-parse HEAD` must equal the registered commit, and the instrument blobs are read
+with `git ls-files -s`. The snapshot has no `.git`. `tools/evaluate_z1_snapshot.py`
+(added for this package, not part of the thesis repository) replaces exactly these two
+look-ups. It verifies the snapshot against `SNAPSHOT.json` (every file's git blob SHA1,
+recomputed from its bytes, equal to the one in the commit tree; no file missing; no
+unlisted file) and takes the commit from there. Blob hashes are recomputed from the file
+bytes as `git hash-object` would. Run selection, `meta.json` reading, the `validate_arch`
+cross-check, metrics and rendering stay those of the unchanged `evaluate_z1.py`. A
+modified or additional file in the snapshot aborts with `ABBRUCH (§6.1)`.
+
+**Expected result.** The output equals the archived evaluation except for two fields:
+
+- `erzeugt_utc` (generation time);
+- `protokoll` (revision and SHA256 of `docs/protokolle/z1_protokoll_extraktionsvergleich.md`).
+  The archived run read Rev. 5 (`a6a42f3a…`, thesis commit `062e604`); this package
+  carries Rev. 6 (`618ebde0…`). With the Rev. 5 file in place the output differs only in
+  `erzeugt_utc`.
+
+What is compared: approach 1 (ten figures plus `gold_similarity`, E1/E2 10 of 10) and,
+per block `k2`, `k3`, `k2_trunkiert`, six runs each (`run0`, `run0_w1`…`run0_w3`, `run1`,
+`run2`): 0 of 6 valid in every block, no deviation between `meta.json` and the
+`validate_arch` cross-check, the `compare_runs.py` aggregates, and the token extrapolation.
+
+**Limit: the tokenizer.** The extrapolation section (`tools/z1_tokenizer.py`) builds its
+tokenizer from the GGUF metadata of the Ollama model `qwen2.5-coder:7b` in the local
+Ollama store. Model weights are not part of this package. Without that store the section
+reports `verfuegbar: false` and differs from the archive; all measured figures are
+unaffected.
+
+## Reproducing the Z2 fact bases
+
+The B1 input `data/z2/eingaben/input_facts_raw.json` was produced with the same extractor
+commit, by its `extract_repo` on the test repository's `src/` and the serialization of
+`run_logger.py:62-64` (no trailing newline). `input_facts.json` follows from
+`tools/reduce_facts.py` (stages 0 and 0b). From the repository root, with the environment
+above:
+
+```bash
+work=$(mktemp -d)
+git clone -q data/testrepo/ma-conformance-testrepo-baseline.bundle "$work/testrepo"
+git -C "$work/testrepo" checkout -q 0d651041ed87dd03f2f78359713633fac01c0a66
+PYTHONPATH=code/ma-llm-arch-extractor/src .venv/bin/python -c "
+import json, sys
+from llm_arch.facts import extract_repo
+facts = extract_repo(sys.argv[1])
+open(sys.argv[2], 'w').write(json.dumps([f.model_dump() for f in facts], indent=2))
+" "$work/testrepo/src" "$work/input_facts_raw.json"
+python3 tools/reduce_facts.py --drop-docstrings --drop-empty-init --drop-imports \
+  "$work/input_facts_raw.json" "$work/input_facts.json"
+sha256sum "$work"/input_facts*.json
+```
+
+Expected: `85b7a2c1834b4f954a630f3ff3ccf01ebc139a9f51039365b7759f7fbcc28951`
+(`input_facts_raw.json`, 73 records) and
+`f670593a7add275c364ebff5a5529cb95a787a10de5e0c80f97cd46574eb282a` (`input_facts.json`, 52
+records), the hashes in `data/z2/eingaben/SHA256SUMS`. The same call on
+`code/ma-llm-arch-extractor/fixtures/rich_repo` gives the Z1 fact base
+`data/z1/k2/run0/extractor/input_facts.json` (`f8976558…`). The second B1 input,
+`ist_modell.yaml`, is a Triton export (provenance in `data/z2/MANIFEST.md`).
 
 ## Rerunning the C14 evaluation
 

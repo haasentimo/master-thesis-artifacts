@@ -1,0 +1,22 @@
+{
+  "id": "chatcmpl-z1fixture",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "{\n  \"components\": [\n    {\n      \"id\": \"api\",\n      \"name\": \"API Layer\",\n      \"kind\": \"layer\",\n      \"description\": null,\n      \"role\": \"api\",\n      \"contained_modules\": [\n        \"bookshop.api.catalog_routes\",\n        \"bookshop.api.checkout_routes\"\n      ]\n    },\n    {\n      \"id\": \"application\",\n      \"name\": \"Application Layer\",\n      \"kind\": \"layer\",\n      \"description\": null,\n      \"role\": \"application\",\n      \"contained_modules\": [\n        \"bookshop.application.checkout\",\n        \"bookshop.application.inventory\"\n      ]\n    },\n    {\n      \"id\": \"domain\",\n      \"name\": \"Domain Layer\",\n      \"kind\": \"layer\",\n      \"description\": null,\n      \"role\": \"domain\",\n      \"contained_modules\": [\n        \"bookshop.domain.book\",\n        \"bookshop.domain.catalog\",\n        \"bookshop.domain.order\",\n        \"bookshop.domain.pricing\"\n      ]\n    }\n  ],\n  \"dependencies\": [\n    {\n      \"from\": \"api\",\n      \"to\": \"application\",\n      \"kind\": \"depends_on\"\n    },\n    {\n      \"from\": \"application\",\n      \"to\": \"domain\",\n      \"kind\": \"depends_on\"\n    }\n  ]\n}",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1788000000,
+  "model": "qwen2.5-coder:7b",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "usage": {
+    "completion_tokens": 321,
+    "prompt_tokens": 1876,
+    "total_tokens": 2197
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "components": [
+    {
+      "id": "api",
+      "name": "API Layer",
+      "kind": "layer",
+      "description": null,
+      "role": "api",
+      "contained_modules": [
+        "bookshop.api.catalog_routes",
+        "bookshop.api.checkout_routes"
+      ]
+    },
+    {
+      "id": "application",
+      "name": "Application Layer",
+      "kind": "layer",
+      "description": null,
+      "role": "application",
+      "contained_modules": [
+        "bookshop.application.checkout",
+        "bookshop.application.inventory"
+      ]
+    },
+    {
+      "id": "domain",
+      "name": "Domain Layer",
+      "kind": "layer",
+      "description": null,
+      "role": "domain",
+      "contained_modules": [
+        "bookshop.domain.book",
+        "bookshop.domain.catalog",
+        "bookshop.domain.order",
+        "bookshop.domain.pricing"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "from": "api",
+      "to": "application",
+      "kind": "depends_on"
+    }
+  ]
+}

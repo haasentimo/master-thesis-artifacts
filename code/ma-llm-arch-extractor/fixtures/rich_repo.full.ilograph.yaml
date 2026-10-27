@@ -1,0 +1,200 @@
+description: Full code-model export for rich_repo.
+resources:
+  - id: bookshop
+    name: bookshop
+    subtitle: package · 4 folders
+    x-triton-node-type: package
+    x-triton-package-scope: true
+    children:
+      - id: bookshop.api
+        name: api
+        subtitle: package · 2 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: bookshop.api.catalog_routes
+            name: catalog_routes
+            subtitle: module · 2 artefacts
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: bookshop.api.catalog_routes::function:search_books
+                name: search_books
+                subtitle: function
+              - id: bookshop.api.catalog_routes::function:browse_genre
+                name: browse_genre
+                subtitle: function
+          - id: bookshop.api.checkout_routes
+            name: checkout_routes
+            subtitle: module · 1 artefact
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: bookshop.api.checkout_routes::function:checkout
+                name: checkout
+                subtitle: function
+      - id: bookshop.application
+        name: application
+        subtitle: package · 2 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: bookshop.application.checkout
+            name: checkout
+            subtitle: module · 1 artefact
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: bookshop.application.checkout::class:CheckoutService
+                name: CheckoutService
+                subtitle: class
+          - id: bookshop.application.inventory
+            name: inventory
+            subtitle: module · 1 artefact
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: bookshop.application.inventory::class:InventoryService
+                name: InventoryService
+                subtitle: class
+      - id: bookshop.domain
+        name: domain
+        subtitle: package · 4 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: bookshop.domain.book
+            name: book
+            subtitle: module · 3 artefacts
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: bookshop.domain.book::class:Genre
+                name: Genre
+                subtitle: class
+              - id: bookshop.domain.book::class:Author
+                name: Author
+                subtitle: class
+              - id: bookshop.domain.book::class:Book
+                name: Book
+                subtitle: class
+          - id: bookshop.domain.catalog
+            name: catalog
+            subtitle: module · 1 artefact
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: bookshop.domain.catalog::class:Catalog
+                name: Catalog
+                subtitle: class
+          - id: bookshop.domain.order
+            name: order
+            subtitle: module · 4 artefacts
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: bookshop.domain.order::class:OrderStatus
+                name: OrderStatus
+                subtitle: class
+              - id: bookshop.domain.order::class:LineItem
+                name: LineItem
+                subtitle: class
+              - id: bookshop.domain.order::class:Order
+                name: Order
+                subtitle: class
+              - id: bookshop.domain.order::class:EmptyOrderError
+                name: EmptyOrderError
+                subtitle: class
+          - id: bookshop.domain.pricing
+            name: pricing
+            subtitle: module · 3 artefacts
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: bookshop.domain.pricing::function:total_quantity
+                name: total_quantity
+                subtitle: function
+              - id: bookshop.domain.pricing::function:discount_rate
+                name: discount_rate
+                subtitle: function
+              - id: bookshop.domain.pricing::function:net_cents
+                name: net_cents
+                subtitle: function
+      - id: bookshop.infrastructure
+        name: infrastructure
+        subtitle: package · 3 folders
+        x-triton-node-type: package
+        x-triton-package-scope: true
+        children:
+          - id: bookshop.infrastructure.book_repository
+            name: book_repository
+            subtitle: module · 1 artefact
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: bookshop.infrastructure.book_repository::class:InMemoryBookRepository
+                name: InMemoryBookRepository
+                subtitle: class
+          - id: bookshop.infrastructure.order_repository
+            name: order_repository
+            subtitle: module · 1 artefact
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: bookshop.infrastructure.order_repository::class:InMemoryOrderRepository
+                name: InMemoryOrderRepository
+                subtitle: class
+          - id: bookshop.infrastructure.payment_gateway
+            name: payment_gateway
+            subtitle: module · 2 artefacts
+            x-triton-project-kind: module
+            x-triton-inner-artefacts:
+              - id: bookshop.infrastructure.payment_gateway::class:PaymentError
+                name: PaymentError
+                subtitle: class
+              - id: bookshop.infrastructure.payment_gateway::class:FakePaymentGateway
+                name: FakePaymentGateway
+                subtitle: class
+perspectives:
+  - name: dependencies
+    orientation: leftToRight
+    color: royalblue
+    relations:
+      - from: bookshop.api.catalog_routes
+        to: bookshop.application.inventory
+        label: imports
+      - from: bookshop.api.catalog_routes
+        to: bookshop.domain.book
+        label: imports
+      - from: bookshop.api.checkout_routes
+        to: bookshop.application.checkout
+        label: imports
+      - from: bookshop.api.checkout_routes
+        to: bookshop.domain.order
+        label: imports
+      - from: bookshop.application.checkout
+        to: bookshop.domain
+        label: imports
+      - from: bookshop.application.checkout
+        to: bookshop.domain.order
+        label: imports
+      - from: bookshop.application.checkout
+        to: bookshop.infrastructure.order_repository
+        label: imports
+      - from: bookshop.application.checkout
+        to: bookshop.infrastructure.payment_gateway
+        label: imports
+      - from: bookshop.application.inventory
+        to: bookshop.domain.book
+        label: imports
+      - from: bookshop.application.inventory
+        to: bookshop.infrastructure.book_repository
+        label: imports
+      - from: bookshop.domain.catalog
+        to: bookshop.domain.book
+        label: imports
+      - from: bookshop.domain.order
+        to: bookshop.domain.book
+        label: imports
+      - from: bookshop.domain.pricing
+        to: bookshop.domain.order
+        label: imports
+      - from: bookshop.infrastructure.book_repository
+        to: bookshop.domain.book
+        label: imports
+      - from: bookshop.infrastructure.book_repository
+        to: bookshop.domain.catalog
+        label: imports
+      - from: bookshop.infrastructure.order_repository
+        to: bookshop.domain.order
+        label: imports

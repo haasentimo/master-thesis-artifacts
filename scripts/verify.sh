@@ -30,4 +30,7 @@ sha256sum -c - <<'EOF'
 6cc16ef9c041b8721500fc521a437ea090fcacd209cf275561f673a1e52b7018  freezes/z3/tools/check_doc_invariants@02d8fc8.py
 EOF
 
+echo "== extractor snapshot (git blob SHA1 against SNAPSHOT.json, commit 5c0b65a)"
+PYTHONDONTWRITEBYTECODE=1 python3 tools/evaluate_z1_snapshot.py --verify-snapshot
+
 echo "all checks passed"

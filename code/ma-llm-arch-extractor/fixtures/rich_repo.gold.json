@@ -1,0 +1,13 @@
+{
+  "bookshop.api.catalog_routes": "api",
+  "bookshop.api.checkout_routes": "api",
+  "bookshop.application.checkout": "application",
+  "bookshop.application.inventory": "application",
+  "bookshop.domain.book": "domain",
+  "bookshop.domain.catalog": "domain",
+  "bookshop.domain.order": "domain",
+  "bookshop.domain.pricing": "domain",
+  "bookshop.infrastructure.book_repository": "infrastructure",
+  "bookshop.infrastructure.order_repository": "infrastructure",
+  "bookshop.infrastructure.payment_gateway": "infrastructure"
+}

@@ -26,6 +26,9 @@ repository `masterarbeit`, freeze date, commit and full SHA256.
 | Z1 | Runs K3 | `data/z1/k3/` | same | — | — | see `data/z1/k3/SHA256SUMS` (85 entries) | nvidia-nemotron-3-super-120b, DigitalOcean |
 | Z1 | Evaluation (JSON) | `data/z1/auswertung/z1_auswertung.json` | same | 01.09.2026 | — | `6e6e005f7e634ecb08ceb21bd89c51d6083a2e37cdef7e56e4ff8a07353264f0` | Output of `tools/evaluate_z1.py` |
 | Z1 | Evaluation (Markdown) | `data/z1/auswertung/z1_auswertung.md` | same | 01.09.2026 | — | `18180bb4e64098977a56e1f89848f981592edc25181cf675bc73e464481d32b0` | |
+| Z1/Z2 | Extractor snapshot | `code/ma-llm-arch-extractor/` | repository `ma-llm-arch-extractor` (private), 59 versioned files | 31.08.2026 | `5c0b65a82cc3d8af47c022d779ff63d8a20a9e08` | per file in `code/ma-llm-arch-extractor/SNAPSHOT.json` | `git archive`, no history; all 28 `REGISTERED_BLOBS` of `run_z1.py` and the 6 instrument blobs of `z1_auswertung.json` match; inclusions/exclusions in `code/README.md` |
+| Z1/Z2 | Snapshot index | `code/ma-llm-arch-extractor/SNAPSHOT.json` | — (created for this package) | — | — | top-level `SHA256SUMS` | Git blob SHA1, SHA256 and size per file |
+| Z1 | Parse-assertion fixtures | `tests/fixtures/z1/` | same | — | thesis state `f5dca31` | top-level `SHA256SUMS` | 17 files; used by `evaluate_z1.py --selftest` and the `run_z1.py` self-test; no measurement |
 
 ## Z2 — architecture rule derivation
 
@@ -98,6 +101,7 @@ necessarily the versions of every individual run. The run reports name the tool 
 | Tool | Status | Note |
 |---|---|---|
 | `run_z1.py`, `evaluate_z1.py`, `check_z1_delivery.py`, `z1_tokenizer.py` | included | Z1 |
+| `evaluate_z1_snapshot.py` | **added for this package**, not in the source repository | Replay mode: runs the unchanged `evaluate_z1.py` against `code/ma-llm-arch-extractor/` and replaces only its two git look-ups (HEAD, blob SHA1) with a check against `SNAPSHOT.json`; see README "Rerunning the Z1 evaluation" |
 | `run_z2.py`, `reduce_facts.py`, `measure_prompt_tokens.py`, `prepare_z2_review.py`, `tally_z2_review.py`, `prepare_z2_overlap.py`, `tally_z2_overlap.py`, `z2_extractor_requirements.txt`, `fixtures/z2/` | included | Z2; named in `data/z2/MANIFEST.md`; fixtures are used by `run_z2.py` |
 | `run_campaign.py`, `campaign_spec.py`, `postrun_check.py`, `validate_soll.py`, `build_control_set.py`, `generate_soll.py`, `evaluate_control_run.py` | included | Z3 runs and Soll |
 | `evaluate_campaign.py` | included | `b66be750f9b7cf524b9afa8edbab0138d17c409de4637465eb82d0f079a93428` = the version of the canonical run C14 |
@@ -122,8 +126,8 @@ are not otherwise touched (`git diff 02d8fc8 f328761 -- tools/check_doc_invarian
 | `analyze_control_findings.py`, `describe_campaign.py`, `postcheck_run.py`, `bundle-docs.sh` | not included | Not referenced by any measurement document, or document tooling only |
 | `z4_generate_soll.py` | not included | Z4 |
 
-External dependencies not included: the extractor package `llm_arch` (Z1/Z2) and the Triton
-conformance checker (Z3).
+The extractor package `llm_arch` (Z1/Z2) is included as a snapshot under `code/` (see the Z1
+table). External dependency not included: the Triton conformance checker (Z3).
 
 ## Deliberately not included
 
