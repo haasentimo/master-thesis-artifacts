@@ -1,0 +1,363 @@
+{
+  "result_schema_version": "1",
+  "run_id": "20260824T153243Z-c37ec225",
+  "timestamp": "2026-08-24T15:32:57.364Z",
+  "provenance": {
+    "topology_sha256": "e97013685ff217d85095b637459a2eb02d2f4effb9f9ad44d1f45798144ec25d",
+    "rules_sha256": "72fa851ffd9eae3865827f959e962f564216fe48948e792944537d64a8d87b95",
+    "prompt_template_sha256": "65e78f38e7b1fee20000ea70c654df042f5e0831fc6a68ccb340f833bd915035",
+    "user_prompt_render_sha256": "45780c70c486ea8f608d1b2ca11178049a02b7a6ece9ba33fcdc8d1b815b03ef",
+    "checker_git_head": "348ca9daa456af4954f11f7152fc45201035297e",
+    "target_repo_git_head": "0d651041ed87dd03f2f78359713633fac01c0a66",
+    "base_ref": "0d651041ed87dd03f2f78359713633fac01c0a66",
+    "rule_graph_mode": "diff",
+    "model_requested": "qwen2.5-coder:7b",
+    "endpoint": "http://localhost:11434/v1",
+    "seed_requested": 42,
+    "temperature_requested": 0,
+    "runs_requested": 3,
+    "timeout_ms": 240000,
+    "changed_files_count": 0,
+    "control_files_count": 1
+  },
+  "runs": [
+    {
+      "run_index": 0,
+      "findings": [
+        {
+          "match_key": "FORBIDDEN_RELATION|orders_models|depot.orders.models.discount_models|orders_models->core",
+          "source": "llm",
+          "rule_id": "R-INDEP-1",
+          "category": "FORBIDDEN_RELATION",
+          "component": "orders_models",
+          "module": "depot.orders.models.discount_models",
+          "file": "src/depot/orders/models/discount_models.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "orders_models",
+            "to": "core"
+          },
+          "reason": "The `orders_models` component imports from the `core` component, which is not allowed according to rule R-INDEP-1. The `orders` and `billing` contexts are mutually independent, and this import violates that rule.",
+          "suggestion": "Refactor the import to use a dependency that is allowed between `orders_models` and `core`, such as an adapter or a service that provides the necessary functionality.",
+          "confidence": null
+        },
+        {
+          "match_key": "FORBIDDEN_SIGNATURE_TYPE|orders_models|depot.orders.models.discount_models|sqlalchemy.orm.Session",
+          "source": "llm",
+          "rule_id": "R-FRAMEWORK-1",
+          "category": "FORBIDDEN_SIGNATURE_TYPE",
+          "component": "orders_models",
+          "module": "depot.orders.models.discount_models",
+          "file": "src/depot/orders/models/discount_models.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "sqlalchemy.orm.Session"
+          },
+          "reason": "The `house_codes` function has a return type of `list[Discount]`, which is a public signature. The return type `sqlalchemy.orm.Session` is not allowed in public signatures according to rule R-FRAMEWORK-1. This import violates that rule.",
+          "suggestion": "Refactor the function to use a built-in or project-local type for the return type, rather than a type from the `sqlalchemy.orm` namespace.",
+          "confidence": null
+        },
+        {
+          "match_key": "STRUCTURAL_PLACEMENT|orders_models|depot.orders.models.discount_models|depot.orders.models.discount_models",
+          "source": "llm",
+          "rule_id": "R-PLACE-1",
+          "category": "STRUCTURAL_PLACEMENT",
+          "component": "orders_models",
+          "module": "depot.orders.models.discount_models",
+          "file": "src/depot/orders/models/discount_models.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "depot.orders.models.discount_models"
+          },
+          "reason": "The module `depot.orders.models.discount_models` has a name that ends in `_models`, which implies that it belongs in the `models` package of the `orders` context. However, the module is located in the `models` package of the `orders` context, which is correct. This module name does not break the naming convention of its target layer.",
+          "suggestion": "No action is required. The module name is correctly placed according to the naming convention.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-INDEP-1",
+          "scope": {
+            "components": [
+              "orders_api",
+              "orders_mappers",
+              "orders_models",
+              "orders_repository",
+              "orders_services",
+              "orders_services_pricing",
+              "billing_api",
+              "billing_mappers",
+              "billing_models",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/orders/models/discount_models.py"
+        },
+        {
+          "rule_id": "R-FRAMEWORK-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "orders_models",
+              "billing_models"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/orders/models/discount_models.py"
+        },
+        {
+          "rule_id": "R-PLACE-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "identity_repository",
+              "orders_models",
+              "orders_repository",
+              "billing_models",
+              "billing_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/orders/models/discount_models.py"
+        }
+      ]
+    },
+    {
+      "run_index": 1,
+      "findings": [
+        {
+          "match_key": "FORBIDDEN_RELATION|orders_models|depot.orders.models.discount_models|orders_models->core",
+          "source": "llm",
+          "rule_id": "R-INDEP-1",
+          "category": "FORBIDDEN_RELATION",
+          "component": "orders_models",
+          "module": "depot.orders.models.discount_models",
+          "file": "src/depot/orders/models/discount_models.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "orders_models",
+            "to": "core"
+          },
+          "reason": "The `orders_models` component imports from the `core` component, which is not allowed according to rule R-INDEP-1. The `orders` and `billing` contexts are mutually independent, and this import violates that rule.",
+          "suggestion": "Refactor the import to use a dependency that is allowed between `orders_models` and `core`, such as an adapter or a service that provides the necessary functionality.",
+          "confidence": null
+        },
+        {
+          "match_key": "FORBIDDEN_SIGNATURE_TYPE|orders_models|depot.orders.models.discount_models|sqlalchemy.orm.Session",
+          "source": "llm",
+          "rule_id": "R-FRAMEWORK-1",
+          "category": "FORBIDDEN_SIGNATURE_TYPE",
+          "component": "orders_models",
+          "module": "depot.orders.models.discount_models",
+          "file": "src/depot/orders/models/discount_models.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "sqlalchemy.orm.Session"
+          },
+          "reason": "The `house_codes` function has a return type of `list[Discount]`, which is a public signature. The return type `sqlalchemy.orm.Session` is not allowed in public signatures according to rule R-FRAMEWORK-1. This import violates that rule.",
+          "suggestion": "Refactor the function to use a built-in or project-local type for the return type, rather than a type from the `sqlalchemy.orm` namespace.",
+          "confidence": null
+        },
+        {
+          "match_key": "STRUCTURAL_PLACEMENT|orders_models|depot.orders.models.discount_models|depot.orders.models.discount_models",
+          "source": "llm",
+          "rule_id": "R-PLACE-1",
+          "category": "STRUCTURAL_PLACEMENT",
+          "component": "orders_models",
+          "module": "depot.orders.models.discount_models",
+          "file": "src/depot/orders/models/discount_models.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "depot.orders.models.discount_models"
+          },
+          "reason": "The module `depot.orders.models.discount_models` has a name that ends in `_models`, which implies that it belongs in the `models` package of its bounded context. However, the module is located in the `models` package, which is correct. The naming convention is not violated in this case.",
+          "suggestion": "No action is required. The module name is correctly placed according to the naming convention.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-INDEP-1",
+          "scope": {
+            "components": [
+              "orders_api",
+              "orders_mappers",
+              "orders_models",
+              "orders_repository",
+              "orders_services",
+              "orders_services_pricing",
+              "billing_api",
+              "billing_mappers",
+              "billing_models",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/orders/models/discount_models.py"
+        },
+        {
+          "rule_id": "R-FRAMEWORK-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "orders_models",
+              "billing_models"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/orders/models/discount_models.py"
+        },
+        {
+          "rule_id": "R-PLACE-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "identity_repository",
+              "orders_models",
+              "orders_repository",
+              "billing_models",
+              "billing_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/orders/models/discount_models.py"
+        }
+      ]
+    },
+    {
+      "run_index": 2,
+      "findings": [
+        {
+          "match_key": "FORBIDDEN_RELATION|orders_models|depot.orders.models.discount_models|orders_models->core",
+          "source": "llm",
+          "rule_id": "R-INDEP-1",
+          "category": "FORBIDDEN_RELATION",
+          "component": "orders_models",
+          "module": "depot.orders.models.discount_models",
+          "file": "src/depot/orders/models/discount_models.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "orders_models",
+            "to": "core"
+          },
+          "reason": "The `orders_models` component imports from the `core` component, which is not allowed according to rule R-INDEP-1. The `orders` and `billing` contexts are mutually independent, and this import violates that rule.",
+          "suggestion": "Refactor the import to use a dependency that is allowed between `orders_models` and `core`, such as an adapter or a service that provides the necessary functionality.",
+          "confidence": null
+        },
+        {
+          "match_key": "FORBIDDEN_SIGNATURE_TYPE|orders_models|depot.orders.models.discount_models|sqlalchemy.orm.Session",
+          "source": "llm",
+          "rule_id": "R-FRAMEWORK-1",
+          "category": "FORBIDDEN_SIGNATURE_TYPE",
+          "component": "orders_models",
+          "module": "depot.orders.models.discount_models",
+          "file": "src/depot/orders/models/discount_models.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "sqlalchemy.orm.Session"
+          },
+          "reason": "The `house_codes` function has a return type of `list[Discount]`, which is a public signature. The return type `sqlalchemy.orm.Session` is not allowed in public signatures according to rule R-FRAMEWORK-1. This import violates that rule.",
+          "suggestion": "Refactor the function to use a built-in or project-local type for the return type, rather than a type from the `sqlalchemy.orm` namespace.",
+          "confidence": null
+        },
+        {
+          "match_key": "STRUCTURAL_PLACEMENT|orders_models|depot.orders.models.discount_models|depot.orders.models.discount_models",
+          "source": "llm",
+          "rule_id": "R-PLACE-1",
+          "category": "STRUCTURAL_PLACEMENT",
+          "component": "orders_models",
+          "module": "depot.orders.models.discount_models",
+          "file": "src/depot/orders/models/discount_models.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "depot.orders.models.discount_models"
+          },
+          "reason": "The module `depot.orders.models.discount_models` has a name that ends in `_models`, which implies that it belongs in the `models` package of its bounded context. However, the module is located in the `models` package, which is correct. The naming convention is not violated in this case.",
+          "suggestion": "No action is required. The module name is correctly placed according to the naming convention.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-INDEP-1",
+          "scope": {
+            "components": [
+              "orders_api",
+              "orders_mappers",
+              "orders_models",
+              "orders_repository",
+              "orders_services",
+              "orders_services_pricing",
+              "billing_api",
+              "billing_mappers",
+              "billing_models",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/orders/models/discount_models.py"
+        },
+        {
+          "rule_id": "R-FRAMEWORK-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "orders_models",
+              "billing_models"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/orders/models/discount_models.py"
+        },
+        {
+          "rule_id": "R-PLACE-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "identity_repository",
+              "orders_models",
+              "orders_repository",
+              "billing_models",
+              "billing_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/orders/models/discount_models.py"
+        }
+      ]
+    }
+  ],
+  "validity": {
+    "status": "completed",
+    "runs_completed": 3,
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 0,
+    "skipped_count": 0,
+    "invalid_reasons": [],
+    "exit_code": 1
+  },
+  "skipped": []
+}

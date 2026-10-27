@@ -58,7 +58,8 @@ protocols themselves; the current versions are in `docs/protokolle/`.
   identically today.
 - The package is meant for checking the frozen inputs, the raw artifacts and the
   deterministic evaluation. The archived artifacts permit independent inspection of the
-  reported results. The Z3 evaluation can be rerun from the included campaign artifacts,
+  reported results. The Z3 evaluation can be rerun from the included campaign artifacts
+  and clean-control stocks (see [Rerunning the C14 evaluation](#rerunning-the-c14-evaluation)),
   while parts of Z1 depend on the separately versioned `llm_arch` extractor.
 - A byte-identical regeneration of all model responses is **not** claimed.
 - K3 depended on a hosted provider (DigitalOcean endpoint, not pinned). Its valid runs came
@@ -81,6 +82,7 @@ protocols themselves; the current versions are in `docs/protokolle/`.
 | `data/z2/` | Z2 inputs, instrument measurements, runs (K2/K3, B1) and rating |
 | `data/soll/` | Z3 target model: the seven registered measurement inputs |
 | `data/campaign/` | Z3 campaign: raw artifacts K1–K5, run manifests, control runs, evaluation runs C11–C14 |
+| `data/c3b-k2/`, `data/c3b-k3/` | Z3 clean-control stocks (C3b) for K2 and K3: the 52 control modules on the baseline, input of the C14 evaluation |
 | `data/testrepo/` | Git bundles of the synthetic test repository |
 | `data/checker/` | Reference to the checker state (no code, see its README) |
 | `tools/` | Runner and evaluation tools as used, unchanged |
@@ -110,12 +112,62 @@ The script checks, from the repository root:
 1. the top-level `SHA256SUMS` (`sha256sum -c SHA256SUMS`), which covers every file of this
    repository except `.git/`, itself and ignored local-only files;
 2. every nested `SHA256SUMS` from the original thesis repository. Those under `data/z1/`,
-   `data/z2/`, `data/soll/` and `data/testrepo/` use paths relative to their own directory;
+   `data/z2/`, `data/soll/`, `data/testrepo/`, `data/c3b-k2/` and `data/c3b-k3/` use paths
+   relative to their own directory;
    those under `data/campaign/` use paths relative to the repository root, so they are
    checked from there;
 3. the three frozen protocols in `freezes/` against the SHA256 recorded at freeze time.
 
 It exits non-zero on the first mismatch and changes no file.
+
+## Rerunning the C14 evaluation
+
+`tools/evaluate_campaign.py` regenerates the canonical Z3 result C14
+(`data/campaign/eval/c14_eval_full.json` / `.md`) from data in this repository only. It
+needs Python 3 with the standard library (it imports `tools/match_k4k5.py`, nothing else)
+and reads, at its default paths:
+
+| Input | Path | Role |
+|---|---|---|
+| Target model | `data/soll/` | `injection_manifest.json`, `control_files.txt` (denominator 52) |
+| Clean-control stocks | `data/c3b-k2/`, `data/c3b-k3/` | False-positive base rate and the clean-state side of every K2/K3 cell |
+| Campaign | `data/campaign/` | Run manifests (source of T7), `journal.jsonl`, `MANIFEST.md` files, raw artifacts K1–K5 |
+
+From the repository root, writing to a scratch directory so the archived files stay
+untouched:
+
+```bash
+out=$(mktemp -d)
+python3 tools/evaluate_campaign.py --with-campaign \
+  --json-out "$out/c14.json" --markdown-out "$out/c14.md"
+for f in json md; do
+  sed "s|$(pwd -P)|/home/haasentimo/ma/masterarbeit|g" "$out/c14.$f" | sha256sum
+done
+```
+
+Expected, as registered in the archived run head (`c14_run_head.rohausgabe_sha256`):
+
+```
+c7c6d003946129f64b4ae7b180d1a251cf4e5c243ed9bf022918a22cd359280a  (json)
+759c72c89f2cf30ed60539ba02ac5fb0028d71ac5c81d407348e1b66dba8aa24  (md)
+```
+
+**The one normalization.** The tool records the absolute paths of the files it reads
+(JSON keys `reads` and `journal`, and one `**Quelle:**` line in the Markdown). The original
+run was made in `/home/haasentimo/ma/masterarbeit`, the working directory recorded in the
+run head. The `sed` above replaces the resolved repository root of the rerun with that
+original root, as a literal string, and changes nothing else. No value, count, marker or
+ordering is touched.
+
+**Why the archived files themselves have different hashes.** The archived
+`c14_eval_full.json` / `.md` are the raw output plus a run head prepended afterwards: a
+top-level JSON key `c14_run_head` and 60 lines of Markdown above the first harness line.
+The raw output hashes above are the ones the run head registers. Equivalently, the
+archived JSON without `c14_run_head` equals the normalized rerun JSON, and the archived
+Markdown ends with the normalized rerun Markdown.
+
+Without `data/c3b-k2/` and `data/c3b-k3/`, the tool aborts with
+`StatisticsError: no median for empty data`.
 
 ## Public-release note
 

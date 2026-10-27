@@ -1,0 +1,6170 @@
+{
+  "_meta": {
+    "purpose": "Deterministic re-render of the K2 prompt-building pipeline for the 52 control files (loadSoll -> extractFacts -> buildPromptContext -> buildUserPrompt, run.ts:115-138), for Auftrag 'K2-Kontrolllauf: Bezug der Findings zur gepruften Datei' Teil B.5 and D.1. NOT a new measurement, NO model call: pure function output over already-registered, already-hashed inputs (checker_git_head 348ca9d, data/soll/*, target_repo_git_head 0d65104).",
+    "method": "Standalone driver script outside tritongraph (never written into that repo), bundled with tritongraph's own local esbuild devDependency (packages/triton-conformance/node_modules), run against a checkout of data/testrepo/ma-conformance-testrepo-baseline.bundle (HEAD 0d651041ed87dd03f2f78359713633fac01c0a66, identical to target_repo_git_head).",
+    "verification": "For all 52 files, computed_prompt_hash below reproduces byte-for-byte the archived `prompt_hash` field of every llm_call record in data/c3b-k2/runs/ for that file (all 3 run-indices, 156 calls total, 0 mismatches).",
+    "checker_git_head": "348ca9daa456af4954f11f7152fc45201035297e",
+    "target_repo_git_head": "0d651041ed87dd03f2f78359713633fac01c0a66"
+  },
+  "facts": [
+    {
+      "path": "src/depot/billing/api/routes.py",
+      "module": "depot.billing.api.routes",
+      "component": "billing_api",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.billing.mappers.invoice_mapper",
+          "target_component": "billing_mappers"
+        },
+        {
+          "target": "depot.billing.mappers.payment_mapper",
+          "target_component": "billing_mappers"
+        },
+        {
+          "target": "depot.billing.services.invoice_service",
+          "target_component": "billing_services"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "status_for",
+          "kind": "function",
+          "params": [
+            {
+              "name": "error",
+              "annotation": "depot.core.errors.DepotError"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "InvoiceRoutes.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "invoices",
+              "annotation": "depot.billing.services.invoice_service.InvoiceService"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "InvoiceRoutes.post_invoice",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "net_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "InvoiceRoutes.get_invoice",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "InvoiceRoutes.post_issue",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            },
+            {
+              "name": "issued_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "InvoiceRoutes.get_document_header",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, str]"
+        },
+        {
+          "symbol": "InvoiceRoutes.get_invoices_of_customer",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "PaymentRoutes.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "invoices",
+              "annotation": "depot.billing.services.invoice_service.InvoiceService"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "PaymentRoutes.post_statement",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "notices",
+              "annotation": "list[dict[str, object]]"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "PaymentRoutes.post_settlement",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "dict[str, object]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-INDEP-1",
+        "R-CYCLE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3608,
+      "total_prompt_len": 4900,
+      "computed_prompt_hash": "07e66011"
+    },
+    {
+      "path": "src/depot/billing/api/schemas.py",
+      "module": "depot.billing.api.schemas",
+      "component": "billing_api",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "error_body",
+          "kind": "function",
+          "params": [
+            {
+              "name": "error",
+              "annotation": "depot.core.errors.DepotError"
+            }
+          ],
+          "returns": "dict[str, str]"
+        },
+        {
+          "symbol": "InvoiceDraft.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "net_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "InvoiceDraft.validate",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "SettlementNotice.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "SettlementNotice.validate",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "StatementBatch.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "notices",
+              "annotation": "list[dict[str, object]]"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "StatementBatch.validate",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-INDEP-1",
+        "R-CYCLE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2918,
+      "total_prompt_len": 4210,
+      "computed_prompt_hash": "991ee1bf"
+    },
+    {
+      "path": "src/depot/billing/mappers/invoice_mapper.py",
+      "module": "depot.billing.mappers.invoice_mapper",
+      "component": "billing_mappers",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.billing.models.invoice_models",
+          "target_component": "billing_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "to_payload",
+          "kind": "function",
+          "params": [
+            {
+              "name": "invoice",
+              "annotation": "depot.billing.models.invoice_models.Invoice"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "to_document_header",
+          "kind": "function",
+          "params": [
+            {
+              "name": "invoice",
+              "annotation": "depot.billing.models.invoice_models.Invoice"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "check_number",
+          "kind": "function",
+          "params": [
+            {
+              "name": "number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "is_settled",
+          "kind": "function",
+          "params": [
+            {
+              "name": "invoice",
+              "annotation": "depot.billing.models.invoice_models.Invoice"
+            }
+          ],
+          "returns": "bool"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-CYCLE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2050,
+      "total_prompt_len": 3342,
+      "computed_prompt_hash": "89932570"
+    },
+    {
+      "path": "src/depot/billing/mappers/payment_mapper.py",
+      "module": "depot.billing.mappers.payment_mapper",
+      "component": "billing_mappers",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.billing.models.payment_models",
+          "target_component": "billing_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "to_payload",
+          "kind": "function",
+          "params": [
+            {
+              "name": "payment",
+              "annotation": "depot.billing.models.payment_models.Payment"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "to_remittance_line",
+          "kind": "function",
+          "params": [
+            {
+              "name": "payment",
+              "annotation": "depot.billing.models.payment_models.Payment"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "normalise_notice",
+          "kind": "function",
+          "params": [
+            {
+              "name": "notice",
+              "annotation": "dict[str, object]"
+            }
+          ],
+          "returns": "dict[str, object]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-CYCLE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 1998,
+      "total_prompt_len": 3290,
+      "computed_prompt_hash": "11e312ff"
+    },
+    {
+      "path": "src/depot/billing/models/invoice_models.py",
+      "module": "depot.billing.models.invoice_models",
+      "component": "billing_models",
+      "imports": [
+        {
+          "target": "sqlalchemy.orm",
+          "target_component": null
+        },
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "Invoice.vat_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "Invoice.gross_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "Invoice.open_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "Invoice.issue",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "issued_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Invoice.settle",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "Invoice.due_at",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "float | None"
+        },
+        {
+          "symbol": "Invoice.is_overdue",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "now_epoch",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3591,
+      "total_prompt_len": 4883,
+      "computed_prompt_hash": "2fa5e98f"
+    },
+    {
+      "path": "src/depot/billing/models/invoice_view_models.py",
+      "module": "depot.billing.models.invoice_view_models",
+      "component": "billing_models",
+      "imports": [
+        {
+          "target": "sqlalchemy.orm",
+          "target_component": null
+        },
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "DebtorStatementLine.bucket",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "DebtorStatementLine.counts_towards_dunning",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "DebtorStatementLine.printed_amount",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "DebtorStatementLine.headline",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "str"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3469,
+      "total_prompt_len": 4761,
+      "computed_prompt_hash": "1c85361f"
+    },
+    {
+      "path": "src/depot/billing/models/legacy_tax_models.py",
+      "module": "depot.billing.models.legacy_tax_models",
+      "component": "billing_models",
+      "imports": [],
+      "signatures": [
+        {
+          "symbol": "LegacyTaxRate.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "code",
+              "annotation": "str"
+            },
+            {
+              "name": "percent_scaled",
+              "annotation": "int"
+            },
+            {
+              "name": "valid_from",
+              "annotation": "str"
+            },
+            {
+              "name": "valid_to",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LegacyTaxRate.applies_on",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "LegacyTaxRate.tax_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "net_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "LegacyTaxTable.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LegacyTaxTable.load_line",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "line",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "LegacyTaxTable.rate_on",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            }
+          ],
+          "returns": "LegacyTaxRate | None"
+        },
+        {
+          "symbol": "LegacyTaxTable.codes",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "list[str]"
+        },
+        {
+          "symbol": "LegacyTaxTable.size",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3675,
+      "total_prompt_len": 4967,
+      "computed_prompt_hash": "b7f01ec9"
+    },
+    {
+      "path": "src/depot/billing/models/payment_models.py",
+      "module": "depot.billing.models.payment_models",
+      "component": "billing_models",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "cash_at_counter",
+          "kind": "function",
+          "params": [
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            },
+            {
+              "name": "received_at",
+              "annotation": "float"
+            },
+            {
+              "name": "slip",
+              "annotation": "str"
+            }
+          ],
+          "returns": "Payment"
+        },
+        {
+          "symbol": "Payment.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            },
+            {
+              "name": "method",
+              "annotation": "str"
+            },
+            {
+              "name": "received_at",
+              "annotation": "float"
+            },
+            {
+              "name": "remittance_note",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Payment.normalise",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "Payment.looks_matchable",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "Payment.is_reversible",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "Payment.printed_amount",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "str"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3604,
+      "total_prompt_len": 4896,
+      "computed_prompt_hash": "419e142b"
+    },
+    {
+      "path": "src/depot/billing/repository/invoice_query.py",
+      "module": "depot.billing.repository.invoice_query",
+      "component": "billing_repository",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.billing.models.payment_models",
+          "target_component": "billing_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "InvoiceQuery.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "InvoiceQuery.settled_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "invoice_number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "InvoiceQuery.book",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "payment",
+              "annotation": "PaymentRecord"
+            },
+            {
+              "name": "known_numbers",
+              "annotation": "list[str]"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "InvoiceQuery.match",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "payment",
+              "annotation": "PaymentRecord"
+            },
+            {
+              "name": "known_numbers",
+              "annotation": "list[str]"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "InvoiceQuery.payments_of",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "invoice_number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "list[PaymentRecord]"
+        },
+        {
+          "symbol": "InvoiceQuery.unmatched_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "InvoiceQuery.last_payment_at",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "invoice_number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "float | None"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-INDEP-1",
+        "R-PLACE-1",
+        "R-SIG-3"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 4210,
+      "total_prompt_len": 5502,
+      "computed_prompt_hash": "06924d37"
+    },
+    {
+      "path": "src/depot/billing/repository/invoice_repo.py",
+      "module": "depot.billing.repository.invoice_repo",
+      "component": "billing_repository",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.billing.models.invoice_models",
+          "target_component": "billing_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "InvoiceRepository.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "ids",
+              "annotation": "depot.core.ports.IdGenerator"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "InvoiceRepository.create",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "net_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "InvoiceRepository.get",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "InvoiceRecord | None"
+        },
+        {
+          "symbol": "InvoiceRepository.issue",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            },
+            {
+              "name": "issued_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "InvoiceRepository.settle",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "InvoiceRepository.count_reminder",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "InvoiceRepository.overdue",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "now_epoch",
+              "annotation": "float"
+            }
+          ],
+          "returns": "list[str]"
+        },
+        {
+          "symbol": "InvoiceRepository.of_customer",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "list[str]"
+        },
+        {
+          "symbol": "InvoiceRepository.open_total_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-INDEP-1",
+        "R-PLACE-1",
+        "R-SIG-3"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 4412,
+      "total_prompt_len": 5704,
+      "computed_prompt_hash": "dd19d3b0"
+    },
+    {
+      "path": "src/depot/billing/repository/legacy_invoice_index.py",
+      "module": "depot.billing.repository.legacy_invoice_index",
+      "component": "billing_repository",
+      "imports": [],
+      "signatures": [
+        {
+          "symbol": "LegacyInvoiceIndex.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LegacyInvoiceIndex.load_line",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "line",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "LegacyInvoiceIndex.looks_legacy",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "old_number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "LegacyInvoiceIndex.resolve",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "old_number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str | None"
+        },
+        {
+          "symbol": "LegacyInvoiceIndex.size",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-INDEP-1",
+        "R-PLACE-1",
+        "R-SIG-3"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3904,
+      "total_prompt_len": 5196,
+      "computed_prompt_hash": "76654162"
+    },
+    {
+      "path": "src/depot/billing/services/dunning_service.py",
+      "module": "depot.billing.services.dunning_service",
+      "component": "billing_services",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.billing.repository.invoice_query",
+          "target_component": "billing_repository"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "DunningService.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "payments",
+              "annotation": "depot.billing.repository.invoice_query.InvoiceQuery"
+            },
+            {
+              "name": "notifier",
+              "annotation": "depot.core.ports.NotificationSender"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "DunningService.template_for",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reminders_sent",
+              "annotation": "int"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "DunningService.is_quiet",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "invoice_number",
+              "annotation": "str"
+            },
+            {
+              "name": "now_epoch",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "DunningService.should_remind",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "invoice_number",
+              "annotation": "str"
+            },
+            {
+              "name": "gross_cents",
+              "annotation": "int"
+            },
+            {
+              "name": "now_epoch",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "DunningService.remind",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "invoice_number",
+              "annotation": "str"
+            },
+            {
+              "name": "recipient",
+              "annotation": "str"
+            },
+            {
+              "name": "gross_cents",
+              "annotation": "int"
+            },
+            {
+              "name": "reminders_sent",
+              "annotation": "int"
+            },
+            {
+              "name": "now_epoch",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "DunningService.unmatched_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PROTECT-1",
+        "R-INDEP-1",
+        "R-PORT-4"
+      ],
+      "allowed_edges_count": 5,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3942,
+      "total_prompt_len": 5234,
+      "computed_prompt_hash": "24fe5ba2"
+    },
+    {
+      "path": "src/depot/billing/services/invoice_service.py",
+      "module": "depot.billing.services.invoice_service",
+      "component": "billing_services",
+      "imports": [
+        {
+          "target": "depot.core.adapters.storage",
+          "target_component": "core_adapters"
+        },
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.identity.services.customer_service",
+          "target_component": "identity_services"
+        },
+        {
+          "target": "depot.billing.repository.invoice_repo",
+          "target_component": "billing_repository"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "InvoiceService.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "invoices",
+              "annotation": "depot.billing.repository.invoice_repo.InvoiceRepository"
+            },
+            {
+              "name": "customers",
+              "annotation": "depot.identity.services.customer_service.CustomerService"
+            },
+            {
+              "name": "notifier",
+              "annotation": "depot.core.ports.NotificationSender"
+            },
+            {
+              "name": "documents",
+              "annotation": "depot.core.adapters.storage.ParcelDocumentStore"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "InvoiceService.raise_invoice",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "net_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "InvoiceService.fetch",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "depot.billing.repository.invoice_repo.InvoiceRecord | None"
+        },
+        {
+          "symbol": "InvoiceService.issue",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            },
+            {
+              "name": "issued_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "InvoiceService.settle",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "InvoiceService.file_document",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            },
+            {
+              "name": "document",
+              "annotation": "bytes"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "InvoiceService.document",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bytes | None"
+        },
+        {
+          "symbol": "InvoiceService.invoices_of",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "list[str]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PROTECT-1",
+        "R-INDEP-1",
+        "R-PORT-4"
+      ],
+      "allowed_edges_count": 5,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 4382,
+      "total_prompt_len": 5674,
+      "computed_prompt_hash": "22c580b7"
+    },
+    {
+      "path": "src/depot/billing/services/ledger_service.py",
+      "module": "depot.billing.services.ledger_service",
+      "component": "billing_services",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.billing.repository.invoice_repo",
+          "target_component": "billing_repository"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "LedgerService.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "invoices",
+              "annotation": "depot.billing.repository.invoice_repo.InvoiceRepository"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LedgerService.post_invoice",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            },
+            {
+              "name": "clock",
+              "annotation": "depot.core.ports.Clock"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "LedgerService.post_settlement",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "number",
+              "annotation": "str"
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "LedgerService.record",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            },
+            {
+              "name": "debit",
+              "annotation": "str"
+            },
+            {
+              "name": "credit",
+              "annotation": "str"
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LedgerService.journal",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "list[str]"
+        },
+        {
+          "symbol": "LedgerService.balance_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "account",
+              "annotation": "str"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "LedgerService.receivable_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PROTECT-1",
+        "R-INDEP-1",
+        "R-PORT-4"
+      ],
+      "allowed_edges_count": 5,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3894,
+      "total_prompt_len": 5186,
+      "computed_prompt_hash": "da6ef6f9"
+    },
+    {
+      "path": "src/depot/core/adapters/__init__.py",
+      "module": "depot.core.adapters",
+      "component": "core_adapters",
+      "imports": [
+        {
+          "target": "depot.core.adapters.internal.cache",
+          "target_component": "core_adapters_internal"
+        },
+        {
+          "target": "depot.core.adapters.internal.session",
+          "target_component": "core_adapters_internal"
+        },
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "__getattr__",
+          "kind": "function",
+          "params": [
+            {
+              "name": "name",
+              "annotation": "str"
+            }
+          ],
+          "returns": "object"
+        }
+      ],
+      "rules_in_scope": [
+        "R-PROTECT-1",
+        "R-CORE-1"
+      ],
+      "allowed_edges_count": 5,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 1961,
+      "total_prompt_len": 3253,
+      "computed_prompt_hash": "3ffd2b25"
+    },
+    {
+      "path": "src/depot/core/adapters/internal/cache.py",
+      "module": "depot.core.adapters.internal.cache",
+      "component": "core_adapters_internal",
+      "imports": [],
+      "signatures": [
+        {
+          "symbol": "LruCache.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "capacity",
+              "annotation": "int"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LruCache.get",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "key",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str | None"
+        },
+        {
+          "symbol": "LruCache.put",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "key",
+              "annotation": "str"
+            },
+            {
+              "name": "value",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LruCache.invalidate",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "key",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LruCache.clear",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LruCache.size",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-PROTECT-1",
+        "R-CORE-1"
+      ],
+      "allowed_edges_count": 1,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 1953,
+      "total_prompt_len": 3245,
+      "computed_prompt_hash": "811d85a7"
+    },
+    {
+      "path": "src/depot/core/adapters/internal/session.py",
+      "module": "depot.core.adapters.internal.session",
+      "component": "core_adapters_internal",
+      "imports": [],
+      "signatures": [
+        {
+          "symbol": "Session.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "connection_string",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Session.execute",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "statement",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Session.commit",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "Session.rollback",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Session.close",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Session.pending",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "SessionFactory.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "connection_string",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "SessionFactory.open",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "Session"
+        }
+      ],
+      "rules_in_scope": [
+        "R-PROTECT-1",
+        "R-CORE-1"
+      ],
+      "allowed_edges_count": 1,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2062,
+      "total_prompt_len": 3354,
+      "computed_prompt_hash": "81e09c2d"
+    },
+    {
+      "path": "src/depot/core/adapters/storage.py",
+      "module": "depot.core.adapters.storage",
+      "component": "core_adapters",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "ParcelDocumentStore.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "bucket",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "ParcelDocumentStore.key_for",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "tracking_code",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            },
+            {
+              "name": "kind",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "ParcelDocumentStore.put_label",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "tracking_code",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            },
+            {
+              "name": "label",
+              "annotation": "bytes"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "ParcelDocumentStore.put_manifest",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "tracking_code",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            },
+            {
+              "name": "manifest",
+              "annotation": "bytes"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "ParcelDocumentStore.read",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "key",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bytes | None"
+        },
+        {
+          "symbol": "ParcelDocumentStore.drop",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "key",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "ParcelDocumentStore.keys_of_day",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            }
+          ],
+          "returns": "list[str]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-PROTECT-1",
+        "R-CORE-1"
+      ],
+      "allowed_edges_count": 5,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2359,
+      "total_prompt_len": 3651,
+      "computed_prompt_hash": "78a018c7"
+    },
+    {
+      "path": "src/depot/core/config.py",
+      "module": "depot.core.config",
+      "component": "core",
+      "imports": [],
+      "signatures": [
+        {
+          "symbol": "DepotSettings.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "database_url",
+              "annotation": "str"
+            },
+            {
+              "name": "depot_code",
+              "annotation": "str"
+            },
+            {
+              "name": "currency",
+              "annotation": "str"
+            },
+            {
+              "name": "session_ttl_seconds",
+              "annotation": "int"
+            },
+            {
+              "name": "max_parcel_weight_grams",
+              "annotation": "int"
+            },
+            {
+              "name": "max_parcel_girth_cm",
+              "annotation": "int"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "DepotSettings.accepts_weight",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "weight_grams",
+              "annotation": "int"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "DepotSettings.accepts_girth",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "length_cm",
+              "annotation": "int"
+            },
+            {
+              "name": "width_cm",
+              "annotation": "int"
+            },
+            {
+              "name": "height_cm",
+              "annotation": "int"
+            }
+          ],
+          "returns": "bool"
+        }
+      ],
+      "rules_in_scope": [
+        "R-CORE-1"
+      ],
+      "allowed_edges_count": 17,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 1696,
+      "total_prompt_len": 2988,
+      "computed_prompt_hash": "055ad108"
+    },
+    {
+      "path": "src/depot/core/errors.py",
+      "module": "depot.core.errors",
+      "component": "core",
+      "imports": [],
+      "signatures": [
+        {
+          "symbol": "DepotError.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "message",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "NotFoundError.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "entity",
+              "annotation": "str"
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "ValidationError.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "field",
+              "annotation": "str"
+            },
+            {
+              "name": "reason",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        }
+      ],
+      "rules_in_scope": [
+        "R-CORE-1"
+      ],
+      "allowed_edges_count": 17,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 1553,
+      "total_prompt_len": 2845,
+      "computed_prompt_hash": "ccac5d47"
+    },
+    {
+      "path": "src/depot/core/ports.py",
+      "module": "depot.core.ports",
+      "component": "core",
+      "imports": [
+        {
+          "target": "typing",
+          "target_component": null
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "Clock.now_epoch",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "float"
+        },
+        {
+          "symbol": "Clock.today_iso",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "TokenSigner.sign",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "subject",
+              "annotation": "str"
+            },
+            {
+              "name": "ttl_seconds",
+              "annotation": "int"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "TokenSigner.verify",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "token",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str | None"
+        },
+        {
+          "symbol": "SessionStore.touch",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "session_id",
+              "annotation": "str"
+            },
+            {
+              "name": "ttl_seconds",
+              "annotation": "int"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "SessionStore.revoke",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "session_id",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "DocumentStore.key_for",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "tracking_code",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            },
+            {
+              "name": "kind",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "DocumentStore.put_label",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "tracking_code",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            },
+            {
+              "name": "label",
+              "annotation": "bytes"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "DocumentStore.put_manifest",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "tracking_code",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            },
+            {
+              "name": "manifest",
+              "annotation": "bytes"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "DocumentStore.read",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "key",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bytes | None"
+        },
+        {
+          "symbol": "DocumentStore.drop",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "key",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "IdGenerator.new_id",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "prefix",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "NotificationSender.send",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "recipient",
+              "annotation": "str"
+            },
+            {
+              "name": "template",
+              "annotation": "str"
+            },
+            {
+              "name": "fields",
+              "annotation": "dict[str, str]"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "ShelfAllocator.reserve",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "depot_code",
+              "annotation": "str"
+            },
+            {
+              "name": "parcel_count",
+              "annotation": "int"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "ShelfAllocator.release",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "slot",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "RateProvider.rate_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "zone",
+              "annotation": "str"
+            },
+            {
+              "name": "weight_grams",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "DiscountCatalog.percent_for",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "code",
+              "annotation": "str"
+            },
+            {
+              "name": "subtotal_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "PaymentGateway.refund",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "payment_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "PaymentLedger.settled_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "invoice_number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-CORE-1"
+      ],
+      "allowed_edges_count": 17,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2805,
+      "total_prompt_len": 4097,
+      "computed_prompt_hash": "cd4f54a9"
+    },
+    {
+      "path": "src/depot/identity/api/routes.py",
+      "module": "depot.identity.api.routes",
+      "component": "identity_api",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.identity.mappers.customer_mapper",
+          "target_component": "identity_mappers"
+        },
+        {
+          "target": "depot.identity.mappers.role_mapper",
+          "target_component": "identity_mappers"
+        },
+        {
+          "target": "depot.identity.services.customer_service",
+          "target_component": "identity_services"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "status_for",
+          "kind": "function",
+          "params": [
+            {
+              "name": "error",
+              "annotation": "depot.core.errors.DepotError"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "CustomerRoutes.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customers",
+              "annotation": "depot.identity.services.customer_service.CustomerService"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "CustomerRoutes.post_customer",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "email",
+              "annotation": "str"
+            },
+            {
+              "name": "display_name",
+              "annotation": "str"
+            },
+            {
+              "name": "phone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "CustomerRoutes.get_customer",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "CustomerRoutes.patch_customer",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "changes",
+              "annotation": "dict[str, str]"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "CustomerRoutes.post_block",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "reason",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "CustomerRoutes.post_address_confirmation",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "confirmed_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "CustomerRoutes.get_blocked",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "RoleRoutes.get_roles",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "list[dict[str, object]]"
+        },
+        {
+          "symbol": "RoleRoutes.get_role",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "name",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, object]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-CYCLE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2869,
+      "total_prompt_len": 4161,
+      "computed_prompt_hash": "0405ae0a"
+    },
+    {
+      "path": "src/depot/identity/api/schemas.py",
+      "module": "depot.identity.api.schemas",
+      "component": "identity_api",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "error_body",
+          "kind": "function",
+          "params": [
+            {
+              "name": "error",
+              "annotation": "depot.core.errors.DepotError"
+            }
+          ],
+          "returns": "dict[str, str]"
+        },
+        {
+          "symbol": "CustomerRegistration.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "email",
+              "annotation": "str"
+            },
+            {
+              "name": "display_name",
+              "annotation": "str"
+            },
+            {
+              "name": "phone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "CustomerRegistration.validate",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "ContactChange.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "fields",
+              "annotation": "dict[str, str]"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "ContactChange.validate",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "SignOn.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "terminal",
+              "annotation": "str"
+            },
+            {
+              "name": "role_name",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "SignOn.validate",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-CYCLE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2220,
+      "total_prompt_len": 3512,
+      "computed_prompt_hash": "d9819d6e"
+    },
+    {
+      "path": "src/depot/identity/mappers/customer_mapper.py",
+      "module": "depot.identity.mappers.customer_mapper",
+      "component": "identity_mappers",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.identity.models.customer_models",
+          "target_component": "identity_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "to_payload",
+          "kind": "function",
+          "params": [
+            {
+              "name": "customer",
+              "annotation": "depot.identity.models.customer_models.Customer"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "to_slip_line",
+          "kind": "function",
+          "params": [
+            {
+              "name": "customer",
+              "annotation": "depot.identity.models.customer_models.Customer"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "apply_changes",
+          "kind": "function",
+          "params": [
+            {
+              "name": "customer",
+              "annotation": "depot.identity.models.customer_models.Customer"
+            },
+            {
+              "name": "changes",
+              "annotation": "dict[str, str]"
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-CYCLE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 1383,
+      "total_prompt_len": 2675,
+      "computed_prompt_hash": "2929cffe"
+    },
+    {
+      "path": "src/depot/identity/mappers/role_mapper.py",
+      "module": "depot.identity.mappers.role_mapper",
+      "component": "identity_mappers",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.identity.models.role_models",
+          "target_component": "identity_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "to_payload",
+          "kind": "function",
+          "params": [
+            {
+              "name": "role",
+              "annotation": "depot.identity.models.role_models.Role"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "from_name",
+          "kind": "function",
+          "params": [
+            {
+              "name": "name",
+              "annotation": "str"
+            }
+          ],
+          "returns": "depot.identity.models.role_models.Role"
+        },
+        {
+          "symbol": "catalogue",
+          "kind": "function",
+          "params": [],
+          "returns": "list[dict[str, object]]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-CYCLE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 1279,
+      "total_prompt_len": 2571,
+      "computed_prompt_hash": "91b0ba0e"
+    },
+    {
+      "path": "src/depot/identity/models/customer_models.py",
+      "module": "depot.identity.models.customer_models",
+      "component": "identity_models",
+      "imports": [
+        {
+          "target": "sqlalchemy.orm",
+          "target_component": null
+        },
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "Customer.mark_verified",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "verified_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Customer.block",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reason",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Customer.unblock",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Customer.rename",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "display_name",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Customer.may_collect",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "bool"
+        }
+      ],
+      "rules_in_scope": [
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2841,
+      "total_prompt_len": 4133,
+      "computed_prompt_hash": "478822e8"
+    },
+    {
+      "path": "src/depot/identity/models/customer_view_models.py",
+      "module": "depot.identity.models.customer_view_models",
+      "component": "identity_models",
+      "imports": [
+        {
+          "target": "sqlalchemy.orm",
+          "target_component": null
+        },
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "CustomerSummary.shelf_pressure",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "float"
+        },
+        {
+          "symbol": "CustomerSummary.is_overflowing",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "CustomerSummary.needs_reminder",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "now_epoch",
+              "annotation": "float"
+            },
+            {
+              "name": "grace_seconds",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "CustomerSummary.headline",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "str"
+        }
+      ],
+      "rules_in_scope": [
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2837,
+      "total_prompt_len": 4129,
+      "computed_prompt_hash": "45d23afb"
+    },
+    {
+      "path": "src/depot/identity/models/role_models.py",
+      "module": "depot.identity.models.role_models",
+      "component": "identity_models",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "counter_clerk",
+          "kind": "function",
+          "params": [],
+          "returns": "Role"
+        },
+        {
+          "symbol": "dispatcher",
+          "kind": "function",
+          "params": [],
+          "returns": "Role"
+        },
+        {
+          "symbol": "depot_manager",
+          "kind": "function",
+          "params": [],
+          "returns": "Role"
+        },
+        {
+          "symbol": "Role.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "name",
+              "annotation": "str"
+            },
+            {
+              "name": "permissions",
+              "annotation": "frozenset[str]"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Role.grants",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "permission",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "Role.outranks",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "other",
+              "annotation": "'Role'"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "Role.require",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "permission",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        }
+      ],
+      "rules_in_scope": [
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2857,
+      "total_prompt_len": 4149,
+      "computed_prompt_hash": "ea448063"
+    },
+    {
+      "path": "src/depot/identity/repository/customer_repo.py",
+      "module": "depot.identity.repository.customer_repo",
+      "component": "identity_repository",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.identity.models.customer_models",
+          "target_component": "identity_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "CustomerRepository.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "ids",
+              "annotation": "depot.core.ports.IdGenerator"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "CustomerRepository.create",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "email",
+              "annotation": "str"
+            },
+            {
+              "name": "display_name",
+              "annotation": "str"
+            },
+            {
+              "name": "phone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "CustomerRepository.verify",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "confirmed_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "CustomerRepository.get",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "depot.identity.models.customer_models.Customer | None"
+        },
+        {
+          "symbol": "CustomerRepository.find_by_email",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "email",
+              "annotation": "str"
+            }
+          ],
+          "returns": "depot.identity.models.customer_models.Customer | None"
+        },
+        {
+          "symbol": "CustomerRepository.block",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "reason",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "CustomerRepository.blocked_references",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "list[str]"
+        },
+        {
+          "symbol": "CustomerRepository.count",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PLACE-1",
+        "R-SIG-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3754,
+      "total_prompt_len": 5046,
+      "computed_prompt_hash": "ca2da849"
+    },
+    {
+      "path": "src/depot/identity/repository/legacy_token_index.py",
+      "module": "depot.identity.repository.legacy_token_index",
+      "component": "identity_repository",
+      "imports": [],
+      "signatures": [
+        {
+          "symbol": "LegacyTokenIndex.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LegacyTokenIndex.load_line",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "line",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "LegacyTokenIndex.resolve",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "token",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str | None"
+        },
+        {
+          "symbol": "LegacyTokenIndex.knows",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "token",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "LegacyTokenIndex.size",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PLACE-1",
+        "R-SIG-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3240,
+      "total_prompt_len": 4532,
+      "computed_prompt_hash": "3da5ba4a"
+    },
+    {
+      "path": "src/depot/identity/repository/session_repo.py",
+      "module": "depot.identity.repository.session_repo",
+      "component": "identity_repository",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.identity.models.role_models",
+          "target_component": "identity_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "SessionRepository.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "SessionRepository.open",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "session_id",
+              "annotation": "str"
+            },
+            {
+              "name": "role",
+              "annotation": "depot.identity.models.role_models.Role"
+            },
+            {
+              "name": "expires_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "SessionRepository.touch",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "session_id",
+              "annotation": "str"
+            },
+            {
+              "name": "ttl_seconds",
+              "annotation": "int"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "SessionRepository.revoke",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "session_id",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "SessionRepository.role_of",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "session_id",
+              "annotation": "str"
+            }
+          ],
+          "returns": "depot.identity.models.role_models.Role | None"
+        },
+        {
+          "symbol": "SessionRepository.expires_at",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "session_id",
+              "annotation": "str"
+            }
+          ],
+          "returns": "float | None"
+        },
+        {
+          "symbol": "SessionRepository.drop_expired",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "now_epoch",
+              "annotation": "float"
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PLACE-1",
+        "R-SIG-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3642,
+      "total_prompt_len": 4934,
+      "computed_prompt_hash": "68e2b5ba"
+    },
+    {
+      "path": "src/depot/identity/services/customer_service.py",
+      "module": "depot.identity.services.customer_service",
+      "component": "identity_services",
+      "imports": [
+        {
+          "target": "depot.core.adapters.storage",
+          "target_component": "core_adapters"
+        },
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.identity.repository.customer_repo",
+          "target_component": "identity_repository"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "CustomerService.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customers",
+              "annotation": "depot.identity.repository.customer_repo.CustomerRepository"
+            },
+            {
+              "name": "notifier",
+              "annotation": "depot.core.ports.NotificationSender"
+            },
+            {
+              "name": "documents",
+              "annotation": "depot.core.adapters.storage.ParcelDocumentStore"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "CustomerService.register",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "email",
+              "annotation": "str"
+            },
+            {
+              "name": "display_name",
+              "annotation": "str"
+            },
+            {
+              "name": "phone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "CustomerService.fetch",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "depot.identity.repository.customer_repo.CustomerRecord | None"
+        },
+        {
+          "symbol": "CustomerService.confirm_address",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "confirmed_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "CustomerService.block",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "reason",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "CustomerService.file_handover_form",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            },
+            {
+              "name": "form",
+              "annotation": "bytes"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "CustomerService.handover_form",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bytes | None"
+        },
+        {
+          "symbol": "CustomerService.blocked_today",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "list[str]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PROTECT-1",
+        "R-PORT-1"
+      ],
+      "allowed_edges_count": 6,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3502,
+      "total_prompt_len": 4794,
+      "computed_prompt_hash": "f87df883"
+    },
+    {
+      "path": "src/depot/identity/services/token_service.py",
+      "module": "depot.identity.services.token_service",
+      "component": "identity_services",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.identity.repository.session_repo",
+          "target_component": "identity_repository"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "TokenService.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "sessions",
+              "annotation": "depot.identity.repository.session_repo.SessionRepository"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "TokenService.issue",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "session_id",
+              "annotation": "str"
+            },
+            {
+              "name": "signer",
+              "annotation": "depot.core.ports.TokenSigner"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "TokenService.subject_of",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "session_id",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "TokenService.revoke",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "session_id",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "TokenService.is_live",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "session_id",
+              "annotation": "str"
+            },
+            {
+              "name": "now_epoch",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PROTECT-1",
+        "R-PORT-1"
+      ],
+      "allowed_edges_count": 6,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2993,
+      "total_prompt_len": 4285,
+      "computed_prompt_hash": "39a553a8"
+    },
+    {
+      "path": "src/depot/orders/api/routes.py",
+      "module": "depot.orders.api.routes",
+      "component": "orders_api",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.orders.mappers.order_line_mapper",
+          "target_component": "orders_mappers"
+        },
+        {
+          "target": "depot.orders.mappers.order_mapper",
+          "target_component": "orders_mappers"
+        },
+        {
+          "target": "depot.orders.services.order_service",
+          "target_component": "orders_services"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "status_for",
+          "kind": "function",
+          "params": [
+            {
+              "name": "error",
+              "annotation": "depot.core.errors.DepotError"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "OrderRoutes.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "orders",
+              "annotation": "depot.orders.services.order_service.OrderService"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "OrderRoutes.post_order",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "destination_zone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "OrderRoutes.get_order",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "OrderRoutes.post_lines",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "lines",
+              "annotation": "list[dict[str, object]]"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "OrderRoutes.post_placement",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "placed_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "OrderRoutes.delete_order",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "OrderRoutes.get_board",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, str]"
+        },
+        {
+          "symbol": "OrderRoutes.get_open_of_customer",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "dict[str, object]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-INDEP-1",
+        "R-CYCLE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3425,
+      "total_prompt_len": 4717,
+      "computed_prompt_hash": "4de0e04c"
+    },
+    {
+      "path": "src/depot/orders/api/schemas.py",
+      "module": "depot.orders.api.schemas",
+      "component": "orders_api",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "error_body",
+          "kind": "function",
+          "params": [
+            {
+              "name": "error",
+              "annotation": "depot.core.errors.DepotError"
+            }
+          ],
+          "returns": "dict[str, str]"
+        },
+        {
+          "symbol": "OrderDraft.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "destination_zone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "OrderDraft.validate",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LineBatch.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "lines",
+              "annotation": "list[dict[str, object]]"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LineBatch.validate",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "QuoteRequest.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "zone",
+              "annotation": "str"
+            },
+            {
+              "name": "weight_grams",
+              "annotation": "int"
+            },
+            {
+              "name": "code",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "QuoteRequest.validate",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-INDEP-1",
+        "R-CYCLE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2880,
+      "total_prompt_len": 4172,
+      "computed_prompt_hash": "f365a4ac"
+    },
+    {
+      "path": "src/depot/orders/mappers/order_line_mapper.py",
+      "module": "depot.orders.mappers.order_line_mapper",
+      "component": "orders_mappers",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.orders.models.order_line_models",
+          "target_component": "orders_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "to_payload",
+          "kind": "function",
+          "params": [
+            {
+              "name": "line",
+              "annotation": "depot.orders.models.order_line_models.OrderLine"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "to_shelf_label",
+          "kind": "function",
+          "params": [
+            {
+              "name": "line",
+              "annotation": "depot.orders.models.order_line_models.OrderLine"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "normalise_request",
+          "kind": "function",
+          "params": [
+            {
+              "name": "lines",
+              "annotation": "list[dict[str, object]]"
+            }
+          ],
+          "returns": "list[dict[str, object]]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-CYCLE-1",
+        "R-SIG-4"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2733,
+      "total_prompt_len": 4025,
+      "computed_prompt_hash": "ee5983fe"
+    },
+    {
+      "path": "src/depot/orders/mappers/order_mapper.py",
+      "module": "depot.orders.mappers.order_mapper",
+      "component": "orders_mappers",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.orders.models.order_models",
+          "target_component": "orders_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "to_payload",
+          "kind": "function",
+          "params": [
+            {
+              "name": "order",
+              "annotation": "depot.orders.models.order_models.Order"
+            }
+          ],
+          "returns": "dict[str, object]"
+        },
+        {
+          "symbol": "to_board_line",
+          "kind": "function",
+          "params": [
+            {
+              "name": "order",
+              "annotation": "depot.orders.models.order_models.Order"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "check_zone",
+          "kind": "function",
+          "params": [
+            {
+              "name": "zone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "next_states",
+          "kind": "function",
+          "params": [
+            {
+              "name": "order",
+              "annotation": "depot.orders.models.order_models.Order"
+            }
+          ],
+          "returns": "list[str]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-CYCLE-1",
+        "R-SIG-4"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2736,
+      "total_prompt_len": 4028,
+      "computed_prompt_hash": "225a2755"
+    },
+    {
+      "path": "src/depot/orders/models/discount_models.py",
+      "module": "depot.orders.models.discount_models",
+      "component": "orders_models",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "house_codes",
+          "kind": "function",
+          "params": [],
+          "returns": "list[Discount]"
+        },
+        {
+          "symbol": "Discount.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "code",
+              "annotation": "str"
+            },
+            {
+              "name": "percent",
+              "annotation": "int"
+            },
+            {
+              "name": "min_subtotal_cents",
+              "annotation": "int"
+            },
+            {
+              "name": "zones",
+              "annotation": "frozenset[str]"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Discount.applies_to",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "subtotal_cents",
+              "annotation": "int"
+            },
+            {
+              "name": "zone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "Discount.cut_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "subtotal_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3471,
+      "total_prompt_len": 4763,
+      "computed_prompt_hash": "24cb1794"
+    },
+    {
+      "path": "src/depot/orders/models/order_line_models.py",
+      "module": "depot.orders.models.order_line_models",
+      "component": "orders_models",
+      "imports": [
+        {
+          "target": "sqlalchemy.orm",
+          "target_component": null
+        },
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "OrderLine.check",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "OrderLine.total_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "OrderLine.total_weight_grams",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "OrderLine.needs_two_hands",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "bool"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3417,
+      "total_prompt_len": 4709,
+      "computed_prompt_hash": "e4107c43"
+    },
+    {
+      "path": "src/depot/orders/models/order_line_view_models.py",
+      "module": "depot.orders.models.order_line_view_models",
+      "component": "orders_models",
+      "imports": [
+        {
+          "target": "sqlalchemy.orm",
+          "target_component": null
+        },
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "PackingListRow.marks",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "list[str]"
+        },
+        {
+          "symbol": "PackingListRow.is_fragile",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "PackingListRow.check_digit",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "PackingListRow.barcode",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "str"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3436,
+      "total_prompt_len": 4728,
+      "computed_prompt_hash": "129df392"
+    },
+    {
+      "path": "src/depot/orders/models/order_models.py",
+      "module": "depot.orders.models.order_models",
+      "component": "orders_models",
+      "imports": [
+        {
+          "target": "sqlalchemy.orm",
+          "target_component": null
+        },
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "Order.move_to",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "status",
+              "annotation": "str"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Order.place",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "placed_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Order.cancel",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "Order.is_open",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "Order.add_line_total",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "None"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3468,
+      "total_prompt_len": 4760,
+      "computed_prompt_hash": "005c0281"
+    },
+    {
+      "path": "src/depot/orders/models/order_view_models.py",
+      "module": "depot.orders.models.order_view_models",
+      "component": "orders_models",
+      "imports": [
+        {
+          "target": "sqlalchemy.orm",
+          "target_component": null
+        },
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "OrderBoardRow.waited_seconds",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "now_epoch",
+              "annotation": "float"
+            }
+          ],
+          "returns": "float"
+        },
+        {
+          "symbol": "OrderBoardRow.is_urgent",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "now_epoch",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "OrderBoardRow.sort_key",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "now_epoch",
+              "annotation": "float"
+            }
+          ],
+          "returns": "tuple[int, float]"
+        },
+        {
+          "symbol": "OrderBoardRow.label",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "str"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-FRAMEWORK-1",
+        "R-PLACE-1"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3489,
+      "total_prompt_len": 4781,
+      "computed_prompt_hash": "ef1dafd6"
+    },
+    {
+      "path": "src/depot/orders/repository/legacy_order_index.py",
+      "module": "depot.orders.repository.legacy_order_index",
+      "component": "orders_repository",
+      "imports": [],
+      "signatures": [
+        {
+          "symbol": "LegacyOrderIndex.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "LegacyOrderIndex.load_line",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "line",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "LegacyOrderIndex.looks_legacy",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "old_number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "LegacyOrderIndex.resolve",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "old_number",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str | None"
+        },
+        {
+          "symbol": "LegacyOrderIndex.size",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-INDEP-1",
+        "R-PLACE-1",
+        "R-SIG-2"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 3900,
+      "total_prompt_len": 5192,
+      "computed_prompt_hash": "c7ed1d1b"
+    },
+    {
+      "path": "src/depot/orders/repository/order_line_repo.py",
+      "module": "depot.orders.repository.order_line_repo",
+      "component": "orders_repository",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.orders.models.order_line_models",
+          "target_component": "orders_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "OrderLineRepository.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "ids",
+              "annotation": "depot.core.ports.IdGenerator"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "OrderLineRepository.add",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "description",
+              "annotation": "str"
+            },
+            {
+              "name": "weight_grams",
+              "annotation": "int"
+            },
+            {
+              "name": "quantity",
+              "annotation": "int"
+            },
+            {
+              "name": "unit_price_cents",
+              "annotation": "int"
+            },
+            {
+              "name": "fragile",
+              "annotation": "bool"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "OrderLineRepository.get",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "OrderLineRecord | None"
+        },
+        {
+          "symbol": "OrderLineRepository.of_order",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "list[OrderLineRecord]"
+        },
+        {
+          "symbol": "OrderLineRepository.drop",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "OrderLineRepository.subtotal_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "OrderLineRepository.weight_grams",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "OrderLineRepository.two_hand_lines",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "list[str]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-INDEP-1",
+        "R-PLACE-1",
+        "R-SIG-2"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 4440,
+      "total_prompt_len": 5732,
+      "computed_prompt_hash": "b926dc37"
+    },
+    {
+      "path": "src/depot/orders/repository/order_query.py",
+      "module": "depot.orders.repository.order_query",
+      "component": "orders_repository",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.orders.models.discount_models",
+          "target_component": "orders_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "OrderQuery.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "OrderQuery.percent_for",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "code",
+              "annotation": "str"
+            },
+            {
+              "name": "subtotal_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "OrderQuery.cut_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "code",
+              "annotation": "str"
+            },
+            {
+              "name": "subtotal_cents",
+              "annotation": "int"
+            },
+            {
+              "name": "zone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "OrderQuery.find",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "code",
+              "annotation": "str"
+            }
+          ],
+          "returns": "DiscountRecord | None"
+        },
+        {
+          "symbol": "OrderQuery.codes_for_zone",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "zone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "list[str]"
+        },
+        {
+          "symbol": "OrderQuery.reload",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "discounts",
+              "annotation": "list[DiscountRecord]"
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-INDEP-1",
+        "R-PLACE-1",
+        "R-SIG-2"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 4109,
+      "total_prompt_len": 5401,
+      "computed_prompt_hash": "9c8e9250"
+    },
+    {
+      "path": "src/depot/orders/repository/order_repo.py",
+      "module": "depot.orders.repository.order_repo",
+      "component": "orders_repository",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.orders.models.order_models",
+          "target_component": "orders_models"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "OrderRepository.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "ids",
+              "annotation": "depot.core.ports.IdGenerator"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "OrderRepository.create",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "destination_zone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "OrderRepository.get",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "OrderRecord | None"
+        },
+        {
+          "symbol": "OrderRepository.place",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "placed_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "OrderRepository.cancel",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "OrderRepository.book_line",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "OrderRepository.open_of_customer",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "list[str]"
+        },
+        {
+          "symbol": "OrderRepository.count",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-INDEP-1",
+        "R-PLACE-1",
+        "R-SIG-2"
+      ],
+      "allowed_edges_count": 3,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 4307,
+      "total_prompt_len": 5599,
+      "computed_prompt_hash": "b518b6df"
+    },
+    {
+      "path": "src/depot/orders/services/__init__.py",
+      "module": "depot.orders.services",
+      "component": "orders_services",
+      "imports": [
+        {
+          "target": "depot.orders.services.pricing.engine",
+          "target_component": "orders_services_pricing"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "quote_parcel_cents",
+          "kind": "function",
+          "params": [
+            {
+              "name": "weight_grams",
+              "annotation": "int"
+            },
+            {
+              "name": "fragile",
+              "annotation": "bool"
+            },
+            {
+              "name": "two_hands",
+              "annotation": "bool"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "weight_band",
+          "kind": "function",
+          "params": [
+            {
+              "name": "weight_grams",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PROTECT-1",
+        "R-INDEP-1",
+        "R-CYCLE-2",
+        "R-PORT-2",
+        "R-PORT-3"
+      ],
+      "allowed_edges_count": 6,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 4452,
+      "total_prompt_len": 5744,
+      "computed_prompt_hash": "18ea9dc0"
+    },
+    {
+      "path": "src/depot/orders/services/catalog_service.py",
+      "module": "depot.orders.services.catalog_service",
+      "component": "orders_services",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.orders.repository.order_query",
+          "target_component": "orders_repository"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "CatalogService.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "discounts",
+              "annotation": "depot.orders.repository.order_query.OrderQuery"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "CatalogService.quote_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "zone",
+              "annotation": "str"
+            },
+            {
+              "name": "weight_grams",
+              "annotation": "int"
+            },
+            {
+              "name": "rates",
+              "annotation": "depot.core.ports.RateProvider"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "CatalogService.net_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "zone",
+              "annotation": "str"
+            },
+            {
+              "name": "subtotal_cents",
+              "annotation": "int"
+            },
+            {
+              "name": "code",
+              "annotation": "str"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "CatalogService.offers_for",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "zone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "list[str]"
+        },
+        {
+          "symbol": "CatalogService.honours",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "code",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PROTECT-1",
+        "R-INDEP-1",
+        "R-CYCLE-2",
+        "R-PORT-2",
+        "R-PORT-3"
+      ],
+      "allowed_edges_count": 6,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 4828,
+      "total_prompt_len": 6120,
+      "computed_prompt_hash": "b9aa9c54"
+    },
+    {
+      "path": "src/depot/orders/services/checkout_service.py",
+      "module": "depot.orders.services.checkout_service",
+      "component": "orders_services",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.orders.repository.order_line_repo",
+          "target_component": "orders_repository"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "CheckoutService.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "lines",
+              "annotation": "depot.orders.repository.order_line_repo.OrderLineRepository"
+            },
+            {
+              "name": "shelves",
+              "annotation": "depot.core.ports.ShelfAllocator"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "CheckoutService.hand_over",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "depot_code",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "CheckoutService.slot_of",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str | None"
+        },
+        {
+          "symbol": "CheckoutService.take_back",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "CheckoutService.two_hand_warning",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "list[str]"
+        },
+        {
+          "symbol": "CheckoutService.handed_weight_grams",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "order_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PROTECT-1",
+        "R-INDEP-1",
+        "R-CYCLE-2",
+        "R-PORT-2",
+        "R-PORT-3"
+      ],
+      "allowed_edges_count": 6,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 4958,
+      "total_prompt_len": 6250,
+      "computed_prompt_hash": "e76186b1"
+    },
+    {
+      "path": "src/depot/orders/services/order_service.py",
+      "module": "depot.orders.services.order_service",
+      "component": "orders_services",
+      "imports": [
+        {
+          "target": "depot.core.adapters.storage",
+          "target_component": "core_adapters"
+        },
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.identity.services.customer_service",
+          "target_component": "identity_services"
+        },
+        {
+          "target": "depot.orders.repository.order_repo",
+          "target_component": "orders_repository"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "OrderService.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "orders",
+              "annotation": "depot.orders.repository.order_repo.OrderRepository"
+            },
+            {
+              "name": "customers",
+              "annotation": "depot.identity.services.customer_service.CustomerService"
+            },
+            {
+              "name": "notifier",
+              "annotation": "depot.core.ports.NotificationSender"
+            },
+            {
+              "name": "documents",
+              "annotation": "depot.core.adapters.storage.ParcelDocumentStore"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "OrderService.open_order",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "destination_zone",
+              "annotation": "str"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "OrderService.fetch",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "depot.orders.repository.order_repo.OrderRecord | None"
+        },
+        {
+          "symbol": "OrderService.place",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "placed_at",
+              "annotation": "float"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "OrderService.cancel",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bool"
+        },
+        {
+          "symbol": "OrderService.file_dispatch_manifest",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            },
+            {
+              "name": "manifest",
+              "annotation": "bytes"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "OrderService.dispatch_manifest",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "day",
+              "annotation": "str"
+            }
+          ],
+          "returns": "bytes | None"
+        },
+        {
+          "symbol": "OrderService.open_orders_of",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "customer_reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "list[str]"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PROTECT-1",
+        "R-INDEP-1",
+        "R-CYCLE-2",
+        "R-PORT-2",
+        "R-PORT-3"
+      ],
+      "allowed_edges_count": 6,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 5421,
+      "total_prompt_len": 6713,
+      "computed_prompt_hash": "d5f582f1"
+    },
+    {
+      "path": "src/depot/orders/services/pricing/engine.py",
+      "module": "depot.orders.services.pricing.engine",
+      "component": "orders_services_pricing",
+      "imports": [
+        {
+          "target": "depot.core.errors",
+          "target_component": "core"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "PricingEngine.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "handling_percent",
+              "annotation": "int"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "PricingEngine.band_of",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "weight_grams",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "PricingEngine.base_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "weight_grams",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "PricingEngine.quote_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "weight_grams",
+              "annotation": "int"
+            },
+            {
+              "name": "fragile",
+              "annotation": "bool"
+            },
+            {
+              "name": "two_hands",
+              "annotation": "bool"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "PricingEngine.round_up",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "amount_cents",
+              "annotation": "int"
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-INDEP-1",
+        "R-CYCLE-2"
+      ],
+      "allowed_edges_count": 2,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 2048,
+      "total_prompt_len": 3340,
+      "computed_prompt_hash": "ae66f88d"
+    },
+    {
+      "path": "src/depot/orders/services/refund_service.py",
+      "module": "depot.orders.services.refund_service",
+      "component": "orders_services",
+      "imports": [
+        {
+          "target": "depot.core.ports",
+          "target_component": "core"
+        },
+        {
+          "target": "depot.orders.repository.order_repo",
+          "target_component": "orders_repository"
+        }
+      ],
+      "signatures": [
+        {
+          "symbol": "RefundService.__init__",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "orders",
+              "annotation": "depot.orders.repository.order_repo.OrderRepository"
+            }
+          ],
+          "returns": "None"
+        },
+        {
+          "symbol": "RefundService.refund",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            },
+            {
+              "name": "payment_reference",
+              "annotation": "str"
+            },
+            {
+              "name": "gateway",
+              "annotation": "depot.core.ports.PaymentGateway"
+            }
+          ],
+          "returns": "str"
+        },
+        {
+          "symbol": "RefundService.refundable_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "int"
+        },
+        {
+          "symbol": "RefundService.fee_cents",
+          "kind": "method",
+          "params": [
+            {
+              "name": "self",
+              "annotation": null
+            },
+            {
+              "name": "reference",
+              "annotation": "str"
+            }
+          ],
+          "returns": "int"
+        }
+      ],
+      "rules_in_scope": [
+        "R-LAYER-1",
+        "R-PROTECT-1",
+        "R-INDEP-1",
+        "R-CYCLE-2",
+        "R-PORT-2",
+        "R-PORT-3"
+      ],
+      "allowed_edges_count": 6,
+      "system_prompt_len": 1292,
+      "user_prompt_len": 4747,
+      "total_prompt_len": 6039,
+      "computed_prompt_hash": "55e36dd6"
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "result_schema_version": "1",
+  "run_id": "20260824T152844Z-beb15654",
+  "timestamp": "2026-08-24T15:28:56.484Z",
+  "provenance": {
+    "topology_sha256": "e97013685ff217d85095b637459a2eb02d2f4effb9f9ad44d1f45798144ec25d",
+    "rules_sha256": "72fa851ffd9eae3865827f959e962f564216fe48948e792944537d64a8d87b95",
+    "prompt_template_sha256": "65e78f38e7b1fee20000ea70c654df042f5e0831fc6a68ccb340f833bd915035",
+    "user_prompt_render_sha256": "45780c70c486ea8f608d1b2ca11178049a02b7a6ece9ba33fcdc8d1b815b03ef",
+    "checker_git_head": "348ca9daa456af4954f11f7152fc45201035297e",
+    "target_repo_git_head": "0d651041ed87dd03f2f78359713633fac01c0a66",
+    "base_ref": "0d651041ed87dd03f2f78359713633fac01c0a66",
+    "rule_graph_mode": "diff",
+    "model_requested": "qwen2.5-coder:7b",
+    "endpoint": "http://localhost:11434/v1",
+    "seed_requested": 42,
+    "temperature_requested": 0,
+    "runs_requested": 3,
+    "timeout_ms": 240000,
+    "changed_files_count": 0,
+    "control_files_count": 1
+  },
+  "runs": [
+    {
+      "run_index": 0,
+      "findings": [
+        {
+          "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.repository.session_repo|identity_repository->core",
+          "source": "llm",
+          "rule_id": "R-LAYER-1",
+          "category": "FORBIDDEN_RELATION",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.session_repo",
+          "file": "src/depot/identity/repository/session_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "identity_repository",
+            "to": "core"
+          },
+          "reason": "The identity_repository component is importing from the core component, which is a back call. The core component should not depend on the identity_repository component.",
+          "suggestion": "Refactor the code to remove the dependency from identity_repository to core.",
+          "confidence": null
+        },
+        {
+          "match_key": "STRUCTURAL_PLACEMENT|identity_repository|depot.identity.repository.session_repo|depot.identity.repository.session_repo",
+          "source": "llm",
+          "rule_id": "R-PLACE-1",
+          "category": "STRUCTURAL_PLACEMENT",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.session_repo",
+          "file": "src/depot/identity/repository/session_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "depot.identity.repository.session_repo"
+          },
+          "reason": "The module name 'session_repo' ends in '_repo', which implies that it belongs in the 'repository' package of its bounded context. However, it is located in the 'repository' package, which is correct. This module name does not break the naming convention of its target layer.",
+          "suggestion": "No action needed. The module name is correctly placed.",
+          "confidence": null
+        },
+        {
+          "match_key": "API_CONTRACT|identity_repository|depot.identity.repository.session_repo|SessionRepository.touch",
+          "source": "llm",
+          "rule_id": "R-SIG-1",
+          "category": "API_CONTRACT",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.session_repo",
+          "file": "src/depot/identity/repository/session_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "SessionRepository.touch"
+          },
+          "reason": "The signature of the method 'touch' in the class 'SessionRepository' does not match the target signature defined in the port 'depot.core.ports.SessionStore'. The parameter 'ttl_seconds' should be of type 'int' instead of 'int'.",
+          "suggestion": "Change the parameter type of 'ttl_seconds' to 'int' in the method signature.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-LAYER-1",
+          "scope": {
+            "components": [
+              "identity_api",
+              "identity_repository",
+              "identity_services",
+              "orders_api",
+              "orders_repository",
+              "orders_services",
+              "billing_api",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/session_repo.py"
+        },
+        {
+          "rule_id": "R-PLACE-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "identity_repository",
+              "orders_models",
+              "orders_repository",
+              "billing_models",
+              "billing_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/session_repo.py"
+        },
+        {
+          "rule_id": "R-SIG-1",
+          "scope": {
+            "components": [
+              "identity_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/session_repo.py"
+        }
+      ]
+    },
+    {
+      "run_index": 1,
+      "findings": [
+        {
+          "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.repository.session_repo|identity_repository->core",
+          "source": "llm",
+          "rule_id": "R-LAYER-1",
+          "category": "FORBIDDEN_RELATION",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.session_repo",
+          "file": "src/depot/identity/repository/session_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "identity_repository",
+            "to": "core"
+          },
+          "reason": "The identity_repository component is importing from the core component, which is a back call. The core component should not depend on the identity_repository component.",
+          "suggestion": "Refactor the code to remove the dependency from identity_repository to core.",
+          "confidence": null
+        },
+        {
+          "match_key": "STRUCTURAL_PLACEMENT|identity_repository|depot.identity.repository.session_repo|depot.identity.repository.session_repo",
+          "source": "llm",
+          "rule_id": "R-PLACE-1",
+          "category": "STRUCTURAL_PLACEMENT",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.session_repo",
+          "file": "src/depot/identity/repository/session_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "depot.identity.repository.session_repo"
+          },
+          "reason": "The module name 'session_repo' ends in '_repo', which implies it belongs in the 'repository' package of its bounded context. However, it is located in the 'repository' package, which is correct. This module name does not break the naming convention.",
+          "suggestion": "No action needed. The module name is correctly placed.",
+          "confidence": null
+        },
+        {
+          "match_key": "API_CONTRACT|identity_repository|depot.identity.repository.session_repo|SessionRepository.touch",
+          "source": "llm",
+          "rule_id": "R-SIG-1",
+          "category": "API_CONTRACT",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.session_repo",
+          "file": "src/depot/identity/repository/session_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "SessionRepository.touch"
+          },
+          "reason": "The signature of the method 'touch' in the class 'SessionRepository' does not match the target signature defined in the port 'depot.core.ports.SessionStore'. The parameter 'ttl_seconds' should be of type 'int' instead of 'int'.",
+          "suggestion": "Change the parameter type of 'ttl_seconds' to 'int' in the method signature.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-LAYER-1",
+          "scope": {
+            "components": [
+              "identity_api",
+              "identity_repository",
+              "identity_services",
+              "orders_api",
+              "orders_repository",
+              "orders_services",
+              "billing_api",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/session_repo.py"
+        },
+        {
+          "rule_id": "R-PLACE-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "identity_repository",
+              "orders_models",
+              "orders_repository",
+              "billing_models",
+              "billing_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/session_repo.py"
+        },
+        {
+          "rule_id": "R-SIG-1",
+          "scope": {
+            "components": [
+              "identity_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/session_repo.py"
+        }
+      ]
+    },
+    {
+      "run_index": 2,
+      "findings": [
+        {
+          "match_key": "FORBIDDEN_RELATION|identity_repository|depot.identity.repository.session_repo|identity_repository->core",
+          "source": "llm",
+          "rule_id": "R-LAYER-1",
+          "category": "FORBIDDEN_RELATION",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.session_repo",
+          "file": "src/depot/identity/repository/session_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "from": "identity_repository",
+            "to": "core"
+          },
+          "reason": "The identity_repository component is importing from the core component, which is a back call. The core component should not depend on the identity_repository component.",
+          "suggestion": "Refactor the code to remove the dependency from identity_repository to core.",
+          "confidence": null
+        },
+        {
+          "match_key": "STRUCTURAL_PLACEMENT|identity_repository|depot.identity.repository.session_repo|depot.identity.repository.session_repo",
+          "source": "llm",
+          "rule_id": "R-PLACE-1",
+          "category": "STRUCTURAL_PLACEMENT",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.session_repo",
+          "file": "src/depot/identity/repository/session_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "depot.identity.repository.session_repo"
+          },
+          "reason": "The module name 'session_repo' ends in '_repo', which implies it belongs in the 'repository' package of its bounded context. However, it is located in the 'repository' package, which is correct. This module name does not break the naming convention.",
+          "suggestion": "No action needed. The module name is correctly placed.",
+          "confidence": null
+        },
+        {
+          "match_key": "API_CONTRACT|identity_repository|depot.identity.repository.session_repo|SessionRepository.touch",
+          "source": "llm",
+          "rule_id": "R-SIG-1",
+          "category": "API_CONTRACT",
+          "component": "identity_repository",
+          "module": "depot.identity.repository.session_repo",
+          "file": "src/depot/identity/repository/session_repo.py",
+          "line": null,
+          "symbol": null,
+          "severity": "error",
+          "subject": {
+            "offending_type": "SessionRepository.touch"
+          },
+          "reason": "The signature of the method 'touch' in the class 'SessionRepository' does not match the target signature defined in the port 'depot.core.ports.SessionStore'. The parameter 'ttl_seconds' should be of type 'int' instead of 'int'.",
+          "suggestion": "Change the parameter type of 'ttl_seconds' to 'int' in the method signature.",
+          "confidence": null
+        }
+      ],
+      "checks_performed": [
+        {
+          "rule_id": "R-LAYER-1",
+          "scope": {
+            "components": [
+              "identity_api",
+              "identity_repository",
+              "identity_services",
+              "orders_api",
+              "orders_repository",
+              "orders_services",
+              "billing_api",
+              "billing_repository",
+              "billing_services"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/session_repo.py"
+        },
+        {
+          "rule_id": "R-PLACE-1",
+          "scope": {
+            "components": [
+              "identity_models",
+              "identity_repository",
+              "orders_models",
+              "orders_repository",
+              "billing_models",
+              "billing_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/session_repo.py"
+        },
+        {
+          "rule_id": "R-SIG-1",
+          "scope": {
+            "components": [
+              "identity_repository"
+            ]
+          },
+          "source": "llm",
+          "file": "src/depot/identity/repository/session_repo.py"
+        }
+      ]
+    }
+  ],
+  "validity": {
+    "status": "completed",
+    "runs_completed": 3,
+    "calls_total": 3,
+    "calls_invalid": 0,
+    "calls_transport_failed": 0,
+    "skipped_count": 0,
+    "invalid_reasons": [],
+    "exit_code": 1
+  },
+  "skipped": []
+}

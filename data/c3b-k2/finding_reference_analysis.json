@@ -1,0 +1,850 @@
+{
+  "n_total_llm_findings": 461,
+  "b3_classification": {
+    "overall": {
+      "K1": 329,
+      "K4": 84,
+      "K2": 36,
+      "K3": 12
+    },
+    "overall_pct": {
+      "K1": 71.4,
+      "K4": 18.2,
+      "K2": 7.8,
+      "K3": 2.6
+    },
+    "by_run_index": {
+      "0": {
+        "K1": 111,
+        "K4": 28,
+        "K2": 12,
+        "K3": 4
+      },
+      "1": {
+        "K1": 109,
+        "K4": 28,
+        "K2": 12,
+        "K3": 4
+      },
+      "2": {
+        "K1": 109,
+        "K4": 28,
+        "K2": 12,
+        "K3": 4
+      }
+    },
+    "by_category": {
+      "FORBIDDEN_RELATION": {
+        "K1": 260,
+        "K2": 22,
+        "K3": 3
+      },
+      "FORBIDDEN_SIGNATURE_TYPE": {
+        "K4": 63
+      },
+      "STRUCTURAL_PLACEMENT": {
+        "K1": 54
+      },
+      "API_CONTRACT": {
+        "K4": 21
+      },
+      "ABSENCE_REQUIRED": {
+        "K2": 14
+      },
+      "CYCLE": {
+        "K1": 15,
+        "K3": 9
+      }
+    },
+    "by_rule_id": {
+      "R-LAYER-1": {
+        "K1": 63,
+        "K3": 3
+      },
+      "R-INDEP-1": {
+        "K1": 28,
+        "K2": 2
+      },
+      "R-FRAMEWORK-1": {
+        "K4": 63
+      },
+      "R-PLACE-1": {
+        "K1": 54
+      },
+      "R-SIG-3": {
+        "K4": 3
+      },
+      "R-PROTECT-1": {
+        "K1": 16,
+        "K2": 20
+      },
+      "R-PORT-4": {
+        "K2": 3
+      },
+      "R-CORE-1": {
+        "K1": 153
+      },
+      "R-CYCLE-1": {
+        "K1": 12
+      },
+      "R-SIG-1": {
+        "K4": 9
+      },
+      "R-PORT-1": {
+        "K2": 3
+      },
+      "R-SIG-4": {
+        "K4": 6
+      },
+      "R-SIG-2": {
+        "K4": 3
+      },
+      "R-CYCLE-2": {
+        "K3": 9,
+        "K1": 3
+      },
+      "R-PORT-2": {
+        "K2": 4
+      },
+      "R-PORT-3": {
+        "K2": 4
+      }
+    }
+  },
+  "b5_prompt_occurrence": {
+    "n_offending_type_findings": 152,
+    "found_in_imports_or_signatures": 81,
+    "not_found_in_imports_or_signatures": 71,
+    "of_which_header_only": 54,
+    "of_which_absent_everywhere": 17,
+    "not_found_examples": [
+      {
+        "run_index": 0,
+        "control_path": "src/depot/billing/models/payment_models.py",
+        "module": "depot.billing.models.payment_models",
+        "component": "billing_models",
+        "rule_id": "R-FRAMEWORK-1",
+        "category": "FORBIDDEN_SIGNATURE_TYPE",
+        "subject": {
+          "offending_type": "sqlalchemy.orm.Session"
+        },
+        "classification": "K4",
+        "classification_reason": "offending_type `sqlalchemy.orm.Session` resolves to no module in the Soll (external library or bare symbol name)",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": false
+      },
+      {
+        "run_index": 0,
+        "control_path": "src/depot/billing/models/payment_models.py",
+        "module": "depot.billing.models.payment_models",
+        "component": "billing_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.models.payment_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.models.payment_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 1,
+        "control_path": "src/depot/billing/models/payment_models.py",
+        "module": "depot.billing.models.payment_models",
+        "component": "billing_models",
+        "rule_id": "R-FRAMEWORK-1",
+        "category": "FORBIDDEN_SIGNATURE_TYPE",
+        "subject": {
+          "offending_type": "sqlalchemy.orm.Session"
+        },
+        "classification": "K4",
+        "classification_reason": "offending_type `sqlalchemy.orm.Session` resolves to no module in the Soll (external library or bare symbol name)",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": false
+      },
+      {
+        "run_index": 1,
+        "control_path": "src/depot/billing/models/payment_models.py",
+        "module": "depot.billing.models.payment_models",
+        "component": "billing_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.models.payment_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.models.payment_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 2,
+        "control_path": "src/depot/billing/models/payment_models.py",
+        "module": "depot.billing.models.payment_models",
+        "component": "billing_models",
+        "rule_id": "R-FRAMEWORK-1",
+        "category": "FORBIDDEN_SIGNATURE_TYPE",
+        "subject": {
+          "offending_type": "sqlalchemy.orm.Session"
+        },
+        "classification": "K4",
+        "classification_reason": "offending_type `sqlalchemy.orm.Session` resolves to no module in the Soll (external library or bare symbol name)",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": false
+      },
+      {
+        "run_index": 2,
+        "control_path": "src/depot/billing/models/payment_models.py",
+        "module": "depot.billing.models.payment_models",
+        "component": "billing_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.models.payment_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.models.payment_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 0,
+        "control_path": "src/depot/billing/repository/invoice_query.py",
+        "module": "depot.billing.repository.invoice_query",
+        "component": "billing_repository",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.repository.invoice_query"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.repository.invoice_query` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 1,
+        "control_path": "src/depot/billing/repository/invoice_query.py",
+        "module": "depot.billing.repository.invoice_query",
+        "component": "billing_repository",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.repository.invoice_query"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.repository.invoice_query` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 2,
+        "control_path": "src/depot/billing/repository/invoice_query.py",
+        "module": "depot.billing.repository.invoice_query",
+        "component": "billing_repository",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.repository.invoice_query"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.repository.invoice_query` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 0,
+        "control_path": "src/depot/billing/repository/invoice_repo.py",
+        "module": "depot.billing.repository.invoice_repo",
+        "component": "billing_repository",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.repository.invoice_repo"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.repository.invoice_repo` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 1,
+        "control_path": "src/depot/billing/repository/invoice_repo.py",
+        "module": "depot.billing.repository.invoice_repo",
+        "component": "billing_repository",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.repository.invoice_repo"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.repository.invoice_repo` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 2,
+        "control_path": "src/depot/billing/repository/invoice_repo.py",
+        "module": "depot.billing.repository.invoice_repo",
+        "component": "billing_repository",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.repository.invoice_repo"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.repository.invoice_repo` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 0,
+        "control_path": "src/depot/billing/repository/legacy_invoice_index.py",
+        "module": "depot.billing.repository.legacy_invoice_index",
+        "component": "billing_repository",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.repository.legacy_invoice_index"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.repository.legacy_invoice_index` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 1,
+        "control_path": "src/depot/billing/repository/legacy_invoice_index.py",
+        "module": "depot.billing.repository.legacy_invoice_index",
+        "component": "billing_repository",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.repository.legacy_invoice_index"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.repository.legacy_invoice_index` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 2,
+        "control_path": "src/depot/billing/repository/legacy_invoice_index.py",
+        "module": "depot.billing.repository.legacy_invoice_index",
+        "component": "billing_repository",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.billing.repository.legacy_invoice_index"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.billing.repository.legacy_invoice_index` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 0,
+        "control_path": "src/depot/identity/models/customer_models.py",
+        "module": "depot.identity.models.customer_models",
+        "component": "identity_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.identity.models.customer_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.identity.models.customer_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 1,
+        "control_path": "src/depot/identity/models/customer_models.py",
+        "module": "depot.identity.models.customer_models",
+        "component": "identity_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.identity.models.customer_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.identity.models.customer_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 2,
+        "control_path": "src/depot/identity/models/customer_models.py",
+        "module": "depot.identity.models.customer_models",
+        "component": "identity_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.identity.models.customer_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.identity.models.customer_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 0,
+        "control_path": "src/depot/identity/models/customer_view_models.py",
+        "module": "depot.identity.models.customer_view_models",
+        "component": "identity_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.identity.models.customer_view_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.identity.models.customer_view_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 1,
+        "control_path": "src/depot/identity/models/customer_view_models.py",
+        "module": "depot.identity.models.customer_view_models",
+        "component": "identity_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.identity.models.customer_view_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.identity.models.customer_view_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 2,
+        "control_path": "src/depot/identity/models/customer_view_models.py",
+        "module": "depot.identity.models.customer_view_models",
+        "component": "identity_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.identity.models.customer_view_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.identity.models.customer_view_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 0,
+        "control_path": "src/depot/identity/models/role_models.py",
+        "module": "depot.identity.models.role_models",
+        "component": "identity_models",
+        "rule_id": "R-FRAMEWORK-1",
+        "category": "FORBIDDEN_SIGNATURE_TYPE",
+        "subject": {
+          "offending_type": "sqlalchemy.orm.Session"
+        },
+        "classification": "K4",
+        "classification_reason": "offending_type `sqlalchemy.orm.Session` resolves to no module in the Soll (external library or bare symbol name)",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": false
+      },
+      {
+        "run_index": 0,
+        "control_path": "src/depot/identity/models/role_models.py",
+        "module": "depot.identity.models.role_models",
+        "component": "identity_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.identity.models.role_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.identity.models.role_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 1,
+        "control_path": "src/depot/identity/models/role_models.py",
+        "module": "depot.identity.models.role_models",
+        "component": "identity_models",
+        "rule_id": "R-FRAMEWORK-1",
+        "category": "FORBIDDEN_SIGNATURE_TYPE",
+        "subject": {
+          "offending_type": "sqlalchemy.orm.Session"
+        },
+        "classification": "K4",
+        "classification_reason": "offending_type `sqlalchemy.orm.Session` resolves to no module in the Soll (external library or bare symbol name)",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": false
+      },
+      {
+        "run_index": 1,
+        "control_path": "src/depot/identity/models/role_models.py",
+        "module": "depot.identity.models.role_models",
+        "component": "identity_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.identity.models.role_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.identity.models.role_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 2,
+        "control_path": "src/depot/identity/models/role_models.py",
+        "module": "depot.identity.models.role_models",
+        "component": "identity_models",
+        "rule_id": "R-FRAMEWORK-1",
+        "category": "FORBIDDEN_SIGNATURE_TYPE",
+        "subject": {
+          "offending_type": "sqlalchemy.orm.Session"
+        },
+        "classification": "K4",
+        "classification_reason": "offending_type `sqlalchemy.orm.Session` resolves to no module in the Soll (external library or bare symbol name)",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": false
+      },
+      {
+        "run_index": 2,
+        "control_path": "src/depot/identity/models/role_models.py",
+        "module": "depot.identity.models.role_models",
+        "component": "identity_models",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.identity.models.role_models"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.identity.models.role_models` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 0,
+        "control_path": "src/depot/identity/repository/customer_repo.py",
+        "module": "depot.identity.repository.customer_repo",
+        "component": "identity_repository",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.identity.repository.customer_repo"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.identity.repository.customer_repo` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      },
+      {
+        "run_index": 0,
+        "control_path": "src/depot/identity/repository/customer_repo.py",
+        "module": "depot.identity.repository.customer_repo",
+        "component": "identity_repository",
+        "rule_id": "R-SIG-1",
+        "category": "API_CONTRACT",
+        "subject": {
+          "offending_type": "CustomerRepository.touch"
+        },
+        "classification": "K4",
+        "classification_reason": "offending_type `CustomerRepository.touch` resolves to no module in the Soll (external library or bare symbol name)",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": false
+      },
+      {
+        "run_index": 1,
+        "control_path": "src/depot/identity/repository/customer_repo.py",
+        "module": "depot.identity.repository.customer_repo",
+        "component": "identity_repository",
+        "rule_id": "R-PLACE-1",
+        "category": "STRUCTURAL_PLACEMENT",
+        "subject": {
+          "offending_type": "depot.identity.repository.customer_repo"
+        },
+        "classification": "K1",
+        "classification_reason": "offending_type resolves to module `depot.identity.repository.customer_repo` in the checked module's own component",
+        "prompt_occurrence_found": false,
+        "prompt_occurrence_where": "",
+        "occurs_in_header_only": true
+      }
+    ]
+  },
+  "c1_top20_pairs": [
+    {
+      "rule_id": "R-FRAMEWORK-1",
+      "subject": {
+        "offending_type": "sqlalchemy.orm.Session"
+      },
+      "hit_count": 57,
+      "n_distinct_files": 9
+    },
+    {
+      "rule_id": "R-PROTECT-1",
+      "subject": {
+        "from": "orders_services",
+        "to": "core_adapters_internal"
+      },
+      "hit_count": 13,
+      "n_distinct_files": 5
+    },
+    {
+      "rule_id": "R-PROTECT-1",
+      "subject": {
+        "from": "billing_services",
+        "to": "core_adapters_internal"
+      },
+      "hit_count": 12,
+      "n_distinct_files": 4
+    },
+    {
+      "rule_id": "R-CYCLE-2",
+      "subject": {
+        "from": "orders_services_pricing",
+        "to": "orders_services"
+      },
+      "hit_count": 12,
+      "n_distinct_files": 4
+    },
+    {
+      "rule_id": "R-PROTECT-1",
+      "subject": {
+        "from": "identity_services",
+        "to": "core_adapters_internal"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "identity_api"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "identity_mappers"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "identity_models"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "identity_repository"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "identity_services"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "orders_api"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "orders_mappers"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "orders_models"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "orders_repository"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "orders_services"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "orders_services_pricing"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "billing_api"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "billing_mappers"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "billing_models"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    },
+    {
+      "rule_id": "R-CORE-1",
+      "subject": {
+        "from": "core",
+        "to": "billing_repository"
+      },
+      "hit_count": 9,
+      "n_distinct_files": 3
+    }
+  ],
+  "c2_distinct_pairs": 78,
+  "c2_findings_per_run": {
+    "0": 155,
+    "1": 153,
+    "2": 153
+  },
+  "c3_pairs_over_half_the_files": [],
+  "c4_n_unique_pairs": 40,
+  "d1_zero_finding_modules_vs_rest": {
+    "zero_finding_modules": [
+      {
+        "module": "depot.billing.models.legacy_tax_models",
+        "rules_in_scope": 3,
+        "total_prompt_len": 4967,
+        "n_imports": 0,
+        "n_signatures": 8
+      },
+      {
+        "module": "depot.core.adapters.internal.cache",
+        "rules_in_scope": 2,
+        "total_prompt_len": 3245,
+        "n_imports": 0,
+        "n_signatures": 6
+      },
+      {
+        "module": "depot.core.adapters.internal.session",
+        "rules_in_scope": 2,
+        "total_prompt_len": 3354,
+        "n_imports": 0,
+        "n_signatures": 8
+      }
+    ],
+    "meldende_module_means": {
+      "rules_in_scope": 3.1020408163265305,
+      "total_prompt_len": 4598.897959183673,
+      "n_imports": 1.836734693877551,
+      "n_signatures": 5.8979591836734695
+    }
+  },
+  "d2_rules_in_scope_vs_mean_findings": [
+    {
+      "rules_in_scope": 1,
+      "n_modules": 5,
+      "mean_findings": 10.0
+    },
+    {
+      "rules_in_scope": 2,
+      "n_modules": 12,
+      "mean_findings": 1.8333333333333333
+    },
+    {
+      "rules_in_scope": 3,
+      "n_modules": 20,
+      "mean_findings": 2.3
+    },
+    {
+      "rules_in_scope": 4,
+      "n_modules": 10,
+      "mean_findings": 2.0
+    },
+    {
+      "rules_in_scope": 6,
+      "n_modules": 5,
+      "mean_findings": 3.1333333333333337
+    }
+  ]
+}

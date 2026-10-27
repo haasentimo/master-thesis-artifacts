@@ -68,6 +68,8 @@ repository `masterarbeit`, freeze date, commit and full SHA256.
 | Z3 | Raw artifacts K1–K5 | `data/campaign/k1/` … `data/campaign/k5/` | same | 27.–28.08.2026 | — | see `SHA256SUMS` in each directory | Nested sums use repository-root paths |
 | Z3 | Run manifests | `data/campaign/manifests/` | same | — | — | top-level `SHA256SUMS` | No nested sum in the original |
 | Z3 | Control runs | `data/campaign/control/` | same | — | — | see `data/campaign/control/SHA256SUMS` (14 entries) | |
+| Z3 | Clean-control stock K2 (C3b-K2) | `data/c3b-k2/` | same | 24.08.2026 | last change `82f69d4b0f7045cec197935fbc87ccf0bc7a6532` | `SHA256SUMS` `03470aa6c2e8f2aa986de3ad64314bae34cc9b0cd29cf7a4f91e555ab76205d9` (109 entries) | 52 control modules, Ollama; input of `evaluate_campaign.py` (`--control-k2`); copied from source state `f5dca31`, 111 files |
+| Z3 | Clean-control stock K3 (C3b-K3) | `data/c3b-k3/` | same | 25.08.2026 | last change `74e2b10ce5133da4f35777fcbcb2f458c84a9afc` | `SHA256SUMS` `e7c3a8bfd6d3737010f69708ec9f158d9f46843ed037b550e1d8e08e79afe5fb` (105 entries) | 52 control modules, DigitalOcean; input of `evaluate_campaign.py` (`--control-k3`); copied from source state `f5dca31`, 107 files |
 | Z3 | Evaluation run C11 (run 1) | `data/campaign/eval/c11_eval_full.json` / `.md` | same | 28.08.2026, protocol Rev. 39 | — | `ad8f0483ffd2c261d8e33a21c425c5f6a492dedae0cc99c4e135dc56b371ea30` / `3d4874842a5baf92d455c1140b4874d396550fe87c50714d537a15a0a0e595af` | Superseded, validly archived; report `c11_bericht_auswertungslauf.md`, diagnosis `c11a_bericht_diagnose.md` |
 | Z3 | Evaluation run C12 (run 2, order C11b) | `data/campaign/eval/c12_eval_full.json` / `.md` | same | 28.08.2026, Rev. 41 | — | `12751c3e506e3f28d4d32c7c4a104e97c826dad4e71c83f00dc49d200b09f0c7` / `afe28bc2d3d81da4b565d0b2f735745f09422f39523de2f44b27e2c80c921918` | Superseded, validly archived; report `c11b_bericht_zweiter_lauf.md` |
 | Z3 | Evaluation run C13 (run 3, order C11c) | `data/campaign/eval/c13_eval_full.json` / `.md` | same | 28.08.2026, Rev. 43 | — | `873893e771f3dd8a1a195b283f874858990dcd27a75a1c348fa85a1c1914977c` / `f8cd9c074353cefcfe52d55e0df06a76b41c3f4ff75164c3ee1e5777f414c8a2` | Superseded, validly archived; reports `c11c_bericht_dritter_lauf.md`, `c11d_bericht_befund08_grundlagen.md` |
@@ -128,6 +130,8 @@ conformance checker (Z3).
 - `docs/repo-kontext/` beyond the positive list above (138 files in the source repository).
 - `data/checker/*.bundle`, `data/checker/MANIFEST.md`, `data/checker/SHA256SUMS` — see `data/checker/README.md`.
 - `data/z4/` and everything else Z4-related.
-- Other `data/` directories of the source repository (`befund06`, `befunde01-05`, `c3b*`,
+- Other `data/` directories of the source repository (`befund06`, `befunde01-05`, `c3b`,
   `manifest`, `z1_s_diagnose`): preparatory or diagnostic material outside the three measurements.
+  `data/c3b/` holds the four aborted C3b attempts. The clean-control stocks `data/c3b-k2/`
+  and `data/c3b-k3/` **are included** (see Z3 above), because the C14 evaluation reads them.
 - Untracked `__pycache__/` directories.
