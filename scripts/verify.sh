@@ -16,7 +16,7 @@ while IFS= read -r sums; do
     (cd "$dir" && sha256sum -c --quiet SHA256SUMS)
   fi
   echo "ok  $sums"
-done < <(find . -mindepth 2 -path ./.git -prune -o -path ./examiner-package/local-only -prune -o -name SHA256SUMS -print | sed 's#^\./##' | LC_ALL=C sort)
+done < <(find . -mindepth 2 -path ./.git -prune -o -name SHA256SUMS -print | sed 's#^\./##' | LC_ALL=C sort)
 
 echo "== frozen protocols"
 sha256sum -c - <<'EOF'

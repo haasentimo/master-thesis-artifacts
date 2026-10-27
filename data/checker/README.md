@@ -17,9 +17,7 @@ not been settled yet, so they are **deliberately not part of this curated reposi
 The original `data/checker/MANIFEST.md` and `data/checker/SHA256SUMS` are left out too, since
 they only describe these two bundles.
 
-For the examiners, the full checker state can be provided separately in the examiner package
-(see [`examiner-package/README.md`](../../examiner-package/README.md)). The hashes recorded in
-the thesis repository identify the bundles:
+The hashes recorded in the thesis repository identify the bundles:
 
 ```
 68561a86005474ebfceabd8d6fce2a7809297c3578b05d89e8ec35c4605faf85  tritongraph-348ca9d.bundle   (measured state)

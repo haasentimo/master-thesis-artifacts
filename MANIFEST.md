@@ -11,6 +11,22 @@ repository `masterarbeit`, freeze date, commit and full SHA256.
 - **SHA256** of every file is in `SHA256SUMS`; the values below are the ones that matter
   for citation. Where a nested `SHA256SUMS` exists, it is the original from the thesis
   repository.
+- **Created for this package** (not copied, therefore not byte-identical to any original;
+  see the table [Navigation and package files](#navigation-and-package-files)): the
+  navigation documents, `code/README.md`, `SNAPSHOT.json`, `tools/evaluate_z1_snapshot.py`,
+  `scripts/verify.sh` and `data/checker/README.md`.
+
+## Navigation and package files
+
+| Path | Role | Origin |
+|---|---|---|
+| `README.md` | Orientation and per-study entry points | created for this package |
+| `MANIFEST.md` | This technical index | created for this package |
+| `REPRODUCING.md` | Recomputation procedures with expected hashes (Z1, Z1/Z2 fact bases, C14) | created for this package |
+| `data/z2/README.md` | Walkthrough of the Z2 chain with tested commands; clarifies the historical state in `data/z2/MANIFEST.md` | created for this package |
+| `docs/repo-kontext/README.md` | Index of the included reports and of the referenced reports that are not included | created for this package |
+| `code/README.md` | Origin, contents and exclusions of the extractor snapshot | created for this package |
+| `scripts/verify.sh` | Package verification | created for this package |
 
 ## Z1 — architecture model derivation
 
@@ -20,6 +36,7 @@ repository `masterarbeit`, freeze date, commit and full SHA256.
 | Z1 | Current protocol | `docs/protokolle/z1_protokoll_extraktionsvergleich.md` | same | Rev. 6, 01.09.2026 | `f5dca31` (source state) | `618ebde09d66201034013a0b7ed92c97df6b8234ab5c92c7588d2c574eca7679` | Amendments recorded in the protocol |
 | Z1 | Freeze witness report | `docs/repo-kontext/z1_p_bericht_freeze.md` | same | 31.08.2026 | — | `244ee3065c62c8e08e3eca819ee6e5e31cf9aea537de9e6b9334b6dfca703a28` | |
 | Z1 | Architecture model schema | `docs/repo-kontext/z1_p_arch_model_schema.json` | same | — | — | `a83a84af306d647f2d4d9618a39f9b0059431015d3e5234bce931df642012ec0` | Measurement input |
+| Z1 | Context-window report (Z1-T) | `docs/repo-kontext/z1_t_bericht_kontextfenster.md` | same | 31.08.2026 | — | `3746c452094c8f8afb7f1ffc59c2b01be976f1d14079c0754d3d2ba3e9be37c7` | Context window as a measurement input; condition of block `k2`, delivery failure of `k2_trunkiert` |
 | Z1 | Archive root | `data/z1/MANIFEST.md` | same | living document | — | `09e2c605620cb4fdef531238301da93acd71073bc77b8526501bec1d69374368` | Not hashed in the original by design |
 | Z1 | Runs K2 | `data/z1/k2/` | same | — | — | see `data/z1/k2/SHA256SUMS` (85 entries) | qwen2.5-coder:7b, Ollama |
 | Z1 | Runs K2, truncated | `data/z1/k2_trunkiert/` | same | 31.08.2026 | — | see `data/z1/k2_trunkiert/SHA256SUMS` (85 entries) | Evidence of the delivery failure (2 050 of 4 281 prompt tokens), kept on purpose |
@@ -38,7 +55,8 @@ repository `masterarbeit`, freeze date, commit and full SHA256.
 | Z2 | Freeze note | `docs/protokolle/z2_protokoll_regelableitung.md` (contains the note) | same | 02.09.2026 | `35aff9bd777a204977a77ab7fc25df09e9983da6` | `862fdc3b7cfb264482db155575437edb25b1b436f92b5444b2137f1e332d9dde` | The note names commit and SHA256 of the frozen state |
 | Z2 | Current protocol | `docs/protokolle/z2_protokoll_regelableitung.md` | same | — | `f5dca31` (source state) | `862fdc3b7cfb264482db155575437edb25b1b436f92b5444b2137f1e332d9dde` | Byte-identical to the state at `35aff9b` |
 | Z2 | Freeze witness report (Anhang A) | `docs/repo-kontext/s3_bericht_anhang_a_freeze.md` | same | 02.09.2026 | — | `9da4a27d3e2bd88065574ab43ec84f8fc539ceadf5362abad946ae15ecb97739` | |
-| Z2 | Archive root | `data/z2/MANIFEST.md` | same | living document | — | `8d90dfc2687758d5016871b9f1b7261d9af7b4a33460b611dd3d45be9b8b8081` | |
+| Z2 | Archive root | `data/z2/MANIFEST.md` | same | living document | — | `8d90dfc2687758d5016871b9f1b7261d9af7b4a33460b611dd3d45be9b8b8081` | Historical sections show earlier states (e.g. `input_facts.json` "FEHLT NOCH"); current state explained in `data/z2/README.md` |
+| Z2 | Scripts | `tools/run_z2.py`, `reduce_facts.py`, `measure_prompt_tokens.py`, `prepare_z2_review.py`, `tally_z2_review.py`, `prepare_z2_overlap.py`, `tally_z2_overlap.py`, `fixtures/z2/` | same | — | `f5dca31` (source state) | top-level `SHA256SUMS` | Roles and tested commands in `data/z2/README.md` |
 | Z2 | Input: actual model | `data/z2/eingaben/ist_modell.yaml` | same | 02.09.2026 | — | `146dbb055e059b9dd948b27e185f33a2cb56557a534c55e0daf983c892336673` | Exported by Triton's editor (data, not code) |
 | Z2 | Input: fact base | `data/z2/eingaben/input_facts.json` | same | 02.09.2026 | — | `f670593a7add275c364ebff5a5529cb95a787a10de5e0c80f97cd46574eb282a` | 52 records, after stage 0 + 0b |
 | Z2 | Input: raw fact base | `data/z2/eingaben/input_facts_raw.json` | same | 02.09.2026 | — | `85b7a2c1834b4f954a630f3ff3ccf01ebc139a9f51039365b7759f7fbcc28951` | 73 records, provenance |
@@ -71,6 +89,9 @@ repository `masterarbeit`, freeze date, commit and full SHA256.
 | Z3 | Raw artifacts K1–K5 | `data/campaign/k1/` … `data/campaign/k5/` | same | 27.–28.08.2026 | — | see `SHA256SUMS` in each directory | Nested sums use repository-root paths |
 | Z3 | Run manifests | `data/campaign/manifests/` | same | — | — | top-level `SHA256SUMS` | No nested sum in the original |
 | Z3 | Control runs | `data/campaign/control/` | same | — | — | see `data/campaign/control/SHA256SUMS` (14 entries) | |
+| Z3 | Campaign procedure report (C10) | `docs/repo-kontext/c10_bericht_kampagne.md` | same | 29.08.2026 | — | `b4f63c40596bc8d59f303849dd0b0f0f0234ddc9132086eb72a7acfd830a5bb3` | Measurement state, order, repetitions and incidents of K1–K5; no evaluation |
+| Z3 | Control run report K2 (C3b-K2) | `docs/repo-kontext/c3b_k2_bericht_kontrolllauf.md` | same | 24.08.2026 | — | `6e597294f41c3abe6e7deedaf3e8dabe839432a84ac1f74635af481c3609f2f5` | Measurement report for `data/c3b-k2/` |
+| Z3 | Control run report K3 (C3b-K3) | `docs/repo-kontext/c3b_k3_bericht_kontrolllauf.md` | same | 25.08.2026 | — | `99e272b229a113bcd8ccc599424dfe1261f585ad0ead58d5e61a15cd4258dfcb` | Measurement report for `data/c3b-k3/` |
 | Z3 | Clean-control stock K2 (C3b-K2) | `data/c3b-k2/` | same | 24.08.2026 | last change `82f69d4b0f7045cec197935fbc87ccf0bc7a6532` | `SHA256SUMS` `03470aa6c2e8f2aa986de3ad64314bae34cc9b0cd29cf7a4f91e555ab76205d9` (109 entries) | 52 control modules, Ollama; input of `evaluate_campaign.py` (`--control-k2`); copied from source state `f5dca31`, 111 files |
 | Z3 | Clean-control stock K3 (C3b-K3) | `data/c3b-k3/` | same | 25.08.2026 | last change `74e2b10ce5133da4f35777fcbcb2f458c84a9afc` | `SHA256SUMS` `e7c3a8bfd6d3737010f69708ec9f158d9f46843ed037b550e1d8e08e79afe5fb` (105 entries) | 52 control modules, DigitalOcean; input of `evaluate_campaign.py` (`--control-k3`); copied from source state `f5dca31`, 107 files |
 | Z3 | Evaluation run C11 (run 1) | `data/campaign/eval/c11_eval_full.json` / `.md` | same | 28.08.2026, protocol Rev. 39 | — | `ad8f0483ffd2c261d8e33a21c425c5f6a492dedae0cc99c4e135dc56b371ea30` / `3d4874842a5baf92d455c1140b4874d396550fe87c50714d537a15a0a0e595af` | Superseded, validly archived; report `c11_bericht_auswertungslauf.md`, diagnosis `c11a_bericht_diagnose.md` |
@@ -81,6 +102,8 @@ repository `masterarbeit`, freeze date, commit and full SHA256.
 | Z3 | Checker state | `data/checker/README.md` (reference only) | `data/checker/` | tag `phase04-freeze` | `348ca9daa456af4954f11f7152fc45201035297e` | bundle: `68561a86005474ebfceabd8d6fce2a7809297c3578b05d89e8ec35c4605faf85` | Bundle **not included** (third-party code, rights open) |
 | Z3 | Test repository, baseline bundle | `data/testrepo/ma-conformance-testrepo-baseline.bundle` | same | 14.08.2026 | baseline `0d651041ed87dd03f2f78359713633fac01c0a66` | `597fa466c5ff4e05ab5c1f3550fb88e0407c3968fae8fafd420166324d4a7b18` | 4 refs, complete history |
 | Z3 | Test repository, injections bundle | `data/testrepo/ma-conformance-testrepo-injections.bundle` | same | — | baseline `0d651041ed87dd03f2f78359713633fac01c0a66` | `1b9f8b58f271332e2d66ead83a3858271a04f3aebce95b7927977d9fa1be508b` | 37 refs, tags `inj/01`–`inj/32` |
+| Z3 | Test repository, injection construction report (C4b) | `docs/repo-kontext/c4b_bericht_injektionen.md` | same | 25.08.2026 | — | `333f6d4bbc24d236102852ab6d2ab19c4914b846f5cb61ed56e9be58243b0277` | How the 32 injection commits were built and structurally checked |
+| Z3 | Test repository, GitHub | repository `haasentimo/ma-conformance-testrepo` | — | — | tags `baseline`, `inj/01`–`inj/32` identical to the bundles (`git ls-remote`, 27.10.2026) | — | Separate repository; the bundles here are the reference for the measured refs |
 
 ## C11–C14 repair chain — reports
 
@@ -131,7 +154,9 @@ table). External dependency not included: the Triton conformance checker (Z3).
 
 ## Deliberately not included
 
-- `docs/repo-kontext/` beyond the positive list above (138 files in the source repository).
+- `docs/repo-kontext/` beyond the positive list above (15 of 138 files in the source
+  repository are included). The reports that included documents link to but that are not
+  included are listed with reasons in `docs/repo-kontext/README.md`.
 - `data/checker/*.bundle`, `data/checker/MANIFEST.md`, `data/checker/SHA256SUMS` — see `data/checker/README.md`.
 - `data/z4/` and everything else Z4-related.
 - Other `data/` directories of the source repository (`befund06`, `befunde01-05`, `c3b`,
